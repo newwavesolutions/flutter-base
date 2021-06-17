@@ -61,6 +61,7 @@ dependencies:
   shared_preferences:
   #Reactive
   rxdart: ^0.24.1
+  intl_utils: ^1.9.0
 
 dev_dependencies:
   flutter_test:
