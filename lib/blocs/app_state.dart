@@ -1,20 +1,20 @@
 part of 'app_cubit.dart';
 
 class AppState extends Equatable {
-  final UserEntity user;
+  final UserEntity? user;
   final LoadStatus fetchProfileStatus;
   final LoadStatus signOutStatus;
 
   AppState({
     this.user,
-    this.fetchProfileStatus,
-    this.signOutStatus,
+    this.fetchProfileStatus = LoadStatus.initial,
+    this.signOutStatus = LoadStatus.initial,
   });
 
   AppState copyWith({
-    UserEntity user,
-    LoadStatus fetchProfileStatus,
-    LoadStatus signOutStatus,
+    UserEntity? user,
+    LoadStatus? fetchProfileStatus,
+    LoadStatus? signOutStatus,
   }) {
     return new AppState(
       user: user ?? this.user,
@@ -32,9 +32,9 @@ class AppState extends Equatable {
   }
 
   @override
-  List<Object> get props => [
-        user,
-        fetchProfileStatus,
-        signOutStatus,
+  List<Object?> get props => [
+        this.user,
+        this.fetchProfileStatus,
+        this.signOutStatus,
       ];
 }

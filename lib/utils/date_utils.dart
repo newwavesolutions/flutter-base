@@ -1,14 +1,13 @@
-import 'package:flutter_base/configs/app_config.dart';
+import 'package:flutter_base/configs/app_configs.dart';
 import 'package:intl/intl.dart';
 
-import '../configs/app_config.dart';
-
 class DateUtils {
-  static DateTime fromString(String date, {String format}) {
+  static DateTime? fromString(String date, {String? format}) {
     return DateTimeExtension.fromString(date, format: format);
   }
 
-  static String toDateString(DateTime dateTime, {String format = AppConfig.dateDisplayFormat}) {
+  static String toDateString(DateTime dateTime,
+      {String format = AppConfigs.dateDisplayFormat}) {
     try {
       return DateFormat(format).format(dateTime.toLocal());
     } catch (e) {
@@ -16,7 +15,8 @@ class DateUtils {
     }
   }
 
-  static String toDateTimeString(DateTime dateTime, {String format = AppConfig.dateTimeDisplayFormat}) {
+  static String toDateTimeString(DateTime dateTime,
+      {String format = AppConfigs.dateTimeDisplayFormat}) {
     try {
       return DateFormat(format).format(dateTime.toLocal());
     } catch (e) {
@@ -24,7 +24,8 @@ class DateUtils {
     }
   }
 
-  static String toDateAPIString(DateTime dateTime, {String format = AppConfig.dateAPIFormat}) {
+  static String toDateAPIString(DateTime dateTime,
+      {String format = AppConfigs.dateAPIFormat}) {
     try {
       return DateFormat(format).format(dateTime);
     } catch (e) {
@@ -32,7 +33,8 @@ class DateUtils {
     }
   }
 
-  static String toDateTimeAPIString(DateTime dateTime, {String format = AppConfig.dateTimeAPIFormat}) {
+  static String toDateTimeAPIString(DateTime dateTime,
+      {String format = AppConfigs.dateTimeAPIFormat}) {
     try {
       return dateTime.toIso8601String();
     } catch (e) {
@@ -51,7 +53,7 @@ class DateUtils {
 
 ///Method
 extension DateTimeExtension on DateTime {
-  static DateTime fromString(String date, {String format}) {
+  static DateTime? fromString(String date, {String? format}) {
     if ((format ?? "").isNotEmpty) {
       try {
         return DateFormat(format).parse(date);
@@ -67,7 +69,7 @@ extension DateTimeExtension on DateTime {
     return null;
   }
 
-  String toDateString({String format = AppConfig.dateDisplayFormat}) {
+  String toDateString({String format = AppConfigs.dateDisplayFormat}) {
     try {
       return DateFormat(format).format(this);
     } catch (e) {
@@ -75,7 +77,7 @@ extension DateTimeExtension on DateTime {
     }
   }
 
-  String toDateTimeString({String format = AppConfig.dateTimeDisplayFormat}) {
+  String toDateTimeString({String format = AppConfigs.dateTimeDisplayFormat}) {
     try {
       return DateFormat(format).format(this.toLocal());
     } catch (e) {
@@ -83,7 +85,7 @@ extension DateTimeExtension on DateTime {
     }
   }
 
-  String toDateAPIString({String format = AppConfig.dateAPIFormat}) {
+  String toDateAPIString({String format = AppConfigs.dateAPIFormat}) {
     try {
       return DateFormat(format).format(this);
     } catch (e) {
@@ -91,7 +93,7 @@ extension DateTimeExtension on DateTime {
     }
   }
 
-  String toDateTimeAPIString({String format = AppConfig.dateTimeAPIFormat}) {
+  String toDateTimeAPIString({String format = AppConfigs.dateTimeAPIFormat}) {
     try {
       return this.toIso8601String();
     } catch (e) {

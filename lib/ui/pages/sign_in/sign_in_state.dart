@@ -1,32 +1,32 @@
 part of 'sign_in_cubit.dart';
 
-enum SignInStatus {
-  INITIAL,
-  LOADING,
-  SUCCESS,
-  FAILURE,
-  USERNAME_PASSWORD_INVALID,
-}
-
 class SignInState extends Equatable {
-  TokenEntity token;
-  SignInStatus signInStatus;
+  final LoadStatus signInStatus;
+  final String? username;
+  final String? password;
 
-  SignInState({
-    this.token,
-    this.signInStatus = SignInStatus.INITIAL,
+  const SignInState({
+    this.signInStatus = LoadStatus.initial,
+    this.username,
+    this.password,
   });
 
+  @override
+  List<Object?> get props => [
+        signInStatus,
+        username,
+        password,
+      ];
+
   SignInState copyWith({
-    TokenEntity token,
-    SignInStatus signInStatus,
+    LoadStatus? signInStatus,
+    String? username,
+    String? password,
   }) {
     return SignInState(
-      token: token ?? this.token,
       signInStatus: signInStatus ?? this.signInStatus,
+      username: username ?? this.username,
+      password: password ?? this.password,
     );
   }
-
-  @override
-  List<Object> get props => [token, signInStatus];
 }

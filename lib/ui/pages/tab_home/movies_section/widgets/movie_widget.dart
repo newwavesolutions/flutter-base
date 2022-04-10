@@ -1,23 +1,19 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_base/commons/app_colors.dart';
+import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
-
-import '../../../../../commons/app_colors.dart';
-import '../../../../../commons/app_text_styles.dart';
-import '../../../../widgets/images/app_cache_image.dart';
+import 'package:flutter_base/ui/widgets/images/app_cache_image.dart';
 
 class MovieWidget extends StatelessWidget {
-  MovieEntity movie;
-  VoidCallback onPressed;
+  final MovieEntity? movie;
+  final VoidCallback? onPressed;
 
   MovieWidget({this.movie, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
-      child: FlatButton(
-        padding: EdgeInsets.all(0),
+      child: TextButton(
         child: Container(
           child: Column(
             children: [
@@ -30,14 +26,14 @@ class MovieWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      child: Text(movie?.title ?? '', style: AppTextStyle.whiteS12, maxLines: 2),
+                      child: Text(movie?.title ?? '', style: theme.textTheme.caption, maxLines: 2),
                       height: 32,
                       margin: EdgeInsets.only(top: 5),
                     ),
                   ),
                   GestureDetector(
                     child: Container(
-                      child: Icon(Icons.more_vert, color: AppColors.buttonNormal, size: 16),
+                      child: Icon(Icons.more_vert, color: AppColors.secondary, size: 16),
                       height: 32,
                     ),
                   )
@@ -46,7 +42,6 @@ class MovieWidget extends StatelessWidget {
             ],
           ),
         ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         onPressed: onPressed,
       ),
     );
@@ -56,7 +51,7 @@ class MovieWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(4)),
-        color: AppColors.lightGray,
+        color: AppColors.imageBG,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(4)),

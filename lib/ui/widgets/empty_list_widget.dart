@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/commons/app_text_styles.dart';
+import 'package:flutter_base/common/app_text_styles.dart';
 
 class EmptyListWidget extends StatelessWidget {
-  String text;
-  RefreshCallback onRefresh;
+  final String text;
+  final RefreshCallback? onRefresh;
 
   EmptyListWidget({this.text = 'Không có data', this.onRefresh});
 
@@ -26,7 +26,9 @@ class EmptyListWidget extends StatelessWidget {
             },
             itemCount: 1,
           ),
-          onRefresh: onRefresh),
+          onRefresh: onRefresh ?? _onRefreshData),
     );
   }
+
+  Future<void> _onRefreshData() async {}
 }

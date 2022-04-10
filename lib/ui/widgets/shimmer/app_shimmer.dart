@@ -7,8 +7,8 @@ class AppShimmer extends StatelessWidget {
   final double cornerRadius;
   final EdgeInsets margin;
   final EdgeInsets padding;
-  final Color baseColor;
-  final Color highlightColor;
+  final Color? baseColor;
+  final Color? highlightColor;
 
   AppShimmer({
     this.width = double.infinity,
@@ -23,20 +23,20 @@ class AppShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: baseColor ?? Colors.grey[350],
-      highlightColor: highlightColor ?? Colors.grey[100],
+      baseColor: baseColor ?? Colors.grey[350]!,
+      highlightColor: highlightColor ?? Colors.grey[100]!,
       child: Container(
         width: width,
         height: height,
-        margin: margin ?? EdgeInsets.zero,
-        padding: padding ?? EdgeInsets.zero,
+        margin: margin,
+        padding: padding,
         child: Container(
           height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(
-              Radius.circular(cornerRadius ?? 0),
+              Radius.circular(cornerRadius),
             ),
           ),
         ),

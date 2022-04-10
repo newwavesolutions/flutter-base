@@ -1,49 +1,46 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import '../../../../models/entities/movie_entity.dart';
-import '../../../../models/enums/load_status.dart';
-import '../../../../repositories/movie_repository.dart';
+import 'package:flutter_base/models/enums/load_status.dart';
+import 'package:flutter_base/repositories/movie_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'movies_section_state.dart';
+import 'movies_section_state.dart';
 
 class MoviesSectionCubit extends Cubit<MoviesSectionState> {
-  MovieRepository repository;
+  MovieRepository movieRepo;
 
-  MoviesSectionCubit({this.repository}) : super(MoviesSectionState());
+  MoviesSectionCubit({required this.movieRepo}) : super(MoviesSectionState());
 
   void fetchInitialMovies() async {
-    emit(state.copyWith(loadMovieStatus: LoadStatus.LOADING));
+    emit(state.copyWith(loadMovieStatus: LoadStatus.loading));
     try {
-      final result = await repository.getMovies(page: 1);
+      final result = await movieRepo.getMovies(page: 1);
       emit(state.copyWith(
-        loadMovieStatus: LoadStatus.SUCCESS,
+        loadMovieStatus: LoadStatus.success,
         movies: result.results,
         page: result.page,
         totalPages: result.totalPages,
       ));
     } catch (e) {
-      emit(state.copyWith(loadMovieStatus: LoadStatus.FAILURE));
+      emit(state.copyWith(loadMovieStatus: LoadStatus.failure));
     }
   }
 
   void fetchNextMovies() async {
-    if (state.page == state.totalPages) {
-      return;
-    }
-    if (state.loadMovieStatus != LoadStatus.SUCCESS) {
-      return;
-    }
-    emit(state.copyWith(loadMovieStatus: LoadStatus.LOADING_MORE));
-    try {
-      final result = await repository.getMovies(page: state.page + 1);
-      emit(state.copyWith(
-        loadMovieStatus: LoadStatus.SUCCESS,
-        movies: state.movies + result.results,
-        page: result.page,
-        totalPages: result.totalPages,
-      ));
-    } catch (e) {
-      emit(state.copyWith(loadMovieStatus: LoadStatus.SUCCESS));
-    }
+    // if (state.page.value == state.totalPages.value) {
+    //   return;
+    // }
+    // if (state.loadMovieStatus.value != LoadStatus.success) {
+    //   return;
+    // }
+    // state.loadMovieStatus.value = LoadStatus.loadingMore;
+    // try {
+    //   final result = await apiService.getMovies(page: state.page.value + 1);
+    //   state.loadMovieStatus.value = LoadStatus.success;
+    //   state.movies.value = result.results;
+    //   state.page.value = state.page.value + result.page;
+    //   state.page.value = result.page;
+    //   state.totalPages.value = result.totalPages;
+    // } catch (e) {
+    //   state.loadMovieStatus.value = LoadStatus.success;
+    // }
   }
 }

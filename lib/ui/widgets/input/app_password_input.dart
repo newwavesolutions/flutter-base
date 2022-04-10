@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/commons/app_colors.dart';
-import 'package:flutter_base/commons/app_images.dart';
-import 'package:flutter_base/commons/app_text_styles.dart';
+import 'package:flutter_base/common/app_colors.dart';
+import 'package:flutter_base/common/app_images.dart';
+import 'package:flutter_base/common/app_text_styles.dart';
 
 class ObscureTextController extends ValueNotifier<bool> {
-  ObscureTextController({bool obscureText}) : super(obscureText);
+  ObscureTextController({bool obscureText = true}) : super(obscureText);
 
   bool get date => value;
 
@@ -15,18 +15,18 @@ class ObscureTextController extends ValueNotifier<bool> {
 
 class AppPasswordInput extends StatelessWidget {
   final String labelText;
-  final TextStyle labelStyle;
+  final TextStyle? labelStyle;
   final String highlightText;
-  final Widget suffixIcon;
-  final ObscureTextController obscureTextController;
-  final TextEditingController textEditingController;
-  final TextStyle textStyle;
+  final Widget? suffixIcon;
+  final ObscureTextController? obscureTextController;
+  final TextEditingController? textEditingController;
+  final TextStyle? textStyle;
   final String hintText;
-  final TextStyle hintStyle;
-  final ValueChanged<String> onChanged;
-  final ValueChanged<String> onSubmitted;
+  final TextStyle? hintStyle;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
   final TextInputType textInputType;
-  final FocusNode passwordFocusNode;
+  final FocusNode? passwordFocusNode;
 
   AppPasswordInput({
     this.labelText = "Mật khẩu",
@@ -36,7 +36,7 @@ class AppPasswordInput extends StatelessWidget {
     this.obscureTextController,
     this.textEditingController,
     this.textStyle,
-    this.hintText,
+    this.hintText = "",
     this.hintStyle,
     this.onChanged,
     this.onSubmitted,
@@ -53,11 +53,11 @@ class AppPasswordInput extends StatelessWidget {
             child: RichText(
               text: TextSpan(children: [
                 TextSpan(
-                  text: labelText ?? "",
+                  text: labelText,
                   style: labelStyle ?? AppTextStyle.blackS12,
                 ),
                 TextSpan(
-                  text: highlightText ?? "",
+                  text: highlightText,
                   style: AppTextStyle.blackS12.copyWith(color: Colors.red),
                 )
               ]),
@@ -66,9 +66,9 @@ class AppPasswordInput extends StatelessWidget {
           Stack(
             children: [
               ValueListenableBuilder(
-                valueListenable: obscureTextController,
+                valueListenable: obscureTextController!,
                 child: Container(),
-                builder: (context, obscureText, child) {
+                builder: (context, bool obscureText, child) {
                   return TextField(
                     onSubmitted: onSubmitted,
                     onChanged: onChanged,
@@ -88,7 +88,7 @@ class AppPasswordInput extends StatelessWidget {
                       ),
                       fillColor: Colors.white,
                       hintStyle: hintStyle ?? AppTextStyle.greyS16,
-                      hintText: hintText ?? "",
+                      hintText: hintText,
                       isDense: true,
                       contentPadding: EdgeInsets.only(top: 8, bottom: 12),
                       suffixIcon: Image.asset(
@@ -98,16 +98,16 @@ class AppPasswordInput extends StatelessWidget {
                       ),
                       suffixIconConstraints: BoxConstraints(maxHeight: 32, maxWidth: 32),
                     ),
-                    cursorColor: AppColors.gray,
+                    cursorColor: AppColors.textFieldCursor,
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: obscureText,
                   );
                 },
               ),
               ValueListenableBuilder(
-                valueListenable: obscureTextController,
+                valueListenable: obscureTextController!,
                 child: Container(),
-                builder: (context, obscureText, child) {
+                builder: (context, bool obscureText, child) {
                   return _buildSuffixIcon(obscureText);
                 },
               )
@@ -115,9 +115,9 @@ class AppPasswordInput extends StatelessWidget {
           ),
           textEditingController != null
               ? ValueListenableBuilder(
-                  valueListenable: textEditingController,
+                  valueListenable: textEditingController!,
                   builder: (context, TextEditingValue controller, child) {
-                    final isValid = _validatePassword(controller.text) ?? "";
+                    final isValid = _validatePassword(controller.text);
                     return Column(
                       children: [
                         SizedBox(height: 2),
@@ -142,9 +142,9 @@ class AppPasswordInput extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Future.delayed(Duration.zero, () {
-            passwordFocusNode.unfocus();
+            passwordFocusNode?.unfocus();
           });
-          obscureTextController.value = !obscureText ?? false;
+          obscureTextController?.value = !obscureText;
         },
         child: Container(
           height: 34,

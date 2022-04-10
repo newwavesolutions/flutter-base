@@ -1,19 +1,23 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_base/configs/app_config.dart';
-import 'package:flutter_base/network/api_client.dart';
+import 'package:flutter_base/configs/app_configs.dart';
 
+import 'api_client.dart';
 import 'api_interceptors.dart';
 
 class ApiUtil {
-  ApiClient apiClient;
-  Dio dio;
+  static Dio? dio;
 
-  ApiUtil._privateConstructor() {
-    dio = Dio();
-    dio.options.connectTimeout = 30000;
-    dio.interceptors.add(ApiInterceptors());
-    apiClient = ApiClient(dio, baseUrl: AppConfig.baseUrl);
+  static Dio getDio() {
+    if (dio == null) {
+      dio = Dio();
+      dio!.options.connectTimeout = 60000;
+      dio!.interceptors.add(ApiInterceptors());
+    }
+    return dio!;
   }
 
-  static final ApiUtil instance = ApiUtil._privateConstructor();
+  static ApiClient get apiClient {
+    final apiClient = ApiClient(getDio(), baseUrl: AppConfigs.baseUrl);
+    return apiClient;
+  }
 }

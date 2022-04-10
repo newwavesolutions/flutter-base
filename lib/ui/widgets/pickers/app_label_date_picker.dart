@@ -1,34 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/commons/app_colors.dart';
-import 'package:flutter_base/commons/app_images.dart';
-import 'package:flutter_base/commons/app_text_styles.dart';
-import 'package:flutter_base/utils/dialog_utils.dart';
+import 'package:flutter_base/common/app_colors.dart';
+import 'package:flutter_base/common/app_text_styles.dart';
+import 'package:flutter_base/ui/commons/app_dialog.dart';
 import 'package:intl/intl.dart';
 
-class DatePickerController extends ValueNotifier<DateTime> {
-  DatePickerController({DateTime dateTime}) : super(dateTime);
+class DatePickerController extends ValueNotifier<DateTime?> {
+  DatePickerController({DateTime? dateTime}) : super(dateTime);
 
-  DateTime get date => value;
+  DateTime? get date => value;
 
-  set date(DateTime newDate) {
+  set date(DateTime? newDate) {
     value = newDate;
   }
 }
 
 class AppLabelDatePicker extends StatelessWidget {
-  final DatePickerController controller;
+  final DatePickerController? controller;
   final String dateFormat;
-  final DateTime minTime;
-  final DateTime maxTime;
-  final ValueChanged<DateTime> onChanged;
+  final DateTime? minTime;
+  final DateTime? maxTime;
+  final ValueChanged<DateTime>? onChanged;
 
   final String labelText;
-  final TextStyle labelStyle;
+  final TextStyle? labelStyle;
   final String highlightText;
-  final Widget suffixIcon;
-  final TextStyle textStyle;
+  final Widget? suffixIcon;
+  final TextStyle? textStyle;
   final String hintText;
-  final TextStyle hintStyle;
+  final TextStyle? hintStyle;
   final bool enabled;
 
   AppLabelDatePicker({
@@ -36,12 +35,12 @@ class AppLabelDatePicker extends StatelessWidget {
     this.minTime,
     this.maxTime,
     this.controller,
-    this.labelText,
+    this.labelText = "",
     this.labelStyle,
     this.highlightText = "*",
     this.suffixIcon,
     this.textStyle,
-    this.hintText,
+    this.hintText = "",
     this.hintStyle,
     this.onChanged,
     this.enabled = true,
@@ -68,9 +67,9 @@ class AppLabelDatePicker extends StatelessWidget {
             ),
           ),
           ValueListenableBuilder(
-            valueListenable: controller,
+            valueListenable: controller!,
             child: Container(),
-            builder: (context, dateTime, child) {
+            builder: (context, DateTime? dateTime, child) {
               var dateString = "";
               if ((dateFormat != null) && (dateTime != null)) {
                 dateString = DateFormat(dateFormat).format(dateTime);
@@ -103,7 +102,7 @@ class AppLabelDatePicker extends StatelessWidget {
                     suffixIcon: suffixIcon ?? Icon(Icons.date_range_outlined),
                     suffixIconConstraints: BoxConstraints(maxHeight: 32, maxWidth: 32),
                   ),
-                  cursorColor: AppColors.gray,
+                  cursorColor: AppColors.textFieldCursor,
                 ),
               );
             },
@@ -115,20 +114,23 @@ class AppLabelDatePicker extends StatelessWidget {
   }
 
   _showDatePicker({
-    BuildContext context,
+    BuildContext? context,
   }) {
     if (!enabled) {
       return;
     }
-    DialogUtils.showDatePicker(
+    if (context == null) {
+      return;
+    }
+    AppDialog.showDatePicker(
       context,
       maxTime: maxTime,
       minTime: minTime,
       onConfirm: (dateTime) {
         onChanged?.call(dateTime);
-        controller.date = dateTime;
+        controller?.date = dateTime;
       },
-      currentTime: controller.date ?? DateTime.now(),
+      currentTime: controller?.date ?? DateTime.now(),
     );
   }
 }

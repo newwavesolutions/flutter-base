@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/commons/app_text_styles.dart';
-import 'package:flutter_base/ui/widgets/separator_widget.dart';
+import 'package:flutter_base/common/app_dimens.dart';
+import 'package:flutter_base/common/app_text_styles.dart';
+import 'package:flutter_base/ui/widgets/app_devider.dart';
 
 class MenuHeaderWidget extends StatelessWidget {
   final String title;
 
-  MenuHeaderWidget({this.title, Key key}) : super(key: key);
+  MenuHeaderWidget({this.title = "", Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
-      height: 32,
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.only(left: AppDimens.marginNormal, top: AppDimens.marginLarge),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
-            child: Container(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                title ?? "",
-                style: AppTextStyle.greyS12Bold,
-              ),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              title,
+              style: theme.textTheme.headline6,
             ),
           ),
-          SeparatorWidget(),
+          SizedBox(height: AppDimens.marginSmall),
+          AppDivider(),
         ],
       ),
     );

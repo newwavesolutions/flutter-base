@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_base/models/entities/user_entity.dart';
+import 'package:flutter_base/models/entities/user/user_entity.dart';
 
 import '../models/enums/load_status.dart';
 import '../repositories/auth_repository.dart';
@@ -10,13 +10,14 @@ import '../utils/logger.dart';
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
-  UserRepository userRepository;
-  AuthRepository authRepository;
+  UserRepository userRepo;
+  AuthRepository authRepo;
 
-  AppCubit({this.userRepository, this.authRepository}) : super(AppState());
+  AppCubit({required this.userRepo, required this.authRepo})
+      : super(AppState());
 
   void fetchProfile() {
-    emit(state.copyWith(fetchProfileStatus: LoadStatus.LOADING));
+    emit(state.copyWith(fetchProfileStatus: LoadStatus.loading));
   }
 
   void updateProfile(UserEntity user) {
@@ -25,15 +26,15 @@ class AppCubit extends Cubit<AppState> {
 
   ///Sign Out
   void signOut() async {
-    emit(state.copyWith(signOutStatus: LoadStatus.LOADING));
+    emit(state.copyWith(signOutStatus: LoadStatus.loading));
     try {
       //Todo
       await Future.delayed(Duration(seconds: 2));
-      await authRepository.removeToken();
+      await authRepo.removeToken();
       emit(state.removeUser());
     } catch (e) {
       logger.e(e);
-      emit(state.copyWith(signOutStatus: LoadStatus.FAILURE));
+      emit(state.copyWith(signOutStatus: LoadStatus.failure));
     }
   }
 }

@@ -1,45 +1,24 @@
-part of 'splash_cubit.dart';
-
-enum LoginState { INITIAL, LOGGED_IN, LOGGED_OUT }
+import 'package:equatable/equatable.dart';
+import 'package:flutter_base/models/enums/load_status.dart';
+import 'package:get/get.dart';
 
 class SplashState extends Equatable {
-  final LoginState loginState;
-  final LoadStatus loadUserStatus;
-  final UserEntity user;
-  final LoadStatus loadServerConfigStatus;
-  final RemoteConfigEntity remoteConfig;
+  final LoadStatus fetchProfileStatus;
 
   SplashState({
-    this.loginState = LoginState.INITIAL,
-    this.loadUserStatus = LoadStatus.INITIAL,
-    this.user,
-    this.loadServerConfigStatus = LoadStatus.INITIAL,
-    this.remoteConfig,
+    this.fetchProfileStatus = LoadStatus.initial,
   });
 
   SplashState copyWith({
-    LoginState loginState,
-    LoadStatus loadUserStatus,
-    UserEntity user,
-    LoadStatus loadServerConfigStatus,
-    RemoteConfigEntity remoteConfig,
+    LoadStatus? fetchProfileStatus,
   }) {
     return SplashState(
-      loginState: loginState ?? this.loginState,
-      loadUserStatus: loadUserStatus ?? this.loadUserStatus,
-      user: user ?? this.user,
-      loadServerConfigStatus:
-          loadServerConfigStatus ?? this.loadServerConfigStatus,
-      remoteConfig: remoteConfig ?? this.remoteConfig,
+      fetchProfileStatus: fetchProfileStatus ?? this.fetchProfileStatus,
     );
   }
 
   @override
-  List<Object> get props => [
-        this.loginState,
-        this.loadUserStatus,
-        this.user,
-        this.loadServerConfigStatus,
-        this.remoteConfig,
+  List<Object?> get props => [
+        fetchProfileStatus,
       ];
 }

@@ -1,3 +1,10 @@
 {
-  "movies": "Movies"
+  "settings_title": "Settings",
+  "settings_themeMode": "Theme",
+  "settings_themeModeSystem": "System",
+  "settings_themeModeLight": "Light",
+  "settings_themeModeDark": "Dark",
+  "settings_languageVietnamese": "Tiếng việt",
+  "settings_languageEnglish": "English",
+  "settings_language": "Language"
 }

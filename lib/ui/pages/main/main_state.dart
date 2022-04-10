@@ -1,23 +1,23 @@
-part of 'main_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:get/get.dart';
 
 class MainState extends Equatable {
-  final int currentTabIndex;
+  int selectedIndex;
 
   MainState({
-    this.currentTabIndex = 0,
+    this.selectedIndex = 0,
   });
 
   MainState copyWith({
-    int currentTabIndex,
+    int? selectedIndex,
   }) {
     return MainState(
-      currentTabIndex: currentTabIndex ?? this.currentTabIndex,
+      selectedIndex: selectedIndex ?? this.selectedIndex,
     );
   }
 
   @override
-  // TODO: implement props
-  List<Object> get props => [
-        this.currentTabIndex,
+  List<Object?> get props => [
+        selectedIndex,
       ];
 }

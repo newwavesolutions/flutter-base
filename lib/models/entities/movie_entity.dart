@@ -5,33 +5,33 @@ part 'movie_entity.g.dart';
 @JsonSerializable()
 class MovieEntity {
   @JsonKey()
-  String title;
+  String? title;
   @JsonKey(name: 'poster_path')
-  String posterPath;
+  String? posterPath;
   @JsonKey(name: 'backdrop_path')
-  String backdropPath;
+  String? backdropPath;
   @JsonKey(name: 'vote_average')
-  double voteAverage;
+  double? voteAverage;
   @JsonKey()
-  String overview;
+  String? overview;
   @JsonKey(name: 'release_date')
-  String releaseDate;
+  String? releaseDate;
 
-  MovieEntity(
-      {this.title,
-      this.posterPath,
-      this.backdropPath,
-      this.voteAverage,
-      this.overview,
-      this.releaseDate});
+  MovieEntity({
+    this.title,
+    this.posterPath,
+    this.backdropPath,
+    this.voteAverage,
+    this.overview,
+    this.releaseDate,
+  });
 
-  factory MovieEntity.fromJson(Map<String, dynamic> json) =>
-      _$MovieEntityFromJson(json);
+  factory MovieEntity.fromJson(Map<String, dynamic> json) => _$MovieEntityFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieEntityToJson(this);
 
   @JsonKey(ignore: true)
   String get posterUrl {
-    return 'https://image.tmdb.org/t/p/w185' + posterPath;
+    return 'https://image.tmdb.org/t/p/w185' + (posterPath ?? "");
   }
 }

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/utils/validators.dart';
+import 'package:flutter_base/utils/utils.dart';
 
 import 'app_label_text_field.dart';
 
 class AppPhoneInput extends AppLabelTextField {
   AppPhoneInput({
-    String highlightText,
-    String labelText,
-    TextStyle labelStyle,
-    TextEditingController textEditingController,
-    ValueChanged<String> onChanged,
+    String? highlightText,
+    String? labelText,
+    TextStyle? labelStyle,
+    TextEditingController? textEditingController,
+    ValueChanged<String>? onChanged,
     bool enabled = true,
   }) : super(
           textEditingController: textEditingController,
@@ -21,7 +21,7 @@ class AppPhoneInput extends AppLabelTextField {
           textInputType: TextInputType.phone,
           enabled: enabled,
           validator: (text) {
-            if (Validator.isValidPhone(text) || text.isEmpty) {
+            if (Utils.isPhoneNumber(text ?? "") || (text ?? "").isEmpty) {
               return "";
             } else {
               return "Số điện thoại không hợp lệ";

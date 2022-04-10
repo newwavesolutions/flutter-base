@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/commons/app_colors.dart';
-import 'package:flutter_base/commons/app_shadow.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:flutter_base/common/app_colors.dart';
 
 class LoadingMoreRowWidget extends StatelessWidget {
   final double height;
   final Color color;
 
-  LoadingMoreRowWidget({this.height = 80, this.color = AppColors.main});
+  LoadingMoreRowWidget({this.height = 80, this.color = AppColors.secondary});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +18,7 @@ class LoadingMoreRowWidget extends StatelessWidget {
           height: 24,
           child: CircularProgressIndicator(
             backgroundColor: color,
-            valueColor: AlwaysStoppedAnimation<Color>(AppColors.gradientStart),
+            valueColor: AlwaysStoppedAnimation<Color>(AppColors.secondary),
           ),
         ),
       ),

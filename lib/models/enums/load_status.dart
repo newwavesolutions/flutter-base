@@ -1,7 +1,7 @@
 enum LoadStatus {
-  INITIAL,
-  LOADING,
-  SUCCESS,
-  FAILURE,
-  LOADING_MORE,
+  initial,
+  loading,
+  success,
+  failure,
+  loadingMore,
 }

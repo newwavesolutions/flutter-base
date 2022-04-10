@@ -1,12 +1,13 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
-part 'main_state.dart';
+import 'main_state.dart';
 
 class MainCubit extends Cubit<MainState> {
   MainCubit() : super(MainState());
 
-  void changeTab(int index) {
-    emit(state.copyWith(currentTabIndex: index));
+  ///Switch tab
+  void switchTap(int index) {
+    emit(state.copyWith(selectedIndex: index));
   }
 }

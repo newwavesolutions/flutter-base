@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/commons/app_shadow.dart';
+import 'package:flutter_base/common/app_shadows.dart';
 import 'package:shimmer/shimmer.dart';
 
 class LoadingRowWidget extends StatelessWidget {
-  EdgeInsets padding;
-  double height;
+  final EdgeInsets? padding;
+  final double height;
 
   static final _defaultPadding = EdgeInsets.symmetric(
     horizontal: 20,
@@ -21,8 +21,8 @@ class LoadingRowWidget extends StatelessWidget {
       padding: padding,
       child: Container(
         child: Shimmer.fromColors(
-          baseColor: Colors.grey[350],
-          highlightColor: Colors.grey[100],
+          baseColor: Colors.grey[350]!,
+          highlightColor: Colors.grey[100]!,
           child: Container(
               height: double.infinity,
               width: double.infinity,
@@ -31,9 +31,7 @@ class LoadingRowWidget extends StatelessWidget {
                 color: Colors.white,
               )),
         ),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: AppShadow.boxShadow),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), boxShadow: AppShadow.boxShadow),
       ),
     );
   }

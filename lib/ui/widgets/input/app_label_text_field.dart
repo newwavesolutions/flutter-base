@@ -1,36 +1,35 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_base/commons/app_colors.dart';
-import 'package:flutter_base/commons/app_text_styles.dart';
+import 'package:flutter_base/common/app_colors.dart';
+import 'package:flutter_base/common/app_text_styles.dart';
 
 class AppLabelTextField extends StatelessWidget {
   final String labelText;
-  final TextStyle labelStyle;
+  final TextStyle? labelStyle;
   final String highlightText;
-  final Widget suffixIcon;
-  final BoxConstraints suffixIconConstraints;
-  final TextEditingController textEditingController;
-  final TextStyle textStyle;
+  final Widget? suffixIcon;
+  final BoxConstraints? suffixIconConstraints;
+  final TextEditingController? textEditingController;
+  final TextStyle? textStyle;
   final String hintText;
-  final TextStyle hintStyle;
-  final ValueChanged<String> onChanged;
-  final ValueChanged<String> onSubmitted;
+  final TextStyle? hintStyle;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
   final TextInputType textInputType;
-  final FormFieldValidator<String> validator;
-  final List<TextInputFormatter> inputFormatters;
+  final FormFieldValidator<String>? validator;
+  final List<TextInputFormatter>? inputFormatters;
   final bool enabled;
-  final int maxLength;
+  final int? maxLength;
 
   AppLabelTextField({
-    this.labelText,
+    this.labelText = "",
     this.labelStyle,
     this.highlightText = "*",
     this.suffixIcon,
     this.suffixIconConstraints,
     this.textEditingController,
     this.textStyle,
-    this.hintText,
+    this.hintText = "",
     this.hintStyle,
     this.onChanged,
     this.onSubmitted,
@@ -52,16 +51,16 @@ class AppLabelTextField extends StatelessWidget {
                 ? RichText(
                     text: TextSpan(children: [
                       TextSpan(
-                        text: labelText ?? "",
+                        text: labelText,
                         style: labelStyle ?? AppTextStyle.blackS12,
                       ),
                       TextSpan(
-                        text: highlightText ?? "",
+                        text: highlightText,
                         style: AppTextStyle.blackS12.copyWith(color: Colors.red),
                       )
                     ]),
                   )
-                : Text(labelText ?? "", style: labelStyle ?? AppTextStyle.blackS12),
+                : Text(labelText, style: labelStyle ?? AppTextStyle.blackS12),
           ),
           TextField(
             enabled: enabled,
@@ -83,20 +82,20 @@ class AppLabelTextField extends StatelessWidget {
               ),
               fillColor: Colors.white,
               hintStyle: hintStyle ?? AppTextStyle.greyS16,
-              hintText: hintText ?? "",
+              hintText: hintText,
               isDense: true,
               contentPadding: EdgeInsets.only(top: 8, bottom: 12),
               suffixIcon: suffixIcon,
               suffixIconConstraints: suffixIconConstraints ?? BoxConstraints(maxHeight: 32, maxWidth: 32),
               counterText: "",
             ),
-            cursorColor: AppColors.gray,
+            cursorColor: AppColors.textFieldCursor,
             keyboardType: textInputType,
             inputFormatters: inputFormatters,
           ),
           textEditingController != null
               ? ValueListenableBuilder(
-                  valueListenable: textEditingController,
+                  valueListenable: textEditingController!,
                   builder: (context, TextEditingValue controller, child) {
                     final isValid = validator?.call(controller.text) ?? "";
                     return Column(
