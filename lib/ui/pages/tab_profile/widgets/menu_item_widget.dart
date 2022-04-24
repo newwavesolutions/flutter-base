@@ -1,47 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/commons/app_colors.dart';
-import 'package:flutter_base/commons/app_text_styles.dart';
-import 'package:flutter_base/ui/widgets/separator_widget.dart';
+import 'package:flutter_base/common/app_colors.dart';
+import 'package:flutter_base/common/app_dimens.dart';
+import 'package:flutter_base/common/app_text_styles.dart';
+import 'package:flutter_base/ui/widgets/app_devider.dart';
 
 class MenuItemWidget extends StatelessWidget {
   final String title;
+  final VoidCallback? onPressed;
 
-  MenuItemWidget({this.title, Key key}) : super(key: key);
+  MenuItemWidget({Key? key, this.title = "", this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 56,
-      padding: EdgeInsets.only(left: 16),
-      child: Column(
-        children: [
-          Expanded(
-            child: Container(
+    final theme = Theme.of(context);
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        padding: EdgeInsets.only(
+          left: AppDimens.marginNormal,
+          top: AppDimens.paddingSmall,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
               alignment: Alignment.centerLeft,
               child: Row(
                 children: [
                   Icon(
                     Icons.bookmark_outline_rounded,
-                    color: AppColors.main,
                   ),
                   SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      title ?? "",
-                      style: AppTextStyle.whiteS14,
+                      title,
+                      style: theme.textTheme.bodyText1,
                     ),
                   ),
                   Icon(
                     Icons.keyboard_arrow_right,
-                    color: Colors.white,
                   ),
-                  SizedBox(width: 12),
+                  SizedBox(width: AppDimens.paddingSmall),
                 ],
               ),
             ),
-          ),
-          SeparatorWidget(),
-        ],
+            SizedBox(height: AppDimens.paddingSmall),
+            AppDivider(),
+          ],
+        ),
       ),
     );
   }

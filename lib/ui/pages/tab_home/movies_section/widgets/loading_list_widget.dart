@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../../widgets/shimmer/app_shimmer.dart';
 
 class LoadingListWidget extends StatelessWidget {
-  final EdgeInsets rowPadding;
   final double rowHeight;
 
-  LoadingListWidget({this.rowPadding, this.rowHeight = 100});
+  LoadingListWidget({this.rowHeight = 100});
 
   @override
   Widget build(BuildContext context) {

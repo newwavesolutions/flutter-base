@@ -1,4 +1,3 @@
-import 'package:flutter_base/database/secure_storage.dart';
 import 'package:flutter_base/utils/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,6 +22,11 @@ class SharedPreferencesHelper {
   static void setApiTokenKey(String apiTokenKey) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(_authKey, apiTokenKey);
+  }
+
+  static void removeApiTokenKey() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_authKey);
   }
 
   //Get intro

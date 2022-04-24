@@ -1,56 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_base/commons/app_colors.dart';
-import 'package:flutter_base/commons/app_dimens.dart';
-import 'package:flutter_base/commons/app_images.dart';
-import 'package:flutter_base/commons/app_text_styles.dart';
+import 'package:flutter_base/common/app_dimens.dart';
+import 'package:flutter_base/ui/widgets/images/app_cache_image.dart';
 
-import '../../../../commons/app_colors.dart';
-
-class HomeAppBar extends StatelessWidget {
-  final VoidCallback onBackPressed;
-  final String title;
-
-  HomeAppBar({Key key, this.onBackPressed, this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: AppDimens.appBarHeight,
-      child: Stack(
-        children: [
-          Row(
-            children: [
-              SizedBox(width: 16),
-              CircleAvatar(),
-              Spacer(),
-              GestureDetector(
-                child: Container(
-                  height: double.infinity,
-                  width: 48,
-                  child: Icon(
-                    Icons.search,
-                    color: AppColors.buttonNormal,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                child: Container(
-                  height: double.infinity,
-                  width: 48,
-                  child: Icon(
-                    Icons.more_vert,
-                    color: AppColors.buttonNormal,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Center(
-            child: Image.asset(AppImages.icLogo),
-          )
-        ],
-      ),
-    );
-  }
+class HomeAppBar extends AppBar {
+  HomeAppBar({
+    Key? key,
+    String avatarUrl = "",
+    VoidCallback? onSearchPressed,
+    VoidCallback? onSettingPressed,
+  }) : super(
+          key: key,
+          title: Text("Movie"),
+          leading: Container(
+              child: Center(
+            child: AppCircleAvatar(
+              url: avatarUrl,
+              size: 40,
+            ),
+          )),
+          toolbarHeight: AppDimens.appBarHeight,
+          actions: [
+            IconButton(
+                onPressed: null,
+                icon: Icon(
+                  Icons.search,
+                )),
+            IconButton(
+                onPressed: null,
+                icon: Icon(
+                  Icons.more_vert,
+                )),
+          ],
+        );
 }

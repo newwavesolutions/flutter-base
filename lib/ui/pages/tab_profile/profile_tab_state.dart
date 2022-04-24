@@ -1,14 +1,15 @@
-part of 'profile_tab_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_base/models/enums/load_status.dart';
 
 class ProfileTabState extends Equatable {
   final LoadStatus signOutStatus;
 
   ProfileTabState({
-    this.signOutStatus = LoadStatus.INITIAL,
+    this.signOutStatus = LoadStatus.initial,
   });
 
   ProfileTabState copyWith({
-    LoadStatus signOutStatus,
+    LoadStatus? signOutStatus,
   }) {
     return ProfileTabState(
       signOutStatus: signOutStatus ?? this.signOutStatus,
@@ -16,7 +17,7 @@ class ProfileTabState extends Equatable {
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         signOutStatus,
       ];
 }

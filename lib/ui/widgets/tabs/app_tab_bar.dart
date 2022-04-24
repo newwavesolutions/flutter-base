@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/commons/app_colors.dart';
-import 'package:flutter_base/commons/app_shadow.dart';
-import 'package:flutter_base/commons/app_text_styles.dart';
+import 'package:flutter_base/common/app_colors.dart';
+import 'package:flutter_base/common/app_shadows.dart';
+import 'package:flutter_base/common/app_text_styles.dart';
 
 /// tabController = TabController(length: 2, vsync: this)
 /// Page with TickerProviderStateMixin
 
 class AppTabBar extends StatelessWidget {
-  final TabController tabController;
+  final TabController? tabController;
   final List<String> tabItems;
 
-  AppTabBar({@required this.tabController, @required this.tabItems});
+  AppTabBar({this.tabController, this.tabItems = const []});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,9 @@ class AppTabBar extends StatelessWidget {
         labelStyle: AppTextStyle.blackS14,
         unselectedLabelStyle: AppTextStyle.whiteS14,
         labelColor: Colors.white,
-        unselectedLabelColor: AppColors.text,
+        unselectedLabelColor: AppColors.textWhite,
         indicator: BoxDecoration(
-          color: AppColors.main,
+          color: AppColors.secondary,
           borderRadius: BorderRadius.all(Radius.circular(18)),
           boxShadow: AppShadow.boxShadow,
         ),

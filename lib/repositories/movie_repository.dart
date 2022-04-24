@@ -1,21 +1,18 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_base/configs/app_config.dart';
+import 'package:flutter_base/configs/app_configs.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
-import 'package:flutter_base/models/responses/array_response.dart';
+import 'package:flutter_base/models/response/array_response.dart';
 import 'package:flutter_base/network/api_client.dart';
 
 abstract class MovieRepository {
-  Future<ArrayResponse<MovieEntity>> getMovies({@required int page});
+  Future<ArrayResponse<MovieEntity>> getMovies({required int page});
 
   Future<MovieEntity> getMovie(int id);
 }
 
 class MovieRepositoryImpl extends MovieRepository {
-  ApiClient _apiClient;
+  ApiClient apiClient;
 
-  MovieRepositoryImpl(ApiClient client) {
-    _apiClient = client;
-  }
+  MovieRepositoryImpl({required this.apiClient});
 
   @override
   Future<MovieEntity> getMovie(int id) {
@@ -24,9 +21,9 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<ArrayResponse<MovieEntity>> getMovies({@required int page}) async {
+  Future<ArrayResponse<MovieEntity>> getMovies({required int page}) async {
     try {
-      return _apiClient.getMovies(MovieAPIConfig.APIKey, page);
+      return apiClient.getMovies(MovieAPIConfig.APIKey, page);
     } catch (e) {
       throw e;
     }

@@ -1,4 +1,6 @@
-part of 'movies_section_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_base/models/entities/movie_entity.dart';
+import 'package:flutter_base/models/enums/load_status.dart';
 
 class MoviesSectionState extends Equatable {
   final LoadStatus loadMovieStatus;
@@ -8,31 +10,19 @@ class MoviesSectionState extends Equatable {
   final int totalPages;
 
   MoviesSectionState({
-    this.loadMovieStatus,
+    this.loadMovieStatus = LoadStatus.initial,
     this.movies = const [],
     this.page = 1,
     this.totalResults = 0,
-    this.totalPages = 1,
+    this.totalPages = 0,
   });
 
-  MoviesSectionState copyWith({
-    LoadStatus loadMovieStatus,
-    List<MovieEntity> movies,
-    int page,
-    int totalResults,
-    int totalPages,
-  }) {
-    return new MoviesSectionState(
-      loadMovieStatus: loadMovieStatus ?? this.loadMovieStatus,
-      movies: movies ?? this.movies,
-      page: page ?? this.page,
-      totalResults: totalResults ?? this.totalResults,
-      totalPages: totalPages ?? this.totalPages,
-    );
+  bool get hasReachedMax {
+    return page >= totalPages;
   }
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         this.loadMovieStatus,
         this.movies,
         this.page,
@@ -40,7 +30,19 @@ class MoviesSectionState extends Equatable {
         this.totalPages,
       ];
 
-  bool get hasReachedMax {
-    return page >= totalPages;
+  MoviesSectionState copyWith({
+    LoadStatus? loadMovieStatus,
+    List<MovieEntity>? movies,
+    int? page,
+    int? totalResults,
+    int? totalPages,
+  }) {
+    return MoviesSectionState(
+      loadMovieStatus: loadMovieStatus ?? this.loadMovieStatus,
+      movies: movies ?? this.movies,
+      page: page ?? this.page,
+      totalResults: totalResults ?? this.totalResults,
+      totalPages: totalPages ?? this.totalPages,
+    );
   }
 }

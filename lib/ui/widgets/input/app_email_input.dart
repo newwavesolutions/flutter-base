@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/utils/validators.dart';
+import 'package:flutter_base/utils/utils.dart';
 
 import 'app_label_text_field.dart';
 
 class AppEmailInput extends AppLabelTextField {
   AppEmailInput({
-    String highlightText,
-    TextStyle labelStyle,
-    TextStyle textStyle,
-    TextEditingController textEditingController,
-    ValueChanged<String> onChanged,
+    String? highlightText,
+    TextStyle? labelStyle,
+    TextStyle? textStyle,
+    TextEditingController? textEditingController,
+    ValueChanged<String>? onChanged,
     bool enabled = true,
   }) : super(
           textEditingController: textEditingController,
@@ -22,7 +22,7 @@ class AppEmailInput extends AppLabelTextField {
           textInputType: TextInputType.emailAddress,
           enabled: enabled,
           validator: (text) {
-            if (Validator.isValidEmail(text) || text.isEmpty) {
+            if (Utils.isEmail(text ?? "") || (text ?? "").isEmpty) {
               return "";
             } else {
               return "Email invalid";

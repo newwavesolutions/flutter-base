@@ -1,85 +1,82 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/commons/app_colors.dart';
-import 'package:flutter_base/commons/app_shadow.dart';
-import 'package:flutter_base/ui/widgets/loading_indicator_widget.dart';
+import 'package:flutter_base/common/app_dimens.dart';
 
-class _AppButton extends StatelessWidget {
-  String title;
-  bool isLoading;
-  VoidCallback onPressed;
+import '../app_circular_progress_indicator.dart';
 
-  Color textColor;
-  Color backgroundColor;
+class AppButton extends StatelessWidget {
+  final String? title;
+  final Widget? leadingIcon;
+  final Widget? trailingIcon;
 
-  _AppButton({this.title = '', this.isLoading = false, this.onPressed});
+  final bool isLoading;
+
+  final double? height;
+  final double? width;
+  final double? borderWidth;
+  final double? cornerRadius;
+
+  final Color? backgroundColor;
+  final Color? borderColor;
+
+  final TextStyle? textStyle;
+
+  final VoidCallback? onPressed;
+
+  AppButton({
+    this.title,
+    this.leadingIcon,
+    this.trailingIcon,
+    this.isLoading = false,
+    this.height,
+    this.width,
+    this.borderWidth,
+    this.cornerRadius,
+    this.backgroundColor,
+    this.borderColor,
+    this.textStyle,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 48,
-      width: double.infinity,
-      child: ButtonTheme(
-        minWidth: 0.0,
-        height: 0.0,
-        padding: EdgeInsets.all(0),
-        child: FlatButton(
-          child: _buildBodyWidget(),
+      height: height ?? AppDimens.buttonHeight,
+      width: width ?? double.infinity,
+      child: ElevatedButton(
+        child: _buildChildWidget(),
+        style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(cornerRadius ?? AppDimens.buttonCornerRadius),
           ),
-          onPressed: onPressed,
+          side: BorderSide(
+            color: borderColor ?? Colors.transparent,
+            width: borderWidth ?? 0,
+          ),
+          primary: backgroundColor,
+          padding: EdgeInsets.all(0),
         ),
-      ),
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-        boxShadow: AppShadow.boxShadow,
+        onPressed: onPressed,
       ),
     );
   }
 
-  Widget _buildBodyWidget() {
+  Widget _buildChildWidget() {
     if (isLoading) {
-      return LoadingIndicatorWidget(color: Colors.white);
+      return AppCircularProgressIndicator(color: Colors.white);
     } else {
-      return Text(
-        title,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w800,
-          color: textColor,
-        ),
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          leadingIcon ?? Container(),
+          title != null
+              ? Text(
+                  title!,
+                  style: textStyle ?? TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.red),
+                )
+              : Container(),
+          trailingIcon ?? Container(),
+        ],
       );
     }
-  }
-}
-
-class AppWhiteButton extends _AppButton {
-  AppWhiteButton({
-    String title = '',
-    bool isLoading = false,
-    VoidCallback onPressed,
-  }) {
-    this.title = title;
-    this.isLoading = isLoading;
-    this.onPressed = onPressed;
-    //SetupUI
-    textColor = AppColors.main;
-    backgroundColor = Colors.white;
-  }
-}
-
-class AppTintButton extends _AppButton {
-  AppTintButton({
-    String title = '',
-    bool isLoading = false,
-    VoidCallback onPressed,
-  }) {
-    this.title = title;
-    this.isLoading = isLoading;
-    this.onPressed = onPressed;
-    //SetupUI
-    textColor = Colors.white;
-    backgroundColor = AppColors.main;
   }
 }

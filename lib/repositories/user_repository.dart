@@ -6,11 +6,9 @@ abstract class UserRepository {
 }
 
 class UserRepositoryImpl extends UserRepository {
-  ApiClient _apiClient;
+  ApiClient apiClient;
 
-  UserRepositoryImpl(ApiClient client) {
-    _apiClient = client;
-  }
+  UserRepositoryImpl({required this.apiClient});
 
   @override
   Future<UserEntity> getProfile() async {

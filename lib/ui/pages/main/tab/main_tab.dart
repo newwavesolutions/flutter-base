@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/ui/pages/tab_discover/discover_tab_page.dart';
-import 'package:flutter_base/ui/pages/tab_home/home_tab_page.dart';
-import 'package:flutter_base/ui/pages/tab_profile/profile_tab_page.dart';
-import 'package:flutter_base/ui/pages/tab_tv_shows/tv_show_tab_page.dart';
-import 'package:flutter_base/ui/pages/tab_watchlist/watchlist_tab_page.dart';
 
 enum MainTab {
   home,
@@ -17,15 +12,16 @@ extension MainTabExtension on MainTab {
   Widget get page {
     switch (this) {
       case MainTab.home:
-        return HomeTabPage();
+      // return HomeTabPage();
+      // return Container(color: Colors.red,);
       case MainTab.discover:
-        return DiscoverTabPage();
+      // return DiscoverTabPage();
       case MainTab.tvShows:
-        return TvShowTabPage();
+      // return TvShowTabPage();
       case MainTab.watchlist:
-        return WatchlistTabPage();
+      // return WatchlistTabPage();
       case MainTab.profile:
-        return ProfileTabPage();
+      // return ProfileTabPage();
     }
     return Container();
   }
@@ -43,7 +39,6 @@ extension MainTabExtension on MainTab {
       case MainTab.profile:
         return BottomNavigationBarItem(icon: Icon(Icons.person_outline_rounded), label: 'Profile');
     }
-    return null;
   }
 
   String get title {
