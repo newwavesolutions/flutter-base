@@ -1,15 +1,12 @@
+import 'app_env_config.dart';
+
 class AppConfigs {
-  static const String appName = 'Real Agent';
+  static Environment env = Environment.prod;
 
-  ///DEV
+  ///API Env
+  static String get baseUrl => env.baseUrl;
 
-  ///STAGING
-  static const envName = "Staging";
-  static const webUrl = "https://www.themoviedb.org";
-  static const baseUrl = "https://api.themoviedb.org";
-  static const socketUrl = 'wss://socket.themoviedb.org'; //Todo: change this
-
-  ///PRODUCTION
+  static String get envName => env.envName;
 
   ///Paging
   static const pageSize = 20;
@@ -24,7 +21,8 @@ class AppConfigs {
   static const dateAPIFormat = 'dd/MM/yyyy';
   static const dateDisplayFormat = 'dd/MM/yyyy';
 
-  static const dateTimeAPIFormat = "MM/dd/yyyy'T'hh:mm:ss.SSSZ"; //Use DateTime.parse(date) instead of ...
+  static const dateTimeAPIFormat =
+      "MM/dd/yyyy'T'hh:mm:ss.SSSZ"; //Use DateTime.parse(date) instead of ...
   static const dateTimeDisplayFormat = 'dd/MM/yyyy HH:mm';
 
   ///Date range
