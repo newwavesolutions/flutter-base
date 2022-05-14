@@ -7,14 +7,26 @@ import '../tab_profile/profile_tab_view.dart';
 import 'main_state.dart';
 import 'tab/main_tab.dart';
 
-class MainPage extends StatefulWidget {
+class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider<MainCubit>(
+      create: (BuildContext context) => MainCubit(),
+      child: const _MainPage(),
+    );
+  }
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPage extends StatefulWidget {
+  const _MainPage({Key? key}) : super(key: key);
+
+  @override
+  State<_MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<_MainPage> {
   ///PageView page
   late List<Widget> pageList;
   late PageController pageController;
@@ -31,7 +43,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    _cubit = MainCubit();
+    _cubit = BlocProvider.of(context);
     super.initState();
     //PageView page
     pageList = [

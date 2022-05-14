@@ -13,37 +13,35 @@ import '../../../repositories/auth_repository.dart';
 import '../../../repositories/user_repository.dart';
 import 'sign_in_cubit.dart';
 
-class SignInPage extends StatefulWidget {
-  static const routeName = '/signInPage';
-
+class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
 
-  static push({required BuildContext context}) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => BlocProvider(
-          create: (con) {
-            final authRepo = RepositoryProvider.of<AuthRepository>(context);
-            final userRepo = RepositoryProvider.of<UserRepository>(context);
-            final appCubit = RepositoryProvider.of<AppCubit>(context);
-            return SignInCubit(
-              authRepo: authRepo,
-              userRepo: userRepo,
-              appCubit: appCubit,
-            );
-          },
-          child: const SignInPage(),
-        ),
-      ),
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (con) {
+        final authRepo = RepositoryProvider.of<AuthRepository>(context);
+        final userRepo = RepositoryProvider.of<UserRepository>(context);
+        final appCubit = RepositoryProvider.of<AppCubit>(context);
+        return SignInCubit(
+          authRepo: authRepo,
+          userRepo: userRepo,
+          appCubit: appCubit,
+        );
+      },
+      child: const _SignInPage(),
     );
   }
-
-  @override
-  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignInPage extends StatefulWidget {
+  const _SignInPage({Key? key}) : super(key: key);
+
+  @override
+  State<_SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<_SignInPage> {
   late TextEditingController usernameTextController;
   late TextEditingController passwordTextController;
 

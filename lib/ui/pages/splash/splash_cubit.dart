@@ -23,8 +23,7 @@ class SplashCubit extends Cubit<SplashState> {
     await Future.delayed(const Duration(seconds: 2));
     final token = await authRepo.getToken();
     if (token == null) {
-      // Get.offAll(SignInPage());
-      SignInPage.push(context: Get.context!);
+      Get.offAll(() => const SignInPage());
     } else {
       try {
         //Profile
@@ -51,7 +50,7 @@ class SplashCubit extends Cubit<SplashState> {
         );
         return;
       }
-      Get.offAll(const MainPage());
+      Get.offAll(() => const MainPage());
     }
   }
 }
