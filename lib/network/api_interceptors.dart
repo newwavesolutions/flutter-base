@@ -46,7 +46,7 @@ class ApiInterceptors extends InterceptorsWrapper {
     //Handle section expired
     if (response.statusCode == 401) {
       SecureStorageHelper.instance.removeToken();
-      Get.off(SignInPage());
+      Get.off(const SignInPage());
     }
     super.onResponse(response, handler);
   }
@@ -58,7 +58,9 @@ class ApiInterceptors extends InterceptorsWrapper {
     var data = "";
     try {
       data = jsonEncode(err.response?.data);
-    } catch (e) {}
+    } catch (e, s) {
+      logger.e(e, stackTrace: s);
+    }
     logger.log("⚠️ ERROR[$statusCode] => PATH: $uri\n DATA: $data");
     super.onError(err, handler);
   }

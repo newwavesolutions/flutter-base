@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_base/models/entities/user/user_entity.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../models/enums/load_status.dart';
 import '../repositories/auth_repository.dart';
@@ -13,8 +13,10 @@ class AppCubit extends Cubit<AppState> {
   UserRepository userRepo;
   AuthRepository authRepo;
 
-  AppCubit({required this.userRepo, required this.authRepo})
-      : super(AppState());
+  AppCubit({
+    required this.userRepo,
+    required this.authRepo,
+  }) : super(const AppState());
 
   void fetchProfile() {
     emit(state.copyWith(fetchProfileStatus: LoadStatus.loading));
@@ -29,7 +31,7 @@ class AppCubit extends Cubit<AppState> {
     emit(state.copyWith(signOutStatus: LoadStatus.loading));
     try {
       //Todo
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
       await authRepo.removeToken();
       emit(state.removeUser());
     } catch (e) {

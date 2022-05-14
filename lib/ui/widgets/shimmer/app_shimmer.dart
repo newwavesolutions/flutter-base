@@ -10,7 +10,7 @@ class AppShimmer extends StatelessWidget {
   final Color? baseColor;
   final Color? highlightColor;
 
-  AppShimmer({
+  const AppShimmer({Key? key,
     this.width = double.infinity,
     this.height = double.infinity,
     this.cornerRadius = 0,
@@ -18,7 +18,7 @@ class AppShimmer extends StatelessWidget {
     this.padding = EdgeInsets.zero,
     this.baseColor,
     this.highlightColor,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

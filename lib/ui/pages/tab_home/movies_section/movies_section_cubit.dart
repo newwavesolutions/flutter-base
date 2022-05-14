@@ -7,7 +7,9 @@ import 'movies_section_state.dart';
 class MoviesSectionCubit extends Cubit<MoviesSectionState> {
   MovieRepository movieRepo;
 
-  MoviesSectionCubit({required this.movieRepo}) : super(MoviesSectionState());
+  MoviesSectionCubit({
+    required this.movieRepo,
+  }) : super(const MoviesSectionState());
 
   void fetchInitialMovies() async {
     emit(state.copyWith(loadMovieStatus: LoadStatus.loading));

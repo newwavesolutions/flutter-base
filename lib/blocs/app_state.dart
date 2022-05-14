@@ -5,7 +5,7 @@ class AppState extends Equatable {
   final LoadStatus fetchProfileStatus;
   final LoadStatus signOutStatus;
 
-  AppState({
+  const AppState({
     this.user,
     this.fetchProfileStatus = LoadStatus.initial,
     this.signOutStatus = LoadStatus.initial,
@@ -16,7 +16,7 @@ class AppState extends Equatable {
     LoadStatus? fetchProfileStatus,
     LoadStatus? signOutStatus,
   }) {
-    return new AppState(
+    return AppState(
       user: user ?? this.user,
       fetchProfileStatus: fetchProfileStatus ?? this.fetchProfileStatus,
       signOutStatus: signOutStatus ?? this.signOutStatus,
@@ -26,15 +26,15 @@ class AppState extends Equatable {
   AppState removeUser() {
     return AppState(
       user: user,
-      fetchProfileStatus: this.fetchProfileStatus,
-      signOutStatus: this.signOutStatus,
+      fetchProfileStatus: fetchProfileStatus,
+      signOutStatus: signOutStatus,
     );
   }
 
   @override
   List<Object?> get props => [
-        this.user,
-        this.fetchProfileStatus,
-        this.signOutStatus,
+        user,
+        fetchProfileStatus,
+        signOutStatus,
       ];
 }

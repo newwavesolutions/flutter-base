@@ -29,15 +29,20 @@ extension MainTabExtension on MainTab {
   BottomNavigationBarItem get tab {
     switch (this) {
       case MainTab.home:
-        return BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: 'Home');
+        return const BottomNavigationBarItem(
+            icon: Icon(Icons.home_rounded), label: 'Home');
       case MainTab.discover:
-        return BottomNavigationBarItem(icon: Icon(Icons.explore_outlined), label: 'Discover');
+        return const BottomNavigationBarItem(
+            icon: Icon(Icons.explore_outlined), label: 'Discover');
       case MainTab.tvShows:
-        return BottomNavigationBarItem(icon: Icon(Icons.tv_rounded), label: 'TV Shows');
+        return const BottomNavigationBarItem(
+            icon: Icon(Icons.tv_rounded), label: 'TV Shows');
       case MainTab.watchlist:
-        return BottomNavigationBarItem(icon: Icon(Icons.bookmark_outline_rounded), label: 'Watchlist');
+        return const BottomNavigationBarItem(
+            icon: Icon(Icons.bookmark_outline_rounded), label: 'Watchlist');
       case MainTab.profile:
-        return BottomNavigationBarItem(icon: Icon(Icons.person_outline_rounded), label: 'Profile');
+        return const BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline_rounded), label: 'Profile');
     }
   }
 
@@ -54,6 +59,5 @@ extension MainTabExtension on MainTab {
       case MainTab.profile:
         return 'Profile';
     }
-    return '';
   }
 }

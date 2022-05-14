@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/ui/commons/app_dialog.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_base/utils/app_date_utils.dart';
 
 class DatePickerController extends ValueNotifier<DateTime?> {
   DatePickerController({DateTime? dateTime}) : super(dateTime);
@@ -30,7 +30,8 @@ class AppLabelDatePicker extends StatelessWidget {
   final TextStyle? hintStyle;
   final bool enabled;
 
-  AppLabelDatePicker({
+  const AppLabelDatePicker({
+    Key? key,
     this.dateFormat = "dd/MM/yyyy",
     this.minTime,
     this.maxTime,
@@ -44,72 +45,73 @@ class AppLabelDatePicker extends StatelessWidget {
     this.hintStyle,
     this.onChanged,
     this.enabled = true,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            child: RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                  text: labelText ?? "",
-                  style: labelStyle ?? AppTextStyle.blackS12,
-                ),
-                TextSpan(
-                  text: highlightText ?? "*",
-                  style: AppTextStyle.blackS12.copyWith(color: Colors.red),
-                )
-              ]),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+          text: TextSpan(children: [
+            TextSpan(
+              text: labelText,
+              style: labelStyle ?? AppTextStyle.blackS12,
             ),
-          ),
-          ValueListenableBuilder(
-            valueListenable: controller!,
-            child: Container(),
-            builder: (context, DateTime? dateTime, child) {
-              var dateString = "";
-              if ((dateFormat != null) && (dateTime != null)) {
-                dateString = DateFormat(dateFormat).format(dateTime);
-              }
-              return GestureDetector(
-                onTap: () {
-                  _showDatePicker(context: context);
-                },
-                child: TextField(
-                  enabled: false,
-                  textInputAction: TextInputAction.search,
-                  controller: TextEditingController(text: dateString),
-                  style: textStyle ?? AppTextStyle.blackS16,
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.textFieldEnabledBorder),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.textFieldFocusedBorder),
-                    ),
-                    disabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.textFieldDisabledBorder),
-                    ),
-                    fillColor: Colors.white,
-                    hintStyle: hintStyle ?? AppTextStyle.greyS16,
-                    hintText: hintText ?? "",
-                    isDense: true,
-                    contentPadding: EdgeInsets.only(top: 8, bottom: 12),
-                    suffixIcon: suffixIcon ?? Icon(Icons.date_range_outlined),
-                    suffixIconConstraints: BoxConstraints(maxHeight: 32, maxWidth: 32),
+            TextSpan(
+              text: highlightText,
+              style: AppTextStyle.blackS12.copyWith(color: Colors.red),
+            )
+          ]),
+        ),
+        ValueListenableBuilder(
+          valueListenable: controller!,
+          child: Container(),
+          builder: (context, DateTime? dateTime, child) {
+            String? dateString;
+            if (dateTime != null) {
+              dateString = AppDateUtils.toDateTimeString(dateTime);
+            }
+            return GestureDetector(
+              onTap: () {
+                _showDatePicker(context: context);
+              },
+              child: TextField(
+                enabled: false,
+                textInputAction: TextInputAction.search,
+                controller: TextEditingController(text: dateString),
+                style: textStyle ?? AppTextStyle.blackS16,
+                maxLines: 1,
+                decoration: InputDecoration(
+                  enabledBorder: const UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(color: AppColors.textFieldEnabledBorder),
                   ),
-                  cursorColor: AppColors.textFieldCursor,
+                  focusedBorder: const UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(color: AppColors.textFieldFocusedBorder),
+                  ),
+                  disabledBorder: const UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(color: AppColors.textFieldDisabledBorder),
+                  ),
+                  fillColor: Colors.white,
+                  hintStyle: hintStyle ?? AppTextStyle.greyS16,
+                  hintText: hintText,
+                  isDense: true,
+                  contentPadding: const EdgeInsets.only(top: 8, bottom: 12),
+                  suffixIcon:
+                      suffixIcon ?? const Icon(Icons.date_range_outlined),
+                  suffixIconConstraints:
+                      const BoxConstraints(maxHeight: 32, maxWidth: 32),
                 ),
-              );
-            },
-          ),
-          SizedBox(height: 22),
-        ],
-      ),
+                cursorColor: AppColors.textFieldCursor,
+              ),
+            );
+          },
+        ),
+        const SizedBox(height: 22),
+      ],
     );
   }
 

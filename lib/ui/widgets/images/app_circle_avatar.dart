@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_images.dart';
 
@@ -7,7 +6,11 @@ class AppCircleAvatar extends StatelessWidget {
   final String url;
   final double? size;
 
-  AppCircleAvatar({this.url = "", this.size});
+  const AppCircleAvatar({
+    Key? key,
+    this.url = "",
+    this.size,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +18,17 @@ class AppCircleAvatar extends StatelessWidget {
     return Container(
       width: size ?? double.infinity,
       height: size ?? double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        borderRadius: BorderRadius.circular((size ?? 0) / 2),
+      ),
       child: isValidUrl
           ? ClipRRect(
+              borderRadius: BorderRadius.circular((size ?? 0) / 2),
               child: CachedNetworkImage(
                 imageUrl: url,
                 progressIndicatorBuilder: (context, url, downloadProgress) {
-                  return Container(
+                  return SizedBox(
                     width: size,
                     height: size,
                     child: CircularProgressIndicator(
@@ -30,7 +38,7 @@ class AppCircleAvatar extends StatelessWidget {
                   );
                 },
                 errorWidget: (context, url, error) {
-                  return Container(
+                  return SizedBox(
                     width: double.infinity,
                     height: double.infinity,
                     child: Image.asset(
@@ -41,9 +49,8 @@ class AppCircleAvatar extends StatelessWidget {
                 },
                 fit: BoxFit.fill,
               ),
-              borderRadius: BorderRadius.circular((size ?? 0) / 2),
             )
-          : Container(
+          : SizedBox(
               width: double.infinity,
               height: double.infinity,
               child: Image.asset(
@@ -51,10 +58,6 @@ class AppCircleAvatar extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-      decoration: BoxDecoration(
-        color: Colors.grey,
-        borderRadius: BorderRadius.circular((size ?? 0) / 2),
-      ),
     );
   }
 }

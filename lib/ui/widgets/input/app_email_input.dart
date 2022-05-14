@@ -5,6 +5,7 @@ import 'app_label_text_field.dart';
 
 class AppEmailInput extends AppLabelTextField {
   AppEmailInput({
+    Key? key,
     String? highlightText,
     TextStyle? labelStyle,
     TextStyle? textStyle,
@@ -12,6 +13,7 @@ class AppEmailInput extends AppLabelTextField {
     ValueChanged<String>? onChanged,
     bool enabled = true,
   }) : super(
+          key: key,
           textEditingController: textEditingController,
           onChanged: onChanged,
           labelText: "Email",

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_dimens.dart';
-import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/ui/widgets/app_devider.dart';
 
 class MenuItemWidget extends StatelessWidget {
   final String title;
   final VoidCallback? onPressed;
 
-  MenuItemWidget({Key? key, this.title = "", this.onPressed}) : super(key: key);
+  const MenuItemWidget({Key? key, this.title = "", this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +14,7 @@ class MenuItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           left: AppDimens.marginNormal,
           top: AppDimens.paddingSmall,
         ),
@@ -27,25 +25,25 @@ class MenuItemWidget extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.bookmark_outline_rounded,
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
                       title,
                       style: theme.textTheme.bodyText1,
                     ),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.keyboard_arrow_right,
                   ),
-                  SizedBox(width: AppDimens.paddingSmall),
+                  const SizedBox(width: AppDimens.paddingSmall),
                 ],
               ),
             ),
-            SizedBox(height: AppDimens.paddingSmall),
-            AppDivider(),
+            const SizedBox(height: AppDimens.paddingSmall),
+            const AppDivider(),
           ],
         ),
       ),

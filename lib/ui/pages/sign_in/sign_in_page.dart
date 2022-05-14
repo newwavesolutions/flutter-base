@@ -4,16 +4,19 @@ import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_images.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
-import 'package:flutter_base/repositories/index.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
 import 'package:flutter_base/ui/widgets/input/app_email_input.dart';
 import 'package:flutter_base/ui/widgets/input/app_password_input.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../repositories/auth_repository.dart';
+import '../../../repositories/user_repository.dart';
 import 'sign_in_cubit.dart';
 
 class SignInPage extends StatefulWidget {
   static const routeName = '/signInPage';
+
+  const SignInPage({Key? key}) : super(key: key);
 
   static push({required BuildContext context}) {
     Navigator.push(
@@ -30,14 +33,14 @@ class SignInPage extends StatefulWidget {
               appCubit: appCubit,
             );
           },
-          child: SignInPage(),
+          child: const SignInPage(),
         ),
       ),
     );
   }
 
   @override
-  _SignInPageState createState() => _SignInPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
 class _SignInPageState extends State<SignInPage> {
@@ -73,13 +76,13 @@ class _SignInPageState extends State<SignInPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        SizedBox(height: 100),
-        Container(
+        const SizedBox(height: 100),
+        SizedBox(
             height: showingKeyboard ? 0 : 200,
             width: 200,
             child: Image.asset(AppImages.icLogoTransparent)),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           child: AppEmailInput(
             textEditingController: usernameTextController,
             labelStyle: AppTextStyle.whiteS14Bold,
@@ -89,9 +92,9 @@ class _SignInPageState extends State<SignInPage> {
             },
           ),
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           child: AppPasswordInput(
             obscureTextController: obscurePasswordController,
             textEditingController: passwordTextController,
@@ -102,7 +105,7 @@ class _SignInPageState extends State<SignInPage> {
             },
           ),
         ),
-        SizedBox(height: 32),
+        const SizedBox(height: 32),
         _buildSignButton(),
       ],
     );
@@ -112,7 +115,7 @@ class _SignInPageState extends State<SignInPage> {
     return BlocBuilder<SignInCubit, SignInState>(
       builder: (context, state) {
         return Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: AppTintButton(
             title: 'Sign In',
             onPressed: _signIn,

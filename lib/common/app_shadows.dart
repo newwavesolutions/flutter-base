@@ -4,7 +4,7 @@ import 'app_colors.dart';
 
 class AppShadow {
   static final boxShadow = [
-    BoxShadow(
+    const BoxShadow(
       color: AppColors.shadow,
       blurRadius: 3,
       offset: Offset(0, 0),

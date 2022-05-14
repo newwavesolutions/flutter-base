@@ -5,15 +5,20 @@ class AppTextFieldWidget extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final TextInputType? textInputType;
 
-  AppTextFieldWidget({this.inputController, this.onChanged, this.textInputType});
+  const AppTextFieldWidget({
+    Key? key,
+    this.inputController,
+    this.onChanged,
+    this.textInputType,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 40,
       child: TextFormField(
         controller: inputController,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
@@ -23,7 +28,7 @@ class AppTextFieldWidget extends StatelessWidget {
         ),
         keyboardType: textInputType,
         onChanged: onChanged,
-        style: TextStyle(fontSize: 16, color: Colors.black),
+        style: const TextStyle(fontSize: 16, color: Colors.black),
       ),
     );
   }

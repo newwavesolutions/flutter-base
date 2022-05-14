@@ -6,12 +6,16 @@ class LoadingRowWidget extends StatelessWidget {
   final EdgeInsets? padding;
   final double height;
 
-  static final _defaultPadding = EdgeInsets.symmetric(
+  static const _defaultPadding = EdgeInsets.symmetric(
     horizontal: 20,
     vertical: 6,
   );
 
-  LoadingRowWidget({this.padding, this.height = 100});
+  const LoadingRowWidget({
+    Key? key,
+    this.padding,
+    this.height = 100,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +24,9 @@ class LoadingRowWidget extends StatelessWidget {
       height: height,
       padding: padding,
       child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: AppShadow.boxShadow),
         child: Shimmer.fromColors(
           baseColor: Colors.grey[350]!,
           highlightColor: Colors.grey[100]!,
@@ -31,7 +38,6 @@ class LoadingRowWidget extends StatelessWidget {
                 color: Colors.white,
               )),
         ),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), boxShadow: AppShadow.boxShadow),
       ),
     );
   }

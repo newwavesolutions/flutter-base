@@ -35,13 +35,13 @@ class AppDialog {
   }
 
   static void showDatePicker(
-      BuildContext context, {
-        DateTime? minTime,
-        DateTime? maxTime,
-        DateChangedCallback? onConfirm,
-        locale: LocaleType.en,
-        DateTime? currentTime,
-      }) {
+    BuildContext context, {
+    DateTime? minTime,
+    DateTime? maxTime,
+    DateChangedCallback? onConfirm,
+    LocaleType locale = LocaleType.en,
+    DateTime? currentTime,
+  }) {
     DatePicker.showDatePicker(
       context,
       minTime: minTime,
@@ -49,18 +49,18 @@ class AppDialog {
       onConfirm: onConfirm,
       locale: LocaleType.vi,
       currentTime: currentTime,
-      theme: DatePickerTheme(),
+      theme: const DatePickerTheme(),
     );
   }
 
   static void showDateTimePicker(
-      BuildContext context, {
-        DateTime? minTime,
-        DateTime? maxTime,
-        DateChangedCallback? onConfirm,
-        locale: LocaleType.en,
-        DateTime? currentTime,
-      }) {
+    BuildContext context, {
+    DateTime? minTime,
+    DateTime? maxTime,
+    DateChangedCallback? onConfirm,
+    LocaleType locale = LocaleType.en,
+    DateTime? currentTime,
+  }) {
     DatePicker.showDateTimePicker(
       context,
       minTime: minTime,
@@ -68,7 +68,7 @@ class AppDialog {
       onConfirm: onConfirm,
       locale: LocaleType.vi,
       currentTime: currentTime,
-      theme: DatePickerTheme(),
+      theme: const DatePickerTheme(),
     );
   }
 }

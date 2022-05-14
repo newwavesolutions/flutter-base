@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
-import 'package:flutter_base/repositories/index.dart';
 import 'package:flutter_base/ui/pages/movie_detail/movie_detail_view.dart';
 import 'package:flutter_base/ui/pages/tab_home/enums/home_section.dart';
 import 'package:flutter_base/ui/pages/tab_home/movies_section/widgets/loading_list_widget.dart';
@@ -10,16 +9,17 @@ import 'package:flutter_base/ui/widgets/loading_more_row_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
+import '../../../../repositories/movie_repository.dart';
 import 'movies_section_cubit.dart';
 import 'movies_section_state.dart';
 
 class MoviesSectionPage extends StatefulWidget {
   final HomeSection section;
 
-  MoviesSectionPage(this.section);
+  const MoviesSectionPage(this.section, {Key? key}) : super(key: key);
 
   @override
-  _MoviesSectionPageState createState() => _MoviesSectionPageState();
+  State<MoviesSectionPage> createState() => _MoviesSectionPageState();
 }
 
 class _MoviesSectionPageState extends State<MoviesSectionPage> {
@@ -42,33 +42,31 @@ class _MoviesSectionPageState extends State<MoviesSectionPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.all(20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  "${widget.section.title}",
-                  style: theme.textTheme.headline6,
-                ),
-                SizedBox(width: 10),
-                Text(
-                  "${widget.section.typeName}",
-                  style: theme.textTheme.subtitle2,
-                )
-              ],
-            ),
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                widget.section.title,
+                style: theme.textTheme.headline6,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                widget.section.typeName,
+                style: theme.textTheme.subtitle2,
+              )
+            ],
           ),
-          Container(
-            height: 160,
-            width: double.infinity,
-            child: buildContentWidget(),
-          )
-        ],
-      ),
+        ),
+        SizedBox(
+          height: 160,
+          width: double.infinity,
+          child: buildContentWidget(),
+        )
+      ],
     );
   }
 
@@ -91,37 +89,35 @@ class _MoviesSectionPageState extends State<MoviesSectionPage> {
   }
 
   Widget _buildLoadingList() {
-    return LoadingListWidget();
+    return const LoadingListWidget();
   }
 
   Widget _buildSuccessList(List<MovieEntity> items,
       {bool showLoadingMore = false}) {
-    return Container(
-      child: ListView.builder(
-        controller: _scrollController,
-        padding: EdgeInsets.symmetric(horizontal: 15),
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          if (index < items.length) {
-            final item = items[index];
-            return Container(
-              height: 160,
-              width: 82,
-              margin: EdgeInsets.symmetric(horizontal: 5),
-              child: MovieWidget(
-                movie: item,
-                onPressed: () {
-                  Get.to(MovieDetailPage());
-                },
-              ),
-            );
-          } else {
-            return LoadingMoreRowWidget();
-          }
-        },
-        itemCount: showLoadingMore ? items.length + 1 : items.length,
-        // controller: _scrollController,
-      ),
+    return ListView.builder(
+      controller: _scrollController,
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) {
+        if (index < items.length) {
+          final item = items[index];
+          return Container(
+            height: 160,
+            width: 82,
+            margin: const EdgeInsets.symmetric(horizontal: 5),
+            child: MovieWidget(
+              movie: item,
+              onPressed: () {
+                Get.to(const MovieDetailPage());
+              },
+            ),
+          );
+        } else {
+          return const LoadingMoreRowWidget();
+        }
+      },
+      itemCount: showLoadingMore ? items.length + 1 : items.length,
+      // controller: _scrollController,
     );
   }
 

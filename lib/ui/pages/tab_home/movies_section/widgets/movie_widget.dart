@@ -7,54 +7,59 @@ class MovieWidget extends StatelessWidget {
   final MovieEntity? movie;
   final VoidCallback? onPressed;
 
-  MovieWidget({this.movie, this.onPressed});
+  const MovieWidget({
+    Key? key,
+    this.movie,
+    this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      child: TextButton(
-        child: Container(
-          child: Column(
+    return TextButton(
+      onPressed: onPressed,
+      child: Column(
+        children: [
+          Expanded(
+            child: Container(
+              child: _buildThumbWidget(),
+            ),
+          ),
+          Row(
             children: [
               Expanded(
                 child: Container(
-                  child: _buildThumbWidget(),
+                  height: 32,
+                  margin: const EdgeInsets.only(top: 5),
+                  child: Text(movie?.title ?? '',
+                      style: theme.textTheme.caption, maxLines: 2),
                 ),
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      child: Text(movie?.title ?? '', style: theme.textTheme.caption, maxLines: 2),
-                      height: 32,
-                      margin: EdgeInsets.only(top: 5),
-                    ),
+              GestureDetector(
+                child: const SizedBox(
+                  height: 32,
+                  child: Icon(
+                    Icons.more_vert,
+                    color: AppColors.secondary,
+                    size: 16,
                   ),
-                  GestureDetector(
-                    child: Container(
-                      child: Icon(Icons.more_vert, color: AppColors.secondary, size: 16),
-                      height: 32,
-                    ),
-                  )
-                ],
+                ),
               )
             ],
-          ),
-        ),
-        onPressed: onPressed,
+          )
+        ],
       ),
     );
   }
 
   Widget _buildThumbWidget() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(4)),
         color: AppColors.imageBG,
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
+        borderRadius: const BorderRadius.all(Radius.circular(4)),
         child: AppCacheImage(
           url: movie?.posterUrl ?? '',
           fit: BoxFit.cover,

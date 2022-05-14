@@ -1,12 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 import 'profile_tab_state.dart';
 
 class ProfileTabCubit extends Cubit<ProfileTabState> {
-  final state = ProfileTabState();
-
-  ProfileTabCubit() : super(ProfileTabState());
+  ProfileTabCubit() : super(const ProfileTabState());
 
   void signOut() async {
     // state.signOutStatus.value = LoadStatus.loading;

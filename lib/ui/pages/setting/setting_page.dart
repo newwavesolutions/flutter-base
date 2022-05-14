@@ -8,7 +8,7 @@ class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
 
   @override
-  _SettingPageState createState() => _SettingPageState();
+  State<SettingPage> createState() => _SettingPageState();
 }
 
 class _SettingPageState extends State<SettingPage> {
@@ -23,11 +23,11 @@ class _SettingPageState extends State<SettingPage> {
         },
       ),
       body: Container(
-        padding: EdgeInsets.all(AppDimens.paddingNormal),
+        padding: const EdgeInsets.all(AppDimens.paddingNormal),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: const <Widget>[
             // _buildThemeSection(),
             // _buildLanguageSection(),
           ],

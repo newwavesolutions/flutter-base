@@ -4,8 +4,10 @@ import 'package:flutter_base/ui/pages/tab_home/movies_section/movies_section_vie
 import 'package:flutter_base/ui/pages/tab_home/widgets/home_app_bar.dart';
 
 class HomeTabPage extends StatefulWidget {
+  const HomeTabPage({Key? key}) : super(key: key);
+
   @override
-  _HomeTabPageState createState() => _HomeTabPageState();
+  State<HomeTabPage> createState() => _HomeTabPageState();
 }
 
 class _HomeTabPageState extends State<HomeTabPage>
@@ -50,19 +52,19 @@ class _HomeTabPageState extends State<HomeTabPage>
   }
 
   Widget _buildTrendingMovies() {
-    return MoviesSectionPage(HomeSection.trendingMovies);
+    return const MoviesSectionPage(HomeSection.trendingMovies);
   }
 
   Widget _buildTrendingTvShows() {
-    return MoviesSectionPage(HomeSection.trendingTvShows);
+    return const MoviesSectionPage(HomeSection.trendingTvShows);
   }
 
   Widget _buildNowPlayingMovies() {
-    return MoviesSectionPage(HomeSection.nowPlayingMovies);
+    return const MoviesSectionPage(HomeSection.nowPlayingMovies);
   }
 
   Widget _buildUpcomingMovies() {
-    return MoviesSectionPage(HomeSection.upcomingMovies);
+    return const MoviesSectionPage(HomeSection.upcomingMovies);
   }
 
   Future<void> _onRefreshData() async {

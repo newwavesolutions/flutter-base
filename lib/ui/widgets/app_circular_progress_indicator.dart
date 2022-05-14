@@ -4,18 +4,21 @@ import 'package:flutter_base/common/app_colors.dart';
 class AppCircularProgressIndicator extends StatelessWidget {
   final Color color;
 
-  AppCircularProgressIndicator({this.color = AppColors.secondary});
+  const AppCircularProgressIndicator({
+    Key? key,
+    this.color = AppColors.secondary,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: Container(
+      child: SizedBox(
         width: 24,
         height: 24,
         child: CircularProgressIndicator(
           backgroundColor: color,
-          valueColor: AlwaysStoppedAnimation<Color>(AppColors.secondary),
+          valueColor: const AlwaysStoppedAnimation<Color>(AppColors.secondary),
         ),
       ),
     );

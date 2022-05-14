@@ -22,7 +22,8 @@ class AppButton extends StatelessWidget {
 
   final VoidCallback? onPressed;
 
-  AppButton({
+  const AppButton({
+    Key? key,
     this.title,
     this.leadingIcon,
     this.trailingIcon,
@@ -35,34 +36,35 @@ class AppButton extends StatelessWidget {
     this.borderColor,
     this.textStyle,
     this.onPressed,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: height ?? AppDimens.buttonHeight,
       width: width ?? double.infinity,
       child: ElevatedButton(
-        child: _buildChildWidget(),
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(cornerRadius ?? AppDimens.buttonCornerRadius),
+            borderRadius: BorderRadius.circular(
+                cornerRadius ?? AppDimens.buttonCornerRadius),
           ),
           side: BorderSide(
             color: borderColor ?? Colors.transparent,
             width: borderWidth ?? 0,
           ),
           primary: backgroundColor,
-          padding: EdgeInsets.all(0),
+          padding: const EdgeInsets.all(0),
         ),
         onPressed: onPressed,
+        child: _buildChildWidget(),
       ),
     );
   }
 
   Widget _buildChildWidget() {
     if (isLoading) {
-      return AppCircularProgressIndicator(color: Colors.white);
+      return const AppCircularProgressIndicator(color: Colors.white);
     } else {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -71,7 +73,11 @@ class AppButton extends StatelessWidget {
           title != null
               ? Text(
                   title!,
-                  style: textStyle ?? TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.red),
+                  style: textStyle ??
+                      const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.red),
                 )
               : Container(),
           trailingIcon ?? Container(),

@@ -1,10 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:get/get.dart';
 
 class MainState extends Equatable {
-  int selectedIndex;
+  final int selectedIndex;
 
-  MainState({
+  const MainState({
     this.selectedIndex = 0,
   });
 
