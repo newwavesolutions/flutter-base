@@ -56,11 +56,11 @@ class AppLabelDatePicker extends StatelessWidget {
             child: RichText(
               text: TextSpan(children: [
                 TextSpan(
-                  text: labelText ?? "",
+                  text: labelText,
                   style: labelStyle ?? AppTextStyle.blackS12,
                 ),
                 TextSpan(
-                  text: highlightText ?? "*",
+                  text: highlightText,
                   style: AppTextStyle.blackS12.copyWith(color: Colors.red),
                 )
               ]),
@@ -71,7 +71,7 @@ class AppLabelDatePicker extends StatelessWidget {
             child: Container(),
             builder: (context, DateTime? dateTime, child) {
               var dateString = "";
-              if ((dateFormat != null) && (dateTime != null)) {
+              if (dateTime != null) {
                 dateString = DateFormat(dateFormat).format(dateTime);
               }
               return GestureDetector(
@@ -86,21 +86,25 @@ class AppLabelDatePicker extends StatelessWidget {
                   maxLines: 1,
                   decoration: InputDecoration(
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.textFieldEnabledBorder),
+                      borderSide:
+                          BorderSide(color: AppColors.textFieldEnabledBorder),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.textFieldFocusedBorder),
+                      borderSide:
+                          BorderSide(color: AppColors.textFieldFocusedBorder),
                     ),
                     disabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.textFieldDisabledBorder),
+                      borderSide:
+                          BorderSide(color: AppColors.textFieldDisabledBorder),
                     ),
                     fillColor: Colors.white,
                     hintStyle: hintStyle ?? AppTextStyle.greyS16,
-                    hintText: hintText ?? "",
+                    hintText: hintText,
                     isDense: true,
                     contentPadding: EdgeInsets.only(top: 8, bottom: 12),
                     suffixIcon: suffixIcon ?? Icon(Icons.date_range_outlined),
-                    suffixIconConstraints: BoxConstraints(maxHeight: 32, maxWidth: 32),
+                    suffixIconConstraints:
+                        BoxConstraints(maxHeight: 32, maxWidth: 32),
                   ),
                   cursorColor: AppColors.textFieldCursor,
                 ),

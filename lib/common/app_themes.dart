@@ -12,8 +12,8 @@ class AppThemes {
   static const Color _darkPrimaryColor = Color(0xFF1a222d);
 
   //Secondary
-  static const Color _lightSecondaryColor = Color(0xFFd74315);
-  static const Color _darkSecondaryColor = Color(0xFFd74315);
+  // static const Color _lightSecondaryColor = Color(0xFFd74315);
+  // static const Color _darkSecondaryColor = Color(0xFFd74315);
 
   //Background
   static const Color _lightBackgroundColor = Color(0xffffffff);
@@ -24,8 +24,8 @@ class AppThemes {
   static const Color _darkTextColor = Color(0xffffffff);
 
   //Border
-  static const Color _lightBorderColor = Colors.grey;
-  static const Color _darkBorderColor = Colors.grey;
+  // static const Color _lightBorderColor = Colors.grey;
+  // static const Color _darkBorderColor = Colors.grey;
 
   //Icon
   static const Color _lightIconColor = Color(0xff000000);
@@ -68,13 +68,11 @@ class AppThemes {
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: _lightPrimaryColor,
-    accentColor: _lightSecondaryColor,
     fontFamily: darkFont,
     scaffoldBackgroundColor: _lightBackgroundColor,
     appBarTheme: AppBarTheme(
       color: _lightBackgroundColor,
       iconTheme: IconThemeData(color: _lightIconColor),
-      textTheme: _lightTextTheme,
     ),
     iconTheme: IconThemeData(
       color: _lightIconColor,
@@ -89,13 +87,11 @@ class AppThemes {
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: _darkPrimaryColor,
-    accentColor: _darkSecondaryColor,
     fontFamily: darkFont,
     scaffoldBackgroundColor: _darkBackgroundColor,
     appBarTheme: AppBarTheme(
       color: _darkBackgroundColor,
       iconTheme: IconThemeData(color: _darkIconColor),
-      textTheme: _darkTextTheme,
     ),
     iconTheme: IconThemeData(
       color: _darkIconColor,

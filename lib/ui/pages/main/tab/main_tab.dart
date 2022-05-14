@@ -54,6 +54,5 @@ extension MainTabExtension on MainTab {
       case MainTab.profile:
         return 'Profile';
     }
-    return '';
   }
 }

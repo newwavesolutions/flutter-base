@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_base/models/entities/user/user_entity.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
-import 'package:flutter_base/repositories/index.dart';
 import 'package:flutter_base/ui/commons/app_dialog.dart';
 import 'package:flutter_base/ui/pages/main/main_view.dart';
 import 'package:flutter_base/ui/pages/sign_in/sign_in_page.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_base/utils/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
+import '../../../repositories/user_repository.dart';
 import 'splash_state.dart';
 
 class SplashCubit extends Cubit<SplashState> {
@@ -29,7 +29,7 @@ class SplashCubit extends Cubit<SplashState> {
     } else {
       try {
         //Profile
-        UserEntity? myProfile = await userRepo.getProfile();
+        UserEntity? _ = await userRepo.getProfile();
         //Todo
         // authService.updateUser(myProfile);
       } catch (error, s) {

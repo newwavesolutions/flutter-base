@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
-import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/ui/widgets/app_devider.dart';
 
 class MenuHeaderWidget extends StatelessWidget {

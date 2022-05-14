@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter_base/models/entities/index.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import '../models/entities/token_entity.dart';
 import 'share_preferences_helper.dart';
 
 class SecureStorageHelper {

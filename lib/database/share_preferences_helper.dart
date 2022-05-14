@@ -2,7 +2,6 @@ import 'package:flutter_base/utils/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesHelper {
-  static const _token = '_token';
   static const _introKey = '_introKey';
 
   static const _authKey = '_authKey';

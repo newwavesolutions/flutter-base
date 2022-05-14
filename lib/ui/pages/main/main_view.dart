@@ -83,7 +83,7 @@ class _MainPageState extends State<MainPage> {
           type: BottomNavigationBarType.fixed,
           currentIndex: state.selectedIndex,
           unselectedItemColor: Colors.grey,
-          selectedItemColor: theme.accentColor,
+          selectedItemColor: theme.indicatorColor,
           items: tabs.map((e) => e.tab).toList(),
           onTap: (index) {
             _cubit.switchTap(index);

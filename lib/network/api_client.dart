@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_base/models/entities/index.dart';
 import 'package:flutter_base/models/response/array_response.dart';
 import 'package:retrofit/retrofit.dart';
+
+import '../models/entities/movie_entity.dart';
+import '../models/entities/notification/notification_entity.dart';
+import '../models/entities/token_entity.dart';
 
 part 'api_client.g.dart';
 

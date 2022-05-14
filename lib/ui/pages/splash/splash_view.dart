@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_images.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
-import 'package:flutter_base/repositories/index.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../repositories/user_repository.dart';
 import 'splash_cubit.dart';
 
 class SplashPage extends StatefulWidget {

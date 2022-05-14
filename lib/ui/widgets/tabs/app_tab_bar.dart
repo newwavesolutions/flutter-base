@@ -40,7 +40,7 @@ class AppTabBar extends StatelessWidget {
 
   List<Widget> buildTabItems() {
     List<Widget> items = [];
-    for (int i = 0; i < (tabItems ?? []).length; i++) {
+    for (int i = 0; i < (tabItems).length; i++) {
       items.add(buildTabItem(tabItems[i], i));
     }
     return items;

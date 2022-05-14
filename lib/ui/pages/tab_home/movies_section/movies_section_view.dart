@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
-import 'package:flutter_base/repositories/index.dart';
 import 'package:flutter_base/ui/pages/movie_detail/movie_detail_view.dart';
 import 'package:flutter_base/ui/pages/tab_home/enums/home_section.dart';
 import 'package:flutter_base/ui/pages/tab_home/movies_section/widgets/loading_list_widget.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_base/ui/widgets/loading_more_row_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
+import '../../../../repositories/movie_repository.dart';
 import 'movies_section_cubit.dart';
 import 'movies_section_state.dart';
 
