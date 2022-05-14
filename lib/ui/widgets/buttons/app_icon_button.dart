@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'app_button.dart';
 
 class AppIconButton extends AppButton {
-  AppIconButton({
+  const AppIconButton({
+    Key? key,
     String? title,
     Widget? leadingIcon,
     Widget? trailingIcon,
@@ -12,6 +13,7 @@ class AppIconButton extends AppButton {
     Color? backgroundColor,
     VoidCallback? onPressed,
   }) : super(
+          key: key,
           title: title,
           leadingIcon: leadingIcon,
           trailingIcon: trailingIcon,

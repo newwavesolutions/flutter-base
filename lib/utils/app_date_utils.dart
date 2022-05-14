@@ -1,7 +1,11 @@
 import 'package:flutter_base/configs/app_configs.dart';
 import 'package:intl/intl.dart';
 
-class DateUtils {
+import 'logger.dart';
+
+class AppDateUtils {
+  AppDateUtils._();
+
   static DateTime? fromString(String date, {String? format}) {
     return DateTimeExtension.fromString(date, format: format);
   }
@@ -57,29 +61,36 @@ extension DateTimeExtension on DateTime {
     if ((format ?? "").isNotEmpty) {
       try {
         return DateFormat(format).parse(date);
-      } catch (e) {}
+      } catch (e, s) {
+        logger.e(e, stackTrace: s);
+      }
     }
     try {
       return DateTime.parse(date);
-    } catch (e) {}
+    } catch (e, s) {
+      logger.e(e, stackTrace: s);
+    }
     //
     try {
       return DateFormat("yyyy/MM/dd").parse(date);
-    } catch (e) {}
+    } catch (e, s) {
+      logger.e(e, stackTrace: s);
+    }
     return null;
   }
 
   String toDateString({String format = AppConfigs.dateDisplayFormat}) {
     try {
       return DateFormat(format).format(this);
-    } catch (e) {
+    } catch (e, s) {
+      logger.e(e, stackTrace: s);
       return '';
     }
   }
 
   String toDateTimeString({String format = AppConfigs.dateTimeDisplayFormat}) {
     try {
-      return DateFormat(format).format(this.toLocal());
+      return DateFormat(format).format(toLocal());
     } catch (e) {
       return '';
     }
@@ -95,7 +106,7 @@ extension DateTimeExtension on DateTime {
 
   String toDateTimeAPIString({String format = AppConfigs.dateTimeAPIFormat}) {
     try {
-      return this.toIso8601String();
+      return toIso8601String();
     } catch (e) {
       return '';
     }

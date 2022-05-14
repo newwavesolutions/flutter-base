@@ -36,6 +36,7 @@ dependencies:
   #Utilities
   package_info: ^2.0.0
   permission_handler: ^8.3.0
+  intl: ^0.17.0
   intl_utils: ^2.1.0
   equatable: ^2.0.3
 
@@ -59,8 +60,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner:
-  retrofit_generator:
+  retrofit_generator: ^4.0.1
   json_serializable:
+  flutter_lints: ^2.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

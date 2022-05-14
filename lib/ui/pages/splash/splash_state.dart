@@ -4,7 +4,7 @@ import 'package:flutter_base/models/enums/load_status.dart';
 class SplashState extends Equatable {
   final LoadStatus fetchProfileStatus;
 
-  SplashState({
+  const SplashState({
     this.fetchProfileStatus = LoadStatus.initial,
   });
 

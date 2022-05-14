@@ -48,9 +48,9 @@ class DatabaseConfig {
 }
 
 class MovieAPIConfig {
-  static const String APIKey = '26763d7bf2e94098192e629eb975dab0';
+  static const String apiKey = '26763d7bf2e94098192e629eb975dab0';
 }
 
 class UpGraderAPIConfig {
-  static const String APIKey = '';
+  static const String apiKey = '';
 }

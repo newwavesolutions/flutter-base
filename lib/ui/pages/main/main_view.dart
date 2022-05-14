@@ -8,8 +8,10 @@ import 'main_state.dart';
 import 'tab/main_tab.dart';
 
 class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
+
   @override
-  _MainPageState createState() => _MainPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
@@ -33,11 +35,11 @@ class _MainPageState extends State<MainPage> {
     super.initState();
     //PageView page
     pageList = [
-      HomeTabPage(),
+      const HomeTabPage(),
       Container(color: Colors.green),
       Container(color: Colors.red),
       Container(color: Colors.green),
-      ProfileTabPage(),
+      const ProfileTabPage(),
     ];
     //Page controller
     pageController = PageController();

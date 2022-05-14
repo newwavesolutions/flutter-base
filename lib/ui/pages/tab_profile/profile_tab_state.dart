@@ -4,7 +4,7 @@ import 'package:flutter_base/models/enums/load_status.dart';
 class ProfileTabState extends Equatable {
   final LoadStatus signOutStatus;
 
-  ProfileTabState({
+  const ProfileTabState({
     this.signOutStatus = LoadStatus.initial,
   });
 

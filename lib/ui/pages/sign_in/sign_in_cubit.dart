@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/models/entities/user/user_entity.dart';
@@ -7,6 +6,7 @@ import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/commons/app_snackbar.dart';
 import 'package:flutter_base/utils/logger.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../../repositories/user_repository.dart';
@@ -22,7 +22,7 @@ class SignInCubit extends Cubit<SignInState> {
     required this.authRepo,
     required this.userRepo,
     required this.appCubit,
-  }) : super(SignInState());
+  }) : super(const SignInState());
 
   void changeUsername({required String username}) {
     emit(state.copyWith(username: username));

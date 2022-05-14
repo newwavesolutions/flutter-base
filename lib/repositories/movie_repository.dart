@@ -22,10 +22,6 @@ class MovieRepositoryImpl extends MovieRepository {
 
   @override
   Future<ArrayResponse<MovieEntity>> getMovies({required int page}) async {
-    try {
-      return apiClient.getMovies(MovieAPIConfig.APIKey, page);
-    } catch (e) {
-      throw e;
-    }
+    return apiClient.getMovies(MovieAPIConfig.apiKey, page);
   }
 }

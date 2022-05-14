@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
-import 'package:flutter_base/ui/widgets/images/app_cache_image.dart';
+import '../../../widgets/images/app_circle_avatar.dart';
 
 class HomeAppBar extends AppBar {
   HomeAppBar({
@@ -10,22 +10,21 @@ class HomeAppBar extends AppBar {
     VoidCallback? onSettingPressed,
   }) : super(
           key: key,
-          title: Text("Movie"),
-          leading: Container(
-              child: Center(
+          title: const Text("Movie"),
+          leading: Center(
             child: AppCircleAvatar(
               url: avatarUrl,
               size: 40,
             ),
-          )),
+          ),
           toolbarHeight: AppDimens.appBarHeight,
           actions: [
-            IconButton(
+            const IconButton(
                 onPressed: null,
                 icon: Icon(
                   Icons.search,
                 )),
-            IconButton(
+            const IconButton(
                 onPressed: null,
                 icon: Icon(
                   Icons.more_vert,

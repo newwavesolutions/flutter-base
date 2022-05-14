@@ -16,6 +16,8 @@ import 'router/route_config.dart';
 import 'ui/pages/splash/splash_view.dart';
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _MyAppState();
@@ -70,13 +72,13 @@ class _MyAppState extends State<MyApp> {
             _hideKeyboard(context);
           },
           child: GetMaterialApp(
-            home: SplashPage(),
+            home: const SplashPage(),
             theme: AppThemes.lightTheme,
             darkTheme: AppThemes.darkTheme,
             themeMode: ThemeMode.system,
             initialRoute: RouteConfig.splash,
             getPages: RouteConfig.getPages,
-            localizationsDelegates: [
+            localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,

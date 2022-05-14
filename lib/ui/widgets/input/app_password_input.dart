@@ -28,7 +28,8 @@ class AppPasswordInput extends StatelessWidget {
   final TextInputType textInputType;
   final FocusNode? passwordFocusNode;
 
-  AppPasswordInput({
+  const AppPasswordInput({
+    Key? key,
     this.labelText = "Mật khẩu",
     this.labelStyle,
     this.highlightText = "*",
@@ -42,97 +43,99 @@ class AppPasswordInput extends StatelessWidget {
     this.onSubmitted,
     this.textInputType = TextInputType.text,
     this.passwordFocusNode,
-  });
+  }) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            child: RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                  text: labelText,
-                  style: labelStyle ?? AppTextStyle.blackS12,
-                ),
-                TextSpan(
-                  text: highlightText,
-                  style: AppTextStyle.blackS12.copyWith(color: Colors.red),
-                )
-              ]),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+          text: TextSpan(children: [
+            TextSpan(
+              text: labelText,
+              style: labelStyle ?? AppTextStyle.blackS12,
             ),
-          ),
-          Stack(
-            children: [
-              ValueListenableBuilder(
-                valueListenable: obscureTextController!,
-                child: Container(),
-                builder: (context, bool obscureText, child) {
-                  return TextField(
-                    onSubmitted: onSubmitted,
-                    onChanged: onChanged,
-                    controller: textEditingController,
-                    focusNode: passwordFocusNode,
-                    style: textStyle ?? AppTextStyle.blackS16,
-                    maxLines: 1,
-                    decoration: InputDecoration(
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.textFieldEnabledBorder),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.textFieldFocusedBorder),
-                      ),
-                      disabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.textFieldDisabledBorder),
-                      ),
-                      fillColor: Colors.white,
-                      hintStyle: hintStyle ?? AppTextStyle.greyS16,
-                      hintText: hintText,
-                      isDense: true,
-                      contentPadding: EdgeInsets.only(top: 8, bottom: 12),
-                      suffixIcon: Image.asset(
-                        AppImages.icEyeOpen,
-                        fit: BoxFit.fitWidth,
-                        color: Colors.transparent,
-                      ),
-                      suffixIconConstraints: BoxConstraints(maxHeight: 32, maxWidth: 32),
+            TextSpan(
+              text: highlightText,
+              style: AppTextStyle.blackS12.copyWith(color: Colors.red),
+            )
+          ]),
+        ),
+        Stack(
+          children: [
+            ValueListenableBuilder(
+              valueListenable: obscureTextController!,
+              child: Container(),
+              builder: (context, bool obscureText, child) {
+                return TextField(
+                  onSubmitted: onSubmitted,
+                  onChanged: onChanged,
+                  controller: textEditingController,
+                  focusNode: passwordFocusNode,
+                  style: textStyle ?? AppTextStyle.blackS16,
+                  maxLines: 1,
+                  decoration: InputDecoration(
+                    enabledBorder: const UnderlineInputBorder(
+                      borderSide: BorderSide(
+                          color: AppColors.textFieldEnabledBorder),
                     ),
-                    cursorColor: AppColors.textFieldCursor,
-                    keyboardType: TextInputType.visiblePassword,
-                    obscureText: obscureText,
+                    focusedBorder: const UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: AppColors.textFieldFocusedBorder),
+                    ),
+                    disabledBorder: const UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: AppColors.textFieldDisabledBorder),
+                    ),
+                    fillColor: Colors.white,
+                    hintStyle: hintStyle ?? AppTextStyle.greyS16,
+                    hintText: hintText,
+                    isDense: true,
+                    contentPadding: const EdgeInsets.only(top: 8, bottom: 12),
+                    suffixIcon: Image.asset(
+                      AppImages.icEyeOpen,
+                      fit: BoxFit.fitWidth,
+                      color: Colors.transparent,
+                    ),
+                    suffixIconConstraints:
+                        const BoxConstraints(maxHeight: 32, maxWidth: 32),
+                  ),
+                  cursorColor: AppColors.textFieldCursor,
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: obscureText,
+                );
+              },
+            ),
+            ValueListenableBuilder(
+              valueListenable: obscureTextController!,
+              child: Container(),
+              builder: (context, bool obscureText, child) {
+                return _buildSuffixIcon(obscureText);
+              },
+            )
+          ],
+        ),
+        textEditingController != null
+            ? ValueListenableBuilder(
+                valueListenable: textEditingController!,
+                builder: (context, TextEditingValue controller, child) {
+                  final isValid = _validatePassword(controller.text);
+                  return Column(
+                    children: [
+                      const SizedBox(height: 2),
+                      Text(
+                        isValid,
+                        style:
+                            AppTextStyle.blackS12.copyWith(color: Colors.red),
+                      ),
+                      const SizedBox(height: 8),
+                    ],
                   );
                 },
-              ),
-              ValueListenableBuilder(
-                valueListenable: obscureTextController!,
-                child: Container(),
-                builder: (context, bool obscureText, child) {
-                  return _buildSuffixIcon(obscureText);
-                },
               )
-            ],
-          ),
-          textEditingController != null
-              ? ValueListenableBuilder(
-                  valueListenable: textEditingController!,
-                  builder: (context, TextEditingValue controller, child) {
-                    final isValid = _validatePassword(controller.text);
-                    return Column(
-                      children: [
-                        SizedBox(height: 2),
-                        Text(
-                          isValid,
-                          style: AppTextStyle.blackS12.copyWith(color: Colors.red),
-                        ),
-                        SizedBox(height: 8),
-                      ],
-                    );
-                  },
-                )
-              : Container(),
-        ],
-      ),
+            : Container(),
+      ],
     );
   }
 

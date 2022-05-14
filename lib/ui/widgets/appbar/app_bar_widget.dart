@@ -12,7 +12,7 @@ class AppBarWidget extends AppBar {
           toolbarHeight: 50,
           leading: IconButton(
               onPressed: onBackPressed,
-              icon: Icon(Icons.arrow_back_ios_rounded)),
+              icon: const Icon(Icons.arrow_back_ios_rounded)),
           actions: rightActions,
         );
 }

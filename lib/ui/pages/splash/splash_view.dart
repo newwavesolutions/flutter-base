@@ -7,8 +7,10 @@ import '../../../repositories/user_repository.dart';
 import 'splash_cubit.dart';
 
 class SplashPage extends StatefulWidget {
+  const SplashPage({Key? key}) : super(key: key);
+
   @override
-  _SplashPageState createState() => _SplashPageState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
 class _SplashPageState extends State<SplashPage> {
@@ -31,7 +33,7 @@ class _SplashPageState extends State<SplashPage> {
       body: Stack(
         children: [
           Center(
-            child: Container(
+            child: SizedBox(
               height: 200,
               width: 200,
               child: Image.asset(AppImages.icLogoTransparent),

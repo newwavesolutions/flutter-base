@@ -9,7 +9,7 @@ class MoviesSectionState extends Equatable {
   final int totalResults;
   final int totalPages;
 
-  MoviesSectionState({
+  const MoviesSectionState({
     this.loadMovieStatus = LoadStatus.initial,
     this.movies = const [],
     this.page = 1,
@@ -23,11 +23,11 @@ class MoviesSectionState extends Equatable {
 
   @override
   List<Object?> get props => [
-        this.loadMovieStatus,
-        this.movies,
-        this.page,
-        this.totalResults,
-        this.totalPages,
+        loadMovieStatus,
+        movies,
+        page,
+        totalResults,
+        totalPages,
       ];
 
   MoviesSectionState copyWith({

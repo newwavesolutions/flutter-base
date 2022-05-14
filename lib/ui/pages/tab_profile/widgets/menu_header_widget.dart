@@ -5,13 +5,17 @@ import 'package:flutter_base/ui/widgets/app_devider.dart';
 class MenuHeaderWidget extends StatelessWidget {
   final String title;
 
-  MenuHeaderWidget({this.title = "", Key? key}) : super(key: key);
+  const MenuHeaderWidget({
+    this.title = "",
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      padding: EdgeInsets.only(left: AppDimens.marginNormal, top: AppDimens.marginLarge),
+      padding: const EdgeInsets.only(
+          left: AppDimens.marginNormal, top: AppDimens.marginLarge),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -22,8 +26,8 @@ class MenuHeaderWidget extends StatelessWidget {
               style: theme.textTheme.headline6,
             ),
           ),
-          SizedBox(height: AppDimens.marginSmall),
-          AppDivider(),
+          const SizedBox(height: AppDimens.marginSmall),
+          const AppDivider(),
         ],
       ),
     );

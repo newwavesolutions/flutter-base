@@ -13,7 +13,7 @@ class SecureStorageHelper {
   SecureStorageHelper._(this._storage);
 
   static final SecureStorageHelper _instance =
-      SecureStorageHelper._(FlutterSecureStorage());
+      SecureStorageHelper._(const FlutterSecureStorage());
 
   static SecureStorageHelper get instance => _instance;
 

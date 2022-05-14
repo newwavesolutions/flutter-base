@@ -3,18 +3,20 @@ import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/ui/pages/setting/setting_page.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_white_button.dart';
-import 'package:flutter_base/ui/widgets/images/app_cache_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
+import '../../widgets/images/app_circle_avatar.dart';
 import 'profile_tab_logic.dart';
 import 'profile_tab_state.dart';
 import 'widgets/menu_header_widget.dart';
 import 'widgets/menu_item_widget.dart';
 
 class ProfileTabPage extends StatefulWidget {
+  const ProfileTabPage({Key? key}) : super(key: key);
+
   @override
-  _ProfileTabPageState createState() => _ProfileTabPageState();
+  State<ProfileTabPage> createState() => _ProfileTabPageState();
 }
 
 class _ProfileTabPageState extends State<ProfileTabPage>
@@ -37,9 +39,9 @@ class _ProfileTabPageState extends State<ProfileTabPage>
       body: ListView(
         children: [
           buildMenusWidget(),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           buildSignOutButton(),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       ),
     );
@@ -53,7 +55,7 @@ class _ProfileTabPageState extends State<ProfileTabPage>
       // preferredSize: Size(double.infinity, 60),
       toolbarHeight: 56,
       leading: Container(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: BlocBuilder<AppCubit, AppState>(
           bloc: _appCubit,
           builder: (context, state) {
@@ -64,7 +66,7 @@ class _ProfileTabPageState extends State<ProfileTabPage>
       title: Row(
         children: [
           // AppCircleAvatar(url: state.user.value?.avatarUrl ?? "", size: 60),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,12 +76,12 @@ class _ProfileTabPageState extends State<ProfileTabPage>
                   bloc: _appCubit,
                   builder: (context, state) {
                     return Text(
-                      "${state.user?.username ?? ""}",
+                      state.user?.username ?? "",
                       style: theme.textTheme.headline6,
                     );
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Text(
                   "View profile",
                   style: theme.textTheme.subtitle2,
@@ -95,30 +97,30 @@ class _ProfileTabPageState extends State<ProfileTabPage>
   Widget buildMenusWidget() {
     return Column(
       children: [
-        MenuHeaderWidget(title: "Lists"),
+        const MenuHeaderWidget(title: "Lists"),
         // MenuItemWidget(title: "Watchlist"),
-        MenuItemWidget(title: "History"),
+        const MenuItemWidget(title: "History"),
         // MenuItemWidget(title: "Collection"),
         // MenuItemWidget(title: "Personal Lists"),
         // MenuItemWidget(title: "Reminders"),
         // MenuItemWidget(title: "Hidden Items"),
-        MenuHeaderWidget(title: "Settings"),
+        const MenuHeaderWidget(title: "Settings"),
         // MenuItemWidget(title: "Go Premium"),
         MenuItemWidget(
           title: "Settings",
           onPressed: () {
-            Get.to(() => SettingPage());
+            Get.to(() => const SettingPage());
           },
         ),
-        MenuItemWidget(title: "Help & feedback"),
-        MenuItemWidget(title: "About"),
+        const MenuItemWidget(title: "Help & feedback"),
+        const MenuItemWidget(title: "About"),
       ],
     );
   }
 
   Widget buildSignOutButton() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       child: BlocBuilder<ProfileTabCubit, ProfileTabState>(
         bloc: _cubit,
         builder: (context, state) {

@@ -36,7 +36,7 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<TokenEntity?> signIn(String username, String password) async {
     //Todo
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     return TokenEntity(
         accessToken: 'app_access_token', refreshToken: 'app_refresh_token');
   }

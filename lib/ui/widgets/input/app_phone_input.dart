@@ -5,6 +5,7 @@ import 'app_label_text_field.dart';
 
 class AppPhoneInput extends AppLabelTextField {
   AppPhoneInput({
+    Key? key,
     String? highlightText,
     String? labelText,
     TextStyle? labelStyle,
@@ -12,6 +13,7 @@ class AppPhoneInput extends AppLabelTextField {
     ValueChanged<String>? onChanged,
     bool enabled = true,
   }) : super(
+          key: key,
           textEditingController: textEditingController,
           onChanged: onChanged,
           labelText: labelText ?? "Số điện thoại",

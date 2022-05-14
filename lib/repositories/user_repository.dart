@@ -13,7 +13,7 @@ class UserRepositoryImpl extends UserRepository {
 
   @override
   Future<UserEntity> getProfile() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     //Mock data
     return UserEntity.mockData();
   }
