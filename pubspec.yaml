@@ -32,6 +32,7 @@ dependencies:
   #State management
   get: ^4.6.3
   flutter_bloc: ^8.0.1
+  hydrated_bloc: ^8.1.0
 
   #Utilities
   package_info: ^2.0.0
@@ -43,6 +44,7 @@ dependencies:
   #Store
   flutter_secure_storage: ^5.0.2
   shared_preferences: ^2.0.5
+  path_provider: ^2.0.10
 
   #Network
   retrofit: ^3.0.1

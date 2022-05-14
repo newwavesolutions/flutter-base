@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
 import 'blocs/app_cubit.dart';
+import 'blocs/setting/app_setting_cubit.dart';
 import 'common/app_themes.dart';
 import 'generated/l10n.dart';
 import 'network/api_client.dart';
@@ -66,29 +67,42 @@ class _MyAppState extends State<MyApp> {
               userRepo: userRepo,
               authRepo: authRepo,
             );
-          })
+          }),
+          BlocProvider<AppSettingCubit>(create: (context) {
+            return AppSettingCubit();
+          }),
         ],
-        child: GestureDetector(
-          onTap: () {
-            _hideKeyboard(context);
+        child: BlocBuilder<AppSettingCubit, AppSettingState>(
+          builder: (context, state) {
+            return GestureDetector(
+              onTap: () {
+                _hideKeyboard(context);
+              },
+              child: GetMaterialApp(
+                title: AppConfigs.appName,
+                home: const SplashPage(),
+                theme: AppThemes(
+                  isDarkMode: false,
+                  primaryColor: state.primaryColor,
+                ).theme,
+                darkTheme: AppThemes(
+                  isDarkMode: true,
+                  primaryColor: state.primaryColor,
+                ).theme,
+                themeMode: state.themeMode,
+                initialRoute: RouteConfig.splash,
+                getPages: RouteConfig.getPages,
+                localizationsDelegates: const [
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                  S.delegate,
+                ],
+                locale: state.locale,
+                supportedLocales: S.delegate.supportedLocales,
+              ),
+            );
           },
-          child: GetMaterialApp(
-            title: AppConfigs.appName,
-            home: const SplashPage(),
-            theme: AppThemes.lightTheme,
-            darkTheme: AppThemes.darkTheme,
-            themeMode: ThemeMode.system,
-            initialRoute: RouteConfig.splash,
-            getPages: RouteConfig.getPages,
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              S.delegate,
-            ],
-            // locale: Get.find<SettingService>().currentLocate.value,
-            supportedLocales: S.delegate.supportedLocales,
-          ),
         ),
       ),
     );

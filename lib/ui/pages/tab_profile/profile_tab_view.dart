@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/images/app_circle_avatar.dart';
-import 'profile_tab_logic.dart';
+import 'profile_tab_cubit.dart';
 import 'profile_tab_state.dart';
 import 'widgets/menu_header_widget.dart';
 import 'widgets/menu_item_widget.dart';

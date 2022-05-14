@@ -3,6 +3,7 @@ import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_images.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
+import 'package:flutter_base/generated/l10n.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
 import 'package:flutter_base/ui/widgets/input/app_email_input.dart';
@@ -115,7 +116,7 @@ class _SignInPageState extends State<_SignInPage> {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: AppTintButton(
-            title: 'Sign In',
+            title: S.of(context).button_signIn,
             onPressed: _signIn,
             isLoading: state.signInStatus == LoadStatus.loading,
           ),

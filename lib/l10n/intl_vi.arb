@@ -6,5 +6,6 @@
   "settings_themeModeDark": "Tối",
   "settings_languageVietnamese": "Tiếng việt",
   "settings_languageEnglish": "English",
-  "settings_language": "Ngôn ngữ"
+  "settings_language": "Ngôn ngữ",
+  "button_signIn": "Đăng nhập"
 }
