@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_base/configs/app_configs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -72,6 +73,7 @@ class _MyAppState extends State<MyApp> {
             _hideKeyboard(context);
           },
           child: GetMaterialApp(
+            title: AppConfigs.appName,
             home: const SplashPage(),
             theme: AppThemes.lightTheme,
             darkTheme: AppThemes.darkTheme,
