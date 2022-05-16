@@ -2,28 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
-import 'package:flutter_base/ui/pages/movie_detail/movie_detail_view.dart';
-import 'package:flutter_base/ui/pages/tab_home/enums/home_section.dart';
-import 'package:flutter_base/ui/pages/tab_home/movies_section/widgets/loading_list_widget.dart';
-import 'package:flutter_base/ui/pages/tab_home/movies_section/widgets/movie_widget.dart';
+import 'package:flutter_base/models/enums/movie_category.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../../../repositories/movie_repository.dart';
-import 'movies_section_cubit.dart';
-import 'movies_section_state.dart';
+import '../../movie_detail/movie_detail_page.dart';
+import 'movies_cubit.dart';
+import 'movies_state.dart';
+import 'widgets/loading_list_widget.dart';
+import 'widgets/movie_widget.dart';
 
-class MoviesSectionPage extends StatefulWidget {
-  final HomeSection section;
+class MoviesPage extends StatelessWidget {
+  final MovieCategory section;
 
-  const MoviesSectionPage(this.section, {Key? key}) : super(key: key);
+  const MoviesPage({
+    required this.section,
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<MoviesSectionPage> createState() => _MoviesSectionPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        return MoviesCubit(
+          movieRepo: context.read<MovieRepository>(),
+        );
+      },
+      child: MoviesChildPage(section),
+    );
+  }
 }
 
-class _MoviesSectionPageState extends State<MoviesSectionPage> {
-  late MoviesSectionCubit _cubit;
+class MoviesChildPage extends StatefulWidget {
+  final MovieCategory section;
+
+  const MoviesChildPage(this.section, {Key? key}) : super(key: key);
+
+  @override
+  State<MoviesChildPage> createState() => _MoviesChildPageState();
+}
+
+class _MoviesChildPageState extends State<MoviesChildPage>
+    with AutomaticKeepAliveClientMixin {
+  late MoviesCubit _cubit;
 
   final _scrollController = ScrollController();
   final _scrollThreshold = 200.0;
@@ -33,7 +55,7 @@ class _MoviesSectionPageState extends State<MoviesSectionPage> {
     super.initState();
     _scrollController.addListener(_onScroll);
     final movieRepo = RepositoryProvider.of<MovieRepository>(context);
-    _cubit = MoviesSectionCubit(
+    _cubit = MoviesCubit(
       movieRepo: movieRepo,
     );
     _cubit.fetchInitialMovies();
@@ -45,7 +67,7 @@ class _MoviesSectionPageState extends State<MoviesSectionPage> {
   }
 
   Widget buildContentWidget() {
-    return BlocBuilder<MoviesSectionCubit, MoviesSectionState>(
+    return BlocBuilder<MoviesCubit, MoviesState>(
       bloc: _cubit,
       builder: (context, state) {
         if (state.loadMovieStatus == LoadStatus.loading) {
@@ -62,7 +84,7 @@ class _MoviesSectionPageState extends State<MoviesSectionPage> {
   }
 
   Widget _buildLoadingList() {
-    return const LoadingListWidget();
+    return const LoadingMoviesWidget();
   }
 
   Widget _buildSuccessList(List<MovieEntity> items) {
@@ -104,4 +126,7 @@ class _MoviesSectionPageState extends State<MoviesSectionPage> {
   Future<void> _onRefreshData() async {
     _cubit.fetchInitialMovies();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

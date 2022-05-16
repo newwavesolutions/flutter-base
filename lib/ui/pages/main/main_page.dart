@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/ui/pages/home/home_page.dart';
 import 'package:flutter_base/ui/pages/main/main_cubit.dart';
+import 'package:flutter_base/ui/pages/profile/profile_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../tab_home/home_tab_view.dart';
-import '../tab_profile/profile_tab_view.dart';
 import 'main_state.dart';
-import 'tab/main_tab.dart';
+import 'main_tab.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -47,11 +47,11 @@ class _MainPageState extends State<_MainPage> {
     super.initState();
     //PageView page
     pageList = [
-      const HomeTabPage(),
+      const HomePage(),
       Container(color: Colors.green),
       Container(color: Colors.red),
       Container(color: Colors.green),
-      const ProfileTabPage(),
+      const ProfilePage(),
     ];
     //Page controller
     pageController = PageController();

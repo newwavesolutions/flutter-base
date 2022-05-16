@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
-import 'package:flutter_base/ui/pages/tab_home/enums/home_section.dart';
-import 'package:flutter_base/ui/pages/tab_home/movies_section/movies_section_view.dart';
-import 'package:flutter_base/ui/pages/tab_home/widgets/home_app_bar.dart';
+import 'package:flutter_base/models/enums/movie_category.dart';
 import 'package:flutter_base/ui/widgets/tabs/app_tab_bar.dart';
 
-class HomeTabPage extends StatefulWidget {
-  const HomeTabPage({Key? key}) : super(key: key);
+import 'movies/movies_page.dart';
+import 'widgets/home_app_bar.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomeTabPage> createState() => _HomeTabPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeTabPageState extends State<HomeTabPage>
+class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   @override
   bool get wantKeepAlive => true;
@@ -67,10 +68,10 @@ class _HomeTabPageState extends State<HomeTabPage>
   }
 
   Widget _buildTrendingMovies() {
-    return const MoviesSectionPage(HomeSection.trendingMovies);
+    return const MoviesPage(section: MovieCategory.trending);
   }
 
   Widget _buildUpcomingMovies() {
-    return const MoviesSectionPage(HomeSection.upcomingMovies);
+    return const MoviesPage(section: MovieCategory.upcoming);
   }
 }

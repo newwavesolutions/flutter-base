@@ -7,19 +7,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/images/app_circle_avatar.dart';
-import 'profile_tab_cubit.dart';
-import 'profile_tab_state.dart';
+import 'profile_cubit.dart';
+import 'profile_state.dart';
 import 'widgets/menu_header_widget.dart';
 import 'widgets/menu_item_widget.dart';
 
-class ProfileTabPage extends StatelessWidget {
-  const ProfileTabPage({Key? key}) : super(key: key);
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return ProfileTabCubit();
+        return ProfileCubit();
       },
       child: const _ProfileTabPage(),
     );
@@ -35,12 +35,12 @@ class _ProfileTabPage extends StatefulWidget {
 
 class _ProfileTabPageState extends State<_ProfileTabPage>
     with AutomaticKeepAliveClientMixin {
-  late ProfileTabCubit _cubit;
+  late ProfileCubit _cubit;
   late AppCubit _appCubit;
 
   @override
   void initState() {
-    _cubit = BlocProvider.of<ProfileTabCubit>(context);
+    _cubit = BlocProvider.of<ProfileCubit>(context);
     _appCubit = BlocProvider.of<AppCubit>(context);
     super.initState();
   }
@@ -135,7 +135,7 @@ class _ProfileTabPageState extends State<_ProfileTabPage>
   Widget buildSignOutButton() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
-      child: BlocBuilder<ProfileTabCubit, ProfileTabState>(
+      child: BlocBuilder<ProfileCubit, ProfileState>(
         bloc: _cubit,
         builder: (context, state) {
           return AppWhiteButton(
@@ -149,7 +149,7 @@ class _ProfileTabPageState extends State<_ProfileTabPage>
   }
 
   void _handleSignOut() {
-    BlocProvider.of<ProfileTabCubit>(context).signOut();
+    BlocProvider.of<ProfileCubit>(context).signOut();
   }
 
   @override

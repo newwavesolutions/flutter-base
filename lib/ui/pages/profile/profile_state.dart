@@ -1,17 +1,17 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 
-class ProfileTabState extends Equatable {
+class ProfileState extends Equatable {
   final LoadStatus signOutStatus;
 
-  const ProfileTabState({
+  const ProfileState({
     this.signOutStatus = LoadStatus.initial,
   });
 
-  ProfileTabState copyWith({
+  ProfileState copyWith({
     LoadStatus? signOutStatus,
   }) {
-    return ProfileTabState(
+    return ProfileState(
       signOutStatus: signOutStatus ?? this.signOutStatus,
     );
   }

@@ -1,6 +1,7 @@
-import 'package:flutter_base/ui/pages/main/main_view.dart';
-import 'package:flutter_base/ui/pages/splash/splash_view.dart';
 import 'package:get/get.dart';
+
+import '../ui/pages/main/main_page.dart';
+import '../ui/pages/splash/splash_page.dart';
 
 class RouteConfig {
   ///main page

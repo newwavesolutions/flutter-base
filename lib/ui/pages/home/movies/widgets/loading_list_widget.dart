@@ -3,10 +3,10 @@ import 'package:flutter_base/common/app_dimens.dart';
 
 import '../../../../widgets/shimmer/app_shimmer.dart';
 
-class LoadingListWidget extends StatelessWidget {
+class LoadingMoviesWidget extends StatelessWidget {
   final double rowHeight;
 
-  const LoadingListWidget({Key? key, this.rowHeight = 100}) : super(key: key);
+  const LoadingMoviesWidget({Key? key, this.rowHeight = 100}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

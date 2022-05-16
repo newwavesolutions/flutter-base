@@ -2,14 +2,14 @@ import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/movie_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'movies_section_state.dart';
+import 'movies_state.dart';
 
-class MoviesSectionCubit extends Cubit<MoviesSectionState> {
+class MoviesCubit extends Cubit<MoviesState> {
   MovieRepository movieRepo;
 
-  MoviesSectionCubit({
+  MoviesCubit({
     required this.movieRepo,
-  }) : super(const MoviesSectionState());
+  }) : super(const MoviesState());
 
   void fetchInitialMovies() async {
     emit(state.copyWith(loadMovieStatus: LoadStatus.loading));
