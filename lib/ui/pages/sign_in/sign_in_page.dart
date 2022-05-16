@@ -64,7 +64,7 @@ class _SignInPageState extends State<_SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.primary,
       body: buildBodyWidget(),
       resizeToAvoidBottomInset: false,
     );

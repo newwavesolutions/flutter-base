@@ -15,7 +15,7 @@ class AppConfigs {
   static String get envName => env.envName;
 
   ///Paging
-  static const pageSize = 20;
+  static const pageSize = 40;
   static const pageSizeMax = 1000;
 
   ///Local
