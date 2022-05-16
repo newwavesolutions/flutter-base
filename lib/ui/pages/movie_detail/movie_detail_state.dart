@@ -1,10 +1,6 @@
-import 'package:get/get.dart';
+part of 'movie_detail_cubit.dart';
 
-class MovieDetailState {
-  final temp1 = 0.obs;
-  final temp2 = 0.obs;
-
-  MovieDetailState() {
-    ///Initialize variables
-  }
+class MovieDetailState extends Equatable {
+  @override
+  List<Object?> get props => [];
 }

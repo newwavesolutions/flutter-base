@@ -2,14 +2,14 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 
-class MoviesSectionState extends Equatable {
+class MoviesState extends Equatable {
   final LoadStatus loadMovieStatus;
   final List<MovieEntity> movies;
   final int page;
   final int totalResults;
   final int totalPages;
 
-  const MoviesSectionState({
+  const MoviesState({
     this.loadMovieStatus = LoadStatus.initial,
     this.movies = const [],
     this.page = 1,
@@ -30,14 +30,14 @@ class MoviesSectionState extends Equatable {
         totalPages,
       ];
 
-  MoviesSectionState copyWith({
+  MoviesState copyWith({
     LoadStatus? loadMovieStatus,
     List<MovieEntity>? movies,
     int? page,
     int? totalResults,
     int? totalPages,
   }) {
-    return MoviesSectionState(
+    return MoviesState(
       loadMovieStatus: loadMovieStatus ?? this.loadMovieStatus,
       movies: movies ?? this.movies,
       page: page ?? this.page,

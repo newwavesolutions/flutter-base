@@ -30,19 +30,19 @@ class SignInPage extends StatelessWidget {
           appCubit: appCubit,
         );
       },
-      child: const _SignInPage(),
+      child: const SignInChildPage(),
     );
   }
 }
 
-class _SignInPage extends StatefulWidget {
-  const _SignInPage({Key? key}) : super(key: key);
+class SignInChildPage extends StatefulWidget {
+  const SignInChildPage({Key? key}) : super(key: key);
 
   @override
-  State<_SignInPage> createState() => _SignInPageState();
+  State<SignInChildPage> createState() => _SignInChildPageState();
 }
 
-class _SignInPageState extends State<_SignInPage> {
+class _SignInChildPageState extends State<SignInChildPage> {
   late TextEditingController usernameTextController;
   late TextEditingController passwordTextController;
 

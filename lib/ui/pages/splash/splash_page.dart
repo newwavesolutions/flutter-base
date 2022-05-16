@@ -6,25 +6,35 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../repositories/user_repository.dart';
 import 'splash_cubit.dart';
 
-class SplashPage extends StatefulWidget {
+class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        return SplashCubit(
+          authRepo: RepositoryProvider.of<AuthRepository>(context),
+          userRepo: RepositoryProvider.of<UserRepository>(context),
+        );
+      },
+      child: const SplashChildPage(),
+    );
+  }
 }
 
-class _SplashPageState extends State<SplashPage> {
-  late SplashCubit _cubit;
+class SplashChildPage extends StatefulWidget {
+  const SplashChildPage({Key? key}) : super(key: key);
 
   @override
+  State<SplashChildPage> createState() => _SplashChildPageState();
+}
+
+class _SplashChildPageState extends State<SplashChildPage> {
+  @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _cubit = SplashCubit(
-      authRepo: RepositoryProvider.of<AuthRepository>(context),
-      userRepo: RepositoryProvider.of<UserRepository>(context),
-    );
-    _cubit.checkLogin();
+    context.read<SplashCubit>().checkLogin();
   }
 
   @override
@@ -46,7 +56,6 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   void dispose() {
-    _cubit.close();
     super.dispose();
   }
 }

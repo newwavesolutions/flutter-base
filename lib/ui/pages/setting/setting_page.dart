@@ -2,18 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/setting/app_setting_cubit.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/generated/l10n.dart';
+import 'package:flutter_base/ui/pages/setting/setting_cubit.dart';
 import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
-class SettingPage extends StatefulWidget {
+class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
 
   @override
-  State<SettingPage> createState() => _SettingPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        return SettingCubit();
+      },
+      child: const SettingChildPage(),
+    );
+  }
 }
 
-class _SettingPageState extends State<SettingPage> {
+class SettingChildPage extends StatefulWidget {
+  const SettingChildPage({Key? key}) : super(key: key);
+
+  @override
+  State<SettingChildPage> createState() => _SettingChildPageState();
+}
+
+class _SettingChildPageState extends State<SettingChildPage> {
   late AppSettingCubit _appSettingCubit;
 
   @override
