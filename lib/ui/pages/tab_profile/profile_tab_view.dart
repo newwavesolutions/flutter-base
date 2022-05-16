@@ -7,26 +7,40 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/images/app_circle_avatar.dart';
-import 'profile_tab_logic.dart';
+import 'profile_tab_cubit.dart';
 import 'profile_tab_state.dart';
 import 'widgets/menu_header_widget.dart';
 import 'widgets/menu_item_widget.dart';
 
-class ProfileTabPage extends StatefulWidget {
+class ProfileTabPage extends StatelessWidget {
   const ProfileTabPage({Key? key}) : super(key: key);
 
   @override
-  State<ProfileTabPage> createState() => _ProfileTabPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        return ProfileTabCubit();
+      },
+      child: const _ProfileTabPage(),
+    );
+  }
 }
 
-class _ProfileTabPageState extends State<ProfileTabPage>
+class _ProfileTabPage extends StatefulWidget {
+  const _ProfileTabPage({Key? key}) : super(key: key);
+
+  @override
+  State<_ProfileTabPage> createState() => _ProfileTabPageState();
+}
+
+class _ProfileTabPageState extends State<_ProfileTabPage>
     with AutomaticKeepAliveClientMixin {
   late ProfileTabCubit _cubit;
   late AppCubit _appCubit;
 
   @override
   void initState() {
-    _cubit = ProfileTabCubit();
+    _cubit = BlocProvider.of<ProfileTabCubit>(context);
     _appCubit = BlocProvider.of<AppCubit>(context);
     super.initState();
   }

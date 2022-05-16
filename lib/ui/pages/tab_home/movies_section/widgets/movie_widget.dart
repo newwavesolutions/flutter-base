@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/common/app_colors.dart';
+import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
 import 'package:flutter_base/ui/widgets/images/app_cache_image.dart';
 
@@ -16,54 +16,51 @@ class MovieWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return TextButton(
-      onPressed: onPressed,
-      child: Column(
+    return InkWell(
+      onTap: onPressed,
+      child: Stack(
         children: [
           Expanded(
             child: Container(
               child: _buildThumbWidget(),
             ),
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  height: 32,
-                  margin: const EdgeInsets.only(top: 5),
-                  child: Text(movie?.title ?? '',
-                      style: theme.textTheme.caption, maxLines: 2),
-                ),
-              ),
-              GestureDetector(
-                child: const SizedBox(
-                  height: 32,
-                  child: Icon(
-                    Icons.more_vert,
-                    color: AppColors.secondary,
-                    size: 16,
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 48,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: <Color>[
+                      Colors.black.withOpacity(0.8),
+                      Colors.black.withOpacity(0.2),
+                    ], // Gradien
                   ),
-                ),
-              )
-            ],
-          )
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  )),
+              padding: const EdgeInsets.all(AppDimens.paddingSmall),
+              margin: const EdgeInsets.only(top: 5),
+              child: Text(movie?.title ?? '',
+                  style: theme.textTheme.labelMedium, maxLines: 2),
+            ),
+          ),
         ],
       ),
     );
   }
 
   Widget _buildThumbWidget() {
-    return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
-        color: AppColors.imageBG,
-      ),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(4)),
-        child: AppCacheImage(
-          url: movie?.posterUrl ?? '',
-          fit: BoxFit.cover,
-        ),
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
+      child: AppCacheImage(
+        url: movie?.posterUrl ?? '',
+        fit: BoxFit.cover,
       ),
     );
   }

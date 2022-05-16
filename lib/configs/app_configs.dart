@@ -1,6 +1,12 @@
+import 'dart:ui';
+
 import 'app_env_config.dart';
 
 class AppConfigs {
+  AppConfigs._();
+
+  static const String appName = "Newwave Solution JSC";
+
   static Environment env = Environment.prod;
 
   ///API Env
@@ -9,12 +15,13 @@ class AppConfigs {
   static String get envName => env.envName;
 
   ///Paging
-  static const pageSize = 20;
+  static const pageSize = 40;
   static const pageSizeMax = 1000;
 
   ///Local
   static const appLocal = 'vi_VN';
-  static const appLanguage = 'en';
+  static const appLanguage = 'vi';
+  static const defaultLocal = Locale.fromSubtags(languageCode: appLanguage);
 
   ///DateFormat
 

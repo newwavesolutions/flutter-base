@@ -3,6 +3,7 @@ import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_images.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
+import 'package:flutter_base/generated/l10n.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
 import 'package:flutter_base/ui/widgets/input/app_email_input.dart';
@@ -13,37 +14,35 @@ import '../../../repositories/auth_repository.dart';
 import '../../../repositories/user_repository.dart';
 import 'sign_in_cubit.dart';
 
-class SignInPage extends StatefulWidget {
-  static const routeName = '/signInPage';
-
+class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
 
-  static push({required BuildContext context}) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => BlocProvider(
-          create: (con) {
-            final authRepo = RepositoryProvider.of<AuthRepository>(context);
-            final userRepo = RepositoryProvider.of<UserRepository>(context);
-            final appCubit = RepositoryProvider.of<AppCubit>(context);
-            return SignInCubit(
-              authRepo: authRepo,
-              userRepo: userRepo,
-              appCubit: appCubit,
-            );
-          },
-          child: const SignInPage(),
-        ),
-      ),
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (con) {
+        final authRepo = RepositoryProvider.of<AuthRepository>(context);
+        final userRepo = RepositoryProvider.of<UserRepository>(context);
+        final appCubit = RepositoryProvider.of<AppCubit>(context);
+        return SignInCubit(
+          authRepo: authRepo,
+          userRepo: userRepo,
+          appCubit: appCubit,
+        );
+      },
+      child: const _SignInPage(),
     );
   }
-
-  @override
-  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignInPage extends StatefulWidget {
+  const _SignInPage({Key? key}) : super(key: key);
+
+  @override
+  State<_SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<_SignInPage> {
   late TextEditingController usernameTextController;
   late TextEditingController passwordTextController;
 
@@ -65,7 +64,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.primary,
       body: buildBodyWidget(),
       resizeToAvoidBottomInset: false,
     );
@@ -117,7 +116,7 @@ class _SignInPageState extends State<SignInPage> {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: AppTintButton(
-            title: 'Sign In',
+            title: S.of(context).button_signIn,
             onPressed: _signIn,
             isLoading: state.signInStatus == LoadStatus.loading,
           ),

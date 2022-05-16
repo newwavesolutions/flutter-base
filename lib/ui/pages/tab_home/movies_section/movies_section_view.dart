@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/ui/pages/movie_detail/movie_detail_view.dart';
 import 'package:flutter_base/ui/pages/tab_home/enums/home_section.dart';
 import 'package:flutter_base/ui/pages/tab_home/movies_section/widgets/loading_list_widget.dart';
 import 'package:flutter_base/ui/pages/tab_home/movies_section/widgets/movie_widget.dart';
-import 'package:flutter_base/ui/widgets/loading_more_row_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
@@ -41,33 +41,7 @@ class _MoviesSectionPageState extends State<MoviesSectionPage> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(20),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                widget.section.title,
-                style: theme.textTheme.headline6,
-              ),
-              const SizedBox(width: 10),
-              Text(
-                widget.section.typeName,
-                style: theme.textTheme.subtitle2,
-              )
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 160,
-          width: double.infinity,
-          child: buildContentWidget(),
-        )
-      ],
-    );
+    return buildContentWidget();
   }
 
   Widget buildContentWidget() {
@@ -81,7 +55,6 @@ class _MoviesSectionPageState extends State<MoviesSectionPage> {
         } else {
           return _buildSuccessList(
             state.movies,
-            showLoadingMore: !state.hasReachedMax,
           );
         }
       },
@@ -92,32 +65,31 @@ class _MoviesSectionPageState extends State<MoviesSectionPage> {
     return const LoadingListWidget();
   }
 
-  Widget _buildSuccessList(List<MovieEntity> items,
-      {bool showLoadingMore = false}) {
-    return ListView.builder(
-      controller: _scrollController,
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        if (index < items.length) {
+  Widget _buildSuccessList(List<MovieEntity> items) {
+    return RefreshIndicator(
+      onRefresh: _onRefreshData,
+      child: GridView.builder(
+        controller: _scrollController,
+        padding:
+            const EdgeInsets.symmetric(horizontal: AppDimens.paddingNormal),
+        itemBuilder: (context, index) {
           final item = items[index];
-          return Container(
-            height: 160,
-            width: 82,
-            margin: const EdgeInsets.symmetric(horizontal: 5),
-            child: MovieWidget(
-              movie: item,
-              onPressed: () {
-                Get.to(const MovieDetailPage());
-              },
-            ),
+          return MovieWidget(
+            movie: item,
+            onPressed: () {
+              Get.to(const MovieDetailPage());
+            },
           );
-        } else {
-          return const LoadingMoreRowWidget();
-        }
-      },
-      itemCount: showLoadingMore ? items.length + 1 : items.length,
-      // controller: _scrollController,
+        },
+        itemCount: items.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: AppDimens.paddingNormal,
+          mainAxisSpacing: AppDimens.paddingNormal,
+          childAspectRatio: 3 / 4,
+        ),
+        // controller: _scrollController,
+      ),
     );
   }
 
@@ -127,5 +99,9 @@ class _MoviesSectionPageState extends State<MoviesSectionPage> {
     if (maxScroll - currentScroll <= _scrollThreshold) {
       _cubit.fetchNextMovies();
     }
+  }
+
+  Future<void> _onRefreshData() async {
+    _cubit.fetchInitialMovies();
   }
 }

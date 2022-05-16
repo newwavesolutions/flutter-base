@@ -43,7 +43,7 @@ class AppCacheImage extends StatelessWidget {
                         value: downloadProgress.progress,
                         backgroundColor: Colors.white,
                         valueColor: const AlwaysStoppedAnimation<Color>(
-                            AppColors.accent),
+                            AppColors.secondary),
                       ),
                     ),
                   );

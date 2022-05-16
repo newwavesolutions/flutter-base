@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/ui/pages/tab_home/enums/home_section.dart';
 import 'package:flutter_base/ui/pages/tab_home/movies_section/movies_section_view.dart';
 import 'package:flutter_base/ui/pages/tab_home/widgets/home_app_bar.dart';
+import 'package:flutter_base/ui/widgets/tabs/app_tab_bar.dart';
 
 class HomeTabPage extends StatefulWidget {
   const HomeTabPage({Key? key}) : super(key: key);
@@ -11,13 +13,16 @@ class HomeTabPage extends StatefulWidget {
 }
 
 class _HomeTabPageState extends State<HomeTabPage>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   @override
   bool get wantKeepAlive => true;
+
+  late TabController _tapBarController;
 
   @override
   void initState() {
     super.initState();
+    _tapBarController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -34,18 +39,28 @@ class _HomeTabPageState extends State<HomeTabPage>
           // avatarUrl: authService.user.value?.avatarUrl ?? "",
           ),
       body: SafeArea(
-        child: RefreshIndicator(
-          onRefresh: _onRefreshData,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                _buildTrendingMovies(),
-                _buildTrendingTvShows(),
-                _buildNowPlayingMovies(),
-                _buildUpcomingMovies(),
-              ],
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(AppDimens.paddingNormal),
+              child: AppTabBar(
+                tabController: _tapBarController,
+                tabItems: const [
+                  "Trending",
+                  "Upcoming",
+                ],
+              ),
             ),
-          ),
+            Expanded(
+              child: TabBarView(
+                controller: _tapBarController,
+                children: [
+                  _buildTrendingMovies(),
+                  _buildUpcomingMovies(),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -55,22 +70,7 @@ class _HomeTabPageState extends State<HomeTabPage>
     return const MoviesSectionPage(HomeSection.trendingMovies);
   }
 
-  Widget _buildTrendingTvShows() {
-    return const MoviesSectionPage(HomeSection.trendingTvShows);
-  }
-
-  Widget _buildNowPlayingMovies() {
-    return const MoviesSectionPage(HomeSection.nowPlayingMovies);
-  }
-
   Widget _buildUpcomingMovies() {
     return const MoviesSectionPage(HomeSection.upcomingMovies);
-  }
-
-  Future<void> _onRefreshData() async {
-    // _trendingMoviesCubit.fetchInitialMovies();
-    // _trendingTvShowsCubit.fetchInitialMovies();
-    // _nowPlayingMoviesCubit.fetchInitialMovies();
-    // _upcomingMoviesCubit.fetchInitialMovies();
   }
 }

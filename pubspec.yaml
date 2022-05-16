@@ -32,6 +32,7 @@ dependencies:
   #State management
   get: ^4.6.3
   flutter_bloc: ^8.0.1
+  hydrated_bloc: ^8.1.0
 
   #Utilities
   package_info: ^2.0.0
@@ -43,6 +44,7 @@ dependencies:
   #Store
   flutter_secure_storage: ^5.0.2
   shared_preferences: ^2.0.5
+  path_provider: ^2.0.10
 
   #Network
   retrofit: ^3.0.1
@@ -63,6 +65,13 @@ dev_dependencies:
   retrofit_generator: ^4.0.1
   json_serializable:
   flutter_lints: ^2.0.1
+  flutter_launcher_icons: ^0.9.2
+
+flutter_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/images/launcher_icon.png"
+  remove_alpha_ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
