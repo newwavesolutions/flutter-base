@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/ui/pages/setting/setting_page.dart';
-import 'package:flutter_base/ui/widgets/buttons/app_white_button.dart';
+import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
+import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/images/app_circle_avatar.dart';
 import 'profile_cubit.dart';
-import 'profile_state.dart';
 import 'widgets/menu_header_widget.dart';
 import 'widgets/menu_item_widget.dart';
 
@@ -35,12 +35,10 @@ class _ProfileTabPage extends StatefulWidget {
 
 class _ProfileTabPageState extends State<_ProfileTabPage>
     with AutomaticKeepAliveClientMixin {
-  late ProfileCubit _cubit;
   late AppCubit _appCubit;
 
   @override
   void initState() {
-    _cubit = BlocProvider.of<ProfileCubit>(context);
     _appCubit = BlocProvider.of<AppCubit>(context);
     super.initState();
   }
@@ -49,7 +47,10 @@ class _ProfileTabPageState extends State<_ProfileTabPage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: AppBarWidget(
+        title: "My Profile",
+        showBackButton: false,
+      ),
       body: ListView(
         children: [
           buildMenusWidget(),
@@ -135,10 +136,12 @@ class _ProfileTabPageState extends State<_ProfileTabPage>
   Widget buildSignOutButton() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
-      child: BlocBuilder<ProfileCubit, ProfileState>(
-        bloc: _cubit,
+      child: BlocBuilder<AppCubit, AppState>(
+        buildWhen: (prev, current) {
+          return prev.signOutStatus != current.signOutStatus;
+        },
         builder: (context, state) {
-          return AppWhiteButton(
+          return AppTintButton(
             title: 'Logout',
             isLoading: state.signOutStatus == LoadStatus.loading,
             onPressed: _handleSignOut,
@@ -149,7 +152,7 @@ class _ProfileTabPageState extends State<_ProfileTabPage>
   }
 
   void _handleSignOut() {
-    BlocProvider.of<ProfileCubit>(context).signOut();
+    BlocProvider.of<AppCubit>(context).signOut();
   }
 
   @override

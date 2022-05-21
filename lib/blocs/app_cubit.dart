@@ -30,10 +30,11 @@ class AppCubit extends Cubit<AppState> {
   void signOut() async {
     emit(state.copyWith(signOutStatus: LoadStatus.loading));
     try {
-      //Todo
       await Future.delayed(const Duration(seconds: 2));
       await authRepo.removeToken();
-      emit(state.removeUser());
+      emit(state.removeUser().copyWith(
+            signOutStatus: LoadStatus.success,
+          ));
     } catch (e) {
       logger.e(e);
       emit(state.copyWith(signOutStatus: LoadStatus.failure));

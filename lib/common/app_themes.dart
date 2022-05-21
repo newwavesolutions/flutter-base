@@ -51,6 +51,15 @@ class AppThemes {
         color: backgroundColor,
         iconTheme:
             IconThemeData(color: isDarkMode ? Colors.white : Colors.black),
+        titleTextStyle: isDarkMode
+            ? const TextStyle(
+                color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)
+            : const TextStyle(
+                color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+      tabBarTheme: TabBarTheme(
+        unselectedLabelColor: isDarkMode ? Colors.white : Colors.black,
+        labelColor: Colors.white,
       ),
       iconTheme: IconThemeData(
         color: secondaryColor,

@@ -6,13 +6,16 @@ class AppBarWidget extends AppBar {
     VoidCallback? onBackPressed,
     String title = "",
     List<Widget> rightActions = const [],
+    bool showBackButton = true,
   }) : super(
           key: key,
           title: Text(title),
           toolbarHeight: 50,
-          leading: IconButton(
-              onPressed: onBackPressed,
-              icon: const Icon(Icons.arrow_back_ios_rounded)),
+          leading: showBackButton
+              ? IconButton(
+                  onPressed: onBackPressed,
+                  icon: const Icon(Icons.arrow_back_ios_rounded))
+              : null,
           actions: rightActions,
         );
 }

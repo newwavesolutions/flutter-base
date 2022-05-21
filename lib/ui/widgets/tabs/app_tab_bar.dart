@@ -32,8 +32,6 @@ class AppTabBar extends StatelessWidget {
         tabs: buildTabItems(),
         labelStyle: AppTextStyle.blackS14,
         unselectedLabelStyle: AppTextStyle.whiteS14,
-        labelColor: Colors.white,
-        unselectedLabelColor: AppColors.textWhite,
         indicator: BoxDecoration(
           color: AppColors.secondary,
           borderRadius: const BorderRadius.all(Radius.circular(16)),
