@@ -63,6 +63,7 @@ class _MoviesChildPageState extends State<MoviesChildPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return buildContentWidget();
   }
 
@@ -99,7 +100,7 @@ class _MoviesChildPageState extends State<MoviesChildPage>
           return MovieWidget(
             movie: item,
             onPressed: () {
-              Get.to(const MovieDetailPage());
+              Get.to(() => MovieDetailPage(movie: item));
             },
           );
         },

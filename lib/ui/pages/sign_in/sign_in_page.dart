@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
-import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_images.dart';
-import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/generated/l10n.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
@@ -53,8 +51,8 @@ class _SignInChildPageState extends State<SignInChildPage> {
   @override
   void initState() {
     super.initState();
-    usernameTextController = TextEditingController(text: 'thoson.it@gmail.com');
-    passwordTextController = TextEditingController(text: "Son@1234");
+    usernameTextController = TextEditingController(text: 'mobile@newwave.com');
+    passwordTextController = TextEditingController(text: "mobile");
     obscurePasswordController = ObscureTextController(obscureText: true);
     _cubit = BlocProvider.of<SignInCubit>(context);
     _cubit.changeUsername(username: usernameTextController.text);
@@ -64,7 +62,6 @@ class _SignInChildPageState extends State<SignInChildPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
       body: buildBodyWidget(),
       resizeToAvoidBottomInset: false,
     );
@@ -84,8 +81,6 @@ class _SignInChildPageState extends State<SignInChildPage> {
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: AppEmailInput(
             textEditingController: usernameTextController,
-            labelStyle: AppTextStyle.whiteS14Bold,
-            textStyle: AppTextStyle.whiteS14,
             onChanged: (text) {
               _cubit.changeUsername(username: text);
             },
@@ -97,8 +92,6 @@ class _SignInChildPageState extends State<SignInChildPage> {
           child: AppPasswordInput(
             obscureTextController: obscurePasswordController,
             textEditingController: passwordTextController,
-            labelStyle: AppTextStyle.whiteS14Bold,
-            textStyle: AppTextStyle.whiteS14,
             onChanged: (text) {
               _cubit.changePassword(password: text);
             },

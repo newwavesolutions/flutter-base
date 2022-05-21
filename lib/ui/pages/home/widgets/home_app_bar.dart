@@ -18,17 +18,10 @@ class HomeAppBar extends AppBar {
             ),
           ),
           toolbarHeight: AppDimens.appBarHeight,
+          leadingWidth: AppDimens.paddingNormal * 2 + 40,
           actions: [
-            const IconButton(
-                onPressed: null,
-                icon: Icon(
-                  Icons.search,
-                )),
-            const IconButton(
-                onPressed: null,
-                icon: Icon(
-                  Icons.more_vert,
-                )),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
           ],
         );
 }

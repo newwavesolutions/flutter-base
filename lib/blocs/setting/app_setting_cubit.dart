@@ -12,6 +12,10 @@ part 'app_setting_state.dart';
 class AppSettingCubit extends Cubit<AppSettingState> with HydratedMixin {
   AppSettingCubit() : super(const AppSettingState());
 
+  void resetSetting() {
+    emit(const AppSettingState());
+  }
+
   void changeThemeMode({required ThemeMode themeMode}) {
     emit(state.copyWith(themeMode: themeMode));
   }

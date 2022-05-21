@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/blocs/app_cubit.dart';
+import 'package:flutter_base/blocs/setting/app_setting_cubit.dart';
+import 'package:flutter_base/models/enums/load_status.dart';
+import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
 import 'package:flutter_base/ui/pages/main/main_cubit.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import 'main_state.dart';
 import 'main_tab.dart';
@@ -48,9 +53,9 @@ class _MainPageState extends State<_MainPage> {
     //PageView page
     pageList = [
       const HomePage(),
-      Container(color: Colors.green),
       Container(color: Colors.red),
       Container(color: Colors.green),
+      Container(color: Colors.blue),
       const ProfilePage(),
     ];
     //Page controller
@@ -59,9 +64,23 @@ class _MainPageState extends State<_MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildPageView(),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AppCubit, AppState>(
+          listenWhen: (prev, current) {
+            return prev.signOutStatus != current.signOutStatus &&
+                current.signOutStatus == LoadStatus.success;
+          },
+          listener: (context, state) {
+            BlocProvider.of<AppSettingCubit>(context).resetSetting();
+            Get.offAllNamed(RouteConfig.signIn);
+          },
+        )
+      ],
+      child: Scaffold(
+        body: _buildPageView(),
+        bottomNavigationBar: _buildBottomNavigationBar(),
+      ),
     );
   }
 

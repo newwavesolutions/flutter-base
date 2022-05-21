@@ -20,10 +20,8 @@ class MovieWidget extends StatelessWidget {
       onTap: onPressed,
       child: Stack(
         children: [
-          Expanded(
-            child: Container(
-              child: _buildThumbWidget(),
-            ),
+          Positioned.fill(
+            child: _buildThumbWidget(),
           ),
           Positioned(
             bottom: 0,
@@ -46,8 +44,12 @@ class MovieWidget extends StatelessWidget {
                   )),
               padding: const EdgeInsets.all(AppDimens.paddingSmall),
               margin: const EdgeInsets.only(top: 5),
-              child: Text(movie?.title ?? '',
-                  style: theme.textTheme.labelMedium, maxLines: 2),
+              child: Text(
+                movie?.title ?? '',
+                style:
+                    theme.textTheme.labelMedium?.copyWith(color: Colors.white),
+                maxLines: 2,
+              ),
             ),
           ),
         ],

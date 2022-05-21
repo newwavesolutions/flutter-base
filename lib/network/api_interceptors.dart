@@ -17,8 +17,6 @@ class ApiInterceptors extends InterceptorsWrapper {
     if (token != null) {
       options.headers['Authorization'] = 'Bearer ${token.accessToken}';
     }
-    logger.log(
-        "\n\n--------------------------------------------------------------------------------------------------------");
     if (method == 'GET') {
       logger.log(
           "✈️ REQUEST[$method] => PATH: $uri \n Token: ${options.headers}",

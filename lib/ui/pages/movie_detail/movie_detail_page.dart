@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/models/entities/movie_entity.dart';
 import 'package:flutter_base/ui/pages/movie_detail/movie_detail_cubit.dart';
+import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 class MovieDetailPage extends StatelessWidget {
-  const MovieDetailPage({Key? key}) : super(key: key);
+  final MovieEntity movie;
+
+  const MovieDetailPage({
+    Key? key,
+    required this.movie,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,13 +19,20 @@ class MovieDetailPage extends StatelessWidget {
       create: (context) {
         return MovieDetailCubit();
       },
-      child: const MovieDetailChildPage(),
+      child: MovieDetailChildPage(
+        movie: movie,
+      ),
     );
   }
 }
 
 class MovieDetailChildPage extends StatefulWidget {
-  const MovieDetailChildPage({Key? key}) : super(key: key);
+  final MovieEntity movie;
+
+  const MovieDetailChildPage({
+    Key? key,
+    required this.movie,
+  }) : super(key: key);
 
   @override
   State<MovieDetailChildPage> createState() => _MovieDetailChildPageState();
@@ -26,8 +41,12 @@ class MovieDetailChildPage extends StatefulWidget {
 class _MovieDetailChildPageState extends State<MovieDetailChildPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: AppBarWidget(
+        title: widget.movie.title ?? '',
+        onBackPressed: Get.back,
+      ),
+      body: const Center(
         child: Text("Movie detail"),
       ),
     );
