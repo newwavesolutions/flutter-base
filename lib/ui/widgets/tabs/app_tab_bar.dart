@@ -22,11 +22,10 @@ class AppTabBar extends StatelessWidget {
       height: 40,
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        // color: Theme.of(context),
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        // boxShadow: AppShadow.boxShadow,
-        border: Border.all(color: AppColors.border)
-      ),
+          // color: Theme.of(context),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          // boxShadow: AppShadow.boxShadow,
+          border: Border.all(color: AppColors.border)),
       child: TabBar(
         controller: tabController,
         tabs: buildTabItems(),

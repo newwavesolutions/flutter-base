@@ -14,7 +14,10 @@ class ObjectResponse<T> {
     this.data,
   });
 
-  factory ObjectResponse.fromJson(Map<String, dynamic> json, T Function(Object? json) fromJsonT) => _$ObjectResponseFromJson(json, fromJsonT);
+  factory ObjectResponse.fromJson(
+          Map<String, dynamic> json, T Function(Object? json) fromJsonT) =>
+      _$ObjectResponseFromJson(json, fromJsonT);
 
-  Map<String, dynamic> toJson(Object? Function(T value) toJsonT) => _$ObjectResponseToJson(this, toJsonT);
+  Map<String, dynamic> toJson(Object? Function(T value) toJsonT) =>
+      _$ObjectResponseToJson(this, toJsonT);
 }

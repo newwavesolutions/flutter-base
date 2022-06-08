@@ -26,7 +26,8 @@ class MovieEntity {
     this.releaseDate,
   });
 
-  factory MovieEntity.fromJson(Map<String, dynamic> json) => _$MovieEntityFromJson(json);
+  factory MovieEntity.fromJson(Map<String, dynamic> json) =>
+      _$MovieEntityFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieEntityToJson(this);
 
