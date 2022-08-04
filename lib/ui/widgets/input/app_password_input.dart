@@ -77,8 +77,8 @@ class AppPasswordInput extends StatelessWidget {
                   maxLines: 1,
                   decoration: InputDecoration(
                     enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(
-                          color: AppColors.textFieldEnabledBorder),
+                      borderSide:
+                          BorderSide(color: AppColors.textFieldEnabledBorder),
                     ),
                     focusedBorder: const UnderlineInputBorder(
                       borderSide:

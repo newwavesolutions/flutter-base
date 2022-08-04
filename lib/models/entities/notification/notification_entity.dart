@@ -23,7 +23,8 @@ class NotificationEntity {
     this.type = "",
   });
 
-  factory NotificationEntity.fromJson(Map<String, dynamic> json) => _$NotificationEntityFromJson(json);
+  factory NotificationEntity.fromJson(Map<String, dynamic> json) =>
+      _$NotificationEntityFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificationEntityToJson(this);
 }

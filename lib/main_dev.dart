@@ -15,7 +15,7 @@ void main() async {
           ? HydratedStorage.webStorageDirectory
           : await getTemporaryDirectory());
   HydratedBlocOverrides.runZoned(
-        () => runApp(const MyApp()),
+    () => runApp(const MyApp()),
     storage: storage,
   );
 }

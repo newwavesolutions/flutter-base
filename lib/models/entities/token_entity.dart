@@ -14,7 +14,8 @@ class TokenEntity {
     this.refreshToken = "",
   });
 
-  factory TokenEntity.fromJson(Map<String, dynamic> json) => _$TokenEntityFromJson(json);
+  factory TokenEntity.fromJson(Map<String, dynamic> json) =>
+      _$TokenEntityFromJson(json);
 
   Map<String, dynamic> toJson() => _$TokenEntityToJson(this);
 }

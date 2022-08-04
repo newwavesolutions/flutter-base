@@ -20,7 +20,8 @@ class SignUpParam {
     this.phone,
   });
 
-  factory SignUpParam.fromJson(Map<String, dynamic> json) => _$SignUpParamFromJson(json);
+  factory SignUpParam.fromJson(Map<String, dynamic> json) =>
+      _$SignUpParamFromJson(json);
 
   Map<String, dynamic> toJson() => _$SignUpParamToJson(this);
 }

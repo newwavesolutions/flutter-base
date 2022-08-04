@@ -20,7 +20,10 @@ class ArrayResponse<T> {
     this.results = const [],
   });
 
-  factory ArrayResponse.fromJson(Map<String, dynamic> json, T Function(Object? json) fromJsonT) => _$ArrayResponseFromJson(json, fromJsonT);
+  factory ArrayResponse.fromJson(
+          Map<String, dynamic> json, T Function(Object? json) fromJsonT) =>
+      _$ArrayResponseFromJson(json, fromJsonT);
 
-  Map<String, dynamic> toJson(Object? Function(T value) toJsonT) => _$ArrayResponseToJson(this, toJsonT);
+  Map<String, dynamic> toJson(Object? Function(T value) toJsonT) =>
+      _$ArrayResponseToJson(this, toJsonT);
 }
