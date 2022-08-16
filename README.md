@@ -24,8 +24,10 @@ assets
 └───image
     └───2.0x
     └───3.0x
-
 libs
+└───bloc
+│   └───app_cubit.dart
+│   └───app_state.dart
 └───common
 │   └───app_colors.dart
 │   └───app_dimens.dart
@@ -38,18 +40,18 @@ libs
 └───database
 │   └───secure_storage_helper.dart
 │   └───shared_preferences_helper.dart
-│   └─── ...
+│   └───...
 └───l10n
 └───models
 │   └───entities
 │   │   └───user_entity.dart
-│   │   └─── ...
+│   │   └───...
 │   └───enums
 │   │   └───load_status.dart
-│   │   └─── ...
+│   │   └───...
 │   └───params
 │   │   └───sign_up_param.dart
-│   │   └─── ...
+│   │   └───...
 │   └───response
 │       └───array_response.dart
 │       └───object_response.dart
@@ -59,22 +61,23 @@ libs
 │   └───api_util.dart
 └───router
 │   └───route_config.dart
-└───services
-│   └───api
-│   └───store
-│   └───auth_service.dart
-│   └───cache_service.dart
-│   └───setting_service.dart
+└───repositories
+│   └───auth_repository.dart
+│   └───user_repository.dart.dart
+│   └───...
 └───ui
-│   └───view
-│   │   └───custom_view.dart
+│   └───commons
+│   │   └───app_bottom_sheet.dart
+│   │   └───app_dialog.dart
+│   │   └───app_snackbar.dart
+│   │   └───...
 │   └───pages
 │   │   └───splash
-│   │   │   └───splash_logic.dart
+│   │   │   └───splash_page.dart
+│   │   │   └───splash_cubit.dart
 │   │   │   └───splash_state.dart
-│   │   │   └───splash_view.dart
-│   │   └───other_page...
-│   └───widget
+│   │   └───...
+│   └───widget //Chứa các widget base cho app
 │       └───appbar
 │       └───buttons
 │       │   └───app_button.dart
@@ -85,16 +88,15 @@ libs
 │       │   └───app_circle_avatar.dart
 │       └───textfields
 │       └───shimmer
-│       └───app_bottom_sheet.dart
-│       └───app_dialog.dart
-│       └───app_snackbar.dart
 │       └───...
 └───utils
 │   └───date_utils.dart
 │   └───file_utils.dart
 │   └───logger.dart
 │   └───utils.dart
-└───main.dart
+│───main.dart
+│───main_dev.dart //Config môi trường dev
+└───main_staging.dart //Config môi trường production
 ```
 | Item           | Explaint |
 | -------------- | -------- |
@@ -107,6 +109,7 @@ libs
 | **models**:    | contain entity, enum, .. |
 | **networks**:  |
 | **router**:    | contain the route navigation |
+| **repositories**:    | contain repository |
 | **ui**         |  |
 | **utils**      |  |
 
