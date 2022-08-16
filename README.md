@@ -115,7 +115,7 @@ libs
 All screen should be created in the `ui/pages` folder
 Each screen have 3 file:
 **Logic:** `movies_cubit.dart`
-```java=
+```dart
 class MoviesCubit extends Cubit<MoviesState> {
   MovieRepository movieRepo;
 
@@ -139,7 +139,7 @@ class MoviesCubit extends Cubit<MoviesState> {
 
 ```
 **State:** `movies_state.dart`
-```java=
+```dart
 class MoviesState extends Equatable {
   final LoadStatus loadMovieStatus;
   final List<MovieEntity> movies;
@@ -167,7 +167,7 @@ class MoviesState extends Equatable {
 }
 ```
 **View:** `movies_view.dart`
-```java=
+```dart
 class MoviesPage extends StatelessWidget {
   ...
   @override
@@ -211,7 +211,7 @@ class _MoviesChildPageState extends State<MoviesChildPage> {
 ### Creating API.
 1. Create entity object in folder `lib/models/entities`
    Ex: `movie_entity.dart`
-```java=
+```dart
 import 'package:json_annotation/json_annotation.dart';
 
 part 'movie_entity.g.dart';
@@ -230,7 +230,7 @@ Class must have `@JsonSerializable()` for generator. Read [json_serializable](ht
 
 2. Define and Generate your API in file `lib/networks/api_client.dart`
    Ex: GET movies
-```java=
+```dart
   /// Movie
   @GET("/3/discover/movie")
   Future<ArrayResponse<MovieEntity>> getMovies(@Query('api_key') String apiKey, @Query('page') int page);
@@ -244,7 +244,7 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
 4. Create repository file for your feature in folder `lib/repositories`
    Ex: `movie_repository.dart`
-```java=
+```dart
 abstract class MovieRepository {
   Future<ArrayResponse<MovieEntity>> getMovies();
 }
@@ -264,26 +264,26 @@ After, add `part 'auth_api.dart';` to `services/api/api_service`
 
 5. You can call API in the logic of screen.
    Ex:
-```java=
+```dart
 final result = await movieRepo.getMovies();
 ```
 
 ### Other
 #### Logger
-```java=
+```dart
 logger.d("message"); //"💙 DEBUG: message"
 logger.i("message"); //"💚 INFO: message"
 logger.e("message"); //"❤️ ERROR: message"
 logger.log("very very very long message");
 ```
 #### Snackbar
-```java=
+```dart
 AppSnackbar.showInfo(message: 'Info');
 AppSnackbar.showWarning(message: 'Warning');
 AppSnackbar.showError(message: 'Error');
 ```
 #### Dialog
-```java=
+```dart
 AppDialog.defaultDialog(
           message: "An error happened. Please check your connection!",
           textConfirm: "Retry",
@@ -293,7 +293,7 @@ AppDialog.defaultDialog(
 );
 ```
 #### Button UI when call API
-```java=
+```dart
 return Obx(() {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 20),
