@@ -80,7 +80,6 @@ class _MyAppState extends State<MyApp> {
               },
               child: GetMaterialApp(
                 title: AppConfigs.appName,
-                home: const SplashPage(),
                 theme: AppThemes(
                   isDarkMode: false,
                   primaryColor: state.primaryColor,
