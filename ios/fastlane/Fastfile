@@ -1,0 +1,57 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Build iOS app to firebase app distribution"
+ lane :staging do
+     build_app(
+       workspace: "Runner.xcworkspace",
+       configuration: "Release-staging",
+       scheme: "staging",
+       export_options: {
+         provisioningProfiles: {
+           "jp.example.staging" => "jp.example.staging.release"
+         },
+         method: "ad-hoc",
+       },
+       silent: true,
+       clean: true,
+       output_directory: "./build/ios/iphoneos",
+       output_name: "app_staging.ipa",
+     )
+
+     #   TODO: - Thay thế app, groups, firebase_cli_token bằng firebase project của dự án
+     firebase_app_distribution(
+       app: "",
+       groups: "",
+       release_notes: "Staging environment",
+       ipa_path: "./build/ios/iphoneos/app_staging.ipa",
+       firebase_cli_token: ""
+     )
+  end
+
+  lane :prod do
+    build_app(
+      workspace: "Runner.xcworkspace",
+      configuration: "Release-prod",
+      scheme: "prod",
+      export_options: {
+      provisioningProfiles: {
+         "jp.example" => "jp.example.release"
+         },
+         method: "app-store",
+         },
+         silent: true,
+         clean: true,
+         output_directory: "./build/ios/iphoneos",
+         output_name: "app_prod.ipa",
+       )
+# TODO: - Thay thế app, groups, firebase_cli_token bằng firebase project của dự án
+     firebase_app_distribution(
+       app: "",
+       groups: "",
+       release_notes: "Staging environment",
+       ipa_path: "./build/ios/iphoneos/app_staging.ipa",
+       firebase_cli_token: ""
+     )
+  end
+end

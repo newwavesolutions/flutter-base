@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
+import 'package:flutter_base/flavors.dart';
 import 'package:flutter_base/models/enums/movie_category.dart';
 import 'package:flutter_base/ui/widgets/tabs/app_tab_bar.dart';
 
@@ -34,34 +36,37 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      appBar: HomeAppBar(
-          //Todo
-          // avatarUrl: authService.user.value?.avatarUrl ?? "",
+    return _flavorBanner(
+      show: F.appFlavor == Flavor.DEV || F.appFlavor == Flavor.STAGING,
+      child: Scaffold(
+        appBar: HomeAppBar(
+            //Todo
+            // avatarUrl: authService.user.value?.avatarUrl ?? "",
+            ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(AppDimens.paddingNormal),
+                child: AppTabBar(
+                  tabController: _tapBarController,
+                  tabItems: const [
+                    "Trending",
+                    "Upcoming",
+                  ],
+                ),
+              ),
+              Expanded(
+                child: TabBarView(
+                  controller: _tapBarController,
+                  children: [
+                    _buildTrendingMovies(),
+                    _buildUpcomingMovies(),
+                  ],
+                ),
+              ),
+            ],
           ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(AppDimens.paddingNormal),
-              child: AppTabBar(
-                tabController: _tapBarController,
-                tabItems: const [
-                  "Trending",
-                  "Upcoming",
-                ],
-              ),
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: _tapBarController,
-                children: [
-                  _buildTrendingMovies(),
-                  _buildUpcomingMovies(),
-                ],
-              ),
-            ),
-          ],
         ),
       ),
     );
@@ -73,5 +78,23 @@ class _HomePageState extends State<HomePage>
 
   Widget _buildUpcomingMovies() {
     return const MoviesPage(section: MovieCategory.upcoming);
+  }
+
+  Widget _flavorBanner({
+    required Widget child,
+    bool show = true,
+  }) {
+    if (!show) {
+      return Container(
+        child: child,
+      );
+    }
+    return Banner(
+      location: BannerLocation.topStart,
+      message: F.name,
+      color: Colors.green.withOpacity(0.6),
+      textDirection: TextDirection.ltr,
+      child: child,
+    );
   }
 }

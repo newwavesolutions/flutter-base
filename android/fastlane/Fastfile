@@ -1,0 +1,41 @@
+default_platform(:android)
+
+platform :android do
+  lane :staging do
+    Dir.chdir "../.." do
+      sh("flutter", "build", "apk", "--flavor", "staging", "-t", "lib/main_staging.dart")
+    end
+    copy_artifacts(
+          artifacts: ['../build/app/outputs/flutter-apk/app-staging-release.apk'],
+          target_path: '../build/app'
+        )
+
+#   TODO: - Thay thế app, groups, firebase_cli_token bằng firebase project của dự án
+    firebase_app_distribution(
+      app: "",
+      groups: "",
+      release_notes: "Staging environment",
+      apk_path: "../build/app/outputs/flutter-apk/app-staging-release.apk",
+      firebase_cli_token: ""
+    )
+  end
+
+  lane :prod do
+    Dir.chdir "../.." do
+      sh("flutter", "build", "apk", "--flavor", "prod", "-t", "lib/main_prod.dart")
+    end
+    copy_artifacts(
+          artifacts: ['../build/app/outputs/flutter-apk/app-prod-release.apk'],
+          target_path: '../build/app'
+        )
+
+#   TODO: - Thay thế app, groups, firebase_cli_token bằng firebase project của dự án
+    firebase_app_distribution(
+      app: "",
+      groups: "",
+      release_notes: "Prod environment",
+      apk_path: "../build/app/outputs/flutter-apk/app-prod-release.apk",
+      firebase_cli_token: ""
+    )
+  end
+end

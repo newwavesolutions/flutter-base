@@ -3,10 +3,12 @@ import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_images.dart';
 import 'package:flutter_base/generated/l10n.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
+import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
 import 'package:flutter_base/ui/widgets/input/app_email_input.dart';
 import 'package:flutter_base/ui/widgets/input/app_password_input.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import '../../../repositories/auth_repository.dart';
 import '../../../repositories/user_repository.dart';
@@ -120,6 +122,6 @@ class _SignInChildPageState extends State<SignInChildPage> {
 
   Future<void> _signIn() async {
     // await _cubit.signIn();
-    // Get.offNamed(RouteConfig.main);
+    Get.offNamed(RouteConfig.main);
   }
 }
