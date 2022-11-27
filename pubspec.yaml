@@ -72,6 +72,9 @@ dev_dependencies:
   # unit test
   mockito: ^5.3.2
 
+  # Flavor
+  flutter_flavorizr: ^2.1.4
+
 flutter_icons:
   android: "ic_launcher"
   ios: true
@@ -150,3 +153,39 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_intl:
   enabled: true
+
+flavorizr:
+  flavors:
+    prod:
+      app:
+        name: "Example"
+      android:
+        applicationId: "jp.example"
+        firebase:
+          config: ".firebase/prod/google-services.json"
+      ios:
+        bundleId: "jp.example"
+        firebase:
+          config: ".firebase/prod/GoogleService-Info.plist"
+    staging:
+      app:
+        name: "Example Staging"
+      android:
+        applicationId: "jp.example.staging"
+        firebase:
+          config: ".firebase/staging/google-services.json"
+      ios:
+        bundleId: "jp.example.staging"
+        firebase:
+          config: ".firebase/staging/GoogleService-Info.plist"
+    dev:
+      app:
+        name: "Example Dev"
+      android:
+        applicationId: "jp.example.dev"
+        firebase:
+          config: ".firebase/dev/google-services.json"
+      ios:
+        bundleId: "jp.example.dev"
+        firebase:
+          config: ".firebase/dev/GoogleService-Info.plist"

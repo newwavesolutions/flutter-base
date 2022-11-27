@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "772659059164",
+    "firebase_url": "https://techmasterdemo-ad510-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "techmasterdemo-ad510",
+    "storage_bucket": "techmasterdemo-ad510.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772659059164:android:a10a425058226690ed1719",
+        "android_client_info": {
+          "package_name": "vn.com.duchv.test.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "772659059164-9tio39pp3hheovihj8fue3al8jnl1h1n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4W-zvkY_WrFDOP4kxmjKT7Jg1mvtRSS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "772659059164-9tio39pp3hheovihj8fue3al8jnl1h1n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "772659059164-v8dhp0p8j91f7129kk30np1ckkqh3mok.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "vn.com.duchv.firebaseauth.demo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
