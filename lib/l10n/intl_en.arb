@@ -1,4 +1,5 @@
 {
+  "@@locale": "en",
   "settings_title": "Settings",
   "settings_themeMode": "Theme",
   "settings_themeModeSystem": "System",

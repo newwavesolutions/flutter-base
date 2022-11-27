@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_base/models/response/array_response.dart';
+import 'package:flutter_base/models/response/sign_in_response.dart';
+import 'package:flutter_base/models/response/sign_up_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../models/entities/movie_entity.dart';
 import '../models/entities/notification/notification_entity.dart';
-import '../models/entities/token_entity.dart';
 
 part 'api_client.g.dart';
 
@@ -13,8 +14,12 @@ abstract class ApiClient {
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 
   ///User
+  @POST("/register")
+  Future<SignUpResponse> signUp(@Body() Map<String, dynamic> body);
+
+  ///User
   @POST("/login")
-  Future<TokenEntity> authLogin(@Body() Map<String, dynamic> body);
+  Future<SignInResponse> authLogin(@Body() Map<String, dynamic> body);
 
   @POST("/logout")
   Future<dynamic> signOut(@Body() Map<String, dynamic> body);

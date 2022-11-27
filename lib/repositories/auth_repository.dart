@@ -1,4 +1,6 @@
 import 'package:flutter_base/database/secure_storage_helper.dart';
+import 'package:flutter_base/models/params/sign_in_param.dart';
+import 'package:flutter_base/models/response/sign_in_response.dart';
 import 'package:flutter_base/network/api_client.dart';
 
 import '../models/entities/token_entity.dart';
@@ -10,7 +12,7 @@ abstract class AuthRepository {
 
   Future<void> removeToken();
 
-  Future<TokenEntity?> signIn(String username, String password);
+  Future<SignInResponse?> signIn(SignInParam param);
 }
 
 class AuthRepositoryImpl extends AuthRepository {
@@ -34,10 +36,7 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<TokenEntity?> signIn(String username, String password) async {
-    //Todo
-    await Future.delayed(const Duration(seconds: 2));
-    return TokenEntity(
-        accessToken: 'app_access_token', refreshToken: 'app_refresh_token');
+  Future<SignInResponse?> signIn(SignInParam param) async {
+    return apiClient.authLogin(param.toJson());
   }
 }

@@ -118,7 +118,8 @@ class _SignInChildPageState extends State<SignInChildPage> {
     );
   }
 
-  void _signIn() {
-    _cubit.signIn();
+  Future<void> _signIn() async {
+    // await _cubit.signIn();
+    // Get.offNamed(RouteConfig.main);
   }
 }

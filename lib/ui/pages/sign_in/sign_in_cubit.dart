@@ -1,13 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
+import 'package:flutter_base/models/entities/token_entity.dart';
 import 'package:flutter_base/models/entities/user/user_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
+import 'package:flutter_base/models/params/sign_in_param.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
-import 'package:flutter_base/router/route_config.dart';
-import 'package:flutter_base/ui/commons/app_snackbar.dart';
-import 'package:flutter_base/utils/logger.dart';
+import 'package:flutter_base/utils/validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 import '../../../repositories/user_repository.dart';
 
@@ -22,7 +21,7 @@ class SignInCubit extends Cubit<SignInState> {
     required this.authRepo,
     required this.userRepo,
     required this.appCubit,
-  }) : super(const SignInState());
+  }) : super(SignInState());
 
   void changeUsername({required String username}) {
     emit(state.copyWith(username: username));
@@ -32,31 +31,40 @@ class SignInCubit extends Cubit<SignInState> {
     emit(state.copyWith(password: password));
   }
 
-  void signIn() async {
-    final username = state.username ?? '';
-    final password = state.password ?? '';
-    if (username.isEmpty) {
-      AppSnackbar.showError(message: 'Username is empty');
-      return;
-    }
-    if (password.isEmpty) {
-      AppSnackbar.showError(message: 'Password is empty');
-      return;
-    }
+  Future<void> checkValidateAndSignIn({
+    required String email,
+    required String password,
+  }) async {
+    final emailValidate = EmailValidator(email).perform(isCheckRequire: true);
+    final passwordValidate =
+        PasswordValidator(password).perform(isCheckRequire: true);
+
+    final newState = state.copyWith();
+    newState.emailValidatorError = emailValidate;
+    newState.passwordValidatorError = passwordValidate;
+    emit(newState);
+  }
+
+  Future<void> signIn(SignInParam param) async {
     emit(state.copyWith(signInStatus: LoadStatus.loading));
+
     try {
-      final result = await authRepo.signIn(username, password);
+      final result = await authRepo.signIn(param);
+
       if (result != null) {
         UserEntity? myProfile = await userRepo.getProfile();
         appCubit.updateProfile(myProfile);
-        authRepo.saveToken(result);
+
+        final tokenEntity = TokenEntity(
+          accessToken: result.accessToken ?? "",
+          refreshToken: result.refreshToken ?? "",
+        );
+        authRepo.saveToken(tokenEntity);
         emit(state.copyWith(signInStatus: LoadStatus.success));
-        Get.offNamed(RouteConfig.main);
       } else {
         emit(state.copyWith(signInStatus: LoadStatus.failure));
       }
     } catch (error) {
-      logger.e(error);
       emit(state.copyWith(signInStatus: LoadStatus.failure));
     }
   }
