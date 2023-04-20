@@ -121,3 +121,4 @@ app.*.symbols
 *.g.dart
 lib/generated
 .flutter-plugins-dependencies
+
