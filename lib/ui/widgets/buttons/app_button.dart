@@ -49,11 +49,11 @@ class AppButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(
                 cornerRadius ?? AppDimens.buttonCornerRadius),
           ),
+          backgroundColor: backgroundColor,
           side: BorderSide(
             color: borderColor ?? Colors.transparent,
             width: borderWidth ?? 0,
           ),
-          backgroundColor: backgroundColor,
           padding: const EdgeInsets.all(0),
         ),
         onPressed: onPressed,
