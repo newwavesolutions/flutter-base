@@ -29,20 +29,20 @@ extension MainTabExtension on MainTab {
   BottomNavigationBarItem get tab {
     switch (this) {
       case MainTab.home:
-        return const BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded), label: 'Home');
+        return BottomNavigationBarItem(
+            icon: const Icon(Icons.home_rounded), label: title);
       case MainTab.discover:
-        return const BottomNavigationBarItem(
-            icon: Icon(Icons.explore_outlined), label: 'Discover');
+        return BottomNavigationBarItem(
+            icon: const Icon(Icons.explore_outlined), label: title);
       case MainTab.tvShows:
-        return const BottomNavigationBarItem(
-            icon: Icon(Icons.tv_rounded), label: 'TV Shows');
+        return BottomNavigationBarItem(
+            icon: const Icon(Icons.tv_rounded), label: title);
       case MainTab.watchlist:
-        return const BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark_outline_rounded), label: 'Watchlist');
+        return BottomNavigationBarItem(
+            icon: const Icon(Icons.bookmark_outline_rounded), label: title);
       case MainTab.profile:
-        return const BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline_rounded), label: 'Profile');
+        return BottomNavigationBarItem(
+            icon: const Icon(Icons.person_outline_rounded), label: title);
     }
   }
 

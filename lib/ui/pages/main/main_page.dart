@@ -109,11 +109,11 @@ class _MainPageState extends State<_MainPage> {
       },
       builder: (context, state) {
         return BottomNavigationBar(
-          showSelectedLabels: false,
+          showSelectedLabels: true,
           showUnselectedLabels: false,
           backgroundColor: theme.appBarTheme.backgroundColor,
           elevation: 8,
-          type: BottomNavigationBarType.fixed,
+          type: BottomNavigationBarType.shifting,
           currentIndex: state.selectedIndex,
           unselectedItemColor: Colors.grey,
           selectedItemColor: theme.indicatorColor,
