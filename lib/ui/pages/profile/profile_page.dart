@@ -63,7 +63,6 @@ class _ProfileTabPageState extends State<_ProfileTabPage>
   }
 
   AppBar buildAppBar() {
-    final theme = Theme.of(context);
     return AppBar(
       // margin: EdgeInsets.all(20),
       // height: 60,
@@ -92,14 +91,12 @@ class _ProfileTabPageState extends State<_ProfileTabPage>
                   builder: (context, state) {
                     return Text(
                       state.user?.username ?? "",
-                      style: theme.textTheme.headline6,
                     );
                   },
                 ),
                 const SizedBox(width: 10),
-                Text(
+                const Text(
                   "View profile",
-                  style: theme.textTheme.subtitle2,
                 ),
               ],
             ),

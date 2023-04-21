@@ -53,7 +53,7 @@ class AppButton extends StatelessWidget {
             color: borderColor ?? Colors.transparent,
             width: borderWidth ?? 0,
           ),
-          primary: backgroundColor,
+          backgroundColor: backgroundColor,
           padding: const EdgeInsets.all(0),
         ),
         onPressed: onPressed,

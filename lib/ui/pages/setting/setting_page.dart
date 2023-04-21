@@ -61,7 +61,6 @@ class _SettingChildPageState extends State<SettingChildPage> {
   }
 
   Widget _buildThemeSection() {
-    final theme = Theme.of(context);
     return BlocBuilder<AppSettingCubit, AppSettingState>(
       buildWhen: (prev, current) {
         return prev.themeMode != current.themeMode;
@@ -73,7 +72,6 @@ class _SettingChildPageState extends State<SettingChildPage> {
           children: [
             Text(
               S.of(context).settings_themeMode,
-              style: theme.textTheme.headline6,
             ),
             RadioListTile(
               title: Text(S.of(context).settings_themeModeSystem),
@@ -112,7 +110,6 @@ class _SettingChildPageState extends State<SettingChildPage> {
   }
 
   Widget _buildLanguageSection() {
-    final theme = Theme.of(context);
     return BlocBuilder<AppSettingCubit, AppSettingState>(
       buildWhen: (prev, current) {
         return prev.locale != current.locale;
@@ -124,7 +121,6 @@ class _SettingChildPageState extends State<SettingChildPage> {
           children: [
             Text(
               S.of(context).settings_language,
-              style: theme.textTheme.headline6,
             ),
             RadioListTile(
               title: Text(S.of(context).settings_languageEnglish),

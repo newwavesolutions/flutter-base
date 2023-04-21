@@ -6,12 +6,14 @@ class MenuItemWidget extends StatelessWidget {
   final String title;
   final VoidCallback? onPressed;
 
-  const MenuItemWidget({Key? key, this.title = "", this.onPressed})
-      : super(key: key);
+  const MenuItemWidget({
+    Key? key,
+    this.title = "",
+    this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return GestureDetector(
       onTap: onPressed,
       child: Container(
@@ -33,7 +35,6 @@ class MenuItemWidget extends StatelessWidget {
                   Expanded(
                     child: Text(
                       title,
-                      style: theme.textTheme.bodyText1,
                     ),
                   ),
                   const Icon(

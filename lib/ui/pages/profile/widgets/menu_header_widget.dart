@@ -12,7 +12,6 @@ class MenuHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.only(
           left: AppDimens.marginNormal, top: AppDimens.marginLarge),
@@ -23,7 +22,6 @@ class MenuHeaderWidget extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               title,
-              style: theme.textTheme.headline6,
             ),
           ),
           const SizedBox(height: AppDimens.marginSmall),

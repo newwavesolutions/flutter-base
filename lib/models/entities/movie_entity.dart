@@ -31,7 +31,7 @@ class MovieEntity {
 
   Map<String, dynamic> toJson() => _$MovieEntityToJson(this);
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   String get posterUrl {
     return 'https://image.tmdb.org/t/p/w185${posterPath ?? ""}';
   }
