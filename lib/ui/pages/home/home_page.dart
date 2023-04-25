@@ -29,12 +29,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      appBar: HomeAppBar(
-          //Todo
-          // avatarUrl: authService.user.value?.avatarUrl ?? "",
-          ),
-      body: SafeArea(
+    return SafeArea(
         child: Column(
           children: [
             Padding(
@@ -58,8 +53,7 @@ class _HomePageState extends State<HomePage>
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 
   Widget _buildTrendingMovies() {

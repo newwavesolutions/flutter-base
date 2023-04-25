@@ -6,7 +6,7 @@ import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/utils/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-mixin AppLifecycleMixin<T extends StatefulWidget> on State<T> {
+mixin CheckConnectivityMixin<T extends StatefulWidget> on State<T> {
   late StreamSubscription<ConnectivityResult> _appConnectivity;
 
   @override

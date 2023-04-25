@@ -13,8 +13,8 @@ mixin AppLifecycleMixin<T extends StatefulWidget> on State<T> {
     super.initState();
     final appCubit = BlocProvider.of<AppCubit>(context);
 
-    _appLifecycleState = appCubit.appLifeCycleState.asBroadcastStream().listen(
-          (state) {
+    _appLifecycleState = appCubit.appLifeCycleState.listen(
+      (state) {
         switch (state) {
           case AppLifecycleState.inactive:
             onInactive();

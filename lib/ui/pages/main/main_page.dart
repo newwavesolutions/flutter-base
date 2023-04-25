@@ -4,7 +4,9 @@ import 'package:flutter_base/blocs/setting/app_setting_cubit.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
+import 'package:flutter_base/ui/pages/home/widgets/home_app_bar.dart';
 import 'package:flutter_base/ui/pages/main/main_cubit.dart';
+import 'package:flutter_base/ui/pages/main/widgets/main_drawer.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -35,6 +37,8 @@ class _MainPageState extends State<_MainPage> {
   ///PageView page
   late List<Widget> pageList;
   late PageController pageController;
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
   final tabs = [
     MainTab.home,
@@ -77,11 +81,30 @@ class _MainPageState extends State<_MainPage> {
           },
         )
       ],
-      child: Scaffold(
-        body: _buildPageView(),
-        bottomNavigationBar: _buildBottomNavigationBar(),
+      child: BlocBuilder<MainCubit, MainState>(
+        bloc: _cubit,
+        buildWhen: (prev, cur) {
+          return prev.selectedIndex != cur.selectedIndex;
+        },
+        builder: (_, state) {
+          return Scaffold(
+            key: _scaffoldKey,
+            appBar: HomeAppBar(
+              title: MainTab.values[state.selectedIndex].title,
+              backgroundColor: context.theme.primaryColor,
+              leadingOnTap: () => _scaffoldKey.currentState?.openDrawer(),
+            ),
+            body: _buildPageView(),
+            drawer: _buildDrawer(),
+            bottomNavigationBar: _buildBottomNavigationBar(),
+          );
+        },
       ),
     );
+  }
+
+  Widget _buildDrawer() {
+    return const MainDrawer();
   }
 
   Widget _buildPageView() {
