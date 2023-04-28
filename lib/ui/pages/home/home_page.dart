@@ -1,19 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/models/enums/movie_category.dart';
+import 'package:flutter_base/repositories/movie_repository.dart';
+import 'package:flutter_base/ui/pages/home/home_cubit.dart';
 import 'package:flutter_base/ui/widgets/tabs/app_tab_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'movies/movies_page.dart';
-import 'widgets/home_app_bar.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        final movieRepo = RepositoryProvider.of<MovieRepository>(context);
+        return HomeCubit(movieRepo);
+      },
+      child: const HomePageChild(),
+    );
+  }
 }
 
-class _HomePageState extends State<HomePage>
+class HomePageChild extends StatefulWidget {
+  const HomePageChild({Key? key}) : super(key: key);
+
+  @override
+  State<HomePageChild> createState() => _HomePageChildState();
+}
+
+class _HomePageChildState extends State<HomePageChild>
     with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   @override
   bool get wantKeepAlive => true;

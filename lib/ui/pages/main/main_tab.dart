@@ -4,7 +4,7 @@ enum MainTab {
   home,
   discover,
   tvShows,
-  watchlist,
+  search,
   profile,
 }
 
@@ -18,7 +18,7 @@ extension MainTabExtension on MainTab {
       // return DiscoverTabPage();
       case MainTab.tvShows:
       // return TvShowTabPage();
-      case MainTab.watchlist:
+      case MainTab.search:
       // return WatchlistTabPage();
       case MainTab.profile:
       // return ProfileTabPage();
@@ -37,9 +37,9 @@ extension MainTabExtension on MainTab {
       case MainTab.tvShows:
         return BottomNavigationBarItem(
             icon: const Icon(Icons.tv_rounded), label: title);
-      case MainTab.watchlist:
+      case MainTab.search:
         return BottomNavigationBarItem(
-            icon: const Icon(Icons.bookmark_outline_rounded), label: title);
+            icon: const Icon(Icons.search), label: title);
       case MainTab.profile:
         return BottomNavigationBarItem(
             icon: const Icon(Icons.person_outline_rounded), label: title);
@@ -54,8 +54,8 @@ extension MainTabExtension on MainTab {
         return 'Notification';
       case MainTab.tvShows:
         return 'TV Shows';
-      case MainTab.watchlist:
-        return 'Setting';
+      case MainTab.search:
+        return 'Search';
       case MainTab.profile:
         return 'Profile';
     }

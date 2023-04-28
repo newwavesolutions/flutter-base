@@ -8,6 +8,7 @@ import 'package:flutter_base/ui/pages/home/widgets/home_app_bar.dart';
 import 'package:flutter_base/ui/pages/main/main_cubit.dart';
 import 'package:flutter_base/ui/pages/main/widgets/main_drawer.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
+import 'package:flutter_base/ui/pages/search/search_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
@@ -44,7 +45,7 @@ class _MainPageState extends State<_MainPage> {
     MainTab.home,
     MainTab.discover,
     MainTab.tvShows,
-    MainTab.watchlist,
+    MainTab.search,
     MainTab.profile,
   ];
 
@@ -59,7 +60,7 @@ class _MainPageState extends State<_MainPage> {
       const HomePage(),
       Container(color: Colors.red),
       Container(color: Colors.green),
-      Container(color: Colors.blue),
+      const SearchPage(),
       const ProfilePage(),
     ];
     //Page controller

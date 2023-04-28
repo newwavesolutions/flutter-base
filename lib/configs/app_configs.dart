@@ -43,6 +43,9 @@ class AppConfigs {
 
   ///Max file
   static const maxAttachFile = 5;
+
+  /// Max scroll extend
+  static const maxScrollExtend = 100;
 }
 
 class FirebaseConfig {
