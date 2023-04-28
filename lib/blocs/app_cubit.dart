@@ -51,14 +51,17 @@ class AppCubit extends Cubit<AppState> {
   void addAppLifecycleState(AppLifecycleState appLifecycleState) {
     _appLifeCycleState.add(appLifecycleState);
   }
+
   void _closeStream() {
     _appLifeCycleState.close();
   }
 
   /// check connectivity
   final _connectivity = Connectivity();
-  Stream<ConnectivityResult> get connectivityChanged => _connectivity.onConnectivityChanged;
-  Future<ConnectivityResult> get checkConnection => _connectivity.checkConnectivity();
+  Stream<ConnectivityResult> get connectivityChanged =>
+      _connectivity.onConnectivityChanged;
+  Future<ConnectivityResult> get checkConnection =>
+      _connectivity.checkConnectivity();
 
   @override
   Future<void> close() {

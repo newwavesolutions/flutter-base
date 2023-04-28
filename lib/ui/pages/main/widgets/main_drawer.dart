@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/common/app_colors.dart';
-import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/ui/pages/main/widgets/theme_mode_widget.dart';
 import 'package:flutter_base/ui/pages/profile/widgets/menu_header_widget.dart';
 import 'package:flutter_base/ui/pages/profile/widgets/menu_item_widget.dart';

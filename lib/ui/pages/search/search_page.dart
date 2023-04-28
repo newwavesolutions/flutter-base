@@ -24,7 +24,8 @@ class _SearchPageChild extends StatefulWidget {
   State<_SearchPageChild> createState() => _SearchPageChildState();
 }
 
-class _SearchPageChildState extends State<_SearchPageChild> with AutomaticKeepAliveClientMixin {
+class _SearchPageChildState extends State<_SearchPageChild>
+    with AutomaticKeepAliveClientMixin {
   late SearchCubit _cubit;
 
   @override

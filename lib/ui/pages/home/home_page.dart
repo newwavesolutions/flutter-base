@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/models/enums/movie_category.dart';
-import 'package:flutter_base/repositories/movie_repository.dart';
 import 'package:flutter_base/ui/pages/home/home_cubit.dart';
 import 'package:flutter_base/ui/widgets/tabs/app_tab_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,8 +14,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        final movieRepo = RepositoryProvider.of<MovieRepository>(context);
-        return HomeCubit(movieRepo);
+        return HomeCubit();
       },
       child: const HomePageChild(),
     );
@@ -47,30 +45,30 @@ class _HomePageChildState extends State<HomePageChild>
   Widget build(BuildContext context) {
     super.build(context);
     return SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(AppDimens.paddingNormal),
-              child: AppTabBar(
-                tabController: _tapBarController,
-                tabItems: const [
-                  "Trending",
-                  "Upcoming",
-                ],
-              ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(AppDimens.paddingNormal),
+            child: AppTabBar(
+              tabController: _tapBarController,
+              tabItems: const [
+                "Trending",
+                "Upcoming",
+              ],
             ),
-            Expanded(
-              child: TabBarView(
-                controller: _tapBarController,
-                children: [
-                  _buildTrendingMovies(),
-                  _buildUpcomingMovies(),
-                ],
-              ),
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: _tapBarController,
+              children: [
+                _buildTrendingMovies(),
+                _buildUpcomingMovies(),
+              ],
             ),
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildTrendingMovies() {

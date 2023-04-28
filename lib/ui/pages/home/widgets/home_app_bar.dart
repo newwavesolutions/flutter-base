@@ -68,23 +68,25 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
       leadingWidth: 60,
       elevation: elevation,
       title: title != null ? Text(title ?? '') : null,
-      actions: actions ?? [
-        IconButton(
-            onPressed: onSearchPressed, icon: const Icon(Icons.search)),
-        IconButton(
-            onPressed: onSettingPressed, icon: const Icon(Icons.more_vert)),
-      ],
+      actions: actions ??
+          [
+            IconButton(
+                onPressed: onSearchPressed, icon: const Icon(Icons.search)),
+            IconButton(
+                onPressed: onSettingPressed, icon: const Icon(Icons.more_vert)),
+          ],
     );
   }
 
   @override
-
-  Size get preferredSize => _PreferredAppBarSize(kToolbarHeight, bottom?.preferredSize.height);
+  Size get preferredSize =>
+      _PreferredAppBarSize(kToolbarHeight, bottom?.preferredSize.height);
 }
 
 class _PreferredAppBarSize extends Size {
   _PreferredAppBarSize(this.toolbarHeight, this.bottomHeight)
-      : super.fromHeight((toolbarHeight ?? kToolbarHeight) + (bottomHeight ?? 0));
+      : super.fromHeight(
+            (toolbarHeight ?? kToolbarHeight) + (bottomHeight ?? 0));
 
   final double? toolbarHeight;
   final double? bottomHeight;
