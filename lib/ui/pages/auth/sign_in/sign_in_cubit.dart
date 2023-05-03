@@ -3,13 +3,12 @@ import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/models/entities/user/user_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
+import 'package:flutter_base/repositories/user_repository.dart';
 import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/commons/app_snackbar.dart';
 import 'package:flutter_base/utils/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-
-import '../../../repositories/user_repository.dart';
 
 part 'sign_in_state.dart';
 
