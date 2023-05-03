@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
-import 'package:flutter_base/ui/pages/movie_list/movie_list/movie_list_page.dart';
+import 'package:flutter_base/ui/pages/movie_list/movie_list_page.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
-import 'package:flutter_base/ui/pages/widget_list/widget_list/widget_list_page.dart';
+import 'package:flutter_base/ui/pages/widget_list/widget_list_page.dart';
 
 enum MainTab {
   home,

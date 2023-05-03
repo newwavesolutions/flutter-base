@@ -49,12 +49,14 @@ class _MovieListChildPageState extends State<MovieListChildPage> {
 
   @override
   Widget build(BuildContext context) {
-     return Scaffold(
-       appBar: AppBar(title: const Text('Movies'),),
-       body: SafeArea(
-         child: _buildBodyWidget(),
-       ),
-     );
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Movies'),
+      ),
+      body: SafeArea(
+        child: _buildBodyWidget(),
+      ),
+    );
   }
 
   Widget _buildBodyWidget() {
