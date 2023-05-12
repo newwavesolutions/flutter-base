@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_base/ui/commons/app_dialog.dart';
+import 'package:flutter_base/ui/commons/app_dialog.dart';
 import 'package:flutter_base/utils/app_date_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,7 +14,7 @@ class DateTimePage extends StatefulWidget {
 
 class _DateTimePageState extends State<DateTimePage> {
   DateTime? _date;
-  DateTime? _dateTime;
+  TimeOfDay? _timeOfDay;
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +33,14 @@ class _DateTimePageState extends State<DateTimePage> {
         ListTile(
           title: Text(
               "Pick Date${_date != null ? ": ${_date!.toIso8601String()}" : ""}"),
+          trailing: const Icon(Icons.chevron_right),
           onTap: _openDatePicker,
         ),
         //Pick date & time
         ListTile(
           title: Text(
-              "Pick DateTime ${_dateTime != null ? ": ${_dateTime!.toIso8601String()}" : ""}"),
+              "Pick DateTime ${_timeOfDay != null ? ": ${_timeOfDay!.toString()}" : ""}"),
+          trailing: const Icon(Icons.chevron_right),
           onTap: _openDateTimePicker,
         ),
         //Date to String
@@ -48,26 +50,18 @@ class _DateTimePageState extends State<DateTimePage> {
     );
   }
 
-  void _openDatePicker() {
-    // AppDialog.showDatePicker(
-    //   context,
-    //   onConfirm: (dateTime) {
-    //     setState(() {
-    //       _date = dateTime;
-    //     });
-    //   },
-    // );
+  void _openDatePicker() async {
+    final dateTime = await AppDialog.showDateDialog(context);
+    setState(() {
+      _date = dateTime;
+    });
   }
 
-  void _openDateTimePicker() {
-    // AppDialog.showDateTimePicker(
-    //   context,
-    //   onConfirm: (dateTime) {
-    //     setState(() {
-    //       _dateTime = dateTime;
-    //     });
-    //   },
-    // );
+  void _openDateTimePicker() async {
+    final timeOfDay = await AppDialog.showTimeDialog(context);
+    setState(() {
+      _timeOfDay = timeOfDay;
+    });
   }
 
   Widget _buildDateToStringWidget() {
