@@ -25,12 +25,12 @@ class AppConfigs {
 
   ///DateFormat
 
-  static const dateAPIFormat = 'dd/MM/yyyy';
   static const dateDisplayFormat = 'dd/MM/yyyy';
+  static const dateTimeDisplayFormat = 'dd/MM/yyyy HH:mm';
 
   static const dateTimeAPIFormat =
-      "MM/dd/yyyy'T'hh:mm:ss.SSSZ"; //Use DateTime.parse(date) instead of ...
-  static const dateTimeDisplayFormat = 'dd/MM/yyyy HH:mm';
+      "YYYY-MM-DDThh:mm:ssTZD"; //Use DateTime.parse(date) instead of ...
+  static const dateAPIFormat = 'dd/MM/yyyy';
 
   ///Date range
   static final identityMinDate = DateTime(1900, 1, 1);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/ui/pages/widget_list/widgets/date_time_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'widget_list_cubit.dart';
@@ -60,12 +61,24 @@ class _WidgetListChildPageState extends State<WidgetListChildPage> {
   }
 
   Widget _buildBodyWidget() {
-    return Container();
+    return ListView(
+      children: [
+        ListTile(
+          title: const Text("DateTime"),
+          onTap: _openDateTimePage,
+        )
+      ],
+    );
   }
 
   @override
   void dispose() {
     _cubit.close();
     super.dispose();
+  }
+
+  void _openDateTimePage() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const DateTimePage()));
   }
 }
