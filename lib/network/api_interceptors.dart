@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_base/database/secure_storage_helper.dart';
-import 'package:flutter_base/ui/pages/sign_in/sign_in_page.dart';
+import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
 import 'package:flutter_base/utils/logger.dart';
 import 'package:get/get.dart' hide Response;
 

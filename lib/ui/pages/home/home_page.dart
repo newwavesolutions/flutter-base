@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/models/enums/movie_category.dart';
+import 'package:flutter_base/ui/pages/notification/notification_list/notification_list/notification_list_page.dart';
 import 'package:flutter_base/ui/widgets/tabs/app_tab_bar.dart';
 
 import 'movies/movies_page.dart';
@@ -31,9 +32,10 @@ class _HomePageState extends State<HomePage>
     super.build(context);
     return Scaffold(
       appBar: HomeAppBar(
-          //Todo
-          // avatarUrl: authService.user.value?.avatarUrl ?? "",
-          ),
+        //Todo
+        // avatarUrl: authService.user.value?.avatarUrl ?? "",
+        onNotificationPressed: _openNotificationList,
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -68,5 +70,10 @@ class _HomePageState extends State<HomePage>
 
   Widget _buildUpcomingMovies() {
     return const MoviesPage(section: MovieCategory.upcoming);
+  }
+
+  void _openNotificationList() {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => const NotificationListPage()));
   }
 }

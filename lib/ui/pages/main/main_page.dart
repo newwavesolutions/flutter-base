@@ -5,7 +5,9 @@ import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
 import 'package:flutter_base/ui/pages/main/main_cubit.dart';
+import 'package:flutter_base/ui/pages/movie_list/movie_list/movie_list_page.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
+import 'package:flutter_base/ui/pages/widget_list/widget_list/widget_list_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
@@ -38,9 +40,8 @@ class _MainPageState extends State<_MainPage> {
 
   final tabs = [
     MainTab.home,
-    MainTab.discover,
-    MainTab.tvShows,
-    MainTab.watchlist,
+    MainTab.movies,
+    MainTab.widgets,
     MainTab.profile,
   ];
 
@@ -53,9 +54,8 @@ class _MainPageState extends State<_MainPage> {
     //PageView page
     pageList = [
       const HomePage(),
-      Container(color: Colors.red),
-      Container(color: Colors.green),
-      Container(color: Colors.blue),
+      const MovieListPage(),
+      const WidgetListPage(),
       const ProfilePage(),
     ];
     //Page controller
