@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - main
-      - master
+      - develop
   pull_request:
     branches:
       - main
-      - master
+      - develop
 
 jobs:
   build:
@@ -25,12 +25,12 @@ jobs:
         cache: gradle
     - uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.7.10'
+        flutter-version: '3.10.0'
         channel: 'stable'
   
     - run: flutter clean
     - run: flutter pub get
     - run: flutter pub run intl_utils:generate
     - run: flutter pub run build_runner build --delete-conflicting-outputs
-    - run: flutter format ./lib --set-exit-if-changed
+    - run: dart format ./lib --set-exit-if-changed
     - run: flutter analyze
