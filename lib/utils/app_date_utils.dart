@@ -40,7 +40,7 @@ class AppDateUtils {
   static String toDateTimeAPIString(DateTime dateTime,
       {String format = AppConfigs.dateTimeAPIFormat}) {
     try {
-      return dateTime.toIso8601String();
+      return DateFormat(format).format(dateTime);
     } catch (e) {
       return '';
     }

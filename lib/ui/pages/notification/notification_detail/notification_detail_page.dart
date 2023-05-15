@@ -34,10 +34,12 @@ class NotificationDetailChildPage extends StatefulWidget {
   const NotificationDetailChildPage({Key? key}) : super(key: key);
 
   @override
-  State<NotificationDetailChildPage> createState() => _NotificationDetailChildPageState();
+  State<NotificationDetailChildPage> createState() =>
+      _NotificationDetailChildPageState();
 }
 
-class _NotificationDetailChildPageState extends State<NotificationDetailChildPage> {
+class _NotificationDetailChildPageState
+    extends State<NotificationDetailChildPage> {
   late final NotificationDetailCubit _cubit;
 
   @override
@@ -49,12 +51,12 @@ class _NotificationDetailChildPageState extends State<NotificationDetailChildPag
 
   @override
   Widget build(BuildContext context) {
-     return Scaffold(
-       appBar: AppBar(),
-       body: SafeArea(
-         child: _buildBodyWidget(),
-       ),
-     );
+    return Scaffold(
+      appBar: AppBar(),
+      body: SafeArea(
+        child: _buildBodyWidget(),
+      ),
+    );
   }
 
   Widget _buildBodyWidget() {
