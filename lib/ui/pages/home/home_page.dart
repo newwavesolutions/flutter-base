@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/models/enums/movie_category.dart';
-import 'package:flutter_base/ui/pages/notification/notification_list/notification_list/notification_list_page.dart';
+import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
 import 'package:flutter_base/ui/widgets/tabs/app_tab_bar.dart';
 
 import 'movies/movies_page.dart';
