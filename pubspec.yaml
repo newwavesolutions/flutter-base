@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.19.0 <3.0.0"
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -41,7 +41,7 @@ dependencies:
   #Utilities
   package_info_plus: ^3.1.0
   permission_handler: ^10.2.0
-  intl: ^0.17.0
+  intl: ^0.18.0
   intl_utils: ^2.8.2
   equatable: ^2.0.5
   url_launcher: ^6.1.10
@@ -57,7 +57,6 @@ dependencies:
   json_annotation: ^4.8.0
 
   #Custom UI
-  flutter_datetime_picker: ^1.5.1
   shimmer: ^2.0.0
 
   #Dialog, etc
