@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/ui/pages/home/home_page.dart';
+import 'package:flutter_base/ui/pages/movie_list/movie_list/movie_list_page.dart';
+import 'package:flutter_base/ui/pages/profile/profile_page.dart';
+import 'package:flutter_base/ui/pages/widget_list/widget_list/widget_list_page.dart';
 
 enum MainTab {
   home,
-  discover,
-  tvShows,
-  watchlist,
+  movies,
+  widgets,
   profile,
 }
 
@@ -12,37 +15,38 @@ extension MainTabExtension on MainTab {
   Widget get page {
     switch (this) {
       case MainTab.home:
-      // return HomeTabPage();
-      // return Container(color: Colors.red,);
-      case MainTab.discover:
-      // return DiscoverTabPage();
-      case MainTab.tvShows:
-      // return TvShowTabPage();
-      case MainTab.watchlist:
-      // return WatchlistTabPage();
+        return const HomePage();
+      case MainTab.movies:
+        return const MovieListPage();
+      case MainTab.widgets:
+        return const WidgetListPage();
       case MainTab.profile:
-      // return ProfileTabPage();
+        return const ProfilePage();
     }
-    return Container();
   }
 
   BottomNavigationBarItem get tab {
     switch (this) {
       case MainTab.home:
         return const BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded), label: 'Home');
-      case MainTab.discover:
+          icon: Icon(Icons.home_outlined),
+          label: "Home",
+        );
+      case MainTab.movies:
         return const BottomNavigationBarItem(
-            icon: Icon(Icons.explore_outlined), label: 'Discover');
-      case MainTab.tvShows:
+          icon: Icon(Icons.movie_creation_outlined),
+          label: "Movies",
+        );
+      case MainTab.widgets:
         return const BottomNavigationBarItem(
-            icon: Icon(Icons.tv_rounded), label: 'TV Shows');
-      case MainTab.watchlist:
-        return const BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark_outline_rounded), label: 'Watchlist');
+          icon: Icon(Icons.widgets_outlined),
+          label: "Widgets",
+        );
       case MainTab.profile:
         return const BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline_rounded), label: 'Profile');
+          icon: Icon(Icons.person_outline_rounded),
+          label: "Profile",
+        );
     }
   }
 
@@ -50,12 +54,10 @@ extension MainTabExtension on MainTab {
     switch (this) {
       case MainTab.home:
         return 'Home';
-      case MainTab.discover:
-        return 'Notification';
-      case MainTab.tvShows:
-        return 'TV Shows';
-      case MainTab.watchlist:
-        return 'Setting';
+      case MainTab.movies:
+        return 'Movies';
+      case MainTab.widgets:
+        return 'Widgets';
       case MainTab.profile:
         return 'Profile';
     }

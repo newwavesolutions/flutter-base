@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/ui/pages/forgot_password/forgot_password_cubit.dart';
+import 'package:flutter_base/ui/pages/auth/forgot_password/forgot_password_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgotPasswordPage extends StatelessWidget {

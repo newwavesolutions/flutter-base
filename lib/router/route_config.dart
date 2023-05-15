@@ -1,4 +1,4 @@
-import 'package:flutter_base/ui/pages/sign_in/sign_in_page.dart';
+import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
 import 'package:get/get.dart';
 
 import '../ui/pages/main/main_page.dart';
