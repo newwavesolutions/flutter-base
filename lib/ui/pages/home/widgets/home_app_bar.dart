@@ -6,8 +6,8 @@ class HomeAppBar extends AppBar {
   HomeAppBar({
     Key? key,
     String avatarUrl = "",
-    VoidCallback? onSearchPressed,
-    VoidCallback? onSettingPressed,
+    // VoidCallback? onSearchPressed,
+    VoidCallback? onNotificationPressed,
   }) : super(
           key: key,
           title: const Text("Movie"),
@@ -20,8 +20,10 @@ class HomeAppBar extends AppBar {
           toolbarHeight: AppDimens.appBarHeight,
           leadingWidth: AppDimens.paddingNormal * 2 + 40,
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
+            // IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+            IconButton(
+                onPressed: onNotificationPressed,
+                icon: const Icon(Icons.notifications)),
           ],
         );
 }
