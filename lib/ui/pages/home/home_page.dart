@@ -5,7 +5,6 @@ import 'package:flutter_base/models/enums/movie_category.dart';
 import 'package:flutter_base/models/enums/option_drawer.dart';
 import 'package:flutter_base/ui/pages/home/home_cubit.dart';
 import 'package:flutter_base/ui/pages/home/home_state.dart';
-import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_icon_button.dart';
 import 'package:flutter_base/ui/widgets/tabs/app_tab_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,11 +37,6 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      // appBar: HomeAppBar(
-      //   //Todo
-      //   // avatarUrl: authService.user.value?.avatarUrl ?? "",
-      //   onNotificationPressed: _openNotificationList,
-      // ),
       appBar: AppBar(),
       drawer: _buildDrawWidget(),
       body: SafeArea(
