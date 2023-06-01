@@ -198,9 +198,4 @@ class _HomePageState extends State<HomePage>
   Widget _buildUpcomingMovies() {
     return const MoviesPage(section: MovieCategory.upcoming);
   }
-
-  void _openNotificationList() {
-    Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const NotificationListPage()));
-  }
 }
