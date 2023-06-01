@@ -14,7 +14,7 @@ class AppWhiteButton extends AppButton {
           title: title,
           isLoading: isLoading,
           onPressed: onPressed,
-          textStyle: const TextStyle(
+          titleStyle: const TextStyle(
             fontSize: 16,
             color: AppColors.secondary,
             fontWeight: FontWeight.bold,

@@ -19,7 +19,7 @@ class AppIconButton extends AppButton {
           trailingIcon: trailingIcon,
           isLoading: isLoading,
           onPressed: onPressed,
-          textStyle: textStyle,
+          titleStyle: textStyle,
           backgroundColor: backgroundColor,
         );
 }

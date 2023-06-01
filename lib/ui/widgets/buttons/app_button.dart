@@ -18,7 +18,7 @@ class AppButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? borderColor;
 
-  final TextStyle? textStyle;
+  final TextStyle? titleStyle;
 
   final VoidCallback? onPressed;
 
@@ -34,7 +34,7 @@ class AppButton extends StatelessWidget {
     this.cornerRadius,
     this.backgroundColor,
     this.borderColor,
-    this.textStyle,
+    this.titleStyle,
     this.onPressed,
   }) : super(key: key);
 
@@ -43,22 +43,7 @@ class AppButton extends StatelessWidget {
     return SizedBox(
       height: height ?? AppDimens.buttonHeight,
       width: width ?? double.infinity,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                cornerRadius ?? AppDimens.buttonCornerRadius),
-          ),
-          backgroundColor: backgroundColor,
-          side: BorderSide(
-            color: borderColor ?? Colors.transparent,
-            width: borderWidth ?? 0,
-          ),
-          padding: const EdgeInsets.all(0),
-        ),
-        onPressed: onPressed,
-        child: _buildChildWidget(),
-      ),
+      child: _buildChildWidget(),
     );
   }
 
@@ -66,22 +51,32 @@ class AppButton extends StatelessWidget {
     if (isLoading) {
       return const AppCircularProgressIndicator(color: Colors.white);
     } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          leadingIcon ?? Container(),
-          title != null
-              ? Text(
-                  title!,
-                  style: textStyle ??
-                      const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.red),
-                )
-              : Container(),
-          trailingIcon ?? Container(),
-        ],
+      return InkWell(
+        onTap: onPressed,
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: backgroundColor ?? Colors.transparent,
+            borderRadius: BorderRadius.circular(cornerRadius ?? 0),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              leadingIcon ?? const SizedBox(),
+              if (trailingIcon == null) const Spacer(),
+              Text(
+                title ?? 'Title',
+                style: titleStyle ??
+                    const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+              ),
+              const Spacer(),
+              trailingIcon ?? const SizedBox(),
+            ],
+          ),
+        ),
       );
     }
   }

@@ -14,7 +14,7 @@ class AppTintButton extends AppButton {
           title: title,
           isLoading: isLoading,
           onPressed: onPressed,
-          textStyle: const TextStyle(
+          titleStyle: const TextStyle(
             fontSize: 16,
             color: Colors.white,
             fontWeight: FontWeight.bold,

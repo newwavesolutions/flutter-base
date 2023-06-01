@@ -8,4 +8,8 @@ class AppImages {
   ///Sign-In
   static const icEyeClose = 'assets/images/ic_eye_close.png';
   static const icEyeOpen = 'assets/images/ic_eye_open.png';
+
+  ///drawer home
+  static const icDrawerHeader = 'assets/images/header_drawer.png';
+  static const icDrawerAvatar = 'assets/images/bg_image_placeholder.png';
 }
