@@ -1,3 +1,4 @@
+import 'package:flutter_base/ui/pages/main/main_tab.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'main_state.dart';
@@ -8,5 +9,6 @@ class MainCubit extends Cubit<MainState> {
   ///Switch tab
   void switchTap(int index) {
     emit(state.copyWith(selectedIndex: index));
+    indexSelected = index;
   }
 }

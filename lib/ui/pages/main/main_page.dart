@@ -115,8 +115,8 @@ class _MainPageState extends State<_MainPage> {
           elevation: 8,
           type: BottomNavigationBarType.fixed,
           currentIndex: state.selectedIndex,
-          unselectedItemColor: Colors.grey,
-          selectedItemColor: theme.indicatorColor,
+          // unselectedItemColor: Colors.transparent,
+          // selectedItemColor: Colors.transparent,
           items: tabs.map((e) => e.tab).toList(),
           onTap: (index) {
             _cubit.switchTap(index);

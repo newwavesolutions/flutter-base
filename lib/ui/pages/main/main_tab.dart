@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/common/app_vectors.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
+import 'package:flutter_base/ui/pages/main/custom_bottom_nav_item.dart';
 import 'package:flutter_base/ui/pages/movie_list/movie_list_page.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
 import 'package:flutter_base/ui/pages/widget_list/widget_list_page.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+int indexSelected = 0;
 
 enum MainTab {
   home,
@@ -25,27 +30,67 @@ extension MainTabExtension on MainTab {
     }
   }
 
-  BottomNavigationBarItem get tab {
+  CustomBottomNavigationItem get tab {
     switch (this) {
       case MainTab.home:
-        return const BottomNavigationBarItem(
-          icon: Icon(Icons.home_outlined),
+        return CustomBottomNavigationItem(
+          icon: SvgPicture.asset(
+            AppVectors.icHomeBottomNavigator,
+            width: 24,
+            height: 24,
+            fit: BoxFit.fill,
+            colorFilter: ColorFilter.mode(
+              (indexSelected == 0) ? Colors.red : Colors.black,
+              BlendMode.srcIn,
+            ),
+          ),
           label: "Home",
+          isActive: indexSelected == 0,
         );
       case MainTab.movies:
-        return const BottomNavigationBarItem(
-          icon: Icon(Icons.movie_creation_outlined),
+        return CustomBottomNavigationItem(
+          icon: SvgPicture.asset(
+            AppVectors.icMovieBottomNavigator,
+            width: 24,
+            height: 24,
+            fit: BoxFit.fill,
+            colorFilter: ColorFilter.mode(
+              (indexSelected == 1) ? Colors.red : Colors.black,
+              BlendMode.srcIn,
+            ),
+          ),
           label: "Movies",
+          isActive: indexSelected == 1,
         );
       case MainTab.widgets:
-        return const BottomNavigationBarItem(
-          icon: Icon(Icons.widgets_outlined),
+        return CustomBottomNavigationItem(
+          icon: SvgPicture.asset(
+            AppVectors.icOutlineBottomNavigator,
+            width: 24,
+            height: 24,
+            fit: BoxFit.fill,
+            colorFilter: ColorFilter.mode(
+              (indexSelected == 2) ? Colors.red : Colors.black,
+              BlendMode.srcIn,
+            ),
+          ),
           label: "Widgets",
+          isActive: indexSelected == 2,
         );
       case MainTab.profile:
-        return const BottomNavigationBarItem(
-          icon: Icon(Icons.person_outline_rounded),
+        return CustomBottomNavigationItem(
+          icon: SvgPicture.asset(
+            AppVectors.icPersonBottomNavigator,
+            width: 24,
+            height: 24,
+            fit: BoxFit.fill,
+            colorFilter: ColorFilter.mode(
+              (indexSelected == 3) ? Colors.red : Colors.black,
+              BlendMode.srcIn,
+            ),
+          ),
           label: "Profile",
+          isActive: indexSelected == 2,
         );
     }
   }
