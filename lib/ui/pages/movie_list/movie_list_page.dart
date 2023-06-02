@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/common/app_images.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'movie_list_cubit.dart';
@@ -60,7 +61,23 @@ class _MovieListChildPageState extends State<MovieListChildPage> {
   }
 
   Widget _buildBodyWidget() {
-    return Container();
+    return Container(
+      child: _buildBannerWidget(),
+    );
+  }
+
+  Widget _buildBannerWidget() {
+    return Banner(
+      message: "Newwave",
+      location: BannerLocation.topStart,
+      color: Colors.lightBlueAccent,
+      child: Container(
+        color: Colors.blue,
+        child: Center(
+          child: Image.asset(AppImages.bgImagePlaceholder),
+        ),
+      ),
+    );
   }
 
   @override
