@@ -71,20 +71,20 @@ class AppLabelTextField extends StatelessWidget {
           maxLines: 1,
           maxLength: maxLength,
           decoration: InputDecoration(
-            enabledBorder: const UnderlineInputBorder(
+            enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.textFieldEnabledBorder),
             ),
-            focusedBorder: const UnderlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.textFieldFocusedBorder),
             ),
-            disabledBorder: const UnderlineInputBorder(
+            disabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.textFieldDisabledBorder),
             ),
             fillColor: Colors.white,
             hintStyle: hintStyle ?? AppTextStyle.greyS16,
             hintText: hintText,
             isDense: true,
-            contentPadding: const EdgeInsets.only(top: 8, bottom: 12),
+            // contentPadding: const EdgeInsets.only(top: 8, bottom: 12),
             suffixIcon: suffixIcon,
             suffixIconConstraints: suffixIconConstraints ??
                 const BoxConstraints(maxHeight: 32, maxWidth: 32),

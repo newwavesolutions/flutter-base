@@ -5,6 +5,8 @@ import 'app_colors.dart';
 class AppTextStyle {
   ///Black
   static const black = TextStyle(color: Colors.black);
+  static const color10182B = TextStyle(color: AppColors.color10182B);
+  static const colorDarkGray = TextStyle(color: AppColors.darkGrayColor);
 
   //s12
   static final blackS12 = black.copyWith(fontSize: 12);
@@ -25,6 +27,16 @@ class AppTextStyle {
   static final blackS18 = black.copyWith(fontSize: 14);
   static final blackS18Bold = blackS18.copyWith(fontWeight: FontWeight.bold);
   static final blackS18W800 = blackS18.copyWith(fontWeight: FontWeight.w800);
+
+  //s28
+  static final blackS28 = black.copyWith(fontSize: 28);
+  static final blackS28Bold = blackS28.copyWith(fontWeight: FontWeight.bold);
+  static final blackS28W800 = blackS28.copyWith(fontWeight: FontWeight.w800);
+
+  //s36
+  static final blackS36 = black.copyWith(fontSize: 36);
+  static final blackS36Bold = blackS36.copyWith(fontWeight: FontWeight.bold);
+  static final blackS36W800 = blackS36.copyWith(fontWeight: FontWeight.w800);
 
   ///White
   static const white = TextStyle(color: Colors.white);
@@ -94,4 +106,23 @@ class AppTextStyle {
   static final tintS18 = tint.copyWith(fontSize: 18);
   static final tintS18Bold = tintS18.copyWith(fontWeight: FontWeight.bold);
   static final tintS18W800 = tintS18.copyWith(fontWeight: FontWeight.w800);
+
+  /// S14
+  static final color10182BS14 = color10182B.copyWith(fontSize: 14);
+  static final color10182BS14Bold = color10182BS14.copyWith(
+    fontWeight: FontWeight.bold,
+  );
+  static final color10182BS14w400 = color10182BS14.copyWith(
+    fontWeight: FontWeight.w400,
+  );
+  static final color10182BS14w500 = color10182BS14.copyWith(
+    fontWeight: FontWeight.w500,
+  );
+
+  /// S14
+  static final colorDarkGrayS14 = colorDarkGray.copyWith(fontSize: 14);
+  static final colorDarkGrayS14W400 =
+      colorDarkGrayS14.copyWith(fontWeight: FontWeight.w400);
+  static final colorDarkGrayS14W500 =
+      colorDarkGrayS14.copyWith(fontWeight: FontWeight.w500);
 }

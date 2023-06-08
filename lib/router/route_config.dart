@@ -1,4 +1,4 @@
-import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
+import 'package:flutter_base/ui/pages/auth/sign_in_with_email/sign_in_email_page.dart';
 import 'package:get/get.dart';
 
 import '../ui/pages/main/main_page.dart';
@@ -16,6 +16,6 @@ class RouteConfig {
   static final List<GetPage> getPages = [
     GetPage(name: splash, page: () => const SplashPage()),
     GetPage(name: main, page: () => const MainPage()),
-    GetPage(name: signIn, page: () => const SignInPage()),
+    GetPage(name: signIn, page: () => const SignInEmailPage()),
   ];
 }

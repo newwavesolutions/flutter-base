@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "845864443381",
+    "project_id": "nws-mobile-line8-codebase",
+    "storage_bucket": "nws-mobile-line8-codebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845864443381:android:c42b3c5c273710a95e54bc",
+        "android_client_info": {
+          "package_name": "vn.newwave.flutter_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN34h-zkGbteUopdmfSzLJwGrMmyKDWjE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

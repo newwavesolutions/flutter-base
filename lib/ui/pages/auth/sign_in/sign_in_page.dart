@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_images.dart';
@@ -6,8 +7,8 @@ import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/repositories/user_repository.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
-import 'package:flutter_base/ui/widgets/input/app_email_input.dart';
 import 'package:flutter_base/ui/widgets/input/app_password_input.dart';
+import 'package:flutter_base/ui/widgets/textfields/app_text_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'sign_in_cubit.dart';
@@ -79,8 +80,9 @@ class _SignInChildPageState extends State<SignInChildPage> {
             child: Image.asset(AppImages.icLogoTransparent)),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
-          child: AppEmailInput(
-            textEditingController: usernameTextController,
+          child: AppTextField(
+            controller: usernameTextController,
+            borderRadius: 1,
             onChanged: (text) {
               _cubit.changeUsername(username: text);
             },
@@ -97,6 +99,8 @@ class _SignInChildPageState extends State<SignInChildPage> {
             },
           ),
         ),
+        const SizedBox(height: 32),
+        _buildAnotherLogin(),
         const SizedBox(height: 32),
         _buildSignButton(),
       ],
@@ -115,6 +119,29 @@ class _SignInChildPageState extends State<SignInChildPage> {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildAnotherLogin() {
+    return SizedBox(
+      width: double.infinity,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          InkWell(
+            onTap: () {},
+            child: CachedNetworkImage(
+              imageUrl:
+                  "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Mail_%28iOS%29.svg/1200px-Mail_%28iOS%29.svg.png",
+              width: 30,
+              height: 30,
+              fit: BoxFit.cover,
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

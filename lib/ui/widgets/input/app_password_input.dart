@@ -76,15 +76,15 @@ class AppPasswordInput extends StatelessWidget {
                   style: textStyle ?? AppTextStyle.blackS16,
                   maxLines: 1,
                   decoration: InputDecoration(
-                    enabledBorder: const UnderlineInputBorder(
+                    enabledBorder: const OutlineInputBorder(
                       borderSide:
                           BorderSide(color: AppColors.textFieldEnabledBorder),
                     ),
-                    focusedBorder: const UnderlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderSide:
                           BorderSide(color: AppColors.textFieldFocusedBorder),
                     ),
-                    disabledBorder: const UnderlineInputBorder(
+                    disabledBorder: const OutlineInputBorder(
                       borderSide:
                           BorderSide(color: AppColors.textFieldDisabledBorder),
                     ),

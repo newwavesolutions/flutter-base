@@ -31,6 +31,8 @@ class AppColors {
   static const Color textFieldFocusedBorder = Color(0xFFd74315);
   static const Color textFieldDisabledBorder = Color(0xFF919191);
   static const Color textFieldCursor = Color(0xFF919191);
+  static const Color color10182B = Color(0xff10182B);
+  static const Color darkGrayColor = Color(0xff78746D);
 
   ///Button
   static const Color buttonBGWhite = Color(0xFFcdd0d5);
