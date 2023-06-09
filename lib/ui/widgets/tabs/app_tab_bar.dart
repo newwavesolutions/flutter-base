@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_shadows.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
 

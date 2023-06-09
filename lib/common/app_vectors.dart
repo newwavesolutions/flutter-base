@@ -1,4 +1,3 @@
 class AppVectors {
-  static const String imgVerificationOtp =
-      'assets/images/3.0x/verification_otp.svg';
+  static const String imgVerificationOtp = 'assets/vector/verification_otp.svg';
 }

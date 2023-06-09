@@ -20,7 +20,7 @@ class RouteConfig {
     GetPage(name: main, page: () => const MainPage()),
     GetPage(name: signIn, page: () => const SignInPhonePage()),
     GetPage(
-      name: signIn,
+      name: opt,
       page: () => VerificationPage(
         arguments: Get.arguments,
       ),

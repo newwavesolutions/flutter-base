@@ -24,14 +24,17 @@ class SignInCubit extends Cubit<SignInState> {
       AppSnackbar.showError(message: 'Username is empty');
       return;
     }
-    emit(state.copyWith(signInStatus: LoadStatus.loading));
     try {
+      emit(state.copyWith(signInStatus: LoadStatus.loading));
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) {
           debugPrint("verificationCompleted");
         },
-        verificationFailed: (FirebaseAuthException e) {},
+        verificationFailed: (FirebaseAuthException e) {
+          AppSnackbar.showError(message: e.toString());
+          debugPrint(e.toString());
+        },
         codeSent: (String verificationId, int? resendToken) {
           emit(state.copyWith(signInStatus: LoadStatus.success));
           Get.toNamed(

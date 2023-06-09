@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
-import 'package:flutter_base/common/app_shadows.dart';
 
 import '../app_circular_progress_indicator.dart';
 

@@ -2,31 +2,26 @@ part of 'verification_cubit.dart';
 
 class SignInState extends Equatable {
   final LoadStatus signInStatus;
-  final String? username;
-  final String? password;
+  final String? otp;
 
   const SignInState({
     this.signInStatus = LoadStatus.initial,
-    this.username,
-    this.password,
+    this.otp,
   });
 
   @override
   List<Object?> get props => [
         signInStatus,
-        username,
-        password,
+        otp,
       ];
 
   SignInState copyWith({
     LoadStatus? signInStatus,
-    String? username,
-    String? password,
+    String? otp,
   }) {
     return SignInState(
       signInStatus: signInStatus ?? this.signInStatus,
-      username: username ?? this.username,
-      password: password ?? this.password,
+      otp: otp ?? this.otp,
     );
   }
 }

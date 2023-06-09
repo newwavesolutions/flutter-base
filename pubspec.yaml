@@ -51,6 +51,9 @@ dependencies:
   shared_preferences: ^2.1.0
   path_provider: ^2.0.14
 
+  #SVG
+  flutter_svg: ^2.0.6
+
   #Network
   retrofit: ^4.0.1
   dio: ^5.1.1
@@ -112,7 +115,7 @@ flutter:
     - assets/images/ic_eye_close.png
     - assets/images/ic_eye_open.png
     - assets/images/ic_eye_open.png
-
+    - assets/vector/
   fonts:
     - family: Arimo
       fonts:

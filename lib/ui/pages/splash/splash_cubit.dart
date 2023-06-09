@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/ui/commons/app_dialog.dart';
-import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
 import 'package:flutter_base/ui/pages/auth/sign_in_phone_number/sign_in_phone_number_page.dart';
 import 'package:flutter_base/ui/pages/main/main_page.dart';
 import 'package:flutter_base/utils/logger.dart';
