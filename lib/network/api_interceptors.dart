@@ -50,7 +50,7 @@ class ApiInterceptors extends InterceptorsWrapper {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     final statusCode = err.response?.statusCode;
     final uri = err.requestOptions.path;
     var data = "";

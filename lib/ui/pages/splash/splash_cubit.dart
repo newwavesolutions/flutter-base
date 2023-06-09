@@ -33,7 +33,7 @@ class SplashCubit extends Cubit<SplashState> {
       } catch (error, s) {
         logger.log(error, stackTrace: s);
         //Check 401
-        if (error is DioError) {
+        if (error is DioException) {
           if (error.response?.statusCode == 401) {
             //Todo
             // authService.signOut();
