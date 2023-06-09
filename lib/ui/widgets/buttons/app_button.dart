@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
+import 'package:flutter_base/common/app_shadows.dart';
 
 import '../app_circular_progress_indicator.dart';
 
@@ -21,22 +22,24 @@ class AppButton extends StatelessWidget {
   final TextStyle? textStyle;
 
   final VoidCallback? onPressed;
+  final List<BoxShadow>? boxShadow;
 
-  const AppButton({
-    Key? key,
-    this.title,
-    this.leadingIcon,
-    this.trailingIcon,
-    this.isLoading = false,
-    this.height,
-    this.width,
-    this.borderWidth,
-    this.cornerRadius,
-    this.backgroundColor,
-    this.borderColor,
-    this.textStyle,
-    this.onPressed,
-  }) : super(key: key);
+  const AppButton(
+      {Key? key,
+      this.title,
+      this.leadingIcon,
+      this.trailingIcon,
+      this.isLoading = false,
+      this.height,
+      this.width,
+      this.borderWidth,
+      this.cornerRadius,
+      this.backgroundColor,
+      this.borderColor,
+      this.textStyle,
+      this.onPressed,
+      this.boxShadow})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

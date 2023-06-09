@@ -20,6 +20,8 @@ class AppLabelTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool enabled;
   final int? maxLength;
+  final Widget? prefixIcon;
+  final double? borderRadius;
 
   const AppLabelTextField({
     Key? key,
@@ -39,6 +41,8 @@ class AppLabelTextField extends StatelessWidget {
     this.inputFormatters,
     this.enabled = true,
     this.maxLength,
+    this.prefixIcon,
+    this.borderRadius,
   }) : super(key: key);
 
   @override
@@ -46,22 +50,6 @@ class AppLabelTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          child: (highlightText != "" && highlightText.isNotEmpty)
-              ? RichText(
-                  text: TextSpan(children: [
-                    TextSpan(
-                      text: labelText,
-                      style: labelStyle ?? AppTextStyle.blackS12,
-                    ),
-                    TextSpan(
-                      text: highlightText,
-                      style: AppTextStyle.blackS12.copyWith(color: Colors.red),
-                    )
-                  ]),
-                )
-              : Text(labelText, style: labelStyle ?? AppTextStyle.blackS12),
-        ),
         TextField(
           enabled: enabled,
           onSubmitted: onSubmitted,
@@ -71,21 +59,29 @@ class AppLabelTextField extends StatelessWidget {
           maxLines: 1,
           maxLength: maxLength,
           decoration: InputDecoration(
-            enabledBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.textFieldEnabledBorder),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: AppColors.textFieldEnabledBorder,
+              ),
+              borderRadius: BorderRadius.circular(borderRadius ?? 5),
             ),
-            focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.textFieldFocusedBorder),
+            focusedBorder: OutlineInputBorder(
+              borderSide:
+                  const BorderSide(color: AppColors.textFieldEnabledBorder),
+              borderRadius: BorderRadius.circular(borderRadius ?? 5),
             ),
-            disabledBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.textFieldDisabledBorder),
+            disabledBorder: OutlineInputBorder(
+              borderSide:
+                  const BorderSide(color: AppColors.textFieldDisabledBorder),
+              borderRadius: BorderRadius.circular(borderRadius ?? 5),
             ),
             fillColor: Colors.white,
             hintStyle: hintStyle ?? AppTextStyle.greyS16,
             hintText: hintText,
             isDense: true,
-            contentPadding: const EdgeInsets.only(top: 8, bottom: 12),
+            // contentPadding: const EdgeInsets.only(left: 8),
             suffixIcon: suffixIcon,
+            prefixIcon: prefixIcon,
             suffixIconConstraints: suffixIconConstraints ??
                 const BoxConstraints(maxHeight: 32, maxWidth: 32),
             counterText: "",

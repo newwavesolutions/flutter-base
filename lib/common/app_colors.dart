@@ -36,6 +36,7 @@ class AppColors {
   static const Color buttonBGWhite = Color(0xFFcdd0d5);
   static const Color buttonBGTint = secondary;
   static const Color buttonBorder = secondary;
+  static const Color buttonPhone = Color(0xFF789292);
 
   /// Tabs
   static const Color imageBG = Color(0xFF919191);

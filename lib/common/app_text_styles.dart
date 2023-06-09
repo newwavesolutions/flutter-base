@@ -5,6 +5,7 @@ import 'app_colors.dart';
 class AppTextStyle {
   ///Black
   static const black = TextStyle(color: Colors.black);
+  static const amber = TextStyle(color: Colors.amber);
 
   //s12
   static final blackS12 = black.copyWith(fontSize: 12);
@@ -25,6 +26,11 @@ class AppTextStyle {
   static final blackS18 = black.copyWith(fontSize: 14);
   static final blackS18Bold = blackS18.copyWith(fontWeight: FontWeight.bold);
   static final blackS18W800 = blackS18.copyWith(fontWeight: FontWeight.w800);
+
+  //s24
+  static final blackS24 = black.copyWith(fontSize: 24);
+  static final blackS24Bold = blackS24.copyWith(fontWeight: FontWeight.bold);
+  static final blackS24W800 = blackS24.copyWith(fontWeight: FontWeight.w800);
 
   ///White
   static const white = TextStyle(color: Colors.white);
@@ -94,4 +100,10 @@ class AppTextStyle {
   static final tintS18 = tint.copyWith(fontSize: 18);
   static final tintS18Bold = tintS18.copyWith(fontWeight: FontWeight.bold);
   static final tintS18W800 = tintS18.copyWith(fontWeight: FontWeight.w800);
+
+  ///amber
+  //s16
+  static final amberS16 = amber.copyWith(fontSize: 16);
+  static final amberS16Bold = amberS16.copyWith(fontWeight: FontWeight.bold);
+  static final amberS16W800 = amberS16.copyWith(fontWeight: FontWeight.w800);
 }

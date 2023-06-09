@@ -12,8 +12,12 @@ class AppPhoneInput extends AppLabelTextField {
     TextEditingController? textEditingController,
     ValueChanged<String>? onChanged,
     bool enabled = true,
+    Widget? prefixIcon,
+    double? borderRadius,
   }) : super(
           key: key,
+          prefixIcon: prefixIcon,
+          borderRadius: borderRadius,
           textEditingController: textEditingController,
           onChanged: onChanged,
           labelText: labelText ?? "Số điện thoại",

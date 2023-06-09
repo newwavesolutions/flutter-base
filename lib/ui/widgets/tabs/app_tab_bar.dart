@@ -19,21 +19,25 @@ class AppTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: 46,
       padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-          // color: Theme.of(context),
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          // boxShadow: AppShadow.boxShadow,
-          border: Border.all(color: AppColors.border)),
+      decoration: const BoxDecoration(
+        // color: Theme.of(context),
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        // boxShadow: AppShadow.boxShadow,
+        // border: Border.all(color: AppColors.border),
+      ),
       child: TabBar(
         controller: tabController,
         tabs: buildTabItems(),
-        labelStyle: AppTextStyle.blackS14,
-        unselectedLabelStyle: AppTextStyle.whiteS14,
+        labelStyle: AppTextStyle.blackS16,
+        labelColor: Colors.black,
+        unselectedLabelColor: Colors.grey,
         indicator: BoxDecoration(
-          color: AppColors.secondary,
-          borderRadius: const BorderRadius.all(Radius.circular(16)),
+          color: Colors.white,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(100),
+          ),
           boxShadow: AppShadow.boxShadow,
         ),
         indicatorWeight: 0,
