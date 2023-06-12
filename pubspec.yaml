@@ -62,6 +62,9 @@ dependencies:
   #Dialog, etc
   cached_network_image: ^3.2.3
 
+  #Database
+  isar: ^3.1.0+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
