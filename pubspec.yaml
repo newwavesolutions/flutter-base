@@ -62,6 +62,14 @@ dependencies:
   #Dialog, etc
   cached_network_image: ^3.2.3
 
+  #firebase
+  firebase_core: ^2.10.0
+  firebase_auth: ^4.4.2
+
+  #login google
+  google_sign_in: ^6.1.4
+  crypto: ^3.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

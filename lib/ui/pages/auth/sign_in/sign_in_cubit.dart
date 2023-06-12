@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/models/entities/user/user_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_base/ui/commons/app_snackbar.dart';
 import 'package:flutter_base/utils/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 part 'sign_in_state.dart';
 
@@ -57,6 +59,29 @@ class SignInCubit extends Cubit<SignInState> {
     } catch (error) {
       logger.e(error);
       emit(state.copyWith(signInStatus: LoadStatus.failure));
+    }
+  }
+
+  Future<void> signInGoogle() async {
+    try {
+      emit(state.copyWith(signInStatus: LoadStatus.loading));
+
+      GoogleSignInAccount? googleSignInAccount = await GoogleSignIn().signIn();
+      GoogleSignInAuthentication? googleAuth =
+          await googleSignInAccount?.authentication;
+
+      AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      if (userCredential.user?.displayName != null) {
+        emit(state.copyWith(signInStatus: LoadStatus.success));
+        Get.offNamed(RouteConfig.main);
+      }
+    } catch (e) {
+      AppSnackbar.showError(message: e.toString());
     }
   }
 }

@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_images.dart';
+import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/generated/l10n.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
@@ -99,6 +101,36 @@ class _SignInChildPageState extends State<SignInChildPage> {
         ),
         const SizedBox(height: 32),
         _buildSignButton(),
+        const SizedBox(
+          height: 44,
+        ),
+        Row(
+          children: [
+            const Expanded(child: Divider()),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Text(
+                'OR',
+                style: AppTextStyle.blackS18,
+              ),
+            ),
+            const Expanded(child: Divider()),
+          ],
+        ),
+        const SizedBox(
+          height: 44,
+        ),
+        InkWell(
+          onTap: () async {
+            _cubit.signInGoogle();
+          },
+          child: CachedNetworkImage(
+            imageUrl:
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png',
+            width: 30,
+            height: 30,
+          ),
+        ),
       ],
     );
   }

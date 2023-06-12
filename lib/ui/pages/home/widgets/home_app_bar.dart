@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
+
 import '../../../widgets/images/app_circle_avatar.dart';
 
 class HomeAppBar extends AppBar {
