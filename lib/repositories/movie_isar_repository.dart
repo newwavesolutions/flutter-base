@@ -9,8 +9,6 @@ abstract class MovieIsarRepository {
 }
 
 class MovieIsarRepositoryImpl extends MovieIsarRepository {
-  Isar? _isar;
-
   @override
   Future<MovieIsarEntity> getProfile() async {
     await Future.delayed(const Duration(seconds: 2));
@@ -20,7 +18,6 @@ class MovieIsarRepositoryImpl extends MovieIsarRepository {
 
   @override
   Future<void> createMovie({required MovieIsarEntity isarEntity}) async {
-    _isar = await IsarHelper.getInstance(MovieIsarEntitySchema);
     await IsarHelper.create(isarEntity);
   }
 
