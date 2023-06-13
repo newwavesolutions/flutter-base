@@ -45,6 +45,7 @@ dependencies:
   intl_utils: ^2.8.2
   equatable: ^2.0.5
   url_launcher: ^6.1.10
+  open_file: ^3.3.2
 
   #Store
   flutter_secure_storage: ^8.0.0

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
+import 'package:flutter_base/ui/pages/profile/term_policy/term_policy_page.dart';
 import 'package:flutter_base/ui/pages/setting/setting_page.dart';
 import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
@@ -126,6 +127,12 @@ class _ProfileTabPageState extends State<_ProfileTabPage>
         ),
         const MenuItemWidget(title: "Help & feedback"),
         const MenuItemWidget(title: "About"),
+        MenuItemWidget(
+          title: "Term & Policy",
+          onPressed: () {
+            Get.to(() => const TermPolicyPage());
+          },
+        ),
       ],
     );
   }
