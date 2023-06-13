@@ -1,11 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_base/database/share_preferences_helper.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/ui/commons/app_dialog.dart';
 import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
 import 'package:flutter_base/ui/pages/main/main_page.dart';
+import 'package:flutter_base/ui/pages/onboarding/onboarding_page.dart';
 import 'package:flutter_base/utils/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../repositories/user_repository.dart';
 import 'splash_state.dart';
@@ -19,11 +22,19 @@ class SplashCubit extends Cubit<SplashState> {
     required this.userRepo,
   }) : super(const SplashState());
 
-  void checkLogin() async {
+  void checkLogin({required BuildContext context}) async {
     await Future.delayed(const Duration(seconds: 2));
     final token = await authRepo.getToken();
     if (token == null) {
-      Get.offAll(() => const SignInPage());
+      if (await SharedPreferencesHelper.isDoneOnboard()) {
+        if (context.mounted) {
+          context.go("/${SignInPage.router}");
+        }
+      } else {
+        if (context.mounted) {
+          context.go("/${OnBoardingPage.router}");
+        }
+      }
     } else {
       try {
         //Profile
@@ -37,7 +48,9 @@ class SplashCubit extends Cubit<SplashState> {
           if (error.response?.statusCode == 401) {
             //Todo
             // authService.signOut();
-            checkLogin();
+            if (context.mounted) {
+              checkLogin(context: context);
+            }
             return;
           }
         }
@@ -45,12 +58,14 @@ class SplashCubit extends Cubit<SplashState> {
           message: "An error happened. Please check your connection!",
           textConfirm: "Retry",
           onConfirm: () {
-            checkLogin();
+            checkLogin(context: context);
           },
         );
         return;
       }
-      Get.offAll(() => const MainPage());
+      if (context.mounted) {
+        context.go("/${MainPage.router}");
+      }
     }
   }
 }

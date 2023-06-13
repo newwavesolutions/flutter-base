@@ -6,6 +6,25 @@ class SharedPreferencesHelper {
 
   static const _authKey = '_authKey';
 
+  static const _onboardKey = '_onboardKey';
+
+  //Get intro
+  static Future<bool> isDoneOnboard() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getBool(_onboardKey) ?? false;
+    } catch (e) {
+      logger.e(e);
+      return false;
+    }
+  }
+
+  //Set intro
+  static void setOnboard({onBoard = true}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_onboardKey, onBoard ?? true);
+  }
+
   //Get authKey
   static Future<String> getApiTokenKey() async {
     try {

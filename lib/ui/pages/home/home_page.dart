@@ -8,6 +8,7 @@ import 'movies/movies_page.dart';
 import 'widgets/home_app_bar.dart';
 
 class HomePage extends StatefulWidget {
+  static const router = 'home';
   const HomePage({Key? key}) : super(key: key);
 
   @override

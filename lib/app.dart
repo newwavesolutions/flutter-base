@@ -77,8 +77,9 @@ class _MyAppState extends State<MyApp> {
               onTap: () {
                 _hideKeyboard(context);
               },
-              child: GetMaterialApp(
+              child: MaterialApp.router(
                 title: AppConfigs.appName,
+                routerConfig: GoRouterConfig.router(context),
                 theme: AppThemes(
                   isDarkMode: false,
                   primaryColor: state.primaryColor,
@@ -88,8 +89,6 @@ class _MyAppState extends State<MyApp> {
                   primaryColor: state.primaryColor,
                 ).theme,
                 themeMode: state.themeMode,
-                initialRoute: RouteConfig.splash,
-                getPages: RouteConfig.getPages,
                 localizationsDelegates: const [
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,

@@ -12,6 +12,7 @@ class NotificationListArguments {
 }
 
 class NotificationListPage extends StatelessWidget {
+  static const router = 'notificationList';
   final NotificationListArguments? arguments;
 
   const NotificationListPage({

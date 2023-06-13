@@ -13,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'sign_in_cubit.dart';
 
 class SignInPage extends StatelessWidget {
+  static const router = 'signIn';
   const SignInPage({Key? key}) : super(key: key);
 
   @override
@@ -119,6 +120,6 @@ class _SignInChildPageState extends State<SignInChildPage> {
   }
 
   void _signIn() {
-    _cubit.signIn();
+    _cubit.signIn(context: context);
   }
 }

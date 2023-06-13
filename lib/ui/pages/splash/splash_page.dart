@@ -7,6 +7,7 @@ import '../../../repositories/user_repository.dart';
 import 'splash_cubit.dart';
 
 class SplashPage extends StatelessWidget {
+  static const router = 'Splash';
   const SplashPage({Key? key}) : super(key: key);
 
   @override
@@ -34,7 +35,7 @@ class _SplashChildPageState extends State<SplashChildPage> {
   @override
   void initState() {
     super.initState();
-    context.read<SplashCubit>().checkLogin();
+    context.read<SplashCubit>().checkLogin(context: context);
   }
 
   @override

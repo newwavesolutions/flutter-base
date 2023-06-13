@@ -1,14 +1,15 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/models/entities/user/user_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/repositories/user_repository.dart';
-import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/commons/app_snackbar.dart';
+import 'package:flutter_base/ui/pages/main/main_page.dart';
 import 'package:flutter_base/utils/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 part 'sign_in_state.dart';
 
@@ -31,7 +32,7 @@ class SignInCubit extends Cubit<SignInState> {
     emit(state.copyWith(password: password));
   }
 
-  void signIn() async {
+  void signIn({required BuildContext context}) async {
     final username = state.username ?? '';
     final password = state.password ?? '';
     if (username.isEmpty) {
@@ -50,7 +51,9 @@ class SignInCubit extends Cubit<SignInState> {
         appCubit.updateProfile(myProfile);
         authRepo.saveToken(result);
         emit(state.copyWith(signInStatus: LoadStatus.success));
-        Get.offNamed(RouteConfig.main);
+        if (context.mounted) {
+          context.go("/${MainPage.router}");
+        }
       } else {
         emit(state.copyWith(signInStatus: LoadStatus.failure));
       }
