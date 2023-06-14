@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/blocs/setting/app_setting_cubit.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
-import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
 import 'package:flutter_base/ui/pages/main/main_cubit.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_base/ui/pages/movie_list/movie_list_page.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
 import 'package:flutter_base/ui/pages/widget_list/widget_list_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import 'main_state.dart';

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_base/configs/app_configs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get/get.dart';
 
 import 'blocs/app_cubit.dart';
 import 'blocs/setting/app_setting_cubit.dart';
