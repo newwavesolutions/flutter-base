@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_base/database/share_preferences_helper.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/ui/commons/app_dialog.dart';
 import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
 import 'package:flutter_base/ui/pages/main/main_page.dart';
+import 'package:flutter_base/ui/pages/onboarding/onboarding_page.dart';
 import 'package:flutter_base/utils/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -23,7 +25,11 @@ class SplashCubit extends Cubit<SplashState> {
     await Future.delayed(const Duration(seconds: 2));
     final token = await authRepo.getToken();
     if (token == null) {
-      Get.offAll(() => const SignInPage());
+      if (await SharedPreferencesHelper.isOnboardCompleted()) {
+        Get.offAll(() => const SignInPage());
+      } else {
+        Get.offAll(() => const OnboardingPage());
+      }
     } else {
       try {
         //Profile
