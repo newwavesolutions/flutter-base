@@ -13,6 +13,7 @@ import 'network/api_client.dart';
 import 'network/api_util.dart';
 import 'repositories/auth_repository.dart';
 import 'repositories/movie_repository.dart';
+import 'repositories/notification_respository.dart';
 import 'repositories/user_repository.dart';
 import 'router/route_config.dart';
 
@@ -27,10 +28,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late ApiClient _apiClient;
+  late ApiClient _apiMocKyClient;
 
   @override
   void initState() {
     _apiClient = ApiUtil.apiClient;
+    _apiMocKyClient = ApiUtil.mocKyApiClient;
     super.initState();
   }
 
@@ -55,6 +58,9 @@ class _MyAppState extends State<MyApp> {
         }),
         RepositoryProvider<UserRepository>(create: (context) {
           return UserRepositoryImpl(apiClient: _apiClient);
+        }),
+        RepositoryProvider<NotificationRepository>(create: (context) {
+          return NotificationRepositoryImpl(apiClient: _apiMocKyClient);
         }),
       ],
       child: MultiBlocProvider(
