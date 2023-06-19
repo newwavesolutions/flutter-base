@@ -20,10 +20,19 @@ abstract class ApiClient {
   Future<dynamic> signOut(@Body() Map<String, dynamic> body);
 
   /// Notification
-  @GET("/notifications")
+  @GET("/v3/ca940623-8c6c-45e9-86b8-e0156be45290")
   Future<ArrayResponse<NotificationEntity>> getNotifications(
     @Query('page') int page,
-    @Query('pageSize') int pageSize,
+  );
+
+  @POST("/v3/ca940623-8c6c-45e9-86b8-e0156be45290")
+  Future<ArrayResponse<NotificationEntity>> markAllAsRead(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST("/v3/ca940623-8c6c-45e9-86b8-e0156be45290")
+  Future<ArrayResponse<NotificationEntity>> markAsRead(
+    @Body() Map<String, dynamic> body,
   );
 
   /// Movie
