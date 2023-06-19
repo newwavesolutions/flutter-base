@@ -11,6 +11,7 @@ class AppConfigs {
 
   ///API Env
   static String get baseUrl => env.baseUrl;
+  static String get mocKyBaseUrl => 'https://run.mocky.io';
 
   static String get envName => env.envName;
 
@@ -43,6 +44,8 @@ class AppConfigs {
 
   ///Max file
   static const maxAttachFile = 5;
+
+  static const scrollThreshold = 500.0;
 }
 
 class FirebaseConfig {

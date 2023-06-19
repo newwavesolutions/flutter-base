@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/models/entities/notification/notification_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'notification_detail_cubit.dart';
 
 class NotificationDetailArguments {
-  String param;
+  final NotificationEntity notification;
 
   NotificationDetailArguments({
-    required this.param,
+    required this.notification,
   });
 }
 
@@ -52,7 +53,12 @@ class _NotificationDetailChildPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: InkWell(
+          onTap: () {},
+          child: const Icon(Icons.arrow_back_ios),
+        ),
+      ),
       body: SafeArea(
         child: _buildBodyWidget(),
       ),
