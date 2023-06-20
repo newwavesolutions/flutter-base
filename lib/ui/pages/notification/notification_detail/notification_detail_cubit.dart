@@ -1,20 +1,37 @@
+import 'package:flutter_base/models/entities/notification/notification_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
+import 'package:flutter_base/repositories/notification_respository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
 part 'notification_detail_state.dart';
 
 class NotificationDetailCubit extends Cubit<NotificationDetailState> {
-  NotificationDetailCubit() : super(const NotificationDetailState());
+  final NotificationRepository notificationRepository;
 
-  Future<void> loadInitialData() async {
-    emit(state.copyWith(loadDataStatus: LoadStatus.initial));
+  NotificationDetailCubit({
+    required this.notificationRepository,
+  }) : super(const NotificationDetailState());
+
+  Future<void> markNotificationAsRead(
+      {required NotificationEntity notification}) async {
+    emit(
+      state.copyWith(loadDataStatus: LoadStatus.loading),
+    );
+    final notificationJson = notification.toJson();
     try {
-      //Todo: add API calls
-      emit(state.copyWith(loadDataStatus: LoadStatus.success));
+      await notificationRepository.markAsRead(body: notificationJson);
+      emit(
+        state.copyWith(
+          loadDataStatus: LoadStatus.success,
+        ),
+      );
     } catch (e) {
-      //Todo: should print exception here
-      emit(state.copyWith(loadDataStatus: LoadStatus.failure));
+      emit(
+        state.copyWith(
+          loadDataStatus: LoadStatus.failure,
+        ),
+      );
     }
   }
 }

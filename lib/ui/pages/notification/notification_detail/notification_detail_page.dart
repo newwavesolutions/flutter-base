@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/models/entities/notification/notification_entity.dart';
+import 'package:flutter_base/repositories/notification_respository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'notification_detail_cubit.dart';
@@ -24,15 +26,25 @@ class NotificationDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return NotificationDetailCubit();
+        final notificationRepo =
+            RepositoryProvider.of<NotificationRepository>(context);
+        return NotificationDetailCubit(
+            notificationRepository: notificationRepo);
       },
-      child: const NotificationDetailChildPage(),
+      child: NotificationDetailChildPage(
+        notification: arguments.notification,
+      ),
     );
   }
 }
 
 class NotificationDetailChildPage extends StatefulWidget {
-  const NotificationDetailChildPage({Key? key}) : super(key: key);
+  final NotificationEntity notification;
+
+  const NotificationDetailChildPage({
+    Key? key,
+    required this.notification,
+  }) : super(key: key);
 
   @override
   State<NotificationDetailChildPage> createState() =>
@@ -47,17 +59,15 @@ class _NotificationDetailChildPageState
   void initState() {
     super.initState();
     _cubit = BlocProvider.of(context);
-    _cubit.loadInitialData();
+    _cubit.markNotificationAsRead(notification: widget.notification);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: InkWell(
-          onTap: () {},
-          child: const Icon(Icons.arrow_back_ios),
-        ),
+        title: const Text("Detail Notification"),
+        elevation: 0,
       ),
       body: SafeArea(
         child: _buildBodyWidget(),
@@ -66,7 +76,31 @@ class _NotificationDetailChildPageState
   }
 
   Widget _buildBodyWidget() {
-    return Container();
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 16,
+          ),
+          Text(
+            widget.notification.title ?? '',
+            style: AppTextStyle.blackS16W800,
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Text(
+            widget.notification.message ?? '',
+            style: AppTextStyle.blackS16,
+          )
+        ],
+      ),
+    );
   }
 
   @override
