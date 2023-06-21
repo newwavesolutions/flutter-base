@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/movie_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,22 +28,25 @@ class MoviesCubit extends Cubit<MoviesState> {
   }
 
   void fetchNextMovies() async {
-    // if (state.page.value == state.totalPages.value) {
-    //   return;
-    // }
-    // if (state.loadMovieStatus.value != LoadStatus.success) {
-    //   return;
-    // }
-    // state.loadMovieStatus.value = LoadStatus.loadingMore;
-    // try {
-    //   final result = await apiService.getMovies(page: state.page.value + 1);
-    //   state.loadMovieStatus.value = LoadStatus.success;
-    //   state.movies.value = result.results;
-    //   state.page.value = state.page.value + result.page;
-    //   state.page.value = result.page;
-    //   state.totalPages.value = result.totalPages;
-    // } catch (e) {
-    //   state.loadMovieStatus.value = LoadStatus.success;
-    // }
+    if (state.page == state.totalPages) {
+      return;
+    }
+    if (state.loadMovieStatus == LoadStatus.loading) {
+      return;
+    }
+    emit(state.copyWith(
+      loadMovieStatus: LoadStatus.loadingMore,
+    ));
+    try {
+      final result = await movieRepo.getMovies(page: state.page + 1);
+      final resultList = state.movies..addAll(result.results);
+      emit(state.copyWith(
+          loadMovieStatus: LoadStatus.success,
+          movies: resultList,
+          page: result.page + 1,
+          totalPages: result.totalPages));
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 }
