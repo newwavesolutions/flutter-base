@@ -20,17 +20,21 @@ class MovieDetailCubit extends Cubit<MovieDetailState> {
     try {
       final result = await movieRepo.getDetailMovie(id: id);
       if (result != null) {
-        emit(
-          state.copyWith(
-            movieEntity: result,
-            loadMovieStatus: LoadStatus.success,
-          ),
-        );
+        Future.delayed(const Duration(seconds: 3), () {
+          emit(
+            state.copyWith(
+              movieEntity: result,
+              loadMovieStatus: LoadStatus.failure,
+            ),
+          );
+        });
       }
     } catch (e) {
-      emit(
-        state.copyWith(loadMovieStatus: LoadStatus.failure),
-      );
+      Future.delayed(const Duration(seconds: 3), () {
+        emit(
+          state.copyWith(loadMovieStatus: LoadStatus.failure),
+        );
+      });
     }
   }
 }

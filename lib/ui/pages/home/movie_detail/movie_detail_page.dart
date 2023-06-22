@@ -6,7 +6,7 @@ import 'package:flutter_base/repositories/movie_repository.dart';
 import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/pages/home/detail_movie_photo_view/detail_movie_photo_view_page.dart';
 import 'package:flutter_base/ui/pages/home/movie_detail/movie_detail_cubit.dart';
-import 'package:flutter_base/ui/pages/home/movie_detail/widgets/error_movie_detail_widget.dart';
+import 'package:flutter_base/ui/commons/error_page.dart';
 import 'package:flutter_base/ui/pages/home/movie_detail/widgets/loading_movie_detail_widget.dart';
 import 'package:flutter_base/ui/widgets/images/app_cache_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -76,24 +76,26 @@ class _MovieDetailChildPageState extends State<MovieDetailChildPage> {
   }
 
   Widget _buildBodyWidget() {
-    return BlocBuilder<MovieDetailCubit, MovieDetailState>(
-      buildWhen: (previous, current) =>
-          previous.loadMovieStatus != current.loadMovieStatus,
-      builder: (context, state) {
-        return state.loadMovieStatus == LoadStatus.loading
-            ? _buildLoadingList()
-            : (state.loadMovieStatus == LoadStatus.failure)
-                ? ErrorMovieDetailWidget(
-                    onPressed: () {
-                      _cubit.fetchInitialMovies(id: widget.id);
-                    },
-                  )
-                : SingleChildScrollView(
-                    child: _buildDetailMovieSuccessWidget(
-                      movieEntity: state.movieEntity ?? MovieEntity(),
-                    ),
-                  );
-      },
+    return RefreshIndicator(
+      onRefresh: _onRefreshData,
+      child: BlocBuilder<MovieDetailCubit, MovieDetailState>(
+        buildWhen: (previous, current) =>
+            previous.loadMovieStatus != current.loadMovieStatus,
+        builder: (context, state) {
+          return state.loadMovieStatus == LoadStatus.loading
+              ? _buildLoadingList()
+              : (state.loadMovieStatus == LoadStatus.failure)
+                  ? ErrorMovieDetailWidget(
+                      onPressed: _onRefreshData,
+                    )
+                  : SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: _buildDetailMovieSuccessWidget(
+                        movieEntity: state.movieEntity ?? MovieEntity(),
+                      ),
+                    );
+        },
+      ),
     );
   }
 
@@ -149,6 +151,10 @@ class _MovieDetailChildPageState extends State<MovieDetailChildPage> {
 
   Widget _buildLoadingList() {
     return const LoadingMovieDetailWidget();
+  }
+
+  Future<void> _onRefreshData() async {
+    _cubit.fetchInitialMovies(id: widget.id);
   }
 
   @override

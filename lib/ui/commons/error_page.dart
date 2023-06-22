@@ -25,17 +25,14 @@ class ErrorMovieDetailWidget extends StatelessWidget {
             height: 300,
             fit: BoxFit.fill,
           ),
-          Text(
-            'Error',
-            style: AppTextStyle.blackS16W800,
-          ),
           const SizedBox(
             height: 40,
           ),
           AppButton(
             title: "try again",
-            textStyle: AppTextStyle.blackS16,
+            textStyle: AppTextStyle.whiteS16,
             width: 100,
+            cornerRadius: 20,
             onPressed: onPressed,
           ),
         ],
