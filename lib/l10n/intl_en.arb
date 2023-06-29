@@ -7,5 +7,13 @@
   "settings_languageVietnamese": "Tiếng việt",
   "settings_languageEnglish": "English",
   "settings_language": "Language",
-  "button_signIn": "Sign In"
+  "button_signIn": "Sign In",
+  "button_skip": "Skip",
+  "button_next": "Next",
+  "onboarding_title_01": "Welcome to Surf.",
+  "onboarding_description_01": "I provide essential stuff for your ui designs every tuesday!",
+  "onboarding_title_02": "Design Template uploads Every Tuesday!",
+  "onboarding_description_02": "Make sure to take a look my uplab profile every tuesday",
+  "onboarding_title_03": "Download now!",
+  "onboarding_description_03": "You can follow me if you wantand comment on any to get some freebies"
 }

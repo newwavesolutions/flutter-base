@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
+import 'package:flutter_base/configs/app_configs.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/models/enums/movie_category.dart';
@@ -48,7 +49,6 @@ class _MoviesChildPageState extends State<MoviesChildPage>
   late MoviesCubit _cubit;
 
   final _scrollController = ScrollController();
-  final _scrollThreshold = 200.0;
 
   @override
   void initState() {
@@ -119,7 +119,7 @@ class _MoviesChildPageState extends State<MoviesChildPage>
   void _onScroll() {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
-    if (maxScroll - currentScroll <= _scrollThreshold) {
+    if (maxScroll - currentScroll <= AppConfigs.scrollThreshold) {
       _cubit.fetchNextMovies();
     }
   }

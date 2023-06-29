@@ -20,4 +20,9 @@ class ApiUtil {
     final apiClient = ApiClient(getDio(), baseUrl: AppConfigs.baseUrl);
     return apiClient;
   }
+
+  static ApiClient get mocKyApiClient {
+    final apiClient = ApiClient(getDio(), baseUrl: AppConfigs.mocKyBaseUrl);
+    return apiClient;
+  }
 }
