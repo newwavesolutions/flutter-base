@@ -8,6 +8,7 @@ class HomeAppBar extends AppBar {
     String avatarUrl = "",
     // VoidCallback? onSearchPressed,
     VoidCallback? onNotificationPressed,
+    VoidCallback? onSearchPressed,
   }) : super(
           key: key,
           title: const Text("Movie"),
@@ -24,6 +25,10 @@ class HomeAppBar extends AppBar {
             IconButton(
                 onPressed: onNotificationPressed,
                 icon: const Icon(Icons.notifications)),
+            IconButton(
+              onPressed: onSearchPressed,
+              icon: const Icon(Icons.search),
+            ),
           ],
         );
 }

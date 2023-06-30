@@ -7,6 +7,8 @@ abstract class MovieRepository {
   Future<ArrayResponse<MovieEntity>> getMovies({required int page});
 
   Future<MovieEntity> getMovie(int id);
+
+  Future<ArrayResponse<MovieEntity>> searchMovies({required String searchText});
 }
 
 class MovieRepositoryImpl extends MovieRepository {
@@ -23,5 +25,11 @@ class MovieRepositoryImpl extends MovieRepository {
   @override
   Future<ArrayResponse<MovieEntity>> getMovies({required int page}) async {
     return apiClient.getMovies(MovieAPIConfig.apiKey, page);
+  }
+
+  @override
+  Future<ArrayResponse<MovieEntity>> searchMovies(
+      {required String searchText}) async {
+    return apiClient.searchMovies(MovieAPIConfig.apiKey, searchText);
   }
 }

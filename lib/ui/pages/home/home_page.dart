@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/models/enums/movie_category.dart';
+import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
 import 'package:flutter_base/ui/widgets/tabs/app_tab_bar.dart';
+import 'package:get/get.dart';
 
 import 'movies/movies_page.dart';
 import 'widgets/home_app_bar.dart';
@@ -35,6 +37,7 @@ class _HomePageState extends State<HomePage>
         //Todo
         // avatarUrl: authService.user.value?.avatarUrl ?? "",
         onNotificationPressed: _openNotificationList,
+        onSearchPressed: _openSearchPage,
       ),
       body: SafeArea(
         child: Column(
@@ -75,5 +78,9 @@ class _HomePageState extends State<HomePage>
   void _openNotificationList() {
     Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => const NotificationListPage()));
+  }
+
+  void _openSearchPage() {
+    Get.toNamed(RouteConfig.search);
   }
 }

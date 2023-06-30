@@ -41,4 +41,10 @@ abstract class ApiClient {
     @Query('api_key') String apiKey,
     @Query('page') int page,
   );
+
+  @GET("/3/search/movie")
+  Future<ArrayResponse<MovieEntity>> searchMovies(
+    @Query('api_key') String apiKey,
+    @Query('query') String keyword,
+  );
 }
