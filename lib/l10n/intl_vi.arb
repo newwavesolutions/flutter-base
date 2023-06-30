@@ -7,5 +7,21 @@
   "settings_languageVietnamese": "Tiếng việt",
   "settings_languageEnglish": "English",
   "settings_language": "Ngôn ngữ",
-  "button_signIn": "Đăng nhập"
+  "button_signIn": "Đăng nhập",
+  "button_skip": "Bỏ qua",
+  "button_next": "Tiếp theo",
+  "onboarding_title_01": "Welcome to Surf.",
+  "onboarding_description_01": "I provide essential stuff for your ui designs every tuesday!",
+  "onboarding_title_02": "Design Template uploads Every Tuesday!",
+  "onboarding_description_02": "Make sure to take a look my uplab profile every tuesday",
+  "onboarding_title_03": "Download now!",
+  "onboarding_description_03": "You can follow me if you wantand comment on any to get some freebies",
+  "changePassword": "Đổi mật khẩu",
+  "changeEmail": "Thay đổi Email",
+  "deleteAccount": "Xóa tài khoản",
+  "termpolicy": "Điều khoản, Chính sách",
+  "setting": "Cài đặt",
+  "logout": "Đăng xuất",
+  "profile_text1": "Tài khoản",
+  "profile_text2": "Thông tin chung"
 }

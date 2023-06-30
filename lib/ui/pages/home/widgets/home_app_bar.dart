@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
-import '../../../widgets/images/app_circle_avatar.dart';
+import 'package:flutter_base/router/route_config.dart';
+import 'package:get/get.dart';
 
 class HomeAppBar extends AppBar {
   HomeAppBar({
     Key? key,
-    String avatarUrl = "",
+    required Widget avatar,
     // VoidCallback? onSearchPressed,
     VoidCallback? onNotificationPressed,
   }) : super(
           key: key,
           title: const Text("Movie"),
           leading: Center(
-            child: AppCircleAvatar(
-              url: avatarUrl,
-              size: 40,
+            child: InkWell(
+              onTap: () {
+                Get.toNamed(RouteConfig.proFile);
+              },
+              child: avatar,
             ),
           ),
           toolbarHeight: AppDimens.appBarHeight,

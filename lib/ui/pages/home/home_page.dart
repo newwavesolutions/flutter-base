@@ -1,29 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/models/enums/movie_category.dart';
+import 'package:flutter_base/ui/pages/home/home_cubit.dart';
+import 'package:flutter_base/ui/pages/home/home_state.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
+import 'package:flutter_base/ui/widgets/images/app_circle_avatar.dart';
 import 'package:flutter_base/ui/widgets/tabs/app_tab_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'movies/movies_page.dart';
 import 'widgets/home_app_bar.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        final appCubit = RepositoryProvider.of<AppCubit>(context);
+        return HomeCubit(appCubit: appCubit);
+      },
+      child: const HomeChildPage(),
+    );
+  }
 }
 
-class _HomePageState extends State<HomePage>
+class HomeChildPage extends StatefulWidget {
+  const HomeChildPage({Key? key}) : super(key: key);
+
+  @override
+  State<HomeChildPage> createState() => _HomeChildPageState();
+}
+
+class _HomeChildPageState extends State<HomeChildPage>
     with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   @override
   bool get wantKeepAlive => true;
 
   late TabController _tapBarController;
+  late HomeCubit _homeCubit;
 
   @override
   void initState() {
     super.initState();
+    _homeCubit = BlocProvider.of(context);
+    _homeCubit.getAvatar();
     _tapBarController = TabController(length: 2, vsync: this);
   }
 
@@ -32,8 +57,14 @@ class _HomePageState extends State<HomePage>
     super.build(context);
     return Scaffold(
       appBar: HomeAppBar(
-        //Todo
-        // avatarUrl: authService.user.value?.avatarUrl ?? "",
+        avatar: BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            return AppCircleAvatar(
+              url: state.urlAvatar ?? '',
+              size: 40,
+            );
+          },
+        ),
         onNotificationPressed: _openNotificationList,
       ),
       body: SafeArea(

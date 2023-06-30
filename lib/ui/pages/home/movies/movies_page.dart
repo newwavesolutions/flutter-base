@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
+import 'package:flutter_base/configs/app_configs.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/models/enums/movie_category.dart';
+import 'package:flutter_base/router/route_config.dart';
+import 'package:flutter_base/ui/pages/home/movie_detail/movie_detail_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import '../../../../repositories/movie_repository.dart';
-import '../../movie_detail/movie_detail_page.dart';
 import 'movies_cubit.dart';
 import 'movies_state.dart';
 import 'widgets/loading_list_widget.dart';
@@ -48,7 +50,6 @@ class _MoviesChildPageState extends State<MoviesChildPage>
   late MoviesCubit _cubit;
 
   final _scrollController = ScrollController();
-  final _scrollThreshold = 200.0;
 
   @override
   void initState() {
@@ -100,7 +101,12 @@ class _MoviesChildPageState extends State<MoviesChildPage>
           return MovieWidget(
             movie: item,
             onPressed: () {
-              Get.to(() => MovieDetailPage(movie: item));
+              Get.toNamed(
+                RouteConfig.movieDetail,
+                arguments: MovieDetailArguments(
+                  id: item.id ?? 9358,
+                ),
+              );
             },
           );
         },
@@ -119,7 +125,7 @@ class _MoviesChildPageState extends State<MoviesChildPage>
   void _onScroll() {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
-    if (maxScroll - currentScroll <= _scrollThreshold) {
+    if (maxScroll - currentScroll <= AppConfigs.scrollThreshold) {
       _cubit.fetchNextMovies();
     }
   }
