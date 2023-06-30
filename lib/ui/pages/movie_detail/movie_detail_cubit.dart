@@ -27,7 +27,7 @@ class MovieDetailCubit extends Cubit<MovieDetailState> {
           emit(
             state.copyWith(
               movieEntity: result,
-              loadMovieStatus: LoadStatus.failure,
+              loadMovieStatus: LoadStatus.success,
             ),
           );
         });
