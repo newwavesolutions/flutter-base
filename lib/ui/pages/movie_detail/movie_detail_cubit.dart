@@ -2,14 +2,17 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/movie_repository.dart';
+import 'package:flutter_base/ui/pages/movie_detail/movie_detail_navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'movie_detail_state.dart';
 
 class MovieDetailCubit extends Cubit<MovieDetailState> {
+  MovieDetailNavigator navigator;
   MovieRepository movieRepo;
 
   MovieDetailCubit({
+    required this.navigator,
     required this.movieRepo,
   }) : super(const MovieDetailState());
 

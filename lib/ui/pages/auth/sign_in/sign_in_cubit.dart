@@ -4,20 +4,21 @@ import 'package:flutter_base/models/entities/user/user_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/repositories/user_repository.dart';
-import 'package:flutter_base/router/route_config.dart';
-import 'package:flutter_base/ui/commons/app_snackbar.dart';
 import 'package:flutter_base/utils/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
+
+import 'sign_in_navigator.dart';
 
 part 'sign_in_state.dart';
 
 class SignInCubit extends Cubit<SignInState> {
+  final SignInNavigator navigator;
   final AuthRepository authRepo;
   final UserRepository userRepo;
   final AppCubit appCubit;
 
   SignInCubit({
+    required this.navigator,
     required this.authRepo,
     required this.userRepo,
     required this.appCubit,
@@ -35,11 +36,11 @@ class SignInCubit extends Cubit<SignInState> {
     final username = state.username ?? '';
     final password = state.password ?? '';
     if (username.isEmpty) {
-      AppSnackbar.showError(message: 'Username is empty');
+      navigator.flushbarError(message: 'Username is empty');
       return;
     }
     if (password.isEmpty) {
-      AppSnackbar.showError(message: 'Password is empty');
+      navigator.flushbarError(message: 'Password is empty');
       return;
     }
     emit(state.copyWith(signInStatus: LoadStatus.loading));
@@ -50,7 +51,7 @@ class SignInCubit extends Cubit<SignInState> {
         appCubit.updateProfile(myProfile);
         authRepo.saveToken(result);
         emit(state.copyWith(signInStatus: LoadStatus.success));
-        Get.offNamed(RouteConfig.main);
+        navigator.openMainPage();
       } else {
         emit(state.copyWith(signInStatus: LoadStatus.failure));
       }

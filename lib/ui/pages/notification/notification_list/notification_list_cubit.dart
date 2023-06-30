@@ -2,15 +2,18 @@ import 'package:flutter_base/models/entities/notification/notification_entity.da
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/models/response/array_response.dart';
 import 'package:flutter_base/repositories/notification_respository.dart';
+import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
 part 'notification_list_state.dart';
 
 class NotificationListCubit extends Cubit<NotificationListState> {
+  NotificationListNavigator navigator;
   NotificationRepository notificationRepository;
 
   NotificationListCubit({
+    required this.navigator,
     required this.notificationRepository,
   }) : super(const NotificationListState());
 

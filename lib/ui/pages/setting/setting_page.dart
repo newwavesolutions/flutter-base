@@ -5,7 +5,7 @@ import 'package:flutter_base/generated/l10n.dart';
 import 'package:flutter_base/ui/pages/setting/setting_cubit.dart';
 import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -43,7 +43,7 @@ class _SettingChildPageState extends State<SettingChildPage> {
       appBar: AppBarWidget(
         title: S.of(context).settings_title,
         onBackPressed: () {
-          Get.back();
+          GoRouter.of(context).pop();
         },
       ),
       body: Container(

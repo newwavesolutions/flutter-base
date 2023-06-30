@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_images.dart';
 import 'package:flutter_base/generated/l10n.dart';
-import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/pages/onboarding/onboarding_cubit.dart';
+import 'package:flutter_base/ui/pages/onboarding/onboarding_navigator.dart';
 import 'package:flutter_base/ui/pages/onboarding/widgets/onboarding_sub_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 class OnboardingPage extends StatelessWidget {
   static const router = 'onBoarding';
@@ -16,7 +15,9 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return OnboardingCubit();
+        return OnboardingCubit(
+          navigator: OnboardingNavigator(context: context),
+        );
       },
       child: const OnboardingChildPage(),
     );
@@ -36,6 +37,7 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
   late OnboardingCubit _cubit;
   final PageController _pageViewController = PageController(initialPage: 0);
   List<Widget> _onboardingPages = [];
+
   @override
   void initState() {
     super.initState();
@@ -99,7 +101,7 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
                       children: [
                         InkWell(
                           onTap: () {
-                            Get.offAllNamed(RouteConfig.signIn);
+                            _cubit.navigator.openSignInPage();
                           },
                           child: Text(S.of(context).button_skip),
                         ),
@@ -157,7 +159,8 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
 
   @override
   void dispose() {
-    super.dispose();
-    _pageViewController.dispose(); // dispose the PageController
+    _pageViewController.dispose();
+    _cubit.close();
+    super.dispose(); // dispose the PageController
   }
 }

@@ -4,10 +4,8 @@ import 'package:flutter_base/configs/app_configs.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/models/enums/movie_category.dart';
-import 'package:flutter_base/router/route_config.dart';
-import 'package:flutter_base/ui/pages/home/movie_detail/movie_detail_page.dart';
+import 'package:flutter_base/ui/pages/home/movies/movies_navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 import '../../../../repositories/movie_repository.dart';
 import 'movies_cubit.dart';
@@ -28,6 +26,7 @@ class MoviesPage extends StatelessWidget {
     return BlocProvider(
       create: (context) {
         return MoviesCubit(
+          navigator: MoviesNavigator(context: context),
           movieRepo: context.read<MovieRepository>(),
         );
       },
@@ -55,10 +54,7 @@ class _MoviesChildPageState extends State<MoviesChildPage>
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-    final movieRepo = RepositoryProvider.of<MovieRepository>(context);
-    _cubit = MoviesCubit(
-      movieRepo: movieRepo,
-    );
+    _cubit = context.read<MoviesCubit>();
     _cubit.fetchInitialMovies();
   }
 
@@ -101,12 +97,7 @@ class _MoviesChildPageState extends State<MoviesChildPage>
           return MovieWidget(
             movie: item,
             onPressed: () {
-              Get.toNamed(
-                RouteConfig.movieDetail,
-                arguments: MovieDetailArguments(
-                  id: item.id ?? 9358,
-                ),
-              );
+              _cubit.navigator.openMovieDetail(id: item.id ?? 0);
             },
           );
         },
@@ -136,4 +127,10 @@ class _MoviesChildPageState extends State<MoviesChildPage>
 
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void dispose() {
+    _cubit.close();
+    super.dispose();
+  }
 }
