@@ -34,7 +34,6 @@ dependencies:
   flutter_localization: ^0.1.10
 
   #State management
-  get: ^4.6.5
   flutter_bloc: ^8.1.0
   hydrated_bloc: ^9.1.0
 
@@ -57,7 +56,10 @@ dependencies:
   dio: ^5.1.1
   json_annotation: ^4.8.0
 
-  #Custom UI
+  #Router
+  go_router: ^9.0.0
+
+  #UI
   shimmer: ^2.0.0
 
   #Dialog, etc

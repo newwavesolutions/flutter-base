@@ -8,7 +8,6 @@ import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/commons/app_snackbar.dart';
 import 'package:flutter_base/utils/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 part 'sign_in_state.dart';
 
@@ -50,7 +49,7 @@ class SignInCubit extends Cubit<SignInState> {
         appCubit.updateProfile(myProfile);
         authRepo.saveToken(result);
         emit(state.copyWith(signInStatus: LoadStatus.success));
-        Get.offNamed(RouteConfig.main);
+        // Get.offNamed(RouteConfig.main);
       } else {
         emit(state.copyWith(signInStatus: LoadStatus.failure));
       }

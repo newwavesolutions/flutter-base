@@ -5,7 +5,6 @@ import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/pages/onboarding/onboarding_cubit.dart';
 import 'package:flutter_base/ui/pages/onboarding/widgets/onboarding_sub_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 class OnboardingPage extends StatelessWidget {
   static const router = 'onBoarding';
@@ -99,7 +98,8 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
                       children: [
                         InkWell(
                           onTap: () {
-                            Get.offAllNamed(RouteConfig.signIn);
+                            //Todo
+                            // Get.offAllNamed(RouteConfig.signIn);
                           },
                           child: Text(S.of(context).button_skip),
                         ),

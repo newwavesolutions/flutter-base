@@ -3,14 +3,13 @@ import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/movie_repository.dart';
-import 'package:flutter_base/router/route_config.dart';
-import 'package:flutter_base/ui/pages/home/detail_movie_photo_view/detail_movie_photo_view_page.dart';
-import 'package:flutter_base/ui/pages/home/movie_detail/movie_detail_cubit.dart';
 import 'package:flutter_base/ui/commons/error_page.dart';
-import 'package:flutter_base/ui/pages/home/movie_detail/widgets/loading_movie_detail_widget.dart';
+import 'package:flutter_base/ui/pages/movie_detail/movie_detail_navigator.dart';
 import 'package:flutter_base/ui/widgets/images/app_cache_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
+
+import 'movie_detail_cubit.dart';
+import 'widgets/loading_movie_detail_widget.dart';
 
 class MovieDetailArguments {
   final int id;
@@ -33,7 +32,10 @@ class MovieDetailPage extends StatelessWidget {
     return BlocProvider(
       create: (context) {
         final movieRepo = RepositoryProvider.of<MovieRepository>(context);
-        return MovieDetailCubit(movieRepo: movieRepo);
+        return MovieDetailCubit(
+          navigator: MovieDetailNavigator(context: context),
+          movieRepo: movieRepo,
+        );
       },
       child: MovieDetailChildPage(
         id: arguments.id,
@@ -110,12 +112,13 @@ class _MovieDetailChildPageState extends State<MovieDetailChildPage> {
               movieEntity.posterPathUrl,
               movieEntity.posterPathUrl,
             ];
-            Get.toNamed(
-              RouteConfig.photoView,
-              arguments: DetailMoviePhotoViewArguments(
-                images: listPosterPath,
-              ),
-            );
+            //Todo
+            // Get.toNamed(
+            //   RouteConfig.photoView,
+            //   arguments: DetailMoviePhotoViewArguments(
+            //     images: listPosterPath,
+            //   ),
+            // );
           },
           child: AppCacheImage(
             url: movieEntity.posterPathUrl,
@@ -154,7 +157,8 @@ class _MovieDetailChildPageState extends State<MovieDetailChildPage> {
   }
 
   Future<void> _onRefreshData() async {
-    _cubit.fetchInitialMovies(id: widget.id);
+    // _cubit.fetchInitialMovies(id: widget.id);
+    _cubit.navigator.forceSignIn();
   }
 
   @override

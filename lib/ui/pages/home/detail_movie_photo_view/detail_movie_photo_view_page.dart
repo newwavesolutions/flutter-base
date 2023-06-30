@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 import 'detail_movie_photo_view_cubit.dart';
@@ -83,7 +82,8 @@ class _DetailMoviePhotoViewChildPageState
         right: 20,
         child: IconButton(
           onPressed: () {
-            Get.back();
+            //Todo
+            // Get.back();
           },
           icon: const Icon(
             Icons.close,

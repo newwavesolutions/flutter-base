@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_images.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
+import 'package:flutter_base/ui/pages/splash/splash_navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../repositories/user_repository.dart';
+import '../../../router/route_config.dart';
 import 'splash_cubit.dart';
 
 class SplashPage extends StatelessWidget {
@@ -14,6 +17,7 @@ class SplashPage extends StatelessWidget {
     return BlocProvider(
       create: (context) {
         return SplashCubit(
+          navigator: SplashNavigator(context: context),
           authRepo: RepositoryProvider.of<AuthRepository>(context),
           userRepo: RepositoryProvider.of<UserRepository>(context),
         );
@@ -31,10 +35,13 @@ class SplashChildPage extends StatefulWidget {
 }
 
 class _SplashChildPageState extends State<SplashChildPage> {
+  late SplashCubit _splashCubit;
+
   @override
   void initState() {
     super.initState();
-    context.read<SplashCubit>().checkLogin();
+    _splashCubit = context.read<SplashCubit>();
+    _splashCubit.checkLogin();
   }
 
   @override
@@ -56,6 +63,7 @@ class _SplashChildPageState extends State<SplashChildPage> {
 
   @override
   void dispose() {
+    _splashCubit.close();
     super.dispose();
   }
 }

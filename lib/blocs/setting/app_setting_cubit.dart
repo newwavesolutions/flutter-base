@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/utils/utils.dart';
-import 'package:get/get.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import '../../configs/app_configs.dart';
@@ -26,7 +25,8 @@ class AppSettingCubit extends Cubit<AppSettingState> with HydratedMixin {
 
   void changeLocal({required Locale locale}) {
     emit(state.copyWith(locale: locale));
-    Get.updateLocale(locale);
+    // Todo
+    // Get.updateLocale(locale);
   }
 
   @override

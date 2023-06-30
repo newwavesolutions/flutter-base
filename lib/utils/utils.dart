@@ -1,7 +1,5 @@
 import 'dart:ui';
 
-import 'package:get/get.dart';
-
 class Utils {
   ///Search
   // static bool isTextContainKeyword({String text = "", String keyword = ""}) {
@@ -31,13 +29,38 @@ class Utils {
   // }
 
   /// Checks if string is email.
-  static bool isEmail(String email) => GetUtils.isEmail(email);
+  static bool isEmail(String input) {
+    // Regular expression pattern to match email addresses
+    // This pattern allows for most common email address formats
+    const String emailRegex =
+        r'^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,7}$';
+    // Create a regular expression object
+    final RegExp regex = RegExp(emailRegex);
+    // Check if the input matches the email pattern
+    return regex.hasMatch(input);
+  }
 
   /// Checks if string is phone number.
-  static bool isPhoneNumber(String email) => GetUtils.isPhoneNumber(email);
+  static bool isPhoneNumber(String input) {
+    // Regular expression pattern to match phone numbers
+    // This pattern allows for common phone number formats
+    const String phoneRegex =
+        r'^\+?(\d{1,4})?[-.\s]?(\d{1,3})[-.\s]?(\d{1,3})[-.\s]?(\d{1,9})$';
+    // Create a regular expression object
+    final RegExp regex = RegExp(phoneRegex);
+    // Check if the input matches the phone number pattern
+    return regex.hasMatch(input);
+  }
 
   /// Checks if string is URL.
-  static bool isURL(String url) => GetUtils.isURL(url);
+  static bool isURL(String input) {
+    // Regular expression pattern to match URLs
+    const String urlRegex = r'^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$';
+    // Create a regular expression object
+    final RegExp regex = RegExp(urlRegex, caseSensitive: false);
+    // Check if the input matches the URL pattern
+    return regex.hasMatch(input);
+  }
 
   ///Color
   static Color? getColorFromHex(String? hexColor) {

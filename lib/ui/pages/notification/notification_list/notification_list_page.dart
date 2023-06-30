@@ -7,7 +7,6 @@ import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/pages/notification/notification_detail/notification_detail_page.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/widgets/notification_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 import 'notification_list_cubit.dart';
 
@@ -140,12 +139,13 @@ class _NotificationListChildPageState extends State<NotificationListChildPage> {
   void _onPressNotification({
     required NotificationEntity notificationEntity,
   }) {
-    Get.toNamed(
-      RouteConfig.notificationDetail,
-      arguments: NotificationDetailArguments(
-        notification: notificationEntity,
-      ),
-    );
+    //Todo
+    // Get.toNamed(
+    //   RouteConfig.notificationDetail,
+    //   arguments: NotificationDetailArguments(
+    //     notification: notificationEntity,
+    //   ),
+    // );
   }
 
   Future<void> _onRefreshData() async {

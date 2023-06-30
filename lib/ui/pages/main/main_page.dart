@@ -9,7 +9,7 @@ import 'package:flutter_base/ui/pages/movie_list/movie_list_page.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
 import 'package:flutter_base/ui/pages/widget_list/widget_list_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import 'main_state.dart';
 import 'main_tab.dart';
@@ -73,7 +73,7 @@ class _MainPageState extends State<_MainPage> {
           },
           listener: (context, state) {
             BlocProvider.of<AppSettingCubit>(context).resetSetting();
-            Get.offAllNamed(RouteConfig.signIn);
+            GoRouter.of(context).pushReplacement(AppRouter.signIn);
           },
         )
       ],

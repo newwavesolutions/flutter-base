@@ -5,7 +5,6 @@ import 'package:flutter_base/ui/pages/setting/setting_page.dart';
 import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 import '../../widgets/images/app_circle_avatar.dart';
 import 'profile_cubit.dart';
@@ -121,7 +120,8 @@ class _ProfileTabPageState extends State<_ProfileTabPage>
         MenuItemWidget(
           title: "Settings",
           onPressed: () {
-            Get.to(() => const SettingPage());
+            //Todo
+            // Get.to(() => const SettingPage());
           },
         ),
         const MenuItemWidget(title: "Help & feedback"),

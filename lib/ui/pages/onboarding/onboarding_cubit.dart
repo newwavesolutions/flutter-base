@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_base/database/share_preferences_helper.dart';
 import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 part 'onboarding_state.dart';
 
@@ -26,7 +25,8 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       emit(state.copyWith(activePage: nextPage));
     } else {
       SharedPreferencesHelper.setOnboard();
-      Get.offAllNamed(RouteConfig.signIn);
+      //Todo
+      // Get.offAllNamed(RouteConfig.signIn);
     }
   }
 }
