@@ -5,6 +5,7 @@ import 'package:flutter_base/generated/l10n.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/repositories/user_repository.dart';
+import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_navigator.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
 import 'package:flutter_base/ui/widgets/input/app_email_input.dart';
 import 'package:flutter_base/ui/widgets/input/app_password_input.dart';
@@ -23,6 +24,7 @@ class SignInPage extends StatelessWidget {
         final userRepo = RepositoryProvider.of<UserRepository>(context);
         final appCubit = RepositoryProvider.of<AppCubit>(context);
         return SignInCubit(
+          navigator: SignInNavigator(context: context),
           authRepo: authRepo,
           userRepo: userRepo,
           appCubit: appCubit,

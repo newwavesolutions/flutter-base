@@ -112,13 +112,7 @@ class _MovieDetailChildPageState extends State<MovieDetailChildPage> {
               movieEntity.posterPathUrl,
               movieEntity.posterPathUrl,
             ];
-            //Todo
-            // Get.toNamed(
-            //   RouteConfig.photoView,
-            //   arguments: DetailMoviePhotoViewArguments(
-            //     images: listPosterPath,
-            //   ),
-            // );
+            _cubit.navigator.openPhotoView(photoUrls: listPosterPath);
           },
           child: AppCacheImage(
             url: movieEntity.posterPathUrl,
@@ -157,8 +151,7 @@ class _MovieDetailChildPageState extends State<MovieDetailChildPage> {
   }
 
   Future<void> _onRefreshData() async {
-    // _cubit.fetchInitialMovies(id: widget.id);
-    _cubit.navigator.forceSignIn();
+    _cubit.fetchInitialMovies(id: widget.id);
   }
 
   @override

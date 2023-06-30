@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_base/models/entities/notification/notification_entity.dart';
 import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
-import 'package:flutter_base/ui/pages/home/detail_movie_photo_view/detail_movie_photo_view_page.dart';
 import 'package:flutter_base/ui/pages/movie_detail/movie_detail_page.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
+import 'package:flutter_base/ui/pages/photo_view_page/photo_view_page.dart';
+import 'package:flutter_base/ui/pages/setting/setting_page.dart';
 import 'package:go_router/go_router.dart';
 
 import '../ui/pages/main/main_page.dart';
@@ -13,6 +15,14 @@ import '../ui/pages/splash/splash_page.dart';
 class AppRouter {
   AppRouter._();
 
+  static final navigationKey = GlobalKey<NavigatorState>();
+
+  static GoRouter get router => GoRouter(
+        routes: _routes,
+        debugLogDiagnostics: true,
+        navigatorKey: navigationKey,
+      );
+
   ///main page
   static const String splash = "/";
   static const String main = "main";
@@ -22,6 +32,7 @@ class AppRouter {
   static const String onboarding = 'onboarding';
   static const String movieDetail = 'movieDetail';
   static const String photoView = 'photoView';
+  static const String setting = 'setting';
 
   // GoRouter configuration
   static final _routes = <RouteBase>[
@@ -33,7 +44,7 @@ class AppRouter {
     ),
     GoRoute(
       name: signIn,
-      path: "/signIn",
+      path: "/$signIn",
       builder: (context, state) => const SignInPage(),
     ),
     GoRoute(
@@ -57,22 +68,23 @@ class AppRouter {
     ),
     GoRoute(
       name: movieDetail,
-      path: "/$movieDetail",
+      path: "/$movieDetail/:id",
       builder: (context, state) => MovieDetailPage(
-        arguments: MovieDetailArguments(id: 1),
+        arguments: MovieDetailArguments(
+            id: int.tryParse(state.pathParameters["id"] ?? '') ?? 0),
       ),
     ),
     GoRoute(
       name: photoView,
       path: "/$photoView",
-      builder: (context, state) => DetailMoviePhotoViewPage(
-        arguments: DetailMoviePhotoViewArguments(images: []),
+      builder: (context, state) => PhotoViewPage(
+        arguments: PhotoViewArguments(images: state.extra as List<String>),
       ),
     ),
+    GoRoute(
+      name: setting,
+      path: "/$setting",
+      builder: (context, state) => const SettingPage(),
+    ),
   ];
-
-  static get router => GoRouter(
-        routes: _routes,
-        debugLogDiagnostics: true,
-      );
 }

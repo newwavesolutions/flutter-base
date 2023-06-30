@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
-import 'package:flutter_base/ui/pages/setting/setting_page.dart';
+import 'package:flutter_base/ui/pages/profile/profile_navigator.dart';
 import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +18,9 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return ProfileCubit();
+        return ProfileCubit(
+          navigator: ProfileNavigator(context: context),
+        );
       },
       child: const _ProfileTabPage(),
     );
@@ -35,10 +37,12 @@ class _ProfileTabPage extends StatefulWidget {
 class _ProfileTabPageState extends State<_ProfileTabPage>
     with AutomaticKeepAliveClientMixin {
   late AppCubit _appCubit;
+  late ProfileCubit _cubit;
 
   @override
   void initState() {
     _appCubit = BlocProvider.of<AppCubit>(context);
+    _cubit = BlocProvider.of<ProfileCubit>(context);
     super.initState();
   }
 
@@ -120,8 +124,7 @@ class _ProfileTabPageState extends State<_ProfileTabPage>
         MenuItemWidget(
           title: "Settings",
           onPressed: () {
-            //Todo
-            // Get.to(() => const SettingPage());
+            _cubit.navigator.openSetting();
           },
         ),
         const MenuItemWidget(title: "Help & feedback"),
@@ -154,4 +157,10 @@ class _ProfileTabPageState extends State<_ProfileTabPage>
 
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void dispose() {
+    _cubit.close();
+    super.dispose();
+  }
 }

@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
-import 'detail_movie_photo_view_cubit.dart';
+import 'photo_view_cubit.dart';
 
-class DetailMoviePhotoViewArguments {
+class PhotoViewArguments {
   List<String> images;
 
-  DetailMoviePhotoViewArguments({
+  PhotoViewArguments({
     required this.images,
   });
 }
 
-class DetailMoviePhotoViewPage extends StatelessWidget {
-  final DetailMoviePhotoViewArguments arguments;
+class PhotoViewPage extends StatelessWidget {
+  final PhotoViewArguments arguments;
 
-  const DetailMoviePhotoViewPage({
+  const PhotoViewPage({
     Key? key,
     required this.arguments,
   }) : super(key: key);
@@ -25,37 +25,34 @@ class DetailMoviePhotoViewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return DetailMoviePhotoViewCubit();
+        return PhotoViewCubit();
       },
-      child: DetailMoviePhotoViewChildPage(
+      child: PhotoViewChildPage(
         images: arguments.images,
       ),
     );
   }
 }
 
-class DetailMoviePhotoViewChildPage extends StatefulWidget {
+class PhotoViewChildPage extends StatefulWidget {
   final List<String> images;
 
-  const DetailMoviePhotoViewChildPage({
+  const PhotoViewChildPage({
     Key? key,
     required this.images,
   }) : super(key: key);
 
   @override
-  State<DetailMoviePhotoViewChildPage> createState() =>
-      _DetailMoviePhotoViewChildPageState();
+  State<PhotoViewChildPage> createState() => _PhotoViewChildPageState();
 }
 
-class _DetailMoviePhotoViewChildPageState
-    extends State<DetailMoviePhotoViewChildPage> {
-  late final DetailMoviePhotoViewCubit _cubit;
+class _PhotoViewChildPageState extends State<PhotoViewChildPage> {
+  late final PhotoViewCubit _cubit;
 
   @override
   void initState() {
     super.initState();
     _cubit = BlocProvider.of(context);
-    _cubit.loadInitialData();
   }
 
   @override
@@ -82,8 +79,7 @@ class _DetailMoviePhotoViewChildPageState
         right: 20,
         child: IconButton(
           onPressed: () {
-            //Todo
-            // Get.back();
+            Navigator.of(context).pop();
           },
           icon: const Icon(
             Icons.close,

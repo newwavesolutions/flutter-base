@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_base/database/secure_storage_helper.dart';
-import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
+import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/utils/logger.dart';
+import 'package:go_router/go_router.dart';
 
-class ApiInterceptors extends InterceptorsWrapper {
+class ApiInterceptors extends QueuedInterceptorsWrapper {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
@@ -43,8 +44,7 @@ class ApiInterceptors extends InterceptorsWrapper {
     //Handle section expired
     if (response.statusCode == 401) {
       SecureStorageHelper.instance.removeToken();
-      // Todo
-      // Get.off(const SignInPage());
+      _forceSignIn();
     }
     super.onResponse(response, handler);
   }
@@ -61,5 +61,13 @@ class ApiInterceptors extends InterceptorsWrapper {
     }
     logger.log("⚠️ ERROR[$statusCode] => PATH: $uri\n DATA: $data");
     super.onError(err, handler);
+  }
+
+  void _forceSignIn() {
+    while (GoRouter.of(AppRouter.navigationKey.currentContext!).canPop()) {
+      GoRouter.of(AppRouter.navigationKey.currentContext!).pop();
+    }
+    GoRouter.of(AppRouter.navigationKey.currentContext!)
+        .pushReplacementNamed(AppRouter.signIn);
   }
 }

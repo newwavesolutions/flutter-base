@@ -61,6 +61,7 @@ dependencies:
 
   #UI
   shimmer: ^2.0.0
+  another_flushbar: ^1.12.30
 
   #Dialog, etc
   cached_network_image: ^3.2.3

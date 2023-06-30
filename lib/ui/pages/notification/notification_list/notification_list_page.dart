@@ -3,12 +3,11 @@ import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/configs/app_configs.dart';
 import 'package:flutter_base/models/entities/notification/notification_entity.dart';
 import 'package:flutter_base/repositories/notification_respository.dart';
-import 'package:flutter_base/router/route_config.dart';
-import 'package:flutter_base/ui/pages/notification/notification_detail/notification_detail_page.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/widgets/notification_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'notification_list_cubit.dart';
+import 'notification_list_navigator.dart';
 
 class NotificationListArguments {
   String param;
@@ -33,6 +32,7 @@ class NotificationListPage extends StatelessWidget {
         final notificationRepo =
             RepositoryProvider.of<NotificationRepository>(context);
         return NotificationListCubit(
+          navigator: NotificationListNavigator(context: context),
           notificationRepository: notificationRepo,
         );
       },
@@ -139,13 +139,7 @@ class _NotificationListChildPageState extends State<NotificationListChildPage> {
   void _onPressNotification({
     required NotificationEntity notificationEntity,
   }) {
-    //Todo
-    // Get.toNamed(
-    //   RouteConfig.notificationDetail,
-    //   arguments: NotificationDetailArguments(
-    //     notification: notificationEntity,
-    //   ),
-    // );
+    _cubit.navigator.openNotificationDetail();
   }
 
   Future<void> _onRefreshData() async {
