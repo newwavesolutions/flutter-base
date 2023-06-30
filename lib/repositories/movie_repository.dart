@@ -6,7 +6,7 @@ import 'package:flutter_base/network/api_client.dart';
 abstract class MovieRepository {
   Future<ArrayResponse<MovieEntity>> getMovies({required int page});
 
-  Future<MovieEntity> getMovie(int id);
+  Future<MovieEntity?> getDetailMovie({required int id});
 
   Future<ArrayResponse<MovieEntity>> searchMovies({required String searchText});
 }
@@ -17,9 +17,8 @@ class MovieRepositoryImpl extends MovieRepository {
   MovieRepositoryImpl({required this.apiClient});
 
   @override
-  Future<MovieEntity> getMovie(int id) {
-    // TODO: implement getMovie
-    throw UnimplementedError();
+  Future<MovieEntity?> getDetailMovie({required int id}) {
+    return apiClient.getDetailMovie(MovieAPIConfig.apiKey, id);
   }
 
   @override

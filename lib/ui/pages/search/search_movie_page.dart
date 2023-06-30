@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/movie_repository.dart';
-import 'package:flutter_base/ui/pages/movie_detail/movie_detail_page.dart';
+import 'package:flutter_base/router/route_config.dart';
+import 'package:flutter_base/ui/pages/home/movie_detail/movie_detail_page.dart';
 import 'package:flutter_base/ui/pages/search/widgets/search_movie_loading_widget.dart';
 import 'package:flutter_base/ui/pages/search/widgets/movie_widget.dart';
 import 'package:flutter_base/ui/widgets/input/app_search_text_field.dart';
@@ -129,7 +130,12 @@ class _SearchMovieChildPageState extends State<SearchMovieChildPage> {
           return MovieWidget(
             movie: item,
             onPressed: () {
-              Get.to(() => MovieDetailPage(movie: item));
+              Get.toNamed(
+                RouteConfig.movieDetail,
+                arguments: MovieDetailArguments(
+                  id: item.id ?? 9358,
+                ),
+              );
             },
           );
         },
