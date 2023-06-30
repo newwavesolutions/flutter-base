@@ -1,14 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/movie_repository.dart';
+import 'package:flutter_base/ui/pages/home/movies/movies_navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'movies_state.dart';
 
 class MoviesCubit extends Cubit<MoviesState> {
+  MoviesNavigator navigator;
   MovieRepository movieRepo;
 
   MoviesCubit({
+    required this.navigator,
     required this.movieRepo,
   }) : super(const MoviesState());
 
