@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/database/share_preferences_helper.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/ui/commons/app_dialog.dart';
@@ -6,18 +7,17 @@ import 'package:flutter_base/ui/pages/splash/splash_navigator.dart';
 import 'package:flutter_base/utils/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../repositories/user_repository.dart';
 import 'splash_state.dart';
 
 class SplashCubit extends Cubit<SplashState> {
   final SplashNavigator navigator;
   final AuthRepository authRepo;
-  final UserRepository userRepo;
+  final AppCubit appCubit;
 
   SplashCubit({
     required this.navigator,
     required this.authRepo,
-    required this.userRepo,
+    required this.appCubit,
   }) : super(const SplashState());
 
   void checkLogin() async {
@@ -32,7 +32,7 @@ class SplashCubit extends Cubit<SplashState> {
     } else {
       try {
         //Profile
-        await userRepo.getProfile();
+        await appCubit.getProfile();
       } catch (error, s) {
         logger.log(error, stackTrace: s);
         //Check 401

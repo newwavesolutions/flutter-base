@@ -4,6 +4,9 @@ import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
 import 'package:flutter_base/ui/pages/movie_detail/movie_detail_page.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
 import 'package:flutter_base/ui/pages/photo_view_page/photo_view_page.dart';
+import 'package:flutter_base/ui/pages/profile/profile_page.dart';
+import 'package:flutter_base/ui/pages/profile/update_avatar/update_avatar_page.dart';
+import 'package:flutter_base/ui/pages/profile/update_profile/update_profile_page.dart';
 import 'package:flutter_base/ui/pages/setting/setting_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -32,7 +35,10 @@ class AppRouter {
   static const String onboarding = 'onboarding';
   static const String movieDetail = 'movieDetail';
   static const String photoView = 'photoView';
+  static const String profile = 'profile';
   static const String setting = 'setting';
+  static const String updateProfile = 'updateProfile';
+  static const String updateAvatar = 'updateAvatar';
 
   // GoRouter configuration
   static final _routes = <RouteBase>[
@@ -85,6 +91,21 @@ class AppRouter {
       name: setting,
       path: "/$setting",
       builder: (context, state) => const SettingPage(),
+    ),
+    GoRoute(
+      name: updateProfile,
+      path: "/$updateProfile",
+      builder: (context, state) => const UpdateProfilePage(),
+    ),
+    GoRoute(
+      name: updateAvatar,
+      path: "/$updateAvatar",
+      builder: (context, state) => const UpdateAvatarPage(),
+    ),
+    GoRoute(
+      name: profile,
+      path: "/$profile",
+      builder: (context, state) => const ProfilePage(),
     ),
   ];
 }
