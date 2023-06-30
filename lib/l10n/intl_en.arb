@@ -15,5 +15,13 @@
   "onboarding_title_02": "Design Template uploads Every Tuesday!",
   "onboarding_description_02": "Make sure to take a look my uplab profile every tuesday",
   "onboarding_title_03": "Download now!",
-  "onboarding_description_03": "You can follow me if you wantand comment on any to get some freebies"
+  "onboarding_description_03": "You can follow me if you wantand comment on any to get some freebies",
+  "changePassword": "Change password",
+  "changeEmail": "Change email",
+  "deleteAccount": "Delete Account",
+  "termpolicy": "Term,Policy",
+  "setting": "Setting",
+  "logout": "Logout",
+  "profile_text1": "Account",
+  "profile_text2": "General information"
 }

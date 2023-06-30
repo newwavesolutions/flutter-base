@@ -15,5 +15,13 @@
   "onboarding_title_02": "Design Template uploads Every Tuesday!",
   "onboarding_description_02": "Make sure to take a look my uplab profile every tuesday",
   "onboarding_title_03": "Download now!",
-  "onboarding_description_03": "You can follow me if you wantand comment on any to get some freebies"
+  "onboarding_description_03": "You can follow me if you wantand comment on any to get some freebies",
+  "changePassword": "Đổi mật khẩu",
+  "changeEmail": "Thay đổi Email",
+  "deleteAccount": "Xóa tài khoản",
+  "termpolicy": "Điều khoản, Chính sách",
+  "setting": "Cài đặt",
+  "logout": "Đăng xuất",
+  "profile_text1": "Tài khoản",
+  "profile_text2": "Thông tin chung"
 }
