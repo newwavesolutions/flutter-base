@@ -9,38 +9,6 @@ class AppDialog {
       DateTime(_now.year + 100, _now.month, _now.day);
   static final _timeNow = TimeOfDay(hour: _now.hour, minute: _now.minute);
 
-  static void defaultDialog({
-    String title = "Alert",
-    String message = "",
-    String? textConfirm,
-    String? textCancel,
-    VoidCallback? onConfirm,
-    VoidCallback? onCancel,
-  }) {
-    //Todo
-    // Get.defaultDialog(
-    //   title: title,
-    //   content: Text(
-    //     message,
-    //     textAlign: TextAlign.center,
-    //   ),
-    //   onConfirm: onConfirm == null
-    //       ? null
-    //       : () {
-    //           Get.back();
-    //           onConfirm.call();
-    //         },
-    //   onCancel: onCancel == null
-    //       ? null
-    //       : () {
-    //           Get.back();
-    //           onCancel.call();
-    //         },
-    //   textConfirm: textConfirm,
-    //   textCancel: textCancel,
-    // );
-  }
-
   static Future<DateTime?> showDateDialog(
     BuildContext context, {
     DateTime? minDate,

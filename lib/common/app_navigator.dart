@@ -23,7 +23,56 @@ class AppNavigator {
     GoRouter.of(context).push(AppRouter.photoView, extra: photoUrls);
   }
 
-  void flushbarError({required String message}) {
+  /// Show dialog
+  Future<void> showSimpleDialog({
+    String title = "Alert",
+    String message = "",
+    String? textConfirm = "Yes",
+    String? textCancel = "No",
+    barrierDismissible = false,
+    VoidCallback? onConfirm,
+    VoidCallback? onCancel,
+  }) {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: barrierDismissible,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(message),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            textConfirm != null
+                ? TextButton(
+                    child: Text(textConfirm),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      onConfirm?.call();
+                    },
+                  )
+                : const SizedBox(),
+            textCancel != null
+                ? TextButton(
+                    child: const Text('Yes'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      onConfirm?.call();
+                    },
+                  )
+                : const SizedBox(),
+          ],
+        );
+      },
+    );
+  }
+
+  /// Show error flushbar
+  void showErrorFlushbar({required String message}) {
     Flushbar(
       message: message,
       flushbarStyle: FlushbarStyle.GROUNDED,
@@ -35,39 +84,23 @@ class AppNavigator {
       ),
       titleColor: Colors.white,
       duration: const Duration(seconds: 3),
-      backgroundColor: Colors.amber,
+      backgroundColor: Colors.redAccent,
     ).show(context);
   }
 
-  void flushbarMesssage({required String message}) {
+  void showSuccessFlushbar({required String message}) {
     Flushbar(
       message: message,
       flushbarStyle: FlushbarStyle.GROUNDED,
       flushbarPosition: FlushbarPosition.TOP,
       icon: const Icon(
-        Icons.message_outlined,
+        Icons.check_circle_outline,
         size: 28.0,
         color: Colors.white,
       ),
       titleColor: Colors.white,
       duration: const Duration(seconds: 3),
       backgroundColor: Colors.green,
-    ).show(context);
-  }
-
-  void flushbarWarning({required String message}) {
-    Flushbar(
-      message: message,
-      flushbarStyle: FlushbarStyle.GROUNDED,
-      flushbarPosition: FlushbarPosition.TOP,
-      icon: const Icon(
-        Icons.error_outline,
-        size: 28.0,
-        color: Colors.white,
-      ),
-      titleColor: Colors.white,
-      duration: const Duration(seconds: 3),
-      backgroundColor: Colors.amber,
     ).show(context);
   }
 }
