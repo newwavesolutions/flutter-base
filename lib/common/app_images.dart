@@ -1,7 +1,6 @@
 class AppImages {
   /// Common
   static const bgImagePlaceholder = 'assets/images/bg_image_placeholder.png';
-  static const icLogo = 'assets/images/ic_logo.png';
   static const icLogoTransparent = 'assets/images/ic_logo_transparent.png';
   static const icAvatar = 'assets/images/ic_avatar.png';
 
