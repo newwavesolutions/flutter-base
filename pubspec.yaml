@@ -101,7 +101,6 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/bg_image_placeholder.png
-    - assets/images/ic_logo.png
     - assets/images/ic_logo_transparent.png
     - assets/images/ic_back.png
     - assets/images/ic_white_back.png
