@@ -50,7 +50,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
       email: appCubit.state.user?.email,
     );
     if (identical(user, appCubit.state.user)) {
-      navigator.flushbarError(message: 'Username does not change');
+      navigator.showErrorFlushbar(message: 'Username does not change');
       return;
     }
     emit(state.copyWith(

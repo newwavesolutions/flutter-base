@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/database/share_preferences_helper.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
-import 'package:flutter_base/ui/commons/app_dialog.dart';
 import 'package:flutter_base/ui/pages/splash/splash_navigator.dart';
 import 'package:flutter_base/utils/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +43,7 @@ class SplashCubit extends Cubit<SplashState> {
             return;
           }
         }
-        AppDialog.defaultDialog(
+        navigator.showSimpleDialog(
           message: "An error happened. Please check your connection!",
           textConfirm: "Retry",
           onConfirm: () {

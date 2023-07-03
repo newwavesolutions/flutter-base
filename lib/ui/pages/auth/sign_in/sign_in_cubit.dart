@@ -36,11 +36,11 @@ class SignInCubit extends Cubit<SignInState> {
     final username = state.username ?? '';
     final password = state.password ?? '';
     if (username.isEmpty) {
-      navigator.flushbarError(message: 'Username is empty');
+      navigator.showErrorFlushbar(message: 'Username is empty');
       return;
     }
     if (password.isEmpty) {
-      navigator.flushbarError(message: 'Password is empty');
+      navigator.showErrorFlushbar(message: 'Password is empty');
       return;
     }
     emit(state.copyWith(signInStatus: LoadStatus.loading));
