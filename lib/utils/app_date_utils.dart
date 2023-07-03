@@ -62,19 +62,19 @@ extension DateTimeExtension on DateTime {
       try {
         return DateFormat(format).parse(date);
       } catch (e, s) {
-        logger.e(e, stackTrace: s);
+        logger.e(e, s);
       }
     }
     try {
       return DateTime.parse(date);
     } catch (e, s) {
-      logger.e(e, stackTrace: s);
+      logger.e(e, s);
     }
     //
     try {
       return DateFormat("yyyy/MM/dd").parse(date);
     } catch (e, s) {
-      logger.e(e, stackTrace: s);
+      logger.e(e, s);
     }
     return null;
   }
@@ -83,7 +83,7 @@ extension DateTimeExtension on DateTime {
     try {
       return DateFormat(format).format(this);
     } catch (e, s) {
-      logger.e(e, stackTrace: s);
+      logger.e(e, s);
       return '';
     }
   }
