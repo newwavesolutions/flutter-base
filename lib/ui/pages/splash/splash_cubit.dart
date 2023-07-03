@@ -33,7 +33,7 @@ class SplashCubit extends Cubit<SplashState> {
         //Profile
         await appCubit.getProfile();
       } catch (error, s) {
-        logger.log(error, stackTrace: s);
+        logger.e(error, s);
         //Check 401
         if (error is DioError) {
           if (error.response?.statusCode == 401) {

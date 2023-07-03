@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_base/database/secure_storage_helper.dart';
 import 'package:flutter_base/network/api_util.dart';
@@ -11,37 +9,15 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    final method = options.method;
-    final uri = options.uri;
-    final data = options.data;
     final token = await SecureStorageHelper.instance.getToken();
     if (token != null) {
       options.headers['Authorization'] = 'Bearer ${token.accessToken}';
-    }
-    if (method == 'GET') {
-      logger.log(
-          "✈️ REQUEST[$method] => PATH: $uri \n Token: ${options.headers}",
-          printFullText: true);
-    } else {
-      try {
-        logger.log(
-            "✈️ REQUEST[$method] => PATH: $uri \n Token: ${token?.accessToken} \n DATA: ${jsonEncode(data)}",
-            printFullText: true);
-      } catch (e) {
-        logger.log(
-            "✈️ REQUEST[$method] => PATH: $uri \n Token: ${token?.accessToken} \n DATA: $data",
-            printFullText: true);
-      }
     }
     super.onRequest(options, handler);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    final statusCode = response.statusCode;
-    final uri = response.requestOptions.uri;
-    final data = jsonEncode(response.data);
-    logger.log("✅ RESPONSE[$statusCode] => PATH: $uri\n DATA: $data");
     //Handle section expired without refresh token
     // if (response.statusCode == 401) {
     //   _forceSignIn();
