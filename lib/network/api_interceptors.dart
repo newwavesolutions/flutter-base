@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_base/database/secure_storage_helper.dart';
 import 'package:flutter_base/network/api_util.dart';
 import 'package:flutter_base/router/route_config.dart';
@@ -43,9 +42,8 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
     final uri = response.requestOptions.uri;
     final data = jsonEncode(response.data);
     logger.log("✅ RESPONSE[$statusCode] => PATH: $uri\n DATA: $data");
-    //Handle section expired
+    //Handle section expired without refresh token
     // if (response.statusCode == 401) {
-    //   SecureStorageHelper.instance.removeToken();
     //   _forceSignIn();
     // }
     super.onResponse(response, handler);
@@ -57,65 +55,59 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
     final path = err.requestOptions.path;
     final uri = err.requestOptions.uri;
     final RequestOptions request = err.requestOptions;
-    if (kDebugMode) {
-      logger.e(
-          "⚠️ ERROR[$statusCode] => PATH: $path \n Response: ${err.response?.data}");
-    }
+    logger.e(
+        "⚠️ ERROR[$statusCode] => PATH: $path \n Response: ${err.response?.data}");
     switch (statusCode) {
       case 401:
-        final saveToken = await SecureStorageHelper.instance.getToken();
-        List<String> tokens =
-            err.requestOptions.headers['Authorization'].toString().split(' ');
-
-        String tokenRequest = tokens.length > 1 ? tokens[1] : "";
-        if (saveToken != null && saveToken.accessToken != tokenRequest) {
-          final cloneReq = await cloneRequest(
-            accessToken: saveToken.accessToken,
+        final savedToken = await SecureStorageHelper.instance.getToken();
+        String requestingTokens = err.requestOptions.headers['Authorization']
+            .toString()
+            .replaceFirst("Bearer ", "");
+        //Handle following request with old token
+        if (savedToken != null && savedToken.accessToken != requestingTokens) {
+          //Clone request with new token
+          final cloneReq = await _cloneRequest(
+            accessToken: savedToken.accessToken,
             request: request,
             uri: uri,
           );
           return handler.resolve(cloneReq);
         }
-
-        if (saveToken == null) {
+        //Don't have savedToken => return error
+        if (savedToken == null) {
           return handler.next(err);
         }
-
+        //Refresh token in first request
         try {
-          final result = await ApiUtil.onRefreshToken(
-            saveToken.refreshToken,
-          );
-
+          final result = await ApiUtil.onRefreshToken(savedToken.refreshToken);
           if (result != null) {
+            //Refresh success => clone current request
             SecureStorageHelper.instance.saveToken(result);
-
-            final cloneReq = await cloneRequest(
+            final cloneReq = await _cloneRequest(
               accessToken: result.accessToken,
               request: request,
               uri: uri,
             );
             return handler.resolve(cloneReq);
           } else {
-            if (kDebugMode) {
-              logger.e("Response refresh token is null");
-            }
+            //Refresh failure => force login
+            logger.e("Response refresh token is null");
             _forceSignIn();
-            // return handler.next(err);
+            return handler.next(err);
           }
         } catch (e) {
-          if (kDebugMode) {
-            logger.e(
-                "Api refresh token error $e, msg: ${(e as DioError).response}");
-          }
+          //Refresh failure => force login
+          logger.e(
+              "Api refresh token error $e, msg: ${(e as DioError).response}");
           _forceSignIn();
-          // return handler.next(err);
+          return handler.next(err);
         }
       default:
         handler.next(err);
     }
   }
 
-  Future<Response> cloneRequest({
+  Future<Response> _cloneRequest({
     required String accessToken,
     required RequestOptions request,
     required Uri uri,
@@ -133,6 +125,9 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
   }
 
   void _forceSignIn() {
+    //Clear session
+    SecureStorageHelper.instance.removeToken();
+    //Open sign-in page
     while (GoRouter.of(AppRouter.navigationKey.currentContext!).canPop()) {
       GoRouter.of(AppRouter.navigationKey.currentContext!).pop();
     }
