@@ -1,16 +1,16 @@
 import 'package:flutter_base/models/entities/notification/notification_entity.dart';
 import 'package:flutter_base/models/response/array_response.dart';
+import 'package:flutter_base/models/response/object_response.dart';
 import 'package:flutter_base/network/api_client.dart';
 
 abstract class NotificationRepository {
-  Future<ArrayResponse<NotificationEntity>> getNotifications(
-      {required int page});
+  Future<ArrayResponse<NotificationEntity>> getNotifications({
+    required int page,
+  });
 
-  Future<ArrayResponse<NotificationEntity>> markAllAsRead(
-      {required Map<String, dynamic> body});
+  Future<void> markAllAsRead();
 
-  Future<ArrayResponse<NotificationEntity>> markAsRead(
-      {required Map<String, dynamic> body});
+  Future<void> markAsRead({required int notificationId});
 }
 
 class NotificationRepositoryImpl extends NotificationRepository {
@@ -25,14 +25,12 @@ class NotificationRepositoryImpl extends NotificationRepository {
   }
 
   @override
-  Future<ArrayResponse<NotificationEntity>> markAllAsRead(
-      {required Map<String, dynamic> body}) async {
-    return await apiClient.markAllAsRead(body);
+  Future<void> markAllAsRead() {
+    return apiClient.markAllNotificationAsRead();
   }
 
   @override
-  Future<ArrayResponse<NotificationEntity>> markAsRead(
-      {required Map<String, dynamic> body}) async {
-    return await apiClient.markAsRead(body);
+  Future<void> markAsRead({required int notificationId}) {
+    return apiClient.markNotificationAsRead();
   }
 }

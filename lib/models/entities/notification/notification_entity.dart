@@ -5,9 +5,9 @@ part 'notification_entity.g.dart';
 @JsonSerializable()
 class NotificationEntity {
   @JsonKey()
-  int? id;
+  int id;
   @JsonKey()
-  bool? isRead;
+  bool isRead;
   @JsonKey()
   String? title;
   @JsonKey()
@@ -18,8 +18,8 @@ class NotificationEntity {
   String? imageUrl;
 
   NotificationEntity({
-    this.id,
-    this.isRead,
+    this.id = 0,
+    this.isRead = false,
     this.title,
     this.message,
     this.createdAt,
@@ -30,4 +30,22 @@ class NotificationEntity {
       _$NotificationEntityFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificationEntityToJson(this);
+
+  NotificationEntity copyWith({
+    int? id,
+    bool? isRead,
+    String? title,
+    String? message,
+    DateTime? createdAt,
+    String? imageUrl,
+  }) {
+    return NotificationEntity(
+      id: id ?? this.id,
+      isRead: isRead ?? this.isRead,
+      title: title ?? this.title,
+      message: message ?? this.message,
+      createdAt: createdAt ?? this.createdAt,
+      imageUrl: imageUrl ?? this.imageUrl,
+    );
+  }
 }
