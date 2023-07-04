@@ -28,6 +28,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late ApiClient _apiClient;
   late ApiClient _apiMocKyClient;
+  final appRoutes = AppRouter();
 
   @override
   void initState() {
@@ -94,7 +95,9 @@ class _MyAppState extends State<MyApp> {
                 //   primaryColor: state.primaryColor,
                 // ).theme,
                 themeMode: state.themeMode,
-                routerConfig: AppRouter.router,
+                routeInformationParser: appRoutes.goRouter.routeInformationParser,
+                routerDelegate: appRoutes.goRouter.routerDelegate,
+                routeInformationProvider: appRoutes.goRouter.routeInformationProvider,
                 localizationsDelegates: const [
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,

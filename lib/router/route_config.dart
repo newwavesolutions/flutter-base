@@ -16,15 +16,17 @@ import '../ui/pages/onboarding/onboarding_page.dart';
 import '../ui/pages/splash/splash_page.dart';
 
 class AppRouter {
-  AppRouter._();
+  final GoRouter goRouter;
+
+  AppRouter() : goRouter = _router;
 
   static final navigationKey = GlobalKey<NavigatorState>();
 
-  static GoRouter get router => GoRouter(
-        routes: _routes,
-        debugLogDiagnostics: true,
-        navigatorKey: navigationKey,
-      );
+  static GoRouter get _router => GoRouter(
+    routes: _routes,
+    debugLogDiagnostics: true,
+    navigatorKey: navigationKey,
+  );
 
   ///main page
   static const String splash = "/";
