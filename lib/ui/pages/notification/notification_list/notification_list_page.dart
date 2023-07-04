@@ -4,7 +4,6 @@ import 'package:flutter_base/configs/app_configs.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/notification_respository.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/widgets/notification_widget.dart';
-import 'package:flutter_base/ui/widgets/app_devider.dart';
 import 'package:flutter_base/ui/widgets/list/error_list_widget.dart';
 import 'package:flutter_base/ui/widgets/list/loading_list_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -124,7 +123,7 @@ class _NotificationListChildPageState extends State<NotificationListChildPage> {
               return NotificationWidget(
                 notification: notification,
                 onPressed: () {
-                  _cubit.markNotificationAsRead(id: notification.id ?? 0);
+                  _cubit.markNotificationAsRead(id: notification.id);
                   _cubit.navigator.openNotificationDetail();
                 },
               );

@@ -1,6 +1,5 @@
 import 'package:flutter_base/models/entities/notification/notification_entity.dart';
 import 'package:flutter_base/models/response/array_response.dart';
-import 'package:flutter_base/models/response/object_response.dart';
 import 'package:flutter_base/network/api_client.dart';
 
 abstract class NotificationRepository {

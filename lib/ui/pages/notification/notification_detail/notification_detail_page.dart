@@ -59,9 +59,7 @@ class _NotificationDetailChildPageState
   void initState() {
     super.initState();
     _cubit = BlocProvider.of(context);
-    if (widget.notification.id != null) {
-      _cubit.markNotificationAsRead(id: widget.notification.id!);
-    }
+    _cubit.markNotificationAsRead(id: widget.notification.id);
   }
 
   @override

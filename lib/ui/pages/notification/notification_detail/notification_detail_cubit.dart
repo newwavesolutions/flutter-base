@@ -1,4 +1,3 @@
-import 'package:flutter_base/models/entities/notification/notification_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/notification_respository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
