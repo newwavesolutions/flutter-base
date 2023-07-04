@@ -88,10 +88,11 @@ class _MyAppState extends State<MyApp> {
                   isDarkMode: false,
                   primaryColor: state.primaryColor,
                 ).theme,
-                darkTheme: AppThemes(
-                  isDarkMode: true,
-                  primaryColor: state.primaryColor,
-                ).theme,
+                //Disabled
+                // darkTheme: AppThemes(
+                //   isDarkMode: true,
+                //   primaryColor: state.primaryColor,
+                // ).theme,
                 themeMode: state.themeMode,
                 routerConfig: AppRouter.router,
                 localizationsDelegates: const [

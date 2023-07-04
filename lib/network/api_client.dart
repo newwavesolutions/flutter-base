@@ -26,14 +26,10 @@ abstract class ApiClient {
   );
 
   @POST("/v3/ca940623-8c6c-45e9-86b8-e0156be45290")
-  Future<ArrayResponse<NotificationEntity>> markAllAsRead(
-    @Body() Map<String, dynamic> body,
-  );
+  Future<void> markAllNotificationAsRead();
 
   @POST("/v3/ca940623-8c6c-45e9-86b8-e0156be45290")
-  Future<ArrayResponse<NotificationEntity>> markAsRead(
-    @Body() Map<String, dynamic> body,
-  );
+  Future<void> markNotificationAsRead();
 
   /// Movie
   @GET("/3/discover/movie")

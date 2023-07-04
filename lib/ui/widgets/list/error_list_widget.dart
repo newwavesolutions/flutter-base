@@ -7,7 +7,7 @@ class ErrorListWidget extends StatelessWidget {
 
   const ErrorListWidget({
     Key? key,
-    this.text = 'Đã xảy ra lỗi',
+    this.text = 'Something went wrong',
     this.onRefresh,
   }) : super(key: key);
 

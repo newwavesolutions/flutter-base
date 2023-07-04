@@ -1,6 +1,5 @@
 import 'package:flutter_base/models/entities/notification/notification_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
-import 'package:flutter_base/models/response/array_response.dart';
 import 'package:flutter_base/repositories/notification_respository.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,100 +17,74 @@ class NotificationListCubit extends Cubit<NotificationListState> {
   }) : super(const NotificationListState());
 
   Future<void> loadInitialData() async {
-    emit(
-      state.copyWith(loadDataStatus: LoadStatus.initial),
-    );
+    emit(state.copyWith(loadDataStatus: LoadStatus.loading));
     try {
       final result = await notificationRepository.getNotifications(page: 1);
-      if (result.results.isNotEmpty) {
-        emit(
-          state.copyWith(
-              notifications: result.results,
-              loadDataStatus: LoadStatus.success),
-        );
-      }
+      emit(
+        state.copyWith(
+          notifications: result.results,
+          loadDataStatus: LoadStatus.success,
+          totalPages: result.totalPages,
+          page: result.page,
+        ),
+      );
     } catch (e) {
-      emit(state.copyWith(
-        loadDataStatus: LoadStatus.failure,
-      ));
+      emit(state.copyWith(loadDataStatus: LoadStatus.failure));
     }
   }
 
-  Future<void> fetchNextNotifications() async {
-    if (state.page == state.totalPages) {
-      return;
-    }
+  Future<void> loadNextData() async {
     if (state.loadDataStatus != LoadStatus.success) {
       return;
     }
-    emit(state.copyWith(
-      loadDataStatus: LoadStatus.loadingMore,
-    ));
+    emit(state.copyWith(loadDataStatus: LoadStatus.loadingMore));
     try {
-      final result = await notificationRepository.getNotifications(
-        page: state.page + 1,
-      );
-      final resultList = state.notifications?..addAll(result.results);
-      emit(state.copyWith(
+      final result =
+          await notificationRepository.getNotifications(page: state.page + 1);
+      final newNotifications = state.notifications..addAll(result.results);
+      emit(
+        state.copyWith(
           loadDataStatus: LoadStatus.success,
-          notifications: resultList,
-          page: state.page + 1,
-          totalPages: result.totalPages));
+          notifications: newNotifications,
+          page: result.page,
+          totalPages: result.totalPages,
+        ),
+      );
     } catch (e) {
-      emit(state.copyWith(
-        loadDataStatus: LoadStatus.failure,
-      ));
+      emit(state.copyWith(loadDataStatus: LoadStatus.failure));
     }
   }
 
   Future<void> markNotificationAsRead({required int id}) async {
-    emit(
-      state.copyWith(loadDataStatus: LoadStatus.loading),
-    );
-    List<NotificationEntity> notifications = [...?state.notifications];
-    final notificationJson = notifications
-        .firstWhere((notification) => notification.id == id)
-        .toJson();
+    emit(state.copyWith(markAsReadStatus: LoadStatus.loading));
     try {
-      final result =
-          await notificationRepository.markAsRead(body: notificationJson);
-      emit(
-        state.copyWith(
-          notifications: result.results,
-          loadDataStatus: LoadStatus.success,
-        ),
-      );
+      final _ = await notificationRepository.markAsRead(notificationId: id);
+      final index =
+          state.notifications.indexWhere((element) => element.id == id);
+      state.notifications[index].isRead = true;
+      emit(state.copyWith(
+        markAsReadStatus: LoadStatus.success,
+        notifications: state.notifications,
+      ));
     } catch (e) {
-      state.copyWith(loadDataStatus: LoadStatus.failure);
+      state.copyWith(markAsReadStatus: LoadStatus.failure);
     }
   }
 
   Future<void> markAllNotificationAsRead() async {
-    emit(
-      state.copyWith(loadDataStatus: LoadStatus.loading),
-    );
-    List<NotificationEntity> notifications = [...?state.notifications];
-    for (NotificationEntity item in notifications) {
-      item.isRead = true;
-    }
+    emit(state.copyWith(markAllAsReadStatus: LoadStatus.loading));
     try {
-      final ArrayResponse<NotificationEntity> data =
-          ArrayResponse<NotificationEntity>(
-        page: state.page,
-        totalPages: state.totalPages,
-        results: notifications,
-      );
-      final result = await notificationRepository.markAllAsRead(
-        body: data.toJson((value) => value.toJson()),
-      );
+      final _ = await notificationRepository.markAllAsRead();
+      List<NotificationEntity> notifications =
+          state.notifications.map((e) => e.copyWith(isRead: true)).toList();
       emit(
         state.copyWith(
-          notifications: result.results,
-          loadDataStatus: LoadStatus.success,
+          notifications: notifications,
+          markAllAsReadStatus: LoadStatus.success,
         ),
       );
     } catch (e) {
-      state.copyWith(loadDataStatus: LoadStatus.failure);
+      state.copyWith(markAllAsReadStatus: LoadStatus.failure);
     }
   }
 }
