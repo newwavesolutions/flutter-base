@@ -95,9 +95,11 @@ class _MyAppState extends State<MyApp> {
                 //   primaryColor: state.primaryColor,
                 // ).theme,
                 themeMode: state.themeMode,
-                routeInformationParser: appRoutes.goRouter.routeInformationParser,
+                routeInformationParser:
+                    appRoutes.goRouter.routeInformationParser,
                 routerDelegate: appRoutes.goRouter.routerDelegate,
-                routeInformationProvider: appRoutes.goRouter.routeInformationProvider,
+                routeInformationProvider:
+                    appRoutes.goRouter.routeInformationProvider,
                 localizationsDelegates: const [
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,

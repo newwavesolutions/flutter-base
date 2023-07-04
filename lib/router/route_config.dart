@@ -23,10 +23,10 @@ class AppRouter {
   static final navigationKey = GlobalKey<NavigatorState>();
 
   static GoRouter get _router => GoRouter(
-    routes: _routes,
-    debugLogDiagnostics: true,
-    navigatorKey: navigationKey,
-  );
+        routes: _routes,
+        debugLogDiagnostics: true,
+        navigatorKey: navigationKey,
+      );
 
   ///main page
   static const String splash = "/";
