@@ -62,6 +62,7 @@ dependencies:
   #UI
   shimmer: ^2.0.0
   another_flushbar: ^1.12.30
+  flutter_svg: ^2.0.7
 
   #Logger
   logger: ^1.4.0
@@ -104,6 +105,7 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
+    - assets/vectors/
     - assets/images/bg_image_placeholder.png
     - assets/images/ic_logo_transparent.png
     - assets/images/ic_back.png

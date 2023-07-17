@@ -39,7 +39,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       state.copyWith(signOutStatus: LoadStatus.loading),
     );
     try {
-      appCubit.signOut();
+      await appCubit.signOut();
     } catch (e) {
       emit(
         state.copyWith(signOutStatus: LoadStatus.failure),
@@ -53,7 +53,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     // TODO: Thêm handle cho các options còn lại
     if (option == ProfileMenu.logout) {
       signOut();
-      navigator.openSignIn();
     } else if (option == ProfileMenu.openPolicy) {
       launchUrl(Uri(
         scheme: 'https',

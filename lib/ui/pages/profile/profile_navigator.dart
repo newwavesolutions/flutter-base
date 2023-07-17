@@ -10,10 +10,6 @@ class ProfileNavigator extends AppNavigator {
     GoRouter.of(context).pushNamed(AppRouter.setting);
   }
 
-  void openSignIn() {
-    GoRouter.of(context).pushNamed(AppRouter.signIn);
-  }
-
   Future<bool> openUpdateProfile() async {
     var result = await GoRouter.of(context).pushNamed(AppRouter.updateProfile);
     return result as bool;

@@ -73,7 +73,7 @@ class _MainPageState extends State<_MainPage> {
           },
           listener: (context, state) {
             BlocProvider.of<AppSettingCubit>(context).resetSetting();
-            GoRouter.of(context).pushReplacement(AppRouter.signIn);
+            GoRouter.of(context).pushReplacementNamed(AppRouter.signIn);
           },
         )
       ],
