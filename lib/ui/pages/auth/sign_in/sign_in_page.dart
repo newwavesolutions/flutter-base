@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_images.dart';
+import 'package:flutter_base/common/app_svgs.dart';
 import 'package:flutter_base/generated/l10n.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/repositories/user_repository.dart';
 import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_navigator.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
-import 'package:flutter_base/ui/widgets/input/app_email_input.dart';
-import 'package:flutter_base/ui/widgets/input/app_password_input.dart';
+import 'package:flutter_base/ui/widgets/textfields/app_email_text_field.dart';
+import 'package:flutter_base/ui/widgets/textfields/app_password_text_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'sign_in_cubit.dart';
 
@@ -47,6 +49,7 @@ class _SignInChildPageState extends State<SignInChildPage> {
   late TextEditingController passwordTextController;
 
   late ObscureTextController obscurePasswordController;
+  final _formKey = GlobalKey<FormState>();
 
   late SignInCubit _cubit;
 
@@ -54,7 +57,7 @@ class _SignInChildPageState extends State<SignInChildPage> {
   void initState() {
     super.initState();
     usernameTextController = TextEditingController(text: 'mobile@newwave.com');
-    passwordTextController = TextEditingController(text: "mobile");
+    passwordTextController = TextEditingController(text: "Aa@12345");
     obscurePasswordController = ObscureTextController(obscureText: true);
     _cubit = BlocProvider.of<SignInCubit>(context);
     _cubit.changeUsername(username: usernameTextController.text);
@@ -71,36 +74,59 @@ class _SignInChildPageState extends State<SignInChildPage> {
 
   Widget buildBodyWidget() {
     final showingKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(height: 100),
+            SizedBox(
+                height: showingKeyboard ? 0 : 200,
+                width: 200,
+                child: Image.asset(AppImages.icLogoTransparent)),
+            AppEmailTextField(
+              textEditingController: usernameTextController,
+              onChanged: (text) {
+                _cubit.changeUsername(username: text);
+              },
+            ),
+            const SizedBox(height: 20),
+            AppPasswordTextField(
+              textEditingController: passwordTextController,
+              obscureTextController: obscurePasswordController,
+              onChanged: (text) {
+                _cubit.changeUsername(username: text);
+              },
+            ),
+            _buildForgotPasswordButton(),
+            const SizedBox(height: 20),
+            _buildSignButton(),
+            const SizedBox(height: 20),
+            const Divider(),
+            _buildSocialLogin(),
+            const SizedBox(height: 20),
+            _buildRegister(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildForgotPasswordButton() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        const SizedBox(height: 100),
-        SizedBox(
-            height: showingKeyboard ? 0 : 200,
-            width: 200,
-            child: Image.asset(AppImages.icLogoTransparent)),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          child: AppEmailInput(
-            textEditingController: usernameTextController,
-            onChanged: (text) {
-              _cubit.changeUsername(username: text);
-            },
+        TextButton(
+          onPressed: () {},
+          child: const Text(
+            "Forgot password?",
+            style: TextStyle(
+              color: Colors.black,
+            ),
           ),
         ),
-        const SizedBox(height: 12),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          child: AppPasswordInput(
-            obscureTextController: obscurePasswordController,
-            textEditingController: passwordTextController,
-            onChanged: (text) {
-              _cubit.changePassword(password: text);
-            },
-          ),
-        ),
-        const SizedBox(height: 32),
-        _buildSignButton(),
       ],
     );
   }
@@ -120,7 +146,51 @@ class _SignInChildPageState extends State<SignInChildPage> {
     );
   }
 
+  Widget _buildSocialLogin() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+          onPressed: () {},
+          icon: SvgPicture.asset(AppSVGs.icGoogle),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: SvgPicture.asset(AppSVGs.icFacebook),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: SvgPicture.asset(AppSVGs.icApple),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRegister() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text("Don't have an account?"),
+        TextButton(
+          onPressed: () {},
+          child: const Text(
+            "Register Now",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   void _signIn() {
+    if (!_formKey.currentState!.validate()) {
+      _cubit.navigator
+          .showErrorFlushbar(message: "Please enter correct information");
+      return;
+    }
     _cubit.signIn();
   }
 }

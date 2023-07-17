@@ -4,8 +4,7 @@ import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/ui/commons/app_dialog.dart';
 import 'package:flutter_base/ui/pages/profile/update_profile/update_profile_navigator.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_button.dart';
-import 'package:flutter_base/ui/widgets/input/app_label_text_field.dart';
-import 'package:flutter_base/ui/widgets/input/app_phone_input.dart';
+import 'package:flutter_base/ui/widgets/textfields/app_text_field.dart';
 import 'package:flutter_base/utils/app_date_utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -84,18 +83,14 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
         builder: (context, state) {
           return Column(
             children: [
-              AppLabelTextField(
+              const AppTextField(
                 labelText: "Name",
-                labelStyle: AppTextStyle.blackS16W600,
-                textEditingController: textNameController,
               ),
               const SizedBox(
                 height: 16,
               ),
-              AppPhoneInput(
+              const AppTextField(
                 labelText: "Phone number",
-                labelStyle: AppTextStyle.blackS16W600,
-                textEditingController: textPhoneNumberController,
               ),
               const SizedBox(
                 height: 16,
@@ -106,15 +101,9 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
                 builder: (context, state) {
                   return InkWell(
                     onTap: _openDatePicker,
-                    child: AppLabelTextField(
-                      textEditingController: textBirthdayController,
+                    child: AppTextField(
+                      controller: textBirthdayController,
                       labelText: 'Birthday',
-                      labelStyle: AppTextStyle.blackS16W600,
-                      enabled: false,
-                      suffixIcon: const Icon(
-                        Icons.date_range,
-                        color: Colors.grey,
-                      ),
                     ),
                   );
                 },
@@ -122,10 +111,8 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
               const SizedBox(
                 height: 16,
               ),
-              AppLabelTextField(
+              const AppTextField(
                 labelText: "Address",
-                labelStyle: AppTextStyle.blackS16W600,
-                textEditingController: textAddressController,
               ),
               const Spacer(),
               AppButton(
