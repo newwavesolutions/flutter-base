@@ -7,7 +7,7 @@ import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/repositories/user_repository.dart';
 import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_navigator.dart';
-import 'package:flutter_base/ui/widgets/buttons/app_tint_button.dart';
+import 'package:flutter_base/ui/widgets/buttons/app_button.dart';
 import 'package:flutter_base/ui/widgets/textfields/app_email_text_field.dart';
 import 'package:flutter_base/ui/widgets/textfields/app_password_text_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -136,9 +136,10 @@ class _SignInChildPageState extends State<SignInChildPage> {
       builder: (context, state) {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: AppTintButton(
+          child: AppButton(
             title: S.of(context).button_signIn,
             onPressed: _signIn,
+            isEnable: true,
             isLoading: state.signInStatus == LoadStatus.loading,
           ),
         );
