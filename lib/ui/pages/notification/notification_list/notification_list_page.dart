@@ -23,9 +23,9 @@ class NotificationListPage extends StatelessWidget {
   final NotificationListArguments? arguments;
 
   const NotificationListPage({
-    Key? key,
+    super.key,
     this.arguments,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class NotificationListPage extends StatelessWidget {
 }
 
 class NotificationListChildPage extends StatefulWidget {
-  const NotificationListChildPage({Key? key}) : super(key: key);
+  const NotificationListChildPage({super.key});
 
   @override
   State<NotificationListChildPage> createState() =>

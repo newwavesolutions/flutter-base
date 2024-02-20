@@ -3,7 +3,7 @@ import 'package:flutter_base/ui/pages/auth/forgot_password/forgot_password_cubit
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
-  const ForgotPasswordPage({Key? key}) : super(key: key);
+  const ForgotPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class ForgotPasswordPage extends StatelessWidget {
 }
 
 class ForgotPasswordChildPage extends StatefulWidget {
-  const ForgotPasswordChildPage({Key? key}) : super(key: key);
+  const ForgotPasswordChildPage({super.key});
 
   @override
   State<StatefulWidget> createState() {

@@ -6,10 +6,10 @@ class EmptyListWidget extends StatelessWidget {
   final RefreshCallback? onRefresh;
 
   const EmptyListWidget({
-    Key? key,
+    super.key,
     this.text = 'Không có data',
     this.onRefresh,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

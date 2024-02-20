@@ -16,7 +16,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'sign_in_cubit.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class SignInPage extends StatelessWidget {
 }
 
 class SignInChildPage extends StatefulWidget {
-  const SignInChildPage({Key? key}) : super(key: key);
+  const SignInChildPage({super.key});
 
   @override
   State<SignInChildPage> createState() => _SignInChildPageState();

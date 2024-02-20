@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 
 class AppBarWidget extends AppBar {
   AppBarWidget({
-    Key? key,
+    super.key,
     VoidCallback? onBackPressed,
     String title = "",
     List<Widget> rightActions = const [],
     bool showBackButton = true,
   }) : super(
-          key: key,
           title: Text(title),
           toolbarHeight: 50,
           leading: showBackButton

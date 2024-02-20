@@ -18,8 +18,8 @@ class MoviesPage extends StatelessWidget {
 
   const MoviesPage({
     required this.section,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class MoviesPage extends StatelessWidget {
 class MoviesChildPage extends StatefulWidget {
   final MovieCategory section;
 
-  const MoviesChildPage(this.section, {Key? key}) : super(key: key);
+  const MoviesChildPage(this.section, {super.key});
 
   @override
   State<MoviesChildPage> createState() => _MoviesChildPageState();

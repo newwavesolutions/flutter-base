@@ -17,9 +17,9 @@ class PhotoViewPage extends StatelessWidget {
   final PhotoViewArguments arguments;
 
   const PhotoViewPage({
-    Key? key,
+    super.key,
     required this.arguments,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +38,9 @@ class PhotoViewChildPage extends StatefulWidget {
   final List<String> images;
 
   const PhotoViewChildPage({
-    Key? key,
+    super.key,
     required this.images,
-  }) : super(key: key);
+  });
 
   @override
   State<PhotoViewChildPage> createState() => _PhotoViewChildPageState();

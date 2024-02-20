@@ -8,13 +8,13 @@ class AppTextField extends StatelessWidget {
   final String? hintText;
 
   const AppTextField({
-    Key? key,
+    super.key,
     this.controller,
     this.onChanged,
     this.textInputType,
     this.labelText,
     this.hintText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -61,20 +61,20 @@ extension DateTimeExtension on DateTime {
     if ((format ?? "").isNotEmpty) {
       try {
         return DateFormat(format).parse(date);
-      } catch (e, s) {
-        logger.e(e, s);
+      } catch (e) {
+        logger.e(e);
       }
     }
     try {
       return DateTime.parse(date);
-    } catch (e, s) {
-      logger.e(e, s);
+    } catch (e) {
+      logger.e(e);
     }
     //
     try {
       return DateFormat("yyyy/MM/dd").parse(date);
-    } catch (e, s) {
-      logger.e(e, s);
+    } catch (e) {
+      logger.e(e);
     }
     return null;
   }
@@ -82,8 +82,8 @@ extension DateTimeExtension on DateTime {
   String toDateString({String format = AppConfigs.dateDisplayFormat}) {
     try {
       return DateFormat(format).format(this);
-    } catch (e, s) {
-      logger.e(e, s);
+    } catch (e) {
+      logger.e(e);
       return '';
     }
   }

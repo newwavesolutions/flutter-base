@@ -15,8 +15,8 @@ import 'widgets/home_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
 }
 
 class HomeChildPage extends StatefulWidget {
-  const HomeChildPage({Key? key}) : super(key: key);
+  const HomeChildPage({super.key});
 
   @override
   State<HomeChildPage> createState() => _HomeChildPageState();

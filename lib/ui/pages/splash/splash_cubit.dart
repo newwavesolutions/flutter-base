@@ -32,10 +32,10 @@ class SplashCubit extends Cubit<SplashState> {
       try {
         //Profile
         await appCubit.getProfile();
-      } catch (error, s) {
-        logger.e(error, s);
+      } catch (error) {
+        logger.e(error);
         //Check 401
-        if (error is DioError) {
+        if (error is DioException) {
           if (error.response?.statusCode == 401) {
             //Todo
             // authService.signOut();

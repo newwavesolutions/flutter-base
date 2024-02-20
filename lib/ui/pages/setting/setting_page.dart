@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SettingPage extends StatelessWidget {
-  const SettingPage({Key? key}) : super(key: key);
+  const SettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class SettingPage extends StatelessWidget {
 }
 
 class SettingChildPage extends StatefulWidget {
-  const SettingChildPage({Key? key}) : super(key: key);
+  const SettingChildPage({super.key});
 
   @override
   State<SettingChildPage> createState() => _SettingChildPageState();

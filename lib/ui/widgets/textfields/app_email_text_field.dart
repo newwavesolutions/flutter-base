@@ -11,14 +11,14 @@ class AppEmailTextField extends StatelessWidget {
   // final GlobalKey<FormState> formKey;
 
   const AppEmailTextField({
-    Key? key,
+    super.key,
     // required this.formKey,
     required this.textEditingController,
     this.onChanged,
     this.labelText = "Email",
     this.hintText,
     this.focusNode,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

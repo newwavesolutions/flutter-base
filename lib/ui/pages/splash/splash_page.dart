@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'splash_cubit.dart';
 
 class SplashPage extends StatelessWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class SplashPage extends StatelessWidget {
 }
 
 class SplashChildPage extends StatefulWidget {
-  const SplashChildPage({Key? key}) : super(key: key);
+  const SplashChildPage({super.key});
 
   @override
   State<SplashChildPage> createState() => _SplashChildPageState();

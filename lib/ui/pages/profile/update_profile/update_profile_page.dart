@@ -13,8 +13,8 @@ import 'update_profile_cubit.dart';
 
 class UpdateProfilePage extends StatelessWidget {
   const UpdateProfilePage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class UpdateProfilePage extends StatelessWidget {
 }
 
 class UpdateProfileChildPage extends StatefulWidget {
-  const UpdateProfileChildPage({Key? key}) : super(key: key);
+  const UpdateProfileChildPage({super.key});
 
   @override
   State<UpdateProfileChildPage> createState() => _UpdateProfileChildPageState();

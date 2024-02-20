@@ -8,10 +8,10 @@ class MovieWidget extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const MovieWidget({
-    Key? key,
+    super.key,
     this.movie,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

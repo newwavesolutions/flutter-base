@@ -29,7 +29,7 @@ class AppButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const AppButton({
-    Key? key,
+    super.key,
     this.title = "",
     this.width = double.infinity,
     this.height = AppDimens.buttonHeight,
@@ -44,7 +44,7 @@ class AppButton extends StatelessWidget {
     this.isEnable = true,
     this.isLoading = false,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

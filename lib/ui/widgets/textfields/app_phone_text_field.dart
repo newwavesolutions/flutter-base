@@ -11,14 +11,14 @@ class AppPhoneTextField extends StatelessWidget {
   // final GlobalKey<FormState> formKey;
 
   const AppPhoneTextField({
-    Key? key,
+    super.key,
     // required this.formKey,
     required this.textEditingController,
     this.onChanged,
     this.labelText = "Phone",
     this.hintText,
     this.focusNode,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

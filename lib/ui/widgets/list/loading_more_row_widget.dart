@@ -6,10 +6,10 @@ class LoadingMoreRowWidget extends StatelessWidget {
   final Color color;
 
   const LoadingMoreRowWidget({
-    Key? key,
+    super.key,
     this.height = 80,
     this.color = AppColors.secondary,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

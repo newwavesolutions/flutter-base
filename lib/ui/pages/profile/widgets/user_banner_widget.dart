@@ -10,11 +10,11 @@ class UserBannerWidget extends StatelessWidget {
   final Function() onPressedAvatar;
 
   const UserBannerWidget({
-    Key? key,
+    super.key,
     required this.user,
     required this.onPressed,
     required this.onPressedAvatar,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
