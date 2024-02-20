@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
-
-import '../app_circular_progress_indicator.dart';
+import 'package:flutter_base/ui/widgets/app_circular_progress_indicator.dart';
 
 class AppButton extends StatelessWidget {
   //Attributes
@@ -28,6 +27,12 @@ class AppButton extends StatelessWidget {
   //Action & callback
   final VoidCallback? onPressed;
 
+  final EdgeInsets? padding;
+
+  final List<BoxShadow>? boxShadow;
+
+  final bool isEnabled;
+
   const AppButton({
     super.key,
     this.title = "",
@@ -44,26 +49,31 @@ class AppButton extends StatelessWidget {
     this.isEnable = true,
     this.isLoading = false,
     this.onPressed,
+    this.padding,
+    this.boxShadow,
+    this.isEnabled = true,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: height,
-      width: width,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(cornerRadius),
+    return InkWell(
+      onTap: isEnabled ? onPressed : null,
+      child: Container(
+        height: height,
+        width: width,
+        padding: padding ?? EdgeInsets.zero,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            cornerRadius,
           ),
-          backgroundColor: isEnable ? backgroundColor : disableBackgroundColor,
-          side: BorderSide(
+          color:
+              isEnabled ? backgroundColor : AppColors.textFieldDisabledBorder,
+          border: Border.all(
             color: borderColor,
             width: borderWidth,
           ),
-          padding: const EdgeInsets.all(0),
+          boxShadow: boxShadow,
         ),
-        onPressed: isEnable ? onPressed : null,
         child: _buildChildWidget(),
       ),
     );
@@ -77,7 +87,16 @@ class AppButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           leadingIcon ?? Container(),
-          title.isNotEmpty ? Text(title, style: textStyle) : Container(),
+          Expanded(
+            child: Center(
+              child: title.isNotEmpty
+                  ? Text(
+                      title,
+                      style: textStyle,
+                    )
+                  : Container(),
+            ),
+          ),
           trailingIcon ?? Container(),
         ],
       );

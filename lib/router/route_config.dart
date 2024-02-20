@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/models/entities/notification/notification_entity.dart';
 import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
+import 'package:flutter_base/ui/pages/auth/sign_up/sign_up_page.dart';
+import 'package:flutter_base/ui/pages/main/main_page.dart';
 import 'package:flutter_base/ui/pages/movie_detail/movie_detail_page.dart';
+import 'package:flutter_base/ui/pages/notification/notification_detail/notification_detail_page.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
+import 'package:flutter_base/ui/pages/onboarding/onboarding_page.dart';
 import 'package:flutter_base/ui/pages/photo_view_page/photo_view_page.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
 import 'package:flutter_base/ui/pages/profile/update_avatar/update_avatar_page.dart';
 import 'package:flutter_base/ui/pages/profile/update_profile/update_profile_page.dart';
 import 'package:flutter_base/ui/pages/setting/setting_page.dart';
+import 'package:flutter_base/ui/pages/splash/splash_page.dart';
 import 'package:go_router/go_router.dart';
-
-import '../ui/pages/main/main_page.dart';
-import '../ui/pages/notification/notification_detail/notification_detail_page.dart';
-import '../ui/pages/onboarding/onboarding_page.dart';
-import '../ui/pages/splash/splash_page.dart';
 
 class AppRouter {
   AppRouter._();
@@ -30,9 +30,10 @@ class AppRouter {
   static const String splash = "/";
   static const String main = "main";
   static const String signIn = "signIn";
+  static const String signUp = "signUp";
   static const String notificationList = "notificationList";
   static const String notificationDetail = "notificationDetail";
-  static const String onboarding = 'onboarding';
+  static const String onBoarding = 'onBoarding';
   static const String movieDetail = 'movieDetail';
   static const String photoView = 'photoView';
   static const String profile = 'profile';
@@ -54,6 +55,11 @@ class AppRouter {
       builder: (context, state) => const SignInPage(),
     ),
     GoRoute(
+      name: signUp,
+      path: "/$signUp",
+      builder: (context, state) => const SignUpPage(),
+    ),
+    GoRoute(
       name: notificationList,
       path: "/$notificationList",
       builder: (context, state) => const NotificationListPage(),
@@ -68,8 +74,8 @@ class AppRouter {
       ),
     ),
     GoRoute(
-      name: onboarding,
-      path: "/$onboarding",
+      name: onBoarding,
+      path: "/$onBoarding",
       builder: (context, state) => const OnboardingPage(),
     ),
     GoRoute(
