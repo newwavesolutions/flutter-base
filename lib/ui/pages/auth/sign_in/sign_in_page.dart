@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
-import 'package:flutter_base/common/app_images.dart';
+import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_svgs.dart';
+import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/generated/l10n.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/repositories/user_repository.dart';
 import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_navigator.dart';
+import 'package:flutter_base/ui/pages/auth/widgets/welcome_widget.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_button.dart';
-import 'package:flutter_base/ui/widgets/textfields/app_email_text_field.dart';
-import 'package:flutter_base/ui/widgets/textfields/app_password_text_field.dart';
+import 'package:flutter_base/ui/widgets/text_field/app_password_text_field.dart';
+import 'package:flutter_base/ui/widgets/text_field/app_text_field.dart';
+import 'package:flutter_base/utils/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -45,7 +48,7 @@ class SignInChildPage extends StatefulWidget {
 }
 
 class _SignInChildPageState extends State<SignInChildPage> {
-  late TextEditingController usernameTextController;
+  late TextEditingController emailTextController;
   late TextEditingController passwordTextController;
 
   late ObscureTextController obscurePasswordController;
@@ -56,11 +59,11 @@ class _SignInChildPageState extends State<SignInChildPage> {
   @override
   void initState() {
     super.initState();
-    usernameTextController = TextEditingController(text: 'mobile@newwave.com');
+    emailTextController = TextEditingController(text: 'mobile@newwave.com');
     passwordTextController = TextEditingController(text: "Aa@12345");
     obscurePasswordController = ObscureTextController(obscureText: true);
     _cubit = BlocProvider.of<SignInCubit>(context);
-    _cubit.changeUsername(username: usernameTextController.text);
+    _cubit.changeEmail(email: emailTextController.text);
     _cubit.changePassword(password: passwordTextController.text);
   }
 
@@ -73,41 +76,58 @@ class _SignInChildPageState extends State<SignInChildPage> {
   }
 
   Widget buildBodyWidget() {
-    final showingKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      physics: const ClampingScrollPhysics(),
       child: Form(
         key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 100),
-            SizedBox(
-                height: showingKeyboard ? 0 : 200,
-                width: 200,
-                child: Image.asset(AppImages.icLogoTransparent)),
-            AppEmailTextField(
-              textEditingController: usernameTextController,
+            const SizedBox(height: 112),
+            WelcomeWidget(
+              title: S.current.sign_in_title,
+              subTitle: S.current.sign_in_sub_title,
+            ),
+            const SizedBox(height: 28),
+            AppTextField(
+              controller: emailTextController,
+              hintText: S.current.your_email,
+              borderRadius: 5,
+              prefix: const Icon(Icons.email_outlined),
+              type: TextInputType.emailAddress,
               onChanged: (text) {
-                _cubit.changeUsername(username: text);
+                _cubit.changeEmail(email: text);
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return S.current.email_empty;
+                }
+                if (!Utils.isEmail(value)) {
+                  return "Email invalid";
+                }
+                return null;
               },
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 8),
             AppPasswordTextField(
-              textEditingController: passwordTextController,
+              controller: passwordTextController,
               obscureTextController: obscurePasswordController,
+              hintText: S.current.password,
+              borderRadius: 5,
               onChanged: (text) {
-                _cubit.changeUsername(username: text);
+                _cubit.changePassword(password: text);
               },
             ),
+            const SizedBox(height: 16),
+            _buildSignInButton(),
+            const SizedBox(height: 20),
+            _buildDivider(),
+            const SizedBox(height: 16),
+            _buildSocialLoginWidget(),
+            const SizedBox(height: 16),
             _buildForgotPasswordButton(),
-            const SizedBox(height: 20),
-            _buildSignButton(),
-            const SizedBox(height: 20),
-            const Divider(),
-            _buildSocialLogin(),
-            const SizedBox(height: 20),
-            _buildRegister(),
+            _buildRegisterWidget(),
           ],
         ),
       ),
@@ -116,71 +136,120 @@ class _SignInChildPageState extends State<SignInChildPage> {
 
   Widget _buildForgotPasswordButton() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
           onPressed: () {},
-          child: const Text(
-            "Forgot password?",
-            style: TextStyle(
-              color: Colors.black,
-            ),
+          child: Text(
+            S.of(context).forgot_password,
+            style: AppTextStyle.primaryS12Bold,
           ),
         ),
       ],
     );
   }
 
-  Widget _buildSignButton() {
+  Widget _buildSignInButton() {
     return BlocBuilder<SignInCubit, SignInState>(
       builder: (context, state) {
-        return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: AppButton(
-            title: S.of(context).button_signIn,
-            onPressed: _signIn,
-            isEnable: true,
-            isLoading: state.signInStatus == LoadStatus.loading,
-          ),
+        final bool isEnable =
+            (state.email ?? '').isNotEmpty && (state.password ?? '').isNotEmpty;
+        return AppButton(
+          isEnabled: isEnable,
+          title: S.current.button_signIn,
+          onPressed: _signIn,
+          isLoading: state.signInStatus == LoadStatus.loading,
+          boxShadow: [
+            if (isEnable)
+              const BoxShadow(
+                color: Color(0x3D40BFFF),
+                blurRadius: 30,
+                offset: Offset(0, 10),
+                spreadRadius: 0,
+              ),
+          ],
         );
       },
     );
   }
 
-  Widget _buildSocialLogin() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+  Widget _buildSocialLoginWidget() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        IconButton(
+        AppButton(
           onPressed: () {},
-          icon: SvgPicture.asset(AppSVGs.icGoogle),
+          leadingIcon: Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: SvgPicture.asset(
+              AppSVGs.icGoogle,
+              width: 24,
+              height: 24,
+              fit: BoxFit.cover,
+            ),
+          ),
+          trailingIcon: const SizedBox(width: 24),
+          title: S.current.login_with_google,
+          textStyle: AppTextStyle.textGreyS14Bold,
+          borderColor: AppColors.textGrey,
+          backgroundColor: Colors.transparent,
         ),
-        IconButton(
+        const SizedBox(height: 8),
+        AppButton(
           onPressed: () {},
-          icon: SvgPicture.asset(AppSVGs.icFacebook),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: SvgPicture.asset(AppSVGs.icApple),
+          leadingIcon: Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: SvgPicture.asset(
+              AppSVGs.icFacebook,
+              width: 24,
+              height: 24,
+              fit: BoxFit.cover,
+            ),
+          ),
+          trailingIcon: const SizedBox(width: 24),
+          title: S.current.login_with_facebook,
+          textStyle: AppTextStyle.textGreyS14Bold,
+          borderColor: AppColors.textGrey,
+          backgroundColor: Colors.transparent,
         ),
       ],
     );
   }
 
-  Widget _buildRegister() {
+  Widget _buildRegisterWidget() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Don't have an account?"),
+        Text(
+          S.current.dont_have_an_account,
+          style: AppTextStyle.textGreyS12W400,
+        ),
         TextButton(
-          onPressed: () {},
-          child: const Text(
-            "Register Now",
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
+          onPressed: () => _cubit.navigator.openSignUpPage(),
+          child: Text(
+            S.current.register,
+            style: AppTextStyle.primaryS12Bold,
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDivider() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Expanded(
+          child: Divider(color: AppColors.divider),
+        ),
+        const SizedBox(width: 28),
+        Text(
+          S.current.or,
+          style: AppTextStyle.textGreyS14Bold,
+        ),
+        const SizedBox(width: 28),
+        const Expanded(
+          child: Divider(color: AppColors.divider),
         ),
       ],
     );

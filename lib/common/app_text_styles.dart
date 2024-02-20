@@ -96,4 +96,42 @@ class AppTextStyle {
   static final tintS18 = tint.copyWith(fontSize: 18);
   static final tintS18Bold = tintS18.copyWith(fontWeight: FontWeight.bold);
   static final tintS18W800 = tintS18.copyWith(fontWeight: FontWeight.w800);
+
+  ///Indigo
+  static const indigo = TextStyle(color: AppColors.textIndigo);
+
+  //s16
+  static final indigoS16 = indigo.copyWith(fontSize: 16);
+  static final indigoS16Bold = indigoS16.copyWith(fontWeight: FontWeight.w700);
+
+  ///Text grey
+  static const textGrey = TextStyle(color: AppColors.textGrey);
+
+  //s12
+  static final textGreyS12 = textGrey.copyWith(fontSize: 12);
+  static final textGreyS12W400 =
+      textGreyS12.copyWith(fontWeight: FontWeight.w400);
+  static final textGreyS12Bold =
+      textGreyS12.copyWith(fontWeight: FontWeight.bold);
+
+  //s14
+  static final textGreyS14 = textGrey.copyWith(fontSize: 14);
+  static final textGreyS14Bold =
+      textGreyS14.copyWith(fontWeight: FontWeight.bold);
+
+  ///TextField error
+  static const textFieldError =
+      TextStyle(color: AppColors.textFieldErrorBorder);
+
+  //s12
+  static final textFieldErrorS12 = textFieldError.copyWith(fontSize: 12);
+  static final textFieldErrorS12Bold =
+      textFieldError.copyWith(fontWeight: FontWeight.bold);
+
+  ///Primary
+  static const primary = TextStyle(color: AppColors.primary);
+
+  //s12
+  static final primaryS12 = primary.copyWith(fontSize: 12);
+  static final primaryS12Bold = primary.copyWith(fontWeight: FontWeight.bold);
 }

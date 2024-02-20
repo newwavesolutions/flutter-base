@@ -30,8 +30,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       emit(state.copyWith(activePage: nextPage));
     } else {
       SharedPreferencesHelper.setOnboard();
-      //Todo
-      // Get.offAllNamed(RouteConfig.signIn);
+      navigator.openSignInPage();
     }
   }
 }

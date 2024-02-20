@@ -36,12 +36,12 @@ class OnboardingChildPage extends StatefulWidget {
 class _OnboardingChildPageState extends State<OnboardingChildPage> {
   late OnboardingCubit _cubit;
   final PageController _pageViewController = PageController(initialPage: 0);
-  List<Widget> _onboardingPages = [];
+  List<Widget> _onBoardingPages = [];
 
   @override
   void initState() {
     super.initState();
-    _onboardingPages = [
+    _onBoardingPages = [
       OnboardingSubPage(
         title: S.current.onboarding_title_01,
         description: S.current.onboarding_description_01,
@@ -59,7 +59,7 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
       ),
     ];
     _cubit = BlocProvider.of<OnboardingCubit>(context);
-    _cubit.setTotalPage(totalPage: _onboardingPages.length);
+    _cubit.setTotalPage(totalPage: _onBoardingPages.length);
   }
 
   @override
@@ -80,9 +80,9 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
                       debugPrint(index.toString());
                       _cubit.onPageChanged(index);
                     },
-                    itemCount: _onboardingPages.length,
+                    itemCount: _onBoardingPages.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return _onboardingPages[state.activePage];
+                      return _onBoardingPages[state.activePage];
                     });
               },
             ),
@@ -109,7 +109,7 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
                         ListView.separated(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
-                          itemCount: _onboardingPages.length,
+                          itemCount: _onBoardingPages.length,
                           separatorBuilder: (BuildContext context, int index) {
                             return const SizedBox(
                               width: 5,
@@ -143,7 +143,9 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
                               context: context,
                             );
                           },
-                          child: Text(S.of(context).button_next),
+                          child: state.activePage == _onBoardingPages.length - 1
+                              ? Text(S.of(context).lets_go)
+                              : Text(S.of(context).button_next),
                         ),
                       ],
                     );

@@ -6,7 +6,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'blocs/app_cubit.dart';
 import 'blocs/setting/app_setting_cubit.dart';
-import 'common/app_themes.dart';
 import 'generated/l10n.dart';
 import 'network/api_client.dart';
 import 'network/api_util.dart';
@@ -84,10 +83,10 @@ class _MyAppState extends State<MyApp> {
               },
               child: MaterialApp.router(
                 title: AppConfigs.appName,
-                theme: AppThemes(
-                  isDarkMode: false,
+                theme: ThemeData(
                   primaryColor: state.primaryColor,
-                ).theme,
+                  fontFamily: AppConfigs.fontFamily,
+                ),
                 //Disabled
                 // darkTheme: AppThemes(
                 //   isDarkMode: true,

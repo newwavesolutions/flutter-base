@@ -24,8 +24,8 @@ class SignInCubit extends Cubit<SignInState> {
     required this.appCubit,
   }) : super(const SignInState());
 
-  void changeUsername({required String username}) {
-    emit(state.copyWith(username: username));
+  void changeEmail({required String email}) {
+    emit(state.copyWith(email: email));
   }
 
   void changePassword({required String password}) {
@@ -33,9 +33,9 @@ class SignInCubit extends Cubit<SignInState> {
   }
 
   void signIn() async {
-    final username = state.username ?? '';
+    final email = state.email ?? '';
     final password = state.password ?? '';
-    if (username.isEmpty) {
+    if (email.isEmpty) {
       navigator.showErrorFlushbar(message: 'Username is empty');
       return;
     }
@@ -45,7 +45,7 @@ class SignInCubit extends Cubit<SignInState> {
     }
     emit(state.copyWith(signInStatus: LoadStatus.loading));
     try {
-      final result = await authRepo.signIn(username, password);
+      final result = await authRepo.signIn(email, password);
       if (result != null) {
         UserEntity? myProfile = await userRepo.getProfile();
         appCubit.updateProfile(myProfile);

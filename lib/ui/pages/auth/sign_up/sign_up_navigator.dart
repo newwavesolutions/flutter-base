@@ -2,14 +2,14 @@ import 'package:flutter_base/common/app_navigator.dart';
 import 'package:flutter_base/router/route_config.dart';
 import 'package:go_router/go_router.dart';
 
-class SignInNavigator extends AppNavigator {
-  SignInNavigator({required super.context});
+class SignUpNavigator extends AppNavigator {
+  SignUpNavigator({required super.context});
 
   void openMainPage() {
     GoRouter.of(context).pushNamed(AppRouter.main);
   }
 
-  void openSignUpPage() {
-    GoRouter.of(context).pushNamed(AppRouter.signUp);
+  void openSignInPage() {
+    GoRouter.of(context).pushNamed(AppRouter.signIn);
   }
 }

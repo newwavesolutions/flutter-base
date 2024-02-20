@@ -13,7 +13,7 @@ class SplashNavigator extends AppNavigator {
     GoRouter.of(context).pushReplacementNamed(AppRouter.main);
   }
 
-  void openOnboardingPage() {
-    GoRouter.of(context).pushReplacementNamed(AppRouter.onboarding);
+  void openOnBoardingPage() {
+    GoRouter.of(context).pushReplacementNamed(AppRouter.onBoarding);
   }
 }

@@ -26,7 +26,7 @@ class SplashCubit extends Cubit<SplashState> {
       if (await SharedPreferencesHelper.isOnboardCompleted()) {
         navigator.openSignInPage();
       } else {
-        navigator.openOnboardingPage();
+        navigator.openOnBoardingPage();
       }
     } else {
       try {
