@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/ui/widgets/shimmer/app_shimmer.dart';
 
 class LoadingMovieDetailWidget extends StatelessWidget {
-  const LoadingMovieDetailWidget({Key? key}) : super(key: key);
+  const LoadingMovieDetailWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

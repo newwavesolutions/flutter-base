@@ -17,7 +17,7 @@ import 'repositories/user_repository.dart';
 import 'router/route_config.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<StatefulWidget> createState() {

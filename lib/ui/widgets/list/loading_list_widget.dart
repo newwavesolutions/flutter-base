@@ -3,8 +3,8 @@ import 'loading_row_widget.dart';
 
 class LoadingListWidget extends StatelessWidget {
   const LoadingListWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

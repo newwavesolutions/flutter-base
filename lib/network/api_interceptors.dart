@@ -26,7 +26,7 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) async {
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
     final statusCode = err.response?.statusCode;
     final path = err.requestOptions.path;
     final uri = err.requestOptions.uri;
@@ -74,7 +74,7 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
         } catch (e) {
           //Refresh failure => force login
           logger.e(
-              "Api refresh token error $e, msg: ${(e as DioError).response}");
+              "Api refresh token error $e, msg: ${(e as DioException).response}");
           _forceSignIn();
           return handler.next(err);
         }

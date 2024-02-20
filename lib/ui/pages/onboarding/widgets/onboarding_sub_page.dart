@@ -6,12 +6,12 @@ class OnboardingSubPage extends StatelessWidget {
   final String description;
   final String image;
 
-  const OnboardingSubPage(
-      {Key? key,
-      required this.title,
-      required this.description,
-      required this.image})
-      : super(key: key);
+  const OnboardingSubPage({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.image,
+  });
 
   @override
   Widget build(BuildContext context) {

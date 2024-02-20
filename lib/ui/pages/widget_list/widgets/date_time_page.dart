@@ -5,8 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class DateTimePage extends StatefulWidget {
   const DateTimePage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<DateTimePage> createState() => _DateTimePageState();

@@ -15,7 +15,7 @@ import 'main_state.dart';
 import 'main_tab.dart';
 
 class MainPage extends StatelessWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class MainPage extends StatelessWidget {
 }
 
 class _MainPage extends StatefulWidget {
-  const _MainPage({Key? key}) : super(key: key);
+  const _MainPage();
 
   @override
   State<_MainPage> createState() => _MainPageState();

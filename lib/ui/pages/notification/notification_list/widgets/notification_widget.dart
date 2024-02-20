@@ -10,10 +10,10 @@ class NotificationWidget extends StatelessWidget {
   final Function()? onPressed;
 
   const NotificationWidget({
-    Key? key,
+    super.key,
     required this.notification,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

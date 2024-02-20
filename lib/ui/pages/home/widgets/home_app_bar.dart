@@ -3,13 +3,11 @@ import 'package:flutter_base/common/app_dimens.dart';
 
 class HomeAppBar extends AppBar {
   HomeAppBar({
-    Key? key,
+    super.key,
     required Widget avatar,
-    // VoidCallback? onSearchPressed,
     required VoidCallback? onNotificationPressed,
     required VoidCallback? onAvatarPressed,
   }) : super(
-          key: key,
           title: const Text("Movie"),
           leading: Center(
             child: InkWell(

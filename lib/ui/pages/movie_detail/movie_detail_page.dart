@@ -23,9 +23,9 @@ class MovieDetailPage extends StatelessWidget {
   final MovieDetailArguments arguments;
 
   const MovieDetailPage({
-    Key? key,
+    super.key,
     required this.arguments,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +48,9 @@ class MovieDetailChildPage extends StatefulWidget {
   final int id;
 
   const MovieDetailChildPage({
-    Key? key,
+    super.key,
     required this.id,
-  }) : super(key: key);
+  });
 
   @override
   State<MovieDetailChildPage> createState() => _MovieDetailChildPageState();

@@ -20,14 +20,14 @@ class AppPasswordTextField extends StatelessWidget {
   final FocusNode? focusNode;
 
   const AppPasswordTextField({
-    Key? key,
+    super.key,
     required this.textEditingController,
     required this.obscureTextController,
     this.onChanged,
     this.labelText = "Password",
     this.hintText,
     this.focusNode,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
