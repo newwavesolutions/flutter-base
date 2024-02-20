@@ -13,7 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'profile_cubit.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class ProfilePage extends StatelessWidget {
 }
 
 class _ProfileTabPage extends StatefulWidget {
-  const _ProfileTabPage({Key? key}) : super(key: key);
+  const _ProfileTabPage();
 
   @override
   State<_ProfileTabPage> createState() => _ProfileTabPageState();

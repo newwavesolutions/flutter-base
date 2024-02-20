@@ -17,7 +17,7 @@ import 'repositories/user_repository.dart';
 import 'router/route_config.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -88,10 +88,11 @@ class _MyAppState extends State<MyApp> {
                   isDarkMode: false,
                   primaryColor: state.primaryColor,
                 ).theme,
-                darkTheme: AppThemes(
-                  isDarkMode: true,
-                  primaryColor: state.primaryColor,
-                ).theme,
+                //Disabled
+                // darkTheme: AppThemes(
+                //   isDarkMode: true,
+                //   primaryColor: state.primaryColor,
+                // ).theme,
                 themeMode: state.themeMode,
                 routerConfig: AppRouter.router,
                 localizationsDelegates: const [

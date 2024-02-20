@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class OnboardingPage extends StatelessWidget {
   static const router = 'onBoarding';
 
-  const OnboardingPage({Key? key}) : super(key: key);
+  const OnboardingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class OnboardingPage extends StatelessWidget {
 }
 
 class OnboardingChildPage extends StatefulWidget {
-  const OnboardingChildPage({Key? key}) : super(key: key);
+  const OnboardingChildPage({super.key});
 
   @override
   State<StatefulWidget> createState() {

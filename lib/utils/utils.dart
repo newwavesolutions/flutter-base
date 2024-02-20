@@ -1,32 +1,37 @@
 import 'dart:ui';
 
+import 'package:url_launcher/url_launcher_string.dart';
+
 class Utils {
   ///Search
-  // static bool isTextContainKeyword({String text = "", String keyword = ""}) {
-  //   final newText = String.fromCharCodes(replaceCodeUnits(text.codeUnits)).toLowerCase();
-  //   final newKeyword = String.fromCharCodes(replaceCodeUnits(keyword.codeUnits)).toLowerCase();
-  //   final isContain = newText.contains(newKeyword);
-  //   return isContain;
-  // }
-  //
-  // static launchPhoneCall({String phone}) async {
-  //   try {
-  //     await launch("tel:$phone");
-  //   } catch (e) {
-  //     logger.e(e);
-  //   }
-  // }
-  //
-  // static launchEmail({String email}) async {
-  //   try {
-  //     await launch(Uri(
-  //       scheme: 'mailto',
-  //       path: email,
-  //     ).toString());
-  //   } catch (e) {
-  //     logger.e(e);
-  //   }
-  // }
+  void launchPhone(String phoneNumber) async {
+    final url = 'tel:$phoneNumber';
+
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  void launchEmail(String emailAddress, String subject, String body) async {
+    final url =
+        'mailto:$emailAddress?subject=${Uri.encodeComponent(subject)}&body=${Uri.encodeComponent(body)}';
+
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  static launchUrl(String url) async {
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   /// Checks if string is email.
   static bool isEmail(String input) {
@@ -38,6 +43,23 @@ class Utils {
     final RegExp regex = RegExp(emailRegex);
     // Check if the input matches the email pattern
     return regex.hasMatch(input);
+  }
+
+  /// Checks if string is password.
+  /// r'^
+  ///   (?=.*[A-Z])       // should contain at least one upper case
+  ///   (?=.*[a-z])       // should contain at least one lower case
+  ///   (?=.*?[0-9])      // should contain at least one digit
+  ///   (?=.*?[!@#\$&*~]) // should contain at least one Special character
+  ///   .{8,}             // Must be at least 8 characters in length
+  /// $
+  static bool isPassword(String input) {
+    // Define a regular expression pattern for password validation.
+    // This regex requires at least 8 characters, one uppercase letter, one lowercase letter,
+    // one digit, and one special character.
+    const passwordRegex =
+        r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$';
+    return RegExp(passwordRegex).hasMatch(input);
   }
 
   /// Checks if string is phone number.

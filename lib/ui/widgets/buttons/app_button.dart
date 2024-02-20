@@ -1,62 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_dimens.dart';
+import 'package:flutter_base/common/app_text_styles.dart';
 
 import '../app_circular_progress_indicator.dart';
 
 class AppButton extends StatelessWidget {
-  final String? title;
+  //Attributes
+  final String title;
+  final double width;
+  final double height;
+  final double borderWidth;
+  final double cornerRadius;
+  final Color borderColor;
+  final Color backgroundColor;
+  final Color disableBackgroundColor;
+  final TextStyle textStyle;
+
+  //Child widgets
   final Widget? leadingIcon;
   final Widget? trailingIcon;
 
+  //Status
+  final bool isEnable;
   final bool isLoading;
 
-  final double? height;
-  final double? width;
-  final double? borderWidth;
-  final double? cornerRadius;
-
-  final Color? backgroundColor;
-  final Color? borderColor;
-
-  final TextStyle? textStyle;
-
+  //Action & callback
   final VoidCallback? onPressed;
 
   const AppButton({
-    Key? key,
-    this.title,
+    super.key,
+    this.title = "",
+    this.width = double.infinity,
+    this.height = AppDimens.buttonHeight,
+    this.borderWidth = 0,
+    this.cornerRadius = AppDimens.buttonCornerRadius,
+    this.borderColor = AppColors.border,
+    this.backgroundColor = AppColors.buttonBGPrimary,
+    this.disableBackgroundColor = AppColors.buttonBGDisabled,
+    this.textStyle = AppTextStyle.white,
     this.leadingIcon,
     this.trailingIcon,
+    this.isEnable = true,
     this.isLoading = false,
-    this.height,
-    this.width,
-    this.borderWidth,
-    this.cornerRadius,
-    this.backgroundColor,
-    this.borderColor,
-    this.textStyle,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height ?? AppDimens.buttonHeight,
-      width: width ?? double.infinity,
+      height: height,
+      width: width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                cornerRadius ?? AppDimens.buttonCornerRadius),
+            borderRadius: BorderRadius.circular(cornerRadius),
           ),
-          backgroundColor: backgroundColor,
+          backgroundColor: isEnable ? backgroundColor : disableBackgroundColor,
           side: BorderSide(
-            color: borderColor ?? Colors.transparent,
-            width: borderWidth ?? 0,
+            color: borderColor,
+            width: borderWidth,
           ),
           padding: const EdgeInsets.all(0),
         ),
-        onPressed: onPressed,
+        onPressed: isEnable ? onPressed : null,
         child: _buildChildWidget(),
       ),
     );
@@ -70,16 +77,7 @@ class AppButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           leadingIcon ?? Container(),
-          title != null
-              ? Text(
-                  title!,
-                  style: textStyle ??
-                      const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.red),
-                )
-              : Container(),
+          title.isNotEmpty ? Text(title, style: textStyle) : Container(),
           trailingIcon ?? Container(),
         ],
       );

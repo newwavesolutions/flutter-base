@@ -12,10 +12,10 @@ class LoadingRowWidget extends StatelessWidget {
   );
 
   const LoadingRowWidget({
-    Key? key,
+    super.key,
     this.padding,
     this.height = 100,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

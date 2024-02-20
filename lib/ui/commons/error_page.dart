@@ -7,9 +7,9 @@ class ErrorMovieDetailWidget extends StatelessWidget {
   final Function() onPressed;
 
   const ErrorMovieDetailWidget({
-    Key? key,
+    super.key,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

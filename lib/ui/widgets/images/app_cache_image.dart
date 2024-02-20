@@ -11,13 +11,13 @@ class AppCacheImage extends StatelessWidget {
   final BoxFit fit;
 
   const AppCacheImage({
-    Key? key,
+    super.key,
     this.url = "",
     this.width,
     this.height,
     this.borderRadius,
     this.fit = BoxFit.cover,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

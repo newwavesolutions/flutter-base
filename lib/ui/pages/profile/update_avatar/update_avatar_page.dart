@@ -12,8 +12,8 @@ import 'update_avatar_cubit.dart';
 
 class UpdateAvatarPage extends StatelessWidget {
   const UpdateAvatarPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class UpdateAvatarPage extends StatelessWidget {
 }
 
 class UpdateAvatarChildPage extends StatefulWidget {
-  const UpdateAvatarChildPage({Key? key}) : super(key: key);
+  const UpdateAvatarChildPage({super.key});
 
   @override
   State<UpdateAvatarChildPage> createState() => _UpdateAvatarChildPageState();

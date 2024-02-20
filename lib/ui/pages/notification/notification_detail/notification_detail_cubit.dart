@@ -1,4 +1,3 @@
-import 'package:flutter_base/models/entities/notification/notification_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/notification_respository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,25 +12,13 @@ class NotificationDetailCubit extends Cubit<NotificationDetailState> {
     required this.notificationRepository,
   }) : super(const NotificationDetailState());
 
-  Future<void> markNotificationAsRead(
-      {required NotificationEntity notification}) async {
-    emit(
-      state.copyWith(loadDataStatus: LoadStatus.loading),
-    );
-    final notificationJson = notification.toJson();
+  Future<void> markNotificationAsRead({required int id}) async {
+    emit(state.copyWith(loadDataStatus: LoadStatus.loading));
     try {
-      await notificationRepository.markAsRead(body: notificationJson);
-      emit(
-        state.copyWith(
-          loadDataStatus: LoadStatus.success,
-        ),
-      );
+      await notificationRepository.markAsRead(notificationId: id);
+      emit(state.copyWith(loadDataStatus: LoadStatus.success));
     } catch (e) {
-      emit(
-        state.copyWith(
-          loadDataStatus: LoadStatus.failure,
-        ),
-      );
+      emit(state.copyWith(loadDataStatus: LoadStatus.failure));
     }
   }
 }

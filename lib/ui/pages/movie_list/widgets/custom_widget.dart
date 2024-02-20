@@ -5,10 +5,10 @@ class CustomWidget extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const CustomWidget({
-    Key? key,
+    super.key,
     required this.param,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

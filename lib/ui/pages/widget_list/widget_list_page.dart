@@ -16,9 +16,9 @@ class WidgetListPage extends StatelessWidget {
   final WidgetListArguments? arguments;
 
   const WidgetListPage({
-    Key? key,
+    super.key,
     this.arguments,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class WidgetListPage extends StatelessWidget {
 }
 
 class WidgetListChildPage extends StatefulWidget {
-  const WidgetListChildPage({Key? key}) : super(key: key);
+  const WidgetListChildPage({super.key});
 
   @override
   State<WidgetListChildPage> createState() => _WidgetListChildPageState();

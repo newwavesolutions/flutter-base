@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 
-class AppTextFieldWidget extends StatelessWidget {
-  final TextEditingController? inputController;
+class AppTextField extends StatelessWidget {
+  final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
   final TextInputType? textInputType;
+  final String? labelText;
+  final String? hintText;
 
-  const AppTextFieldWidget({
-    Key? key,
-    this.inputController,
+  const AppTextField({
+    super.key,
+    this.controller,
     this.onChanged,
     this.textInputType,
-  }) : super(key: key);
+    this.labelText,
+    this.hintText,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
       child: TextFormField(
-        controller: inputController,
-        decoration: const InputDecoration(
-          contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(12),
-            ),
-          ),
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: labelText,
+          hintText: hintText,
+          border: const OutlineInputBorder(),
         ),
         keyboardType: textInputType,
         onChanged: onChanged,
-        style: const TextStyle(fontSize: 16, color: Colors.black),
+        // style: const TextStyle(fontSize: 16, color: Colors.black),
       ),
     );
   }

@@ -8,11 +8,11 @@ class ProfileMenuWidget extends StatelessWidget {
   final ThemeMode themeMode;
 
   const ProfileMenuWidget({
-    Key? key,
+    super.key,
     required this.onTap,
     required this.profiles,
     required this.themeMode,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

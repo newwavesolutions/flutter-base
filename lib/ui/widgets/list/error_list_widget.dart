@@ -6,10 +6,10 @@ class ErrorListWidget extends StatelessWidget {
   final RefreshCallback? onRefresh;
 
   const ErrorListWidget({
-    Key? key,
-    this.text = 'Đã xảy ra lỗi',
+    super.key,
+    this.text = 'Something went wrong',
     this.onRefresh,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

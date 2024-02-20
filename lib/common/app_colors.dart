@@ -34,7 +34,8 @@ class AppColors {
 
   ///Button
   static const Color buttonBGWhite = Color(0xFFcdd0d5);
-  static const Color buttonBGTint = secondary;
+  static const Color buttonBGPrimary = primary;
+  static const Color buttonBGDisabled = Color(0xFF919191);
   static const Color buttonBorder = secondary;
 
   /// Tabs

@@ -11,10 +11,10 @@ class AppTabBar extends StatelessWidget {
   final List<String> tabItems;
 
   const AppTabBar({
-    Key? key,
+    super.key,
     this.tabController,
     this.tabItems = const [],
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

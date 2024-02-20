@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/configs/app_configs.dart';
-import 'package:flutter_base/models/entities/notification/notification_entity.dart';
+import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/notification_respository.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/widgets/notification_widget.dart';
+import 'package:flutter_base/ui/widgets/list/error_list_widget.dart';
+import 'package:flutter_base/ui/widgets/list/loading_list_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'notification_list_cubit.dart';
@@ -21,9 +23,9 @@ class NotificationListPage extends StatelessWidget {
   final NotificationListArguments? arguments;
 
   const NotificationListPage({
-    Key? key,
+    super.key,
     this.arguments,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class NotificationListPage extends StatelessWidget {
 }
 
 class NotificationListChildPage extends StatefulWidget {
-  const NotificationListChildPage({Key? key}) : super(key: key);
+  const NotificationListChildPage({super.key});
 
   @override
   State<NotificationListChildPage> createState() =>
@@ -68,14 +70,14 @@ class _NotificationListChildPageState extends State<NotificationListChildPage> {
         title: const Text('Notifications'),
         actions: [
           InkWell(
-            onTap: _markAllAsReadNotification,
+            onTap: _cubit.markAllNotificationAsRead,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 25),
                   child: Text(
-                    "Mark all Read",
+                    "Read all",
                     style: AppTextStyle.blackS16W800,
                     textAlign: TextAlign.center,
                   ),
@@ -87,40 +89,47 @@ class _NotificationListChildPageState extends State<NotificationListChildPage> {
         elevation: 0,
       ),
       body: SafeArea(
-        child: _buildBodyWidget(),
+        child: BlocBuilder<NotificationListCubit, NotificationListState>(
+          buildWhen: (prev, current) {
+            return prev.loadDataStatus != current.loadDataStatus;
+          },
+          builder: (context, state) {
+            if (state.loadDataStatus == LoadStatus.loading) {
+              return const LoadingListWidget();
+            } else if (state.loadDataStatus == LoadStatus.failure) {
+              return ErrorListWidget(onRefresh: _cubit.loadInitialData);
+            } else {
+              return _buildNotificationList();
+            }
+          },
+        ),
       ),
     );
   }
 
-  Widget _buildBodyWidget() {
+  Widget _buildNotificationList() {
     return BlocBuilder<NotificationListCubit, NotificationListState>(
       bloc: _cubit,
       builder: (context, state) {
         return RefreshIndicator(
-          onRefresh: _onRefreshData,
+          onRefresh: () async {
+            _cubit.loadInitialData();
+          },
           child: ListView.separated(
             controller: _scrollController,
-            itemCount: state.notifications?.length ?? 0,
-            separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox(
-                height: 14,
+            itemCount: state.notifications.length,
+            itemBuilder: (context, index) {
+              final notification = state.notifications[index];
+              return NotificationWidget(
+                notification: notification,
+                onPressed: () {
+                  _cubit.markNotificationAsRead(id: notification.id);
+                  _cubit.navigator.openNotificationDetail();
+                },
               );
             },
-            itemBuilder: (context, index) {
-              return NotificationWidget(
-                notification:
-                    state.notifications?[index] ?? NotificationEntity(),
-                onPressed: () {
-                  _onPressNotification(
-                    notificationEntity:
-                        state.notifications?[index] ?? NotificationEntity(),
-                  );
-                },
-                onLongPressed: () {
-                  _markAsReadNotification(
-                      id: state.notifications?[index].id ?? 0);
-                },
-              );
+            separatorBuilder: (BuildContext context, int index) {
+              return const Divider(height: 1);
             },
           ),
         );
@@ -132,26 +141,8 @@ class _NotificationListChildPageState extends State<NotificationListChildPage> {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
     if (maxScroll - currentScroll <= AppConfigs.scrollThreshold) {
-      _cubit.fetchNextNotifications();
+      _cubit.loadNextData();
     }
-  }
-
-  void _onPressNotification({
-    required NotificationEntity notificationEntity,
-  }) {
-    _cubit.navigator.openNotificationDetail();
-  }
-
-  Future<void> _onRefreshData() async {
-    _cubit.loadInitialData();
-  }
-
-  void _markAllAsReadNotification() {
-    _cubit.markAllNotificationAsRead();
-  }
-
-  void _markAsReadNotification({required int id}) {
-    _cubit.markNotificationAsRead(id: id);
   }
 
   @override
