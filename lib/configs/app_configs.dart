@@ -40,7 +40,7 @@ class AppConfigs {
   static final birthMaxDate = DateTime.now();
 
   ///Font
-  static const fontFamily = 'Poppins';
+  static const fontFamily = 'Roboto';
 
   ///Max file
   static const maxAttachFile = 5;

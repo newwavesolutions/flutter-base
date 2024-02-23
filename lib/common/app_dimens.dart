@@ -8,16 +8,16 @@ class AppDimens {
   static const double fontLarge = 16.0;
   static const double fontExtra = 18.0;
 
-  static const double buttonHeight = 56;
-  static const double buttonCornerRadius = 5;
+  static const double buttonHeight = 46;
+  static const double buttonCornerRadius = 4;
   static const double buttonBorderWidth = 1;
 
-  static const double appBarHeight = 56;
+  static const double appBarHeight = 60;
 
-  static const double paddingNormal = 20;
-  static const double paddingSmall = 10;
+  static const double paddingNormal = 16;
+  static const double paddingSmall = 8;
 
-  static const double marginNormal = 20;
+  static const double marginNormal = 16;
   static const double marginLarge = 32;
-  static const double marginSmall = 10;
+  static const double marginSmall = 8;
 }

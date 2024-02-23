@@ -62,10 +62,7 @@ class _HomeChildPageState extends State<HomeChildPage>
       appBar: HomeAppBar(
         avatar: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
-            return AppCircleAvatar(
-              url: state.urlAvatar ?? '',
-              size: 40,
-            );
+            return const AppCircleAvatar(size: Size(40, 40));
           },
         ),
         onNotificationPressed: _openNotificationList,

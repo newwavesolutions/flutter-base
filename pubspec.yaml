@@ -106,37 +106,22 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/vectors/
-    - assets/images/bg_image_placeholder.png
-    - assets/images/ic_logo_transparent.png
-    - assets/images/ic_back.png
-    - assets/images/ic_white_back.png
-    - assets/images/ic_avatar.png
-    - assets/images/ic_eye_close.png
-    - assets/images/ic_eye_open.png
-    - assets/images/ic_eye_open.png
-    - assets/images/ic_splash_logo.png
-    - assets/images/ic_logo.png
+    - assets/images/
 
   fonts:
-    - family: Poppins
+    - family: Roboto
       fonts:
-        - asset: assets/fonts/Poppins-Thin.ttf
+        - asset: assets/fonts/Roboto-Thin.ttf
           weight: 100
-        - asset: assets/fonts/Poppins-ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/Poppins-Light.ttf
+        - asset: assets/fonts/Roboto-Light.ttf
           weight: 300
-        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Roboto-Regular.ttf
           weight: 400
-        - asset: assets/fonts/Poppins-Medium.ttf
+        - asset: assets/fonts/Roboto-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Poppins-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Poppins-ExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/Poppins-Black.ttf
+        - asset: assets/fonts/Roboto-Black.ttf
           weight: 900
 
   # An image asset can refer to one or more resolution-specific "variants", see

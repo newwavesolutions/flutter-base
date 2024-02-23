@@ -26,7 +26,7 @@ class LoadingRowWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            boxShadow: AppShadow.boxShadow),
+            boxShadow: AppShadow.defaultShadow),
         child: Shimmer.fromColors(
           baseColor: Colors.grey[350]!,
           highlightColor: Colors.grey[100]!,

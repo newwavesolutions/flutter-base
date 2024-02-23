@@ -50,9 +50,8 @@ class _SplashChildPageState extends State<SplashChildPage> {
           Positioned.fill(child: Container(color: AppColors.primary)),
           Center(
             child: Image.asset(
-              AppImages.icSplashLogo,
-              width: 72,
-              height: 72,
+              AppImages.icLogoTransparent,
+              width: 200,
               fit: BoxFit.cover,
             ),
           ),

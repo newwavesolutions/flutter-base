@@ -45,17 +45,17 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
       OnboardingSubPage(
         title: S.current.onboarding_title_01,
         description: S.current.onboarding_description_01,
-        image: AppImages.bgImagePlaceholder,
+        image: AppImages.icLogoTransparent,
       ),
       OnboardingSubPage(
         title: S.current.onboarding_title_02,
         description: S.current.onboarding_description_02,
-        image: AppImages.bgImagePlaceholder,
+        image: AppImages.icLogoTransparent,
       ),
       OnboardingSubPage(
         title: S.current.onboarding_title_03,
         description: S.current.onboarding_description_03,
-        image: AppImages.bgImagePlaceholder,
+        image: AppImages.icLogoTransparent,
       ),
     ];
     _cubit = BlocProvider.of<OnboardingCubit>(context);

@@ -1,65 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
 
 class AppTextField extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onFieldSubmitted;
   final String? labelText;
   final String? hintText;
   final FocusNode? focusNode;
-  final Icon? prefix;
+  final Widget? prefixIcon;
   final TextStyle? hintStyle;
   final TextStyle? style;
   final Color? focusedColor;
   final EdgeInsets? padding;
-  final double? borderRadius;
   final TextStyle? errorStyle;
   final String? Function(String?)? validator;
-  final TextInputType? type;
-
-  // final GlobalKey<FormState> formKey;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter> inputFormatters;
+  final bool enable;
 
   const AppTextField({
     super.key,
-    // required this.formKey,
     required this.controller,
     this.onChanged,
+    this.onFieldSubmitted,
     this.labelText,
     this.hintText,
     this.focusNode,
-    this.prefix,
+    this.prefixIcon,
     this.hintStyle,
     this.style,
     this.focusedColor,
     this.padding,
-    this.borderRadius,
     this.errorStyle,
     this.validator,
-    this.type,
+    this.keyboardType,
+    this.inputFormatters = const [],
+    this.enable = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      // key: formKey,
       controller: controller,
       focusNode: focusNode,
-      style: style ?? AppTextStyle.textGreyS12Bold,
+      style: style ?? AppTextStyle.blackS14,
+      inputFormatters: inputFormatters,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: enable ? Colors.transparent : AppColors.inputDisabled,
         contentPadding:
-            padding ?? const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            padding ?? const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         hintText: hintText,
-        hintStyle: hintStyle ?? AppTextStyle.textGreyS12W400,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 0),
+        hintStyle: hintStyle ?? AppTextStyle.grayS14,
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.secondary, width: 1.0),
         ),
-        errorStyle: errorStyle ?? AppTextStyle.textFieldErrorS12Bold,
-        prefixIcon: prefix,
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.inputBorder, width: 1.0),
+        ),
+        disabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.inputBorder, width: 1.0),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.error, width: 1.0),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.error, width: 1.0),
+        ),
+        errorStyle: errorStyle ??
+            AppTextStyle.blackS12.copyWith(color: AppColors.error),
+        prefixIcon: prefixIcon,
       ),
-      keyboardType: type,
-      onChanged: onChanged,
+      keyboardType: keyboardType,
+      onFieldSubmitted: onFieldSubmitted,
       validator: validator,
-      // style: const TextStyle(fontSize: 16, color: Colors.black),
+      enabled: enable,
     );
   }
 }

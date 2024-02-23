@@ -4,18 +4,25 @@ class AppColors {
   AppColors._();
 
   ///Common
-  static const Color primary = Color(0xFF40BFFF);
-  static const Color secondary = Color(0xFF47CFFF);
+  static const Color primary = Color(0xFF173d7e);
+  static const Color secondary = Color(0xFF1E8AE7);
+  static const Color error = Color(0xFFEE3134);
 
   ///Background
-  static const Color backgroundLight = Color(0xFFFFFFFF);
-  static const Color backgroundDark = Color(0xFF0F1B2B);
+  static const Color background = Color(0xFFFFFFFF);
+
+  ///Gray
+  static const Color gray1 = Color(0xFFC9C8C8);
+  static const Color gray2 = Color(0xFFF9F9F9);
+  static const Color gray3 = Color(0xFF4A4A4A);
 
   ///Shadow
-  static const Color shadow = Color(0x25606060);
+  static const Color shadow = Color.fromRGBO(0, 0, 0, 0.15);
 
   ///Border
   static const Color border = Color(0xFF606060);
+  static const Color inputBorder = Color(0xFFD8D8D8);
+  static const Color inputDisabled = Color(0xFFF1F1F1);
 
   ///Divider
   static const Color divider = Color(0xFFEBF0FF);
@@ -23,14 +30,12 @@ class AppColors {
   ///Text
   static const Color textWhite = Color(0xFFFFFFFF);
   static const Color textBlack = Color(0xFF000000);
-  static const Color textBlue = Color(0xFF0000FF);
-  static const Color textDisable = Color(0xFF89a3b1);
-  static const Color textIndigo = Color(0xFF223263);
-  static const Color textGrey = Color(0xFF9098B1);
+  static const Color textBlue = Color(0xFF1E8AE7);
+  static const Color textGray = Color(0xFF808080);
 
   ///TextField
   static const Color textFieldEnabledBorder = Color(0xFF919191);
-  static const Color textFieldFocusedBorder = Color(0xFFd74315);
+  static const Color textFieldFocusedBorder = Color(0xFF1E8AE7);
   static const Color textFieldDisabledBorder = Color(0xFF919191);
   static const Color textFieldCursor = Color(0xFF919191);
   static const Color textFieldErrorBorder = Color(0xFFFB7181);
@@ -38,8 +43,9 @@ class AppColors {
   ///Button
   static const Color buttonBGWhite = Color(0xFFcdd0d5);
   static const Color buttonBGPrimary = primary;
+  static const Color buttonBGBlack = Color(0xFF4A4A4A);
   static const Color buttonBGDisabled = Color(0xFF919191);
-  static const Color buttonBorder = secondary;
+  static const Color buttonBorder = Color(0xFFC9C8C8);
 
   /// Tabs
   static const Color imageBG = Color(0xFF919191);

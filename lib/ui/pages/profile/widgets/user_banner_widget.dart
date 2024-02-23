@@ -27,10 +27,7 @@ class UserBannerWidget extends StatelessWidget {
       children: [
         InkWell(
           onTap: onPressedAvatar,
-          child: AppCircleAvatar(
-            url: user.avatarUrl ?? '',
-            size: 40,
-          ),
+          child: const AppCircleAvatar(size: Size(40, 40)),
         ),
         const SizedBox(
           width: 12,

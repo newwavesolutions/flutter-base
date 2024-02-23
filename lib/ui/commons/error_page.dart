@@ -19,15 +19,6 @@ class ErrorMovieDetailWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            AppImages.bgImagePlaceholder,
-            width: 300,
-            height: 300,
-            fit: BoxFit.fill,
-          ),
-          const SizedBox(
-            height: 40,
-          ),
           AppButton(
             title: "try again",
             textStyle: AppTextStyle.whiteS16,

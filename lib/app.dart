@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_base/common/app_themes.dart';
 import 'package:flutter_base/configs/app_configs.dart';
+import 'package:flutter_base/global_blocs/auth/auth_cubit.dart';
+import 'package:flutter_base/global_blocs/user_info/user_info_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -63,6 +66,13 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider<AuthCubit>(create: (context) {
+            final authRepo = RepositoryProvider.of<AuthRepository>(context);
+            return AuthCubit(authRepo: authRepo);
+          }),
+          BlocProvider<UserInfoCubit>(create: (context) {
+            return UserInfoCubit();
+          }),
           BlocProvider<AppCubit>(create: (context) {
             final userRepo = RepositoryProvider.of<UserRepository>(context);
             final authRepo = RepositoryProvider.of<AuthRepository>(context);
@@ -83,15 +93,7 @@ class _MyAppState extends State<MyApp> {
               },
               child: MaterialApp.router(
                 title: AppConfigs.appName,
-                theme: ThemeData(
-                  primaryColor: state.primaryColor,
-                  fontFamily: AppConfigs.fontFamily,
-                ),
-                //Disabled
-                // darkTheme: AppThemes(
-                //   isDarkMode: true,
-                //   primaryColor: state.primaryColor,
-                // ).theme,
+                theme: AppThemes().theme,
                 themeMode: state.themeMode,
                 routerConfig: AppRouter.router,
                 localizationsDelegates: const [

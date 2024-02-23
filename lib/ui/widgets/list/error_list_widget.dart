@@ -23,7 +23,7 @@ class ErrorListWidget extends StatelessWidget {
             child: Center(
               child: Text(
                 text,
-                style: AppTextStyle.greyS18W800,
+                style: AppTextStyle.grayS12Bold,
               ),
             ),
           );

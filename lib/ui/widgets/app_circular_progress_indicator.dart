@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/common/app_colors.dart';
 
 class AppCircularProgressIndicator extends StatelessWidget {
-  final Color color;
+  final Color valueColor;
+  final Color backgroundColor;
 
   const AppCircularProgressIndicator({
     super.key,
-    this.color = AppColors.secondary,
+    this.valueColor = const Color(0xFFC90003),
+    this.backgroundColor = Colors.white,
   });
 
   @override
@@ -17,8 +18,8 @@ class AppCircularProgressIndicator extends StatelessWidget {
         width: 24,
         height: 24,
         child: CircularProgressIndicator(
-          backgroundColor: color,
-          valueColor: const AlwaysStoppedAnimation<Color>(AppColors.secondary),
+          backgroundColor: backgroundColor,
+          valueColor: AlwaysStoppedAnimation<Color>(valueColor),
         ),
       ),
     );

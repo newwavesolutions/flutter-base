@@ -18,11 +18,15 @@ class OnboardingSubPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          image,
+        SizedBox(
           width: 300,
           height: 300,
-          fit: BoxFit.fill,
+          child: Center(
+            child: Image.asset(
+              image,
+              fit: BoxFit.fill,
+            ),
+          ),
         ),
         Text(
           title,

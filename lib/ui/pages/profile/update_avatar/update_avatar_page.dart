@@ -83,10 +83,7 @@ class _UpdateAvatarChildPageState extends State<UpdateAvatarChildPage> {
       child: BlocBuilder<UpdateAvatarCubit, UpdateAvatarState>(
         builder: (context, state) {
           return state.image == null
-              ? AppCircleAvatar(
-                  url: state.user?.avatarUrl ?? '',
-                  size: 400,
-                )
+              ? const AppCircleAvatar(size: Size(400, 400))
               : ClipRRect(
                   borderRadius: BorderRadius.circular(200),
                   child: Image.file(
@@ -119,33 +116,31 @@ class _UpdateAvatarChildPageState extends State<UpdateAvatarChildPage> {
             onTap: () {
               chooseImageCollection();
             },
-            child: Column(
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
+                Icon(
                   Icons.collections,
                   size: 60,
                   color: Colors.grey,
                 ),
                 Text(
                   "choose from the collection",
-                  style: AppTextStyle.greyS16,
                 ),
               ],
             ),
           ),
-          InkWell(
+          const InkWell(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
+                Icon(
                   Icons.photo_camera,
                   size: 60,
                   color: Colors.grey,
                 ),
                 Text(
                   'take a photo',
-                  style: AppTextStyle.greyS16,
                 ),
               ],
             ),

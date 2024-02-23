@@ -11,7 +11,7 @@ class AppButton extends StatelessWidget {
   final double height;
   final double borderWidth;
   final double cornerRadius;
-  final Color borderColor;
+  final Color? borderColor;
   final Color backgroundColor;
   final Color disableBackgroundColor;
   final TextStyle textStyle;
@@ -40,7 +40,7 @@ class AppButton extends StatelessWidget {
     this.height = AppDimens.buttonHeight,
     this.borderWidth = 0,
     this.cornerRadius = AppDimens.buttonCornerRadius,
-    this.borderColor = AppColors.border,
+    this.borderColor,
     this.backgroundColor = AppColors.buttonBGPrimary,
     this.disableBackgroundColor = AppColors.buttonBGDisabled,
     this.textStyle = AppTextStyle.white,
@@ -66,12 +66,13 @@ class AppButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(
             cornerRadius,
           ),
-          color:
-              isEnabled ? backgroundColor : AppColors.textFieldDisabledBorder,
-          border: Border.all(
-            color: borderColor,
-            width: borderWidth,
-          ),
+          color: isEnabled ? backgroundColor : AppColors.gray1,
+          border: borderColor != null
+              ? Border.all(
+                  color: borderColor!,
+                  width: borderWidth,
+                )
+              : null,
           boxShadow: boxShadow,
         ),
         child: _buildChildWidget(),
@@ -81,7 +82,7 @@ class AppButton extends StatelessWidget {
 
   Widget _buildChildWidget() {
     if (isLoading) {
-      return const AppCircularProgressIndicator(color: Colors.white);
+      return const AppCircularProgressIndicator();
     } else {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
