@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_colors.dart';
@@ -103,7 +102,7 @@ class _SignInChildPageState extends State<SignInChildPage> {
                 padding: const EdgeInsets.symmetric(
                     horizontal: AppDimens.paddingNormal),
                 child: Text(
-                  S.of(context).your_email,
+                  S.of(context).sign_in_email,
                   style: AppTextStyle.blackS14Medium,
                 ),
               ),
@@ -113,7 +112,7 @@ class _SignInChildPageState extends State<SignInChildPage> {
                     horizontal: AppDimens.paddingNormal),
                 child: AppTextField(
                   controller: emailTextController,
-                  hintText: S.current.your_email,
+                  hintText: S.current.sign_in_email_hint,
                   keyboardType: TextInputType.emailAddress,
                   onChanged: (text) {
                     _cubit.changeEmail(email: text);
@@ -134,7 +133,7 @@ class _SignInChildPageState extends State<SignInChildPage> {
                 padding: const EdgeInsets.symmetric(
                     horizontal: AppDimens.paddingNormal),
                 child: Text(
-                  S.of(context).password,
+                  S.of(context).sign_in_password,
                   style: AppTextStyle.blackS14Medium,
                 ),
               ),
@@ -145,7 +144,7 @@ class _SignInChildPageState extends State<SignInChildPage> {
                 child: AppPasswordTextField(
                   controller: passwordTextController,
                   obscureTextController: obscurePasswordController,
-                  hintText: S.current.password,
+                  hintText: S.current.sign_in_password_hint,
                   onChanged: (text) {
                     _cubit.changePassword(password: text);
                   },
@@ -183,7 +182,7 @@ class _SignInChildPageState extends State<SignInChildPage> {
             (state.email ?? '').isNotEmpty && (state.password ?? '').isNotEmpty;
         return AppButton(
           isEnabled: isEnable,
-          title: S.current.button_signIn,
+          title: S.current.button_login,
           onPressed: _signIn,
           isLoading: state.signInStatus == LoadStatus.loading,
           boxShadow: [
@@ -208,7 +207,7 @@ class _SignInChildPageState extends State<SignInChildPage> {
           TextButton(
             onPressed: () => _cubit.navigator.openSignUpPage(),
             child: Text(
-              S.of(context).forgot_password,
+              S.of(context).sign_in_forgot_password,
               style: AppTextStyle.blackS12Medium,
             ),
           ),
@@ -216,7 +215,7 @@ class _SignInChildPageState extends State<SignInChildPage> {
           TextButton(
             onPressed: () => _cubit.navigator.openSignUpPage(),
             child: Text(
-              S.of(context).register,
+              S.of(context).sign_in_register,
               style: AppTextStyle.blackS12Medium,
             ),
           ),

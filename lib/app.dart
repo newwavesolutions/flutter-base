@@ -3,12 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_base/common/app_themes.dart';
 import 'package:flutter_base/configs/app_configs.dart';
 import 'package:flutter_base/global_blocs/auth/auth_cubit.dart';
+import 'package:flutter_base/global_blocs/setting/app_setting_cubit.dart';
 import 'package:flutter_base/global_blocs/user_info/user_info_cubit.dart';
+import 'package:flutter_base/models/enums/language.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'blocs/app_cubit.dart';
-import 'blocs/setting/app_setting_cubit.dart';
 import 'generated/l10n.dart';
 import 'network/api_client.dart';
 import 'network/api_util.dart';
@@ -86,29 +87,40 @@ class _MyAppState extends State<MyApp> {
           }),
         ],
         child: BlocBuilder<AppSettingCubit, AppSettingState>(
+          buildWhen: (prev, current) {
+            return prev.language != prev.language;
+          },
           builder: (context, state) {
             return GestureDetector(
               onTap: () {
                 _hideKeyboard(context);
               },
-              child: MaterialApp.router(
-                title: AppConfigs.appName,
-                theme: AppThemes().theme,
-                themeMode: state.themeMode,
-                routerConfig: AppRouter.router,
-                localizationsDelegates: const [
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                  S.delegate,
-                ],
-                locale: state.locale,
-                supportedLocales: S.delegate.supportedLocales,
+              child: _buildMaterialApp(
+                locale: state.language.local,
               ),
             );
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildMaterialApp({
+    required Locale locale,
+  }) {
+    return MaterialApp.router(
+      title: AppConfigs.appName,
+      theme: AppThemes().theme,
+      themeMode: ThemeMode.dark,
+      routerConfig: AppRouter.router,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        S.delegate,
+      ],
+      locale: locale,
+      supportedLocales: S.delegate.supportedLocales,
     );
   }
 

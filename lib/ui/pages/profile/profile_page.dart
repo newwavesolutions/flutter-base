@@ -89,7 +89,7 @@ class _ProfileTabPageState extends State<_ProfileTabPage> {
               left: 20,
             ),
             child: Text(
-              S.of(context).profile_text1,
+              "profile_text1",
               style: AppTextStyle.blackS16W600,
             ),
           ),
@@ -110,7 +110,7 @@ class _ProfileTabPageState extends State<_ProfileTabPage> {
               left: 20,
             ),
             child: Text(
-              S.of(context).profile_text2,
+              "profile_text2",
               style: AppTextStyle.blackS16W600,
             ),
           ),

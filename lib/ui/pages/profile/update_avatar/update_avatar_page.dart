@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
-import 'package:flutter_base/common/app_text_styles.dart';
-import 'package:flutter_base/ui/commons/app_bottom_sheet.dart';
 import 'package:flutter_base/ui/pages/profile/update_avatar/update_avatar_navigator.dart';
 import 'package:flutter_base/ui/widgets/images/app_circle_avatar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -102,52 +100,52 @@ class _UpdateAvatarChildPageState extends State<UpdateAvatarChildPage> {
     required Function() chooseImageCollection,
     required Function() chooseImageCamera,
   }) async {
-    AppBottomSheet.show(Container(
-      height: 200,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.white,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          InkWell(
-            onTap: () {
-              chooseImageCollection();
-            },
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.collections,
-                  size: 60,
-                  color: Colors.grey,
-                ),
-                Text(
-                  "choose from the collection",
-                ),
-              ],
-            ),
-          ),
-          const InkWell(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.photo_camera,
-                  size: 60,
-                  color: Colors.grey,
-                ),
-                Text(
-                  'take a photo',
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ));
+    // AppBottomSheet.show(Container(
+    //   height: 200,
+    //   decoration: BoxDecoration(
+    //     borderRadius: BorderRadius.circular(20),
+    //     color: Colors.white,
+    //   ),
+    //   child: Row(
+    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //     crossAxisAlignment: CrossAxisAlignment.center,
+    //     children: [
+    //       InkWell(
+    //         onTap: () {
+    //           chooseImageCollection();
+    //         },
+    //         child: const Column(
+    //           mainAxisAlignment: MainAxisAlignment.center,
+    //           children: [
+    //             Icon(
+    //               Icons.collections,
+    //               size: 60,
+    //               color: Colors.grey,
+    //             ),
+    //             Text(
+    //               "choose from the collection",
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //       const InkWell(
+    //         child: Column(
+    //           mainAxisAlignment: MainAxisAlignment.center,
+    //           children: [
+    //             Icon(
+    //               Icons.photo_camera,
+    //               size: 60,
+    //               color: Colors.grey,
+    //             ),
+    //             Text(
+    //               'take a photo',
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // ));
   }
 
   @override

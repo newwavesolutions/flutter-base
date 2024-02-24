@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/configs/app_configs.dart';
+import 'package:flutter_base/models/enums/language.dart';
 
-class AppDialog {
+class AppDatePicker {
   static final _now = DateTime.now();
   static final _firstDateDefault =
       DateTime(_now.year - 100, _now.month, _now.day);
@@ -9,12 +10,11 @@ class AppDialog {
       DateTime(_now.year + 100, _now.month, _now.day);
   static final _timeNow = TimeOfDay(hour: _now.hour, minute: _now.minute);
 
-  static Future<DateTime?> showDateDialog(
+  static Future<DateTime?> pickDate(
     BuildContext context, {
     DateTime? minDate,
     DateTime? maxDate,
     DateTime? currentDate,
-    Locale? locale = AppConfigs.defaultLocal,
   }) {
     final firstDate = minDate ?? _firstDateDefault;
     final lastDate = maxDate ?? _lastDateDefault;
@@ -24,11 +24,11 @@ class AppDialog {
       firstDate: firstDate,
       lastDate: lastDate,
       currentDate: currentDate,
-      locale: locale,
+      locale: AppConfigs.defaultLanguage.local,
     );
   }
 
-  static Future<TimeOfDay?> showTimeDialog(
+  static Future<TimeOfDay?> pickTime(
     BuildContext context, {
     TimeOfDay? initialTime,
   }) {

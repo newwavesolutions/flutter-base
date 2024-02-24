@@ -3,7 +3,6 @@ import 'package:flutter_base/models/entities/notification/notification_entity.da
 import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
 import 'package:flutter_base/ui/pages/auth/sign_up/sign_up_page.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
-import 'package:flutter_base/ui/pages/movie_detail/movie_detail_page.dart';
 import 'package:flutter_base/ui/pages/notification/notification_detail/notification_detail_page.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
 import 'package:flutter_base/ui/pages/onboarding/onboarding_page.dart';
@@ -11,7 +10,6 @@ import 'package:flutter_base/ui/pages/photo_view_page/photo_view_page.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
 import 'package:flutter_base/ui/pages/profile/update_avatar/update_avatar_page.dart';
 import 'package:flutter_base/ui/pages/profile/update_profile/update_profile_page.dart';
-import 'package:flutter_base/ui/pages/setting/setting_page.dart';
 import 'package:flutter_base/ui/pages/splash/splash_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -82,25 +80,12 @@ class AppRouter {
             builder: (context, state) => const OnboardingPage(),
           ),
           GoRoute(
-            name: movieDetail,
-            path: "$movieDetail/:id",
-            builder: (context, state) => MovieDetailPage(
-              arguments: MovieDetailArguments(
-                  id: int.tryParse(state.pathParameters["id"] ?? '') ?? 0),
-            ),
-          ),
-          GoRoute(
             name: photoView,
             path: photoView,
             builder: (context, state) => PhotoViewPage(
               arguments:
                   PhotoViewArguments(images: state.extra as List<String>),
             ),
-          ),
-          GoRoute(
-            name: setting,
-            path: setting,
-            builder: (context, state) => const SettingPage(),
           ),
           GoRoute(
             name: updateProfile,

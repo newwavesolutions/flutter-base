@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_images.dart';
+import 'package:flutter_base/database/share_preferences_helper.dart';
+import 'package:flutter_base/global_blocs/setting/app_setting_cubit.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/ui/pages/splash/splash_navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,13 +35,35 @@ class SplashChildPage extends StatefulWidget {
 }
 
 class _SplashChildPageState extends State<SplashChildPage> {
-  late SplashCubit _splashCubit;
+  late SplashCubit _cubit;
+  late AppSettingCubit _appSettingCubit;
 
   @override
   void initState() {
     super.initState();
-    _splashCubit = context.read<SplashCubit>();
-    _splashCubit.checkLogin();
+    _cubit = context.read<SplashCubit>();
+    _appSettingCubit = context.read<AppSettingCubit>();
+    _setup();
+  }
+
+  void _setup() async {
+    await Future.delayed(const Duration(seconds: 1));
+    await _requestPermissions();
+    await _appSettingCubit.getInitialSetting();
+    await _runOnboardingIfNeed();
+    await _cubit.fetchInitialData();
+    await _cubit.checkLogin();
+  }
+
+  Future<void> _requestPermissions() async {
+    //Request push notification permission if need
+  }
+
+  Future<void> _runOnboardingIfNeed() async {
+    final isOnboarded = await SharedPreferencesHelper.isOnboarded();
+    if (!isOnboarded) {
+      await _cubit.navigator.openOnboardingPage();
+    }
   }
 
   @override
@@ -62,7 +86,7 @@ class _SplashChildPageState extends State<SplashChildPage> {
 
   @override
   void dispose() {
-    _splashCubit.close();
+    _cubit.close();
     super.dispose();
   }
 }

@@ -88,13 +88,13 @@ class _SignUpChildPageState extends State<SignUpChildPage> {
             const SizedBox(height: 28),
             AppTextField(
               controller: fullNameTextController,
-              hintText: S.current.full_name,
+              hintText: S.current.sign_up_email,
               onChanged: (text) {
                 _cubit.changeFullName(fullName: text);
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return S.current.full_name_empty;
+                  return "S.current.full_name_empty";
                 }
                 return null;
               },
@@ -102,16 +102,16 @@ class _SignUpChildPageState extends State<SignUpChildPage> {
             const SizedBox(height: 8),
             AppTextField(
               controller: emailTextController,
-              hintText: S.current.your_email,
+              hintText: S.current.sign_up_email_hint,
               onChanged: (text) {
                 _cubit.changeEmail(email: text);
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return S.current.email_empty;
+                  return "S.current.email_empty";
                 }
                 if (!Utils.isEmail(value)) {
-                  return S.current.email_invalid;
+                  return "S.current.email_invalid";
                 }
                 return null;
               },
@@ -120,7 +120,7 @@ class _SignUpChildPageState extends State<SignUpChildPage> {
             AppPasswordTextField(
               controller: passwordTextController,
               obscureTextController: obscurePasswordController,
-              hintText: S.current.password,
+              hintText: S.current.sign_up_password_hint,
               onChanged: (text) {
                 _cubit.changePassword(password: text);
               },
@@ -129,7 +129,7 @@ class _SignUpChildPageState extends State<SignUpChildPage> {
             AppPasswordTextField(
               controller: confirmPasswordTextController,
               obscureTextController: obscurePasswordController,
-              hintText: S.current.confirm_password,
+              hintText: S.current.sign_up_password_confirm_hint,
               onChanged: (text) {
                 _cubit.changeConfirmPassword(confirmPassword: text);
               },
@@ -175,12 +175,12 @@ class _SignUpChildPageState extends State<SignUpChildPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          S.current.already_have_account,
+          S.current.button_login,
         ),
         TextButton(
           onPressed: () => _cubit.navigator.openSignInPage(),
           child: Text(
-            S.current.button_signIn,
+            S.current.button_login,
           ),
         ),
       ],

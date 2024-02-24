@@ -1,32 +1,22 @@
 part of 'app_setting_cubit.dart';
 
 class AppSettingState extends Equatable {
-  final ThemeMode themeMode;
-  final Color primaryColor;
-  final Locale locale;
+  final Language language;
 
   const AppSettingState({
-    this.themeMode = ThemeMode.system,
-    this.primaryColor = AppColors.primary,
-    this.locale = AppConfigs.defaultLocal,
+    this.language = AppConfigs.defaultLanguage,
   });
 
   @override
   List<Object?> get props => [
-        themeMode,
-        primaryColor,
-        locale,
+        language,
       ];
 
   AppSettingState copyWith({
-    ThemeMode? themeMode,
-    Color? primaryColor,
-    Locale? locale,
+    Language? language,
   }) {
     return AppSettingState(
-      themeMode: themeMode ?? this.themeMode,
-      primaryColor: primaryColor ?? this.primaryColor,
-      locale: locale ?? this.locale,
+      language: language ?? this.language,
     );
   }
 }

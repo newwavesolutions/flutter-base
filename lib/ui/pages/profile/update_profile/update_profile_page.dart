@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
-import 'package:flutter_base/ui/commons/app_dialog.dart';
 import 'package:flutter_base/ui/pages/profile/update_profile/update_profile_navigator.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_button.dart';
+import 'package:flutter_base/ui/widgets/picker/app_date_picker.dart';
 import 'package:flutter_base/ui/widgets/text_field/app_text_field.dart';
 import 'package:flutter_base/utils/app_date_utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -132,7 +132,7 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
   }
 
   void _openDatePicker() async {
-    final dateTime = await AppDialog.showDateDialog(context);
+    final dateTime = await AppDatePicker.pickDate(context);
     textBirthdayController.text =
         DateTimeExtension(dateTime ?? DateTime.now()).toDateString().toString();
   }

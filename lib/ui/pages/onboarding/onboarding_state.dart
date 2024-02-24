@@ -1,27 +1,22 @@
 part of 'onboarding_cubit.dart';
 
 class OnboardingState extends Equatable {
-  final int activePage;
-  final int totalPage;
+  final OnboardingStep onboardingStep;
 
   const OnboardingState({
-    this.activePage = 0,
-    this.totalPage = 0,
+    this.onboardingStep = OnboardingStep.step1,
   });
-
-  OnboardingState copyWith({
-    int? activePage,
-    int? totalPage,
-  }) {
-    return OnboardingState(
-      activePage: activePage ?? this.activePage,
-      totalPage: totalPage ?? this.totalPage,
-    );
-  }
 
   @override
   List<Object> get props => [
-        activePage,
-        totalPage,
+        onboardingStep,
       ];
+
+  OnboardingState copyWith({
+    OnboardingStep? onboardingStep,
+  }) {
+    return OnboardingState(
+      onboardingStep: onboardingStep ?? this.onboardingStep,
+    );
+  }
 }

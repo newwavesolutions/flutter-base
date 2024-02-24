@@ -56,20 +56,6 @@ extension ProfileMenuExtension on ProfileMenu {
   static String getName({
     required ProfileMenu profileMenu,
   }) {
-    switch (profileMenu.icon) {
-      case Icons.password_sharp:
-        return S.current.changePassword;
-      case Icons.email:
-        return S.current.changeEmail;
-      case Icons.delete:
-        return S.current.deleteAccount;
-      case Icons.local_police_sharp:
-        return S.current.termpolicy;
-      case Icons.settings:
-        return S.current.setting;
-      case Icons.logout:
-        return S.current.logout;
-    }
     return S.current.button_next;
   }
 }

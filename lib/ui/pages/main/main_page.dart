@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
-import 'package:flutter_base/blocs/setting/app_setting_cubit.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
-import 'package:flutter_base/router/route_config.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
 import 'package:flutter_base/ui/pages/main/main_cubit.dart';
 import 'package:flutter_base/ui/pages/movie_list/movie_list_page.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
-import 'package:flutter_base/ui/pages/widget_list/widget_list_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 import 'main_state.dart';
 import 'main_tab.dart';
@@ -40,8 +36,7 @@ class _MainPageState extends State<_MainPage> {
 
   final tabs = [
     MainTab.home,
-    MainTab.movies,
-    MainTab.widgets,
+    MainTab.notification,
     MainTab.profile,
   ];
 
@@ -55,7 +50,6 @@ class _MainPageState extends State<_MainPage> {
     pageList = [
       const HomePage(),
       const MovieListPage(),
-      const WidgetListPage(),
       const ProfilePage(),
     ];
     //Page controller
@@ -72,8 +66,8 @@ class _MainPageState extends State<_MainPage> {
                 current.signOutStatus == LoadStatus.success;
           },
           listener: (context, state) {
-            BlocProvider.of<AppSettingCubit>(context).resetSetting();
-            GoRouter.of(context).pushReplacementNamed(AppRouter.signIn);
+            // BlocProvider.of<AppSettingCubit>(context).resetSetting();
+            // GoRouter.of(context).pushReplacementNamed(AppRouter.signIn);
           },
         )
       ],
