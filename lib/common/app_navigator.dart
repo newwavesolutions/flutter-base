@@ -58,7 +58,7 @@ class AppNavigator {
     while (GoRouter.of(context).canPop()) {
       GoRouter.of(context).pop();
     }
-    return GoRouter.of(context).pushNamed(AppRouter.main);
+    return GoRouter.of(context).pushNamed(AppRouter.home);
   }
 
   void openPhotoView({required List<String> photoUrls}) {

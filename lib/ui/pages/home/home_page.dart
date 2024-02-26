@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_dimens.dart';
+import 'package:flutter_base/global_blocs/user_info/user_info_cubit.dart';
+import 'package:flutter_base/models/entities/user/user_entity.dart';
 import 'package:flutter_base/models/enums/movie_category.dart';
 import 'package:flutter_base/ui/pages/home/home_cubit.dart';
 import 'package:flutter_base/ui/pages/home/home_navigator.dart';
 import 'package:flutter_base/ui/pages/home/home_state.dart';
-import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
 import 'package:flutter_base/ui/widgets/images/app_circle_avatar.dart';
 import 'package:flutter_base/ui/widgets/tabs/app_tab_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,8 +22,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        final appCubit = RepositoryProvider.of<AppCubit>(context);
-        return HomeCubit(appCubit: appCubit);
+        return HomeCubit(navigator: HomeNavigator(context: context));
       },
       child: const HomeChildPage(),
     );
@@ -44,32 +43,20 @@ class _HomeChildPageState extends State<HomeChildPage>
 
   late TabController _tapBarController;
   late HomeCubit _homeCubit;
-  late HomeNavigator navigator;
 
   @override
   void initState() {
     super.initState();
     _homeCubit = BlocProvider.of(context);
-    _homeCubit.getAvatar();
+    context.read<UserInfoCubit>().updateUser(UserEntity.mockData());
     _tapBarController = TabController(length: 2, vsync: this);
-    navigator = HomeNavigator(context: context);
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      appBar: HomeAppBar(
-        avatar: BlocBuilder<HomeCubit, HomeState>(
-          builder: (context, state) {
-            return const AppCircleAvatar(size: Size(40, 40));
-          },
-        ),
-        onNotificationPressed: _openNotificationList,
-        onAvatarPressed: () {
-          navigator.openProfile();
-        },
-      ),
+      appBar: const HomeAppBar(),
       body: SafeArea(
         child: Column(
           children: [
@@ -104,10 +91,5 @@ class _HomeChildPageState extends State<HomeChildPage>
 
   Widget _buildUpcomingMovies() {
     return const MoviesPage(section: MovieCategory.upcoming);
-  }
-
-  void _openNotificationList() {
-    Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const NotificationListPage()));
   }
 }

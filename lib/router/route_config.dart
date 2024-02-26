@@ -3,6 +3,7 @@ import 'package:flutter_base/models/entities/notification/notification_entity.da
 import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
 import 'package:flutter_base/ui/pages/auth/sign_up/sign_up_page.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
+import 'package:flutter_base/ui/pages/main/main_page.dart';
 import 'package:flutter_base/ui/pages/notification/notification_detail/notification_detail_page.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
 import 'package:flutter_base/ui/pages/onboarding/onboarding_page.dart';
@@ -26,7 +27,7 @@ class AppRouter {
 
   ///main page
   static const String splash = "/";
-  static const String main = "main";
+  static const String home = "main";
   static const String signIn = "signIn";
   static const String signUp = "signUp";
   static const String notificationList = "notificationList";
@@ -46,9 +47,9 @@ class AppRouter {
         builder: (context, state) => const SplashPage(),
         routes: <RouteBase>[
           GoRoute(
-            name: main,
-            path: main,
-            builder: (context, state) => const HomePage(),
+            name: home,
+            path: home,
+            builder: (context, state) => const MainPage(),
           ),
           GoRoute(
             name: signIn,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/blocs/app_cubit.dart';
+import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
 import 'package:flutter_base/ui/pages/main/main_cubit.dart';
@@ -81,15 +82,15 @@ class _MainPageState extends State<_MainPage> {
   Widget _buildPageView() {
     return PageView(
       controller: pageController,
-      children: pageList,
+      physics: const NeverScrollableScrollPhysics(),
       onPageChanged: (index) {
         _cubit.switchTap(index);
       },
+      children: pageList,
     );
   }
 
   Widget _buildBottomNavigationBar() {
-    final theme = Theme.of(context);
     return BlocConsumer<MainCubit, MainState>(
       bloc: _cubit,
       listenWhen: (prev, current) {
@@ -105,12 +106,11 @@ class _MainPageState extends State<_MainPage> {
         return BottomNavigationBar(
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          backgroundColor: theme.appBarTheme.backgroundColor,
           elevation: 8,
           type: BottomNavigationBarType.fixed,
           currentIndex: state.selectedIndex,
           unselectedItemColor: Colors.grey,
-          selectedItemColor: theme.indicatorColor,
+          selectedItemColor: AppColors.primary,
           items: tabs.map((e) => e.tab).toList(),
           onTap: (index) {
             _cubit.switchTap(index);

@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
+import 'package:flutter_base/common/app_shadows.dart';
+import 'package:flutter_base/common/app_text_styles.dart';
+import 'package:flutter_base/configs/app_configs.dart';
+import 'package:flutter_base/ui/widgets/images/app_circle_avatar.dart';
 
-class HomeAppBar extends AppBar {
-  HomeAppBar({
+class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const HomeAppBar({
     super.key,
-    required Widget avatar,
-    required VoidCallback? onNotificationPressed,
-    required VoidCallback? onAvatarPressed,
-  }) : super(
-          title: const Text("Movie"),
-          leading: Center(
-            child: InkWell(
-              onTap: onAvatarPressed,
-              child: avatar,
-            ),
-          ),
-          toolbarHeight: AppDimens.appBarHeight,
-          leadingWidth: AppDimens.paddingNormal * 2 + 40,
-          actions: [
-            // IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-            IconButton(
-                onPressed: onNotificationPressed,
-                icon: const Icon(Icons.notifications)),
-          ],
-        );
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: AppShadow.appBarShadow,
+      ),
+      child: AppBar(
+        title: const Text(AppConfigs.appName),
+        centerTitle: true,
+        leading: const SizedBox(),
+        actions: const [
+          AppCircleAvatar(),
+          SizedBox(width: AppDimens.paddingNormal),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(AppDimens.appBarHeight);
 }

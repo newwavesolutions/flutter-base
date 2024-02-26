@@ -43,7 +43,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     emit(state.copyWith(signUpStatus: LoadStatus.loading));
     try {
       emit(state.copyWith(signUpStatus: LoadStatus.success));
-      navigator.openMainPage();
+      navigator.openHomePage();
     } catch (error) {
       logger.e(error);
       emit(state.copyWith(signUpStatus: LoadStatus.failure));

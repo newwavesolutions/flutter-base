@@ -51,7 +51,7 @@ class SignInCubit extends Cubit<SignInState> {
         appCubit.updateProfile(myProfile);
         authRepo.saveToken(result);
         emit(state.copyWith(signInStatus: LoadStatus.success));
-        navigator.openMainPage();
+        navigator.openHomePage();
       } else {
         emit(state.copyWith(signInStatus: LoadStatus.failure));
       }

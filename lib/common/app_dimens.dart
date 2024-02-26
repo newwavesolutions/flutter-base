@@ -12,7 +12,7 @@ class AppDimens {
   static const double buttonCornerRadius = 4;
   static const double buttonBorderWidth = 1;
 
-  static const double appBarHeight = 60;
+  static const double appBarHeight = 56;
 
   static const double paddingNormal = 16;
   static const double paddingSmall = 8;
