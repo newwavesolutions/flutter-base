@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/models/entities/notification/notification_entity.dart';
 import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
 import 'package:flutter_base/ui/pages/auth/sign_up/sign_up_page.dart';
-import 'package:flutter_base/ui/pages/home/home_page.dart';
 import 'package:flutter_base/ui/pages/main/main_page.dart';
 import 'package:flutter_base/ui/pages/notification/notification_detail/notification_detail_page.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
@@ -33,10 +32,8 @@ class AppRouter {
   static const String notificationList = "notificationList";
   static const String notificationDetail = "notificationDetail";
   static const String onBoarding = 'onBoarding';
-  static const String movieDetail = 'movieDetail';
   static const String photoView = 'photoView';
   static const String profile = 'profile';
-  static const String setting = 'setting';
   static const String updateProfile = 'updateProfile';
   static const String updateAvatar = 'updateAvatar';
 

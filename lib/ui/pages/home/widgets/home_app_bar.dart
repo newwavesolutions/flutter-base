@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/common/app_shadows.dart';
-import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/configs/app_configs.dart';
 import 'package:flutter_base/ui/widgets/images/app_circle_avatar.dart';
 

@@ -20,6 +20,7 @@ class AppCircularProgressIndicator extends StatelessWidget {
         child: CircularProgressIndicator(
           backgroundColor: backgroundColor,
           valueColor: AlwaysStoppedAnimation<Color>(valueColor),
+          strokeWidth: 2,
         ),
       ),
     );

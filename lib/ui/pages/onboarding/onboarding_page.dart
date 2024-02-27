@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/models/enums/onboarding_step.dart';
 import 'package:flutter_base/ui/pages/onboarding/onboarding_cubit.dart';

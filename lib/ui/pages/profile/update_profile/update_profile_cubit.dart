@@ -36,16 +36,12 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
 
   Future<void> updateData({
     required String name,
-    required String phone,
     required DateTime birthday,
-    required String address,
   }) async {
     UserEntity user = UserEntity(
       id: appCubit.state.user?.id,
       username: name,
-      phone: phone,
       birthday: birthday,
-      address: address,
       avatarUrl: appCubit.state.user?.avatarUrl,
       email: appCubit.state.user?.email,
     );

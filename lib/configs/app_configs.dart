@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter_base/models/enums/language.dart';
 
 import 'app_env_config.dart';
@@ -7,7 +5,7 @@ import 'app_env_config.dart';
 class AppConfigs {
   AppConfigs._();
 
-  static const String appName = "Newwave Solution JSC";
+  static const String appName = "NEWWAVE";
 
   static Environment env = Environment.prod;
 

@@ -6,8 +6,10 @@ import 'package:flutter_base/global_blocs/auth/auth_cubit.dart';
 import 'package:flutter_base/global_blocs/setting/app_setting_cubit.dart';
 import 'package:flutter_base/global_blocs/user_info/user_info_cubit.dart';
 import 'package:flutter_base/models/enums/language.dart';
+import 'package:flutter_base/ui/widgets/app_circular_progress_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 import 'blocs/app_cubit.dart';
 import 'generated/l10n.dart';
@@ -95,8 +97,22 @@ class _MyAppState extends State<MyApp> {
               onTap: () {
                 _hideKeyboard(context);
               },
-              child: _buildMaterialApp(
-                locale: state.language.local,
+              child: GlobalLoaderOverlay(
+                useDefaultLoading: false,
+                overlayWidgetBuilder: (_) {
+                  return Center(
+                    child: Container(
+                      color: Colors.grey,
+                      width: 40,
+                      height: 40,
+                      child:
+                          const Center(child: AppCircularProgressIndicator()),
+                    ),
+                  );
+                },
+                child: _buildMaterialApp(
+                  locale: state.language.local,
+                ),
               ),
             );
           },

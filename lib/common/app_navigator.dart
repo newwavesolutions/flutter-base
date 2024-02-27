@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/router/route_config.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 import 'app_colors.dart';
 
@@ -45,6 +46,14 @@ class AppNavigator {
       queryParameters: queryParameters,
       extra: extra,
     );
+  }
+
+  void showLoadingOverlay() {
+    context.loaderOverlay.show();
+  }
+
+  void hideLoadingOverlay() {
+    context.loaderOverlay.hide();
   }
 
   Future<void> openSignIn() {

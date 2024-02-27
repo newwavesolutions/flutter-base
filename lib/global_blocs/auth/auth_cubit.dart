@@ -25,4 +25,8 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(signOutStatus: LoadStatus.failure));
     }
   }
+
+  Future<void> deleteAccount() async {
+    //Todo
+  }
 }

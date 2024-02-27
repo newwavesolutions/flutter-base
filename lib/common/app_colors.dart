@@ -25,7 +25,7 @@ class AppColors {
   static const Color inputDisabled = Color(0xFFF1F1F1);
 
   ///Divider
-  static const Color divider = Color(0xFFEBF0FF);
+  static const Color divider = Color(0xFFD8D8D8);
 
   ///Text
   static const Color textWhite = Color(0xFFFFFFFF);

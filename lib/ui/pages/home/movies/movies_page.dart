@@ -96,9 +96,6 @@ class _MoviesChildPageState extends State<MoviesChildPage>
           final item = items[index];
           return MovieWidget(
             movie: item,
-            onPressed: () {
-              _cubit.navigator.openMovieDetail(id: item.id ?? 0);
-            },
           );
         },
         itemCount: items.length,

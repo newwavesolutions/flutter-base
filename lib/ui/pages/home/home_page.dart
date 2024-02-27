@@ -5,8 +5,6 @@ import 'package:flutter_base/models/entities/user/user_entity.dart';
 import 'package:flutter_base/models/enums/movie_category.dart';
 import 'package:flutter_base/ui/pages/home/home_cubit.dart';
 import 'package:flutter_base/ui/pages/home/home_navigator.dart';
-import 'package:flutter_base/ui/pages/home/home_state.dart';
-import 'package:flutter_base/ui/widgets/images/app_circle_avatar.dart';
 import 'package:flutter_base/ui/widgets/tabs/app_tab_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,12 +40,10 @@ class _HomeChildPageState extends State<HomeChildPage>
   bool get wantKeepAlive => true;
 
   late TabController _tapBarController;
-  late HomeCubit _homeCubit;
 
   @override
   void initState() {
     super.initState();
-    _homeCubit = BlocProvider.of(context);
     context.read<UserInfoCubit>().updateUser(UserEntity.mockData());
     _tapBarController = TabController(length: 2, vsync: this);
   }

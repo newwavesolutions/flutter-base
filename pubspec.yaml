@@ -64,10 +64,11 @@ dependencies:
 
   #Dialog, etc
   cached_network_image: ^3.3.1
+  another_flushbar: ^1.12.30
+  loader_overlay: ^4.0.0
 
   #UI
   shimmer: ^3.0.0
-  another_flushbar: ^1.12.30
   flutter_svg: ^2.0.7
 
 dev_dependencies:

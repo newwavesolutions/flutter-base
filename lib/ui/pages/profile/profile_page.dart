@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/blocs/app_cubit.dart';
-import 'package:flutter_base/common/app_text_styles.dart';
-import 'package:flutter_base/generated/l10n.dart';
+import 'package:flutter_base/common/app_colors.dart';
+import 'package:flutter_base/common/app_dimens.dart';
+import 'package:flutter_base/global_blocs/auth/auth_cubit.dart';
+import 'package:flutter_base/global_blocs/user_info/user_info_cubit.dart';
 import 'package:flutter_base/models/entities/user/user_entity.dart';
+import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/models/enums/profile_menu.dart';
 import 'package:flutter_base/ui/pages/profile/profile_navigator.dart';
-import 'package:flutter_base/ui/pages/profile/profile_state.dart';
 import 'package:flutter_base/ui/pages/profile/widgets/profile_menu_widget.dart';
-import 'package:flutter_base/ui/pages/profile/widgets/user_banner_widget.dart';
+import 'package:flutter_base/ui/pages/profile/widgets/profile_banner_widget.dart';
+import 'package:flutter_base/ui/widgets/app_divider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'profile_cubit.dart';
@@ -19,9 +21,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        final appCubit = RepositoryProvider.of<AppCubit>(context);
         return ProfileCubit(
-          appCubit: appCubit,
           navigator: ProfileNavigator(context: context),
         );
       },
@@ -38,12 +38,11 @@ class _ProfileTabPage extends StatefulWidget {
 }
 
 class _ProfileTabPageState extends State<_ProfileTabPage> {
-  late ProfileCubit _profileCubit;
+  late ProfileCubit _cubit;
 
   @override
   void initState() {
-    _profileCubit = BlocProvider.of(context);
-    _profileCubit.getUser();
+    _cubit = BlocProvider.of(context);
     super.initState();
   }
 
@@ -55,81 +54,94 @@ class _ProfileTabPageState extends State<_ProfileTabPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Profile",
+      body: SafeArea(
+        child: BlocListener<AuthCubit, AuthState>(
+          listenWhen: (prev, current) {
+            return prev.signOutStatus != current.signOutStatus;
+          },
+          listener: (context, state) {
+            if (state.signOutStatus == LoadStatus.loading) {
+              _cubit.navigator.showLoadingOverlay();
+            } else if (state.signOutStatus == LoadStatus.success) {
+              _cubit.navigator.hideLoadingOverlay();
+              _cubit.navigator.openSignIn();
+            } else if (state.signOutStatus == LoadStatus.failure) {
+              _cubit.navigator.hideLoadingOverlay();
+            }
+          },
+          child: _buildBodyWidget(),
         ),
-        elevation: 0,
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          BlocBuilder<ProfileCubit, ProfileState>(
-            builder: (context, state) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
-                child: UserBannerWidget(
-                  user: state.user ?? UserEntity(),
-                  onPressed: () {
-                    _profileCubit.openUpdateProfilePage();
-                  },
-                  onPressedAvatar: () {
-                    _profileCubit.openUpdateAvatarPage();
-                  },
-                ),
-              );
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 34,
-              left: 20,
-            ),
-            child: Text(
-              "profile_text1",
-              style: AppTextStyle.blackS16W600,
-            ),
-          ),
-          BlocBuilder<ProfileCubit, ProfileState>(
-            builder: (context, state) {
-              return ProfileMenuWidget(
-                onTap: (value) {
-                  _profileCubit.handleMenuTapped(option: value);
-                },
-                profiles: ProfileMenuExtension.getAccountItems(),
-                themeMode: state.themeMode,
-              );
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 14,
-              left: 20,
-            ),
-            child: Text(
-              "profile_text2",
-              style: AppTextStyle.blackS16W600,
-            ),
-          ),
-          const SizedBox(
-            height: 14,
-          ),
-          BlocBuilder<ProfileCubit, ProfileState>(
-            builder: (context, state) {
-              return ProfileMenuWidget(
-                onTap: (value) {
-                  _profileCubit.handleMenuTapped(option: value);
-                },
-                profiles: ProfileMenuExtension.getInformationItems(),
-                themeMode: state.themeMode,
-              );
-            },
-          ),
-        ],
       ),
     );
+  }
+
+  Widget _buildBodyWidget() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        BlocBuilder<UserInfoCubit, UserInfoState>(
+          builder: (context, state) {
+            return ProfileBannerWidget(
+              user: state.user ?? UserEntity(),
+              onAvatarPressed: () {
+                _cubit.navigator.openUpdateAvatar();
+              },
+            );
+          },
+        ),
+        Container(height: 4, color: AppColors.divider),
+        const AppDivider(),
+        ProfileMenuWidget(
+          menu: ProfileMenu.updateProfile,
+          onMenuTapped: () {
+            _onMenuTapped(ProfileMenu.updateProfile);
+          },
+        ),
+        const AppDivider(indent: AppDimens.paddingNormal),
+        ProfileMenuWidget(
+          menu: ProfileMenu.changePassword,
+          onMenuTapped: () {
+            _onMenuTapped(ProfileMenu.changePassword);
+          },
+        ),
+        const AppDivider(indent: AppDimens.paddingNormal),
+        ProfileMenuWidget(
+          menu: ProfileMenu.openPolicy,
+          onMenuTapped: () {
+            _onMenuTapped(ProfileMenu.openPolicy);
+          },
+        ),
+        const AppDivider(indent: AppDimens.paddingNormal),
+        ProfileMenuWidget(
+          menu: ProfileMenu.logout,
+          onMenuTapped: () {
+            _onMenuTapped(ProfileMenu.logout);
+          },
+        ),
+        const AppDivider(indent: AppDimens.paddingNormal),
+        ProfileMenuWidget(
+          menu: ProfileMenu.deleteAccount,
+          onMenuTapped: () {
+            _onMenuTapped(ProfileMenu.deleteAccount);
+          },
+        ),
+      ],
+    );
+  }
+
+  void _onMenuTapped(ProfileMenu menu) {
+    switch (menu) {
+      case ProfileMenu.updateProfile:
+        _cubit.navigator.openUpdateProfile();
+      case ProfileMenu.changePassword:
+      // TODO: Handle this case.
+      case ProfileMenu.deleteAccount:
+      // TODO: Handle this case.
+      case ProfileMenu.openPolicy:
+      // TODO: Handle this case.
+      case ProfileMenu.logout:
+        context.read<AuthCubit>().signOut();
+    }
   }
 }

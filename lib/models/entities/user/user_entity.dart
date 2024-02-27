@@ -16,30 +16,23 @@ class UserEntity {
   String? avatarUrl;
   @JsonKey()
   String? email;
-  @JsonKey()
-  String? phone;
-  @JsonKey()
-  String? address;
 
-  UserEntity(
-      {this.id,
-      this.username,
-      this.birthday,
-      this.avatarUrl,
-      this.email,
-      this.phone,
-      this.address});
+  UserEntity({
+    this.id,
+    this.username,
+    this.birthday,
+    this.avatarUrl,
+    this.email,
+  });
 
   factory UserEntity.mockData() {
     return UserEntity(
-        id: 12345678,
-        username: "newwave solution line8",
-        birthday: DateTime.now(),
-        avatarUrl:
-            "https://tophinhanhdep.com/wp-content/uploads/2021/10/Cute-Doraemon-Wallpapers.png",
-        email: "newwave.vn",
-        phone: '+84 123456789',
-        address: "111 tay spon ");
+      id: 12345678,
+      username: "NWS",
+      birthday: DateTime.now(),
+      avatarUrl: "https://picsum.photos/400",
+      email: "mobile@newwave.vn",
+    );
   }
 
   factory UserEntity.updateProfile({required UserEntity userEntity}) {

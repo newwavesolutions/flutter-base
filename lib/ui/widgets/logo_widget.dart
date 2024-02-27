@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_images.dart';
-import 'package:flutter_base/common/app_svgs.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LogoWidget extends StatelessWidget {
   final double? width;

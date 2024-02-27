@@ -7,7 +7,6 @@ class AppTextField extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onFieldSubmitted;
-  final String? labelText;
   final String? hintText;
   final FocusNode? focusNode;
   final Widget? prefixIcon;
@@ -26,7 +25,6 @@ class AppTextField extends StatelessWidget {
     required this.controller,
     this.onChanged,
     this.onFieldSubmitted,
-    this.labelText,
     this.hintText,
     this.focusNode,
     this.prefixIcon,

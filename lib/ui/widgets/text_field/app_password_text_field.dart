@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_svgs.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
-import 'package:flutter_base/utils/utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ObscureTextController extends ValueNotifier<bool> {
@@ -63,28 +62,20 @@ class AppPasswordTextField extends StatelessWidget {
                 const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
             hintText: hintText,
             hintStyle: hintStyle ?? AppTextStyle.grayS14,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(0),
-              borderSide:
-                  const BorderSide(color: AppColors.secondary, width: 1.0),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.secondary, width: 1.0),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(0),
-              borderSide:
-                  const BorderSide(color: AppColors.inputBorder, width: 1.0),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.inputBorder, width: 1.0),
             ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(0),
-              borderSide:
-                  const BorderSide(color: AppColors.inputBorder, width: 1.0),
+            disabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.inputBorder, width: 1.0),
             ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(0),
-              borderSide: const BorderSide(color: AppColors.error, width: 1.0),
+            errorBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.error, width: 1.0),
             ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(0),
-              borderSide: const BorderSide(color: AppColors.error, width: 1.0),
+            focusedErrorBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.error, width: 1.0),
             ),
             errorStyle: errorStyle ??
                 AppTextStyle.blackS12.copyWith(color: AppColors.error),
