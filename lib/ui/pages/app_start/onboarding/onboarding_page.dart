@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/models/enums/onboarding_step.dart';
-import 'package:flutter_base/ui/pages/onboarding/onboarding_cubit.dart';
-import 'package:flutter_base/ui/pages/onboarding/onboarding_navigator.dart';
-import 'package:flutter_base/ui/pages/onboarding/widgets/onboarding_footer.dart';
-import 'package:flutter_base/ui/pages/onboarding/widgets/onboarding_sub_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'onboarding_cubit.dart';
+import 'onboarding_navigator.dart';
+import 'widgets/onboarding_footer.dart';
+import 'widgets/onboarding_sub_page.dart';
 
 class OnboardingPage extends StatelessWidget {
   static const router = 'onBoarding';

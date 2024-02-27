@@ -4,7 +4,7 @@ import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
 import 'package:flutter_base/ui/pages/main/main_cubit.dart';
-import 'package:flutter_base/ui/pages/movie_list/movie_list_page.dart';
+import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -50,7 +50,7 @@ class _MainPageState extends State<_MainPage> {
     //PageView page
     pageList = [
       const HomePage(),
-      const MovieListPage(),
+      const NotificationListPage(),
       const ProfilePage(),
     ];
     //Page controller

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
-import 'package:flutter_base/ui/widgets/app_circular_progress_indicator.dart';
+import 'package:flutter_base/ui/widgets/loading/app_loading_indicator.dart';
 
 class AppTextButton extends StatelessWidget {
   //Attributes

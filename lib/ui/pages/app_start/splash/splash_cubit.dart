@@ -1,8 +1,8 @@
 import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
-import 'package:flutter_base/ui/pages/splash/splash_navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'splash_navigator.dart';
 import 'splash_state.dart';
 
 class SplashCubit extends Cubit<SplashState> {

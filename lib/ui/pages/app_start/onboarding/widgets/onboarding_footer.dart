@@ -4,8 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/generated/l10n.dart';
 import 'package:flutter_base/models/enums/onboarding_step.dart';
-import 'package:flutter_base/ui/pages/onboarding/widgets/onboarding_indicator.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_text_button.dart';
+
+import 'onboarding_indicator.dart';
 
 class OnboardingController extends ValueNotifier<OnboardingStep> {
   OnboardingController({

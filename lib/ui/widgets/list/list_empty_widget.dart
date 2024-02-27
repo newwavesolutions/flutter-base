@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
 
-class ErrorListWidget extends StatelessWidget {
+class ListEmptyWidget extends StatelessWidget {
   final String text;
   final RefreshCallback? onRefresh;
 
-  const ErrorListWidget({
+  const ListEmptyWidget({
     super.key,
-    this.text = 'Something went wrong',
+    this.text = 'Empty Data',
     this.onRefresh,
   });
 

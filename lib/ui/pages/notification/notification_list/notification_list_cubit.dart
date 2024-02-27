@@ -16,8 +16,9 @@ class NotificationListCubit extends Cubit<NotificationListState> {
     required this.notificationRepository,
   }) : super(const NotificationListState());
 
-  Future<void> loadInitialData() async {
+  Future<void> fetchInitialData() async {
     emit(state.copyWith(loadDataStatus: LoadStatus.loading));
+    await Future.delayed(const Duration(seconds: 1));
     try {
       final result = await notificationRepository.getNotifications(page: 1);
       emit(
@@ -33,7 +34,10 @@ class NotificationListCubit extends Cubit<NotificationListState> {
     }
   }
 
-  Future<void> loadNextData() async {
+  Future<void> fetchNextData() async {
+    if (state.page == state.totalPages) {
+      return;
+    }
     if (state.loadDataStatus != LoadStatus.success) {
       return;
     }

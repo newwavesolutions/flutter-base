@@ -6,7 +6,7 @@ import 'package:flutter_base/global_blocs/auth/auth_cubit.dart';
 import 'package:flutter_base/global_blocs/setting/app_setting_cubit.dart';
 import 'package:flutter_base/global_blocs/user_info/user_info_cubit.dart';
 import 'package:flutter_base/models/enums/language.dart';
-import 'package:flutter_base/ui/widgets/app_circular_progress_indicator.dart';
+import 'package:flutter_base/ui/widgets/loading/app_loading_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:loader_overlay/loader_overlay.dart';

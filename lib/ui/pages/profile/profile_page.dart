@@ -9,7 +9,7 @@ import 'package:flutter_base/models/enums/profile_menu.dart';
 import 'package:flutter_base/ui/pages/profile/profile_navigator.dart';
 import 'package:flutter_base/ui/pages/profile/widgets/profile_menu_widget.dart';
 import 'package:flutter_base/ui/pages/profile/widgets/profile_banner_widget.dart';
-import 'package:flutter_base/ui/widgets/app_divider.dart';
+import 'package:flutter_base/ui/widgets/divider/app_divider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'profile_cubit.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
-import 'package:flutter_base/ui/pages/movie_list/movie_list_page.dart';
+import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
 
 enum MainTab {
@@ -15,7 +15,7 @@ extension MainTabExtension on MainTab {
       case MainTab.home:
         return const HomePage();
       case MainTab.notification:
-        return const MovieListPage();
+        return const NotificationListPage();
       case MainTab.profile:
         return const ProfilePage();
     }

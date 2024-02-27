@@ -10,7 +10,7 @@ import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/repositories/user_repository.dart';
 import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_navigator.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_button.dart';
-import 'package:flutter_base/ui/widgets/logo_widget.dart';
+import 'package:flutter_base/ui/widgets/logo/logo_widget.dart';
 import 'package:flutter_base/ui/widgets/text_field/app_password_text_field.dart';
 import 'package:flutter_base/ui/widgets/text_field/app_text_field.dart';
 import 'package:flutter_base/utils/utils.dart';
