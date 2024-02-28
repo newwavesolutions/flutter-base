@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/global_blocs/auth/auth_cubit.dart';
-import 'package:flutter_base/models/entities/user/user_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/models/enums/profile_menu.dart';
 import 'package:flutter_base/ui/pages/profile/profile_navigator.dart';

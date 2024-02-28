@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
