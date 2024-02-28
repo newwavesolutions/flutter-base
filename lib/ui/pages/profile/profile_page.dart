@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/global_blocs/auth/auth_cubit.dart';
-import 'package:flutter_base/global_blocs/user_info/user_info_cubit.dart';
 import 'package:flutter_base/models/entities/user/user_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/models/enums/profile_menu.dart';
@@ -80,14 +79,9 @@ class _ProfileTabPageState extends State<_ProfileTabPage> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        BlocBuilder<UserInfoCubit, UserInfoState>(
-          builder: (context, state) {
-            return ProfileBannerWidget(
-              user: state.user ?? UserEntity(),
-              onAvatarPressed: () {
-                _cubit.navigator.openUpdateAvatar();
-              },
-            );
+        ProfileBannerWidget(
+          onAvatarPressed: () {
+            _cubit.navigator.openUpdateAvatar();
           },
         ),
         Container(height: 4, color: AppColors.divider),

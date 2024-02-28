@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/configs/app_configs.dart';
-import 'package:flutter_base/global_blocs/user_info/user_info_cubit.dart';
+import 'package:flutter_base/global_blocs/user/user_cubit.dart';
 import 'package:flutter_base/models/entities/movie_entity.dart';
 import 'package:flutter_base/models/entities/user/user_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
@@ -55,7 +55,7 @@ class _HomeChildPageState extends State<HomeChildPage>
     super.initState();
     _cubit = context.read<HomeCubit>();
     _cubit.fetchInitialMovies();
-    context.read<UserInfoCubit>().updateUser(UserEntity.mockData());
+    context.read<UserCubit>().updateUser(UserEntity.mockData());
     _scrollController.addListener(_onScroll);
   }
 
@@ -73,18 +73,18 @@ class _HomeChildPageState extends State<HomeChildPage>
   Widget _buildBodyWidget() {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        if (state.loadMovieStatus == LoadStatus.loading) {
+        if (state.loadMovieStatus == LoadStatus.initial) {
+          return Container();
+        } else if (state.loadMovieStatus == LoadStatus.loading) {
           return const ListLoadingWidget();
         } else if (state.loadMovieStatus == LoadStatus.failure) {
           return const ListErrorWidget();
-        } else if (state.loadMovieStatus == LoadStatus.success) {
+        } else {
           if (state.movies.isEmpty) {
             return ListEmptyWidget(onRefresh: _onRefreshData);
           } else {
             return _buildSuccessList(state.movies);
           }
-        } else {
-          return Container();
         }
       },
     );

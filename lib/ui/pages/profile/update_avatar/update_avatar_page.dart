@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/ui/pages/profile/update_avatar/update_avatar_navigator.dart';
 import 'package:flutter_base/ui/widgets/images/app_circle_avatar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,9 +16,7 @@ class UpdateAvatarPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        final appCubit = RepositoryProvider.of<AppCubit>(context);
         return UpdateAvatarCubit(
-          appCubit: appCubit,
           navigator: UpdateAvatarNavigator(context: context),
         );
       },
@@ -42,7 +39,6 @@ class _UpdateAvatarChildPageState extends State<UpdateAvatarChildPage> {
   void initState() {
     super.initState();
     _cubit = BlocProvider.of(context);
-    _cubit.getUser();
   }
 
   @override

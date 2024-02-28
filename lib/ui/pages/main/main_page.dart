@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_colors.dart';
-import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
 import 'package:flutter_base/ui/pages/main/main_cubit.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
@@ -59,23 +57,9 @@ class _MainPageState extends State<_MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<AppCubit, AppState>(
-          listenWhen: (prev, current) {
-            return prev.signOutStatus != current.signOutStatus &&
-                current.signOutStatus == LoadStatus.success;
-          },
-          listener: (context, state) {
-            // BlocProvider.of<AppSettingCubit>(context).resetSetting();
-            // GoRouter.of(context).pushReplacementNamed(AppRouter.signIn);
-          },
-        )
-      ],
-      child: Scaffold(
-        body: _buildPageView(),
-        bottomNavigationBar: _buildBottomNavigationBar(),
-      ),
+    return Scaffold(
+      body: _buildPageView(),
+      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 

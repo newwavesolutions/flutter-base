@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_images.dart';
 import 'package:flutter_base/database/share_preferences_helper.dart';
@@ -19,7 +18,6 @@ class SplashPage extends StatelessWidget {
         return SplashCubit(
           navigator: SplashNavigator(context: context),
           authRepo: RepositoryProvider.of<AuthRepository>(context),
-          appCubit: RepositoryProvider.of<AppCubit>(context),
         );
       },
       child: const SplashChildPage(),

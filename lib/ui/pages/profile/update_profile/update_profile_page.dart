@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/generated/l10n.dart';
+import 'package:flutter_base/global_blocs/user/user_cubit.dart';
 import 'package:flutter_base/ui/pages/profile/update_profile/update_profile_navigator.dart';
 import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_button.dart';
@@ -23,9 +23,7 @@ class UpdateProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        final appCubit = RepositoryProvider.of<AppCubit>(context);
         return UpdateProfileCubit(
-          appCubit: appCubit,
           navigator: UpdateProfileNavigator(context: context),
         );
       },
@@ -51,11 +49,10 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
   void initState() {
     super.initState();
     _cubit = BlocProvider.of(context);
-    _cubit.getUser();
-    textNameController =
-        TextEditingController(text: _cubit.state.user?.username ?? '');
+    final user = context.read<UserCubit>().state.user;
+    textNameController = TextEditingController(text: user?.username ?? '');
     textBirthdayController = TextEditingController(
-        text: DateTimeExtension(_cubit.state.user?.birthday ?? DateTime.now())
+        text: DateTimeExtension(user?.birthday ?? DateTime.now())
             .toDateString()
             .toString());
   }
@@ -101,8 +98,6 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
                     bottom: AppDimens.paddingSmall),
               ),
               BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
-                buildWhen: (previous, current) =>
-                    previous.birthdayStatus != current.birthdayStatus,
                 builder: (context, state) {
                   return InkWell(
                     onTap: _openDatePicker,

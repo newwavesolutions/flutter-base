@@ -1,4 +1,3 @@
-import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,22 +7,16 @@ import 'splash_state.dart';
 class SplashCubit extends Cubit<SplashState> {
   final SplashNavigator navigator;
   final AuthRepository authRepo;
-  final AppCubit appCubit;
 
   SplashCubit({
     required this.navigator,
     required this.authRepo,
-    required this.appCubit,
   }) : super(const SplashState());
 
   Future<void> fetchInitialData() async {
     final isLoggedIn = await _isLoggedIn();
     if (isLoggedIn) {
-      try {
-        await appCubit.getProfile();
-      } catch (error) {
-        // Todo: handle 401 or network error
-      }
+      // Handle user logged in
     }
   }
 

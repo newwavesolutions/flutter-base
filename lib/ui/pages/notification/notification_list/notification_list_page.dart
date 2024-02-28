@@ -77,20 +77,20 @@ class _NotificationListChildPageState extends State<NotificationListChildPage> {
             return prev.loadDataStatus != current.loadDataStatus;
           },
           builder: (context, state) {
-            if (state.loadDataStatus == LoadStatus.loading) {
+            if (state.loadDataStatus == LoadStatus.initial) {
+              return Container();
+            } else if (state.loadDataStatus == LoadStatus.loading) {
               return const ListLoadingWidget();
             } else if (state.loadDataStatus == LoadStatus.failure) {
               return ListErrorWidget(
                 onRefresh: _onRefreshData,
               );
-            } else if (state.loadDataStatus == LoadStatus.success) {
+            } else {
               if (state.notifications.isEmpty) {
                 return ListEmptyWidget(onRefresh: _onRefreshData);
               } else {
                 return _buildNotificationList();
               }
-            } else {
-              return Container();
             }
           },
         ),

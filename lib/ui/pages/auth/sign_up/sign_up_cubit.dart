@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_base/blocs/app_cubit.dart';
+import 'package:flutter_base/global_blocs/user/user_cubit.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/repositories/user_repository.dart';
@@ -14,13 +14,13 @@ class SignUpCubit extends Cubit<SignUpState> {
   final SignUpNavigator navigator;
   final AuthRepository authRepo;
   final UserRepository userRepo;
-  final AppCubit appCubit;
+  final UserCubit userCubit;
 
   SignUpCubit({
     required this.navigator,
     required this.authRepo,
     required this.userRepo,
-    required this.appCubit,
+    required this.userCubit,
   }) : super(const SignUpState());
 
   void changeFullName({required String fullName}) {

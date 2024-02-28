@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_svgs.dart';
-import 'package:flutter_base/global_blocs/user_info/user_info_cubit.dart';
+import 'package:flutter_base/global_blocs/user/user_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,7 +18,7 @@ class AppCircleAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserInfoCubit, UserInfoState>(
+    return BlocBuilder<UserCubit, UserState>(
       buildWhen: (prev, current) {
         return prev.user?.avatarUrl != current.user?.avatarUrl;
       },

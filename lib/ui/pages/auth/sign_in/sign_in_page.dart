@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/common/app_shadows.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/generated/l10n.dart';
+import 'package:flutter_base/global_blocs/user/user_cubit.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/repositories/user_repository.dart';
@@ -27,12 +27,12 @@ class SignInPage extends StatelessWidget {
       create: (con) {
         final authRepo = RepositoryProvider.of<AuthRepository>(context);
         final userRepo = RepositoryProvider.of<UserRepository>(context);
-        final appCubit = RepositoryProvider.of<AppCubit>(context);
+        final userCubit = RepositoryProvider.of<UserCubit>(context);
         return SignInCubit(
           navigator: SignInNavigator(context: context),
           authRepo: authRepo,
           userRepo: userRepo,
-          appCubit: appCubit,
+          userCubit: userCubit,
         );
       },
       child: const SignInChildPage(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/blocs/app_cubit.dart';
 import 'package:flutter_base/generated/l10n.dart';
+import 'package:flutter_base/global_blocs/user/user_cubit.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/repositories/user_repository.dart';
@@ -22,12 +22,12 @@ class SignUpPage extends StatelessWidget {
       create: (context) {
         final authRepo = RepositoryProvider.of<AuthRepository>(context);
         final userRepo = RepositoryProvider.of<UserRepository>(context);
-        final appCubit = RepositoryProvider.of<AppCubit>(context);
+        final userCubit = RepositoryProvider.of<UserCubit>(context);
         return SignUpCubit(
           navigator: SignUpNavigator(context: context),
           authRepo: authRepo,
           userRepo: userRepo,
-          appCubit: appCubit,
+          userCubit: userCubit,
         );
       },
       child: const SignUpChildPage(),

@@ -4,14 +4,13 @@ import 'package:flutter_base/common/app_themes.dart';
 import 'package:flutter_base/configs/app_configs.dart';
 import 'package:flutter_base/global_blocs/auth/auth_cubit.dart';
 import 'package:flutter_base/global_blocs/setting/app_setting_cubit.dart';
-import 'package:flutter_base/global_blocs/user_info/user_info_cubit.dart';
+import 'package:flutter_base/global_blocs/user/user_cubit.dart';
 import 'package:flutter_base/models/enums/language.dart';
 import 'package:flutter_base/ui/widgets/loading/app_loading_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-import 'blocs/app_cubit.dart';
 import 'generated/l10n.dart';
 import 'network/api_client.dart';
 import 'network/api_util.dart';
@@ -73,16 +72,10 @@ class _MyAppState extends State<MyApp> {
             final authRepo = RepositoryProvider.of<AuthRepository>(context);
             return AuthCubit(authRepo: authRepo);
           }),
-          BlocProvider<UserInfoCubit>(create: (context) {
-            return UserInfoCubit();
-          }),
-          BlocProvider<AppCubit>(create: (context) {
-            final userRepo = RepositoryProvider.of<UserRepository>(context);
-            final authRepo = RepositoryProvider.of<AuthRepository>(context);
-            return AppCubit(
-              userRepo: userRepo,
-              authRepo: authRepo,
-            );
+          BlocProvider<UserCubit>(create: (context) {
+            final userRepository =
+                RepositoryProvider.of<UserRepository>(context);
+            return UserCubit(userRepository: userRepository);
           }),
           BlocProvider<AppSettingCubit>(create: (context) {
             return AppSettingCubit();
