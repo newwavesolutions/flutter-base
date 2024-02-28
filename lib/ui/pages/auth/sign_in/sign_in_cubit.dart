@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_base/blocs/app_cubit.dart';
+import 'package:flutter_base/global_blocs/user/user_cubit.dart';
 import 'package:flutter_base/models/entities/user/user_entity.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
@@ -15,13 +15,13 @@ class SignInCubit extends Cubit<SignInState> {
   final SignInNavigator navigator;
   final AuthRepository authRepo;
   final UserRepository userRepo;
-  final AppCubit appCubit;
+  final UserCubit userCubit;
 
   SignInCubit({
     required this.navigator,
     required this.authRepo,
     required this.userRepo,
-    required this.appCubit,
+    required this.userCubit,
   }) : super(const SignInState());
 
   void changeEmail({required String email}) {
@@ -48,10 +48,10 @@ class SignInCubit extends Cubit<SignInState> {
       final result = await authRepo.signIn(email, password);
       if (result != null) {
         UserEntity? myProfile = await userRepo.getProfile();
-        appCubit.updateProfile(myProfile);
+        userCubit.updateUser(myProfile);
         authRepo.saveToken(result);
         emit(state.copyWith(signInStatus: LoadStatus.success));
-        navigator.openMainPage();
+        navigator.openHomePage();
       } else {
         emit(state.copyWith(signInStatus: LoadStatus.failure));
       }

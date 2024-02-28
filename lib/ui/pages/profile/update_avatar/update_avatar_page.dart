@@ -1,9 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_base/blocs/app_cubit.dart';
-import 'package:flutter_base/common/app_text_styles.dart';
-import 'package:flutter_base/ui/commons/app_bottom_sheet.dart';
 import 'package:flutter_base/ui/pages/profile/update_avatar/update_avatar_navigator.dart';
 import 'package:flutter_base/ui/widgets/images/app_circle_avatar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,9 +16,7 @@ class UpdateAvatarPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        final appCubit = RepositoryProvider.of<AppCubit>(context);
         return UpdateAvatarCubit(
-          appCubit: appCubit,
           navigator: UpdateAvatarNavigator(context: context),
         );
       },
@@ -44,7 +39,6 @@ class _UpdateAvatarChildPageState extends State<UpdateAvatarChildPage> {
   void initState() {
     super.initState();
     _cubit = BlocProvider.of(context);
-    _cubit.getUser();
   }
 
   @override
@@ -83,10 +77,7 @@ class _UpdateAvatarChildPageState extends State<UpdateAvatarChildPage> {
       child: BlocBuilder<UpdateAvatarCubit, UpdateAvatarState>(
         builder: (context, state) {
           return state.image == null
-              ? AppCircleAvatar(
-                  url: state.user?.avatarUrl ?? '',
-                  size: 400,
-                )
+              ? const AppCircleAvatar(size: Size(400, 400))
               : ClipRRect(
                   borderRadius: BorderRadius.circular(200),
                   child: Image.file(
@@ -105,54 +96,52 @@ class _UpdateAvatarChildPageState extends State<UpdateAvatarChildPage> {
     required Function() chooseImageCollection,
     required Function() chooseImageCamera,
   }) async {
-    AppBottomSheet.show(Container(
-      height: 200,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.white,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          InkWell(
-            onTap: () {
-              chooseImageCollection();
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.collections,
-                  size: 60,
-                  color: Colors.grey,
-                ),
-                Text(
-                  "choose from the collection",
-                  style: AppTextStyle.greyS16,
-                ),
-              ],
-            ),
-          ),
-          InkWell(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.photo_camera,
-                  size: 60,
-                  color: Colors.grey,
-                ),
-                Text(
-                  'take a photo',
-                  style: AppTextStyle.greyS16,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ));
+    // AppBottomSheet.show(Container(
+    //   height: 200,
+    //   decoration: BoxDecoration(
+    //     borderRadius: BorderRadius.circular(20),
+    //     color: Colors.white,
+    //   ),
+    //   child: Row(
+    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //     crossAxisAlignment: CrossAxisAlignment.center,
+    //     children: [
+    //       InkWell(
+    //         onTap: () {
+    //           chooseImageCollection();
+    //         },
+    //         child: const Column(
+    //           mainAxisAlignment: MainAxisAlignment.center,
+    //           children: [
+    //             Icon(
+    //               Icons.collections,
+    //               size: 60,
+    //               color: Colors.grey,
+    //             ),
+    //             Text(
+    //               "choose from the collection",
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //       const InkWell(
+    //         child: Column(
+    //           mainAxisAlignment: MainAxisAlignment.center,
+    //           children: [
+    //             Icon(
+    //               Icons.photo_camera,
+    //               size: 60,
+    //               color: Colors.grey,
+    //             ),
+    //             Text(
+    //               'take a photo',
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // ));
   }
 
   @override

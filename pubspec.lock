@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  back_button_interceptor:
+    dependency: transitive
+    description:
+      name: back_button_interceptor
+      sha256: a95c096cf76c78cb07c4a84565f41a96f8fac42a37d1c41a1ec1a0bbdf69473e
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.2"
   bloc:
     dependency: transitive
     description:
@@ -437,14 +445,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
-  hive:
-    dependency: transitive
-    description:
-      name: hive
-      sha256: "8dcf6db979d7933da8217edcec84e9df1bdb4e4edc7fc77dbd5aa74356d6d941"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.3"
   http:
     dependency: transitive
     description:
@@ -469,14 +469,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
-  hydrated_bloc:
-    dependency: "direct main"
-    description:
-      name: hydrated_bloc
-      sha256: "00a2099680162e74b5a836b8a7f446e478520a9cae9f6032e028ad8129f4432d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "9.1.4"
   image:
     dependency: transitive
     description:
@@ -565,6 +557,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  loader_overlay:
+    dependency: "direct main"
+    description:
+      name: loader_overlay
+      sha256: "02deeeed0d4eaaeeada6ce7bb13426d7548acad1f71e4884ec4a010e0e4824d6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
   logger:
     dependency: "direct main"
     description:

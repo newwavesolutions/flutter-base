@@ -5,10 +5,6 @@ import 'package:go_router/go_router.dart';
 class SignInNavigator extends AppNavigator {
   SignInNavigator({required super.context});
 
-  void openMainPage() {
-    GoRouter.of(context).pushNamed(AppRouter.main);
-  }
-
   void openSignUpPage() {
     GoRouter.of(context).pushNamed(AppRouter.signUp);
   }

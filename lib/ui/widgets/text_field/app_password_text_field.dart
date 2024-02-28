@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/common/app_colors.dart';
+import 'package:flutter_base/common/app_svgs.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
-import 'package:flutter_base/utils/utils.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ObscureTextController extends ValueNotifier<bool> {
   ObscureTextController({bool obscureText = true}) : super(obscureText);
@@ -16,19 +18,24 @@ class AppPasswordTextField extends StatelessWidget {
   final TextEditingController controller;
   final ObscureTextController obscureTextController;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onFieldSubmitted;
+  final String? Function(String?)? validator;
   final String? labelText;
   final String? hintText;
   final FocusNode? focusNode;
   final TextStyle? style;
   final EdgeInsets? padding;
   final TextStyle? hintStyle;
-  final double? borderRadius;
   final TextStyle? errorStyle;
+  final bool enablePrefixIcon;
+  final bool enableSuffixIcon;
 
   const AppPasswordTextField({
     super.key,
     required this.controller,
     required this.obscureTextController,
+    this.onFieldSubmitted,
+    this.validator,
     this.onChanged,
     this.labelText = "Password",
     this.hintText,
@@ -36,8 +43,9 @@ class AppPasswordTextField extends StatelessWidget {
     this.style,
     this.padding,
     this.hintStyle,
-    this.borderRadius,
     this.errorStyle,
+    this.enablePrefixIcon = false,
+    this.enableSuffixIcon = false,
   });
 
   @override
@@ -48,52 +56,57 @@ class AppPasswordTextField extends StatelessWidget {
         return TextFormField(
           controller: controller,
           focusNode: focusNode,
-          style: style ?? AppTextStyle.textGreyS12Bold,
+          style: style ?? AppTextStyle.blackS14,
           decoration: InputDecoration(
             contentPadding: padding ??
-                const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
             hintText: hintText,
-            hintStyle: hintStyle ?? AppTextStyle.textGreyS12W400,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 0),
+            hintStyle: hintStyle ?? AppTextStyle.grayS14,
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.secondary, width: 1.0),
             ),
-            errorStyle: errorStyle ?? AppTextStyle.textFieldErrorS12Bold,
-            prefixIcon: const Icon(Icons.lock_outline),
-            suffixIcon: ValueListenableBuilder(
-              valueListenable: obscureTextController,
-              child: Container(),
-              builder: (context, bool obscureText, child) {
-                return IconButton(
-                  splashRadius: 24,
-                  onPressed: () {
-                    Future.delayed(Duration.zero, () {
-                      focusNode?.unfocus();
-                    });
-                    obscureTextController.value = !obscureText;
-                  },
-                  icon: Icon(
-                    obscureText
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
-                  ),
-                );
-              },
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.inputBorder, width: 1.0),
             ),
+            disabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.inputBorder, width: 1.0),
+            ),
+            errorBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.error, width: 1.0),
+            ),
+            focusedErrorBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.error, width: 1.0),
+            ),
+            errorStyle: errorStyle ??
+                AppTextStyle.blackS12.copyWith(color: AppColors.error),
+            prefixIcon:
+                enablePrefixIcon ? const Icon(Icons.lock_outline) : null,
+            suffixIcon: enableSuffixIcon
+                ? ValueListenableBuilder(
+                    valueListenable: obscureTextController,
+                    child: Container(),
+                    builder: (context, bool obscureText, child) {
+                      return IconButton(
+                        splashRadius: 24,
+                        onPressed: () {
+                          Future.delayed(Duration.zero, () {
+                            focusNode?.unfocus();
+                          });
+                          obscureTextController.value = !obscureText;
+                        },
+                        icon: obscureText
+                            ? SvgPicture.asset(AppSVGs.icEyeClosed)
+                            : SvgPicture.asset(AppSVGs.icEyeOpening),
+                      );
+                    },
+                  )
+                : null,
           ),
           keyboardType: TextInputType.visiblePassword,
           onChanged: onChanged,
           obscureText: obscureTextController.value,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter password';
-            }
-            if (!Utils.isPassword(value)) {
-              return 'Oops! Your Password Is Not Correct';
-              // return "Password requires at least 8 characters, one uppercase letter, one lowercase letter, one digit, and one special character.";
-            }
-            return null;
-          },
-          // style: const TextStyle(fontSize: 16, color: Colors.black),
+          validator: validator,
+          onFieldSubmitted: onFieldSubmitted,
         );
       },
     );

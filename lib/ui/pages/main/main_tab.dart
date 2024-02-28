@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
-import 'package:flutter_base/ui/pages/movie_list/movie_list_page.dart';
+import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
-import 'package:flutter_base/ui/pages/widget_list/widget_list_page.dart';
 
 enum MainTab {
   home,
-  movies,
-  widgets,
+  notification,
   profile,
 }
 
@@ -16,10 +14,8 @@ extension MainTabExtension on MainTab {
     switch (this) {
       case MainTab.home:
         return const HomePage();
-      case MainTab.movies:
-        return const MovieListPage();
-      case MainTab.widgets:
-        return const WidgetListPage();
+      case MainTab.notification:
+        return const NotificationListPage();
       case MainTab.profile:
         return const ProfilePage();
     }
@@ -32,19 +28,14 @@ extension MainTabExtension on MainTab {
           icon: Icon(Icons.home_outlined),
           label: "Home",
         );
-      case MainTab.movies:
+      case MainTab.notification:
         return const BottomNavigationBarItem(
-          icon: Icon(Icons.movie_creation_outlined),
-          label: "Movies",
-        );
-      case MainTab.widgets:
-        return const BottomNavigationBarItem(
-          icon: Icon(Icons.widgets_outlined),
-          label: "Widgets",
+          icon: Icon(Icons.notifications_outlined),
+          label: "Notifications",
         );
       case MainTab.profile:
         return const BottomNavigationBarItem(
-          icon: Icon(Icons.person_outline_rounded),
+          icon: Icon(Icons.person_outline),
           label: "Profile",
         );
     }
@@ -54,10 +45,8 @@ extension MainTabExtension on MainTab {
     switch (this) {
       case MainTab.home:
         return 'Home';
-      case MainTab.movies:
-        return 'Movies';
-      case MainTab.widgets:
-        return 'Widgets';
+      case MainTab.notification:
+        return 'Notification';
       case MainTab.profile:
         return 'Profile';
     }

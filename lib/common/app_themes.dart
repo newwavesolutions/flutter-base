@@ -15,8 +15,7 @@ class AppThemes {
     this.secondaryColor = AppColors.secondary,
   }) : brightness = isDarkMode ? Brightness.dark : Brightness.light;
 
-  Color get backgroundColor =>
-      isDarkMode ? AppColors.backgroundDark : AppColors.backgroundLight;
+  Color get backgroundColor => AppColors.background;
 
   TextTheme get textTheme {
     final textColor = isDarkMode ? Colors.white : Colors.black;

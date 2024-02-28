@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/blocs/app_cubit.dart';
-import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/generated/l10n.dart';
+import 'package:flutter_base/global_blocs/user/user_cubit.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/auth_repository.dart';
 import 'package:flutter_base/repositories/user_repository.dart';
 import 'package:flutter_base/ui/pages/auth/sign_up/sign_up_cubit.dart';
 import 'package:flutter_base/ui/pages/auth/sign_up/sign_up_navigator.dart';
-import 'package:flutter_base/ui/pages/auth/widgets/welcome_widget.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_button.dart';
+import 'package:flutter_base/ui/widgets/logo/logo_widget.dart';
 import 'package:flutter_base/ui/widgets/text_field/app_password_text_field.dart';
 import 'package:flutter_base/ui/widgets/text_field/app_text_field.dart';
 import 'package:flutter_base/utils/utils.dart';
@@ -23,12 +22,12 @@ class SignUpPage extends StatelessWidget {
       create: (context) {
         final authRepo = RepositoryProvider.of<AuthRepository>(context);
         final userRepo = RepositoryProvider.of<UserRepository>(context);
-        final appCubit = RepositoryProvider.of<AppCubit>(context);
+        final userCubit = RepositoryProvider.of<UserCubit>(context);
         return SignUpCubit(
           navigator: SignUpNavigator(context: context),
           authRepo: authRepo,
           userRepo: userRepo,
-          appCubit: appCubit,
+          userCubit: userCubit,
         );
       },
       child: const SignUpChildPage(),
@@ -85,22 +84,17 @@ class _SignUpChildPageState extends State<SignUpChildPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(height: 156),
-            WelcomeWidget(
-              title: S.current.sign_up_title,
-              subTitle: S.current.sign_up_sub_title,
-            ),
+            const LogoWidget(),
             const SizedBox(height: 28),
             AppTextField(
               controller: fullNameTextController,
-              hintText: S.current.full_name,
-              borderRadius: 5,
-              prefix: const Icon(Icons.person_outline),
+              hintText: S.current.sign_up_email,
               onChanged: (text) {
                 _cubit.changeFullName(fullName: text);
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return S.current.full_name_empty;
+                  return "S.current.full_name_empty";
                 }
                 return null;
               },
@@ -108,19 +102,16 @@ class _SignUpChildPageState extends State<SignUpChildPage> {
             const SizedBox(height: 8),
             AppTextField(
               controller: emailTextController,
-              hintText: S.current.your_email,
-              borderRadius: 5,
-              prefix: const Icon(Icons.email_outlined),
-              type: TextInputType.emailAddress,
+              hintText: S.current.sign_up_email_hint,
               onChanged: (text) {
                 _cubit.changeEmail(email: text);
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return S.current.email_empty;
+                  return "S.current.email_empty";
                 }
                 if (!Utils.isEmail(value)) {
-                  return S.current.email_invalid;
+                  return "S.current.email_invalid";
                 }
                 return null;
               },
@@ -129,8 +120,7 @@ class _SignUpChildPageState extends State<SignUpChildPage> {
             AppPasswordTextField(
               controller: passwordTextController,
               obscureTextController: obscurePasswordController,
-              hintText: S.current.password,
-              borderRadius: 5,
+              hintText: S.current.sign_up_password_hint,
               onChanged: (text) {
                 _cubit.changePassword(password: text);
               },
@@ -139,8 +129,7 @@ class _SignUpChildPageState extends State<SignUpChildPage> {
             AppPasswordTextField(
               controller: confirmPasswordTextController,
               obscureTextController: obscurePasswordController,
-              hintText: S.current.confirm_password,
-              borderRadius: 5,
+              hintText: S.current.sign_up_password_confirm_hint,
               onChanged: (text) {
                 _cubit.changeConfirmPassword(confirmPassword: text);
               },
@@ -186,14 +175,12 @@ class _SignUpChildPageState extends State<SignUpChildPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          S.current.already_have_account,
-          style: AppTextStyle.textGreyS12W400,
+          S.current.button_login,
         ),
         TextButton(
           onPressed: () => _cubit.navigator.openSignInPage(),
           child: Text(
-            S.current.button_signIn,
-            style: AppTextStyle.primaryS12Bold,
+            S.current.button_login,
           ),
         ),
       ],

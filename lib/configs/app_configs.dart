@@ -1,11 +1,11 @@
-import 'dart:ui';
+import 'package:flutter_base/models/enums/language.dart';
 
 import 'app_env_config.dart';
 
 class AppConfigs {
   AppConfigs._();
 
-  static const String appName = "Newwave Solution JSC";
+  static const String appName = "NEWWAVE";
 
   static Environment env = Environment.prod;
 
@@ -20,9 +20,7 @@ class AppConfigs {
   static const pageSizeMax = 1000;
 
   ///Local
-  static const appLocal = 'vi_VN';
-  static const appLanguage = 'vi';
-  static const defaultLocal = Locale.fromSubtags(languageCode: appLanguage);
+  static const defaultLanguage = Language.english;
 
   ///DateFormat
 
@@ -40,7 +38,7 @@ class AppConfigs {
   static final birthMaxDate = DateTime.now();
 
   ///Font
-  static const fontFamily = 'Poppins';
+  static const fontFamily = 'Roboto';
 
   ///Max file
   static const maxAttachFile = 5;

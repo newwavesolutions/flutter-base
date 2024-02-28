@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/blocs/app_cubit.dart';
-import 'package:flutter_base/blocs/setting/app_setting_cubit.dart';
-import 'package:flutter_base/models/enums/load_status.dart';
-import 'package:flutter_base/router/route_config.dart';
+import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/ui/pages/home/home_page.dart';
 import 'package:flutter_base/ui/pages/main/main_cubit.dart';
-import 'package:flutter_base/ui/pages/movie_list/movie_list_page.dart';
+import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
-import 'package:flutter_base/ui/pages/widget_list/widget_list_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 import 'main_state.dart';
 import 'main_tab.dart';
@@ -40,8 +35,7 @@ class _MainPageState extends State<_MainPage> {
 
   final tabs = [
     MainTab.home,
-    MainTab.movies,
-    MainTab.widgets,
+    MainTab.notification,
     MainTab.profile,
   ];
 
@@ -54,8 +48,7 @@ class _MainPageState extends State<_MainPage> {
     //PageView page
     pageList = [
       const HomePage(),
-      const MovieListPage(),
-      const WidgetListPage(),
+      const NotificationListPage(),
       const ProfilePage(),
     ];
     //Page controller
@@ -64,38 +57,24 @@ class _MainPageState extends State<_MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<AppCubit, AppState>(
-          listenWhen: (prev, current) {
-            return prev.signOutStatus != current.signOutStatus &&
-                current.signOutStatus == LoadStatus.success;
-          },
-          listener: (context, state) {
-            BlocProvider.of<AppSettingCubit>(context).resetSetting();
-            GoRouter.of(context).pushReplacementNamed(AppRouter.signIn);
-          },
-        )
-      ],
-      child: Scaffold(
-        body: _buildPageView(),
-        bottomNavigationBar: _buildBottomNavigationBar(),
-      ),
+    return Scaffold(
+      body: _buildPageView(),
+      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
   Widget _buildPageView() {
     return PageView(
       controller: pageController,
-      children: pageList,
+      physics: const NeverScrollableScrollPhysics(),
       onPageChanged: (index) {
         _cubit.switchTap(index);
       },
+      children: pageList,
     );
   }
 
   Widget _buildBottomNavigationBar() {
-    final theme = Theme.of(context);
     return BlocConsumer<MainCubit, MainState>(
       bloc: _cubit,
       listenWhen: (prev, current) {
@@ -111,12 +90,11 @@ class _MainPageState extends State<_MainPage> {
         return BottomNavigationBar(
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          backgroundColor: theme.appBarTheme.backgroundColor,
           elevation: 8,
           type: BottomNavigationBarType.fixed,
           currentIndex: state.selectedIndex,
           unselectedItemColor: Colors.grey,
-          selectedItemColor: theme.indicatorColor,
+          selectedItemColor: AppColors.primary,
           items: tabs.map((e) => e.tab).toList(),
           onTap: (index) {
             _cubit.switchTap(index);

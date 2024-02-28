@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_colors.dart';
-import 'package:flutter_base/common/app_images.dart';
 
 class AppCacheImage extends StatelessWidget {
   final String url;
@@ -68,12 +67,6 @@ class AppCacheImage extends StatelessWidget {
       borderRadius: BorderRadius.circular(borderRadius ?? 0),
       child: Container(
         color: const Color(0xFFe6e6e6),
-        child: Center(
-          child: Image.asset(
-            AppImages.bgImagePlaceholder,
-            fit: BoxFit.fitHeight,
-          ),
-        ),
       ),
     );
   }

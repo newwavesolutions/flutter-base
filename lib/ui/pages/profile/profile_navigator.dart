@@ -5,10 +5,6 @@ import 'package:go_router/go_router.dart';
 class ProfileNavigator extends AppNavigator {
   ProfileNavigator({required super.context});
 
-  void openSetting() {
-    GoRouter.of(context).pushNamed(AppRouter.setting);
-  }
-
   Future<bool> openUpdateProfile() async {
     var result = await GoRouter.of(context).pushNamed(AppRouter.updateProfile);
     return result as bool;

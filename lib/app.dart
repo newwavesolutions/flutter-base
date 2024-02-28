@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_base/common/app_themes.dart';
 import 'package:flutter_base/configs/app_configs.dart';
+import 'package:flutter_base/global_blocs/auth/auth_cubit.dart';
+import 'package:flutter_base/global_blocs/setting/app_setting_cubit.dart';
+import 'package:flutter_base/global_blocs/user/user_cubit.dart';
+import 'package:flutter_base/models/enums/language.dart';
+import 'package:flutter_base/ui/widgets/loading/app_loading_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
-import 'blocs/app_cubit.dart';
-import 'blocs/setting/app_setting_cubit.dart';
 import 'generated/l10n.dart';
 import 'network/api_client.dart';
 import 'network/api_util.dart';
@@ -63,50 +68,68 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<AppCubit>(create: (context) {
-            final userRepo = RepositoryProvider.of<UserRepository>(context);
+          BlocProvider<AuthCubit>(create: (context) {
             final authRepo = RepositoryProvider.of<AuthRepository>(context);
-            return AppCubit(
-              userRepo: userRepo,
-              authRepo: authRepo,
-            );
+            return AuthCubit(authRepo: authRepo);
+          }),
+          BlocProvider<UserCubit>(create: (context) {
+            final userRepository =
+                RepositoryProvider.of<UserRepository>(context);
+            return UserCubit(userRepository: userRepository);
           }),
           BlocProvider<AppSettingCubit>(create: (context) {
             return AppSettingCubit();
           }),
         ],
         child: BlocBuilder<AppSettingCubit, AppSettingState>(
+          buildWhen: (prev, current) {
+            return prev.language != prev.language;
+          },
           builder: (context, state) {
             return GestureDetector(
               onTap: () {
                 _hideKeyboard(context);
               },
-              child: MaterialApp.router(
-                title: AppConfigs.appName,
-                theme: ThemeData(
-                  primaryColor: state.primaryColor,
-                  fontFamily: AppConfigs.fontFamily,
+              child: GlobalLoaderOverlay(
+                useDefaultLoading: false,
+                overlayWidgetBuilder: (_) {
+                  return Center(
+                    child: Container(
+                      color: Colors.grey,
+                      width: 40,
+                      height: 40,
+                      child:
+                          const Center(child: AppCircularProgressIndicator()),
+                    ),
+                  );
+                },
+                child: _buildMaterialApp(
+                  locale: state.language.local,
                 ),
-                //Disabled
-                // darkTheme: AppThemes(
-                //   isDarkMode: true,
-                //   primaryColor: state.primaryColor,
-                // ).theme,
-                themeMode: state.themeMode,
-                routerConfig: AppRouter.router,
-                localizationsDelegates: const [
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                  S.delegate,
-                ],
-                locale: state.locale,
-                supportedLocales: S.delegate.supportedLocales,
               ),
             );
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildMaterialApp({
+    required Locale locale,
+  }) {
+    return MaterialApp.router(
+      title: AppConfigs.appName,
+      theme: AppThemes().theme,
+      themeMode: ThemeMode.dark,
+      routerConfig: AppRouter.router,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        S.delegate,
+      ],
+      locale: locale,
+      supportedLocales: S.delegate.supportedLocales,
     );
   }
 

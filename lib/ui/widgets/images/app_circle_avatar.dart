@@ -1,63 +1,69 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_base/common/app_images.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_base/common/app_colors.dart';
+import 'package:flutter_base/common/app_svgs.dart';
+import 'package:flutter_base/global_blocs/user/user_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AppCircleAvatar extends StatelessWidget {
-  final String url;
-  final double? size;
+  final Size size;
+  final VoidCallback? onPressed;
 
   const AppCircleAvatar({
     super.key,
-    this.url = "",
-    this.size,
+    this.size = const Size(34, 34),
+    this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    bool isValidUrl = Uri.tryParse(url)?.isAbsolute == true;
-    return Container(
-      width: size ?? double.infinity,
-      height: size ?? double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.grey,
-        borderRadius: BorderRadius.circular((size ?? 0) / 2),
+    return BlocBuilder<UserCubit, UserState>(
+      buildWhen: (prev, current) {
+        return prev.user?.avatarUrl != current.user?.avatarUrl;
+      },
+      builder: (context, state) {
+        final avatarUrl = state.user?.avatarUrl;
+        return _buildAvatar(avatarUrl: avatarUrl);
+      },
+    );
+  }
+
+  Widget _buildAvatar({String? avatarUrl}) {
+    bool isValidUrl = Uri.tryParse(avatarUrl ?? "")?.isAbsolute == true;
+    return GestureDetector(
+      onTap: onPressed,
+      child: ClipOval(
+        child: Container(
+          width: size.width,
+          height: size.height,
+          decoration: const BoxDecoration(
+            color: AppColors.gray1,
+          ),
+          child: isValidUrl
+              ? CachedNetworkImage(
+                  imageUrl: avatarUrl!,
+                  progressIndicatorBuilder: (context, url, downloadProgress) {
+                    return const Center(
+                      child: CupertinoActivityIndicator(),
+                    );
+                  },
+                  errorWidget: (context, url, error) {
+                    return _buildPlaceHolder();
+                  },
+                  fit: BoxFit.fill,
+                )
+              : _buildPlaceHolder(),
+        ),
       ),
-      child: isValidUrl
-          ? ClipRRect(
-              borderRadius: BorderRadius.circular((size ?? 0) / 2),
-              child: CachedNetworkImage(
-                imageUrl: url,
-                progressIndicatorBuilder: (context, url, downloadProgress) {
-                  return SizedBox(
-                    width: size,
-                    height: size,
-                    child: CircularProgressIndicator(
-                      value: downloadProgress.progress,
-                      strokeWidth: 2,
-                    ),
-                  );
-                },
-                errorWidget: (context, url, error) {
-                  return SizedBox(
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: Image.asset(
-                      AppImages.icAvatar,
-                      fit: BoxFit.cover,
-                    ),
-                  );
-                },
-                fit: BoxFit.fill,
-              ),
-            )
-          : SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: Image.asset(
-                AppImages.icAvatar,
-                fit: BoxFit.cover,
-              ),
-            ),
+    );
+  }
+
+  Widget _buildPlaceHolder() {
+    return SvgPicture.asset(
+      AppSVGs.icAvatarPlaceholder,
+      width: size.width,
+      height: size.height,
     );
   }
 }

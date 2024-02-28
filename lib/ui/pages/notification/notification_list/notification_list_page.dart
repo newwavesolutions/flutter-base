@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/configs/app_configs.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/repositories/notification_respository.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/widgets/notification_widget.dart';
-import 'package:flutter_base/ui/widgets/list/error_list_widget.dart';
-import 'package:flutter_base/ui/widgets/list/loading_list_widget.dart';
+import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
+import 'package:flutter_base/ui/widgets/list/list_empty_widget.dart';
+import 'package:flutter_base/ui/widgets/list/list_error_widget.dart';
+import 'package:flutter_base/ui/widgets/list/list_loading_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'notification_list_cubit.dart';
@@ -60,33 +61,15 @@ class _NotificationListChildPageState extends State<NotificationListChildPage> {
     super.initState();
     _scrollController.addListener(_onScroll);
     _cubit = BlocProvider.of(context);
-    _cubit.loadInitialData();
+    _cubit.fetchInitialData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Notifications'),
-        actions: [
-          InkWell(
-            onTap: _cubit.markAllNotificationAsRead,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 25),
-                  child: Text(
-                    "Read all",
-                    style: AppTextStyle.blackS16W800,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
-        elevation: 0,
+      appBar: const AppBarWidget(
+        title: "Notifications",
+        showCloseButton: false,
       ),
       body: SafeArea(
         child: BlocBuilder<NotificationListCubit, NotificationListState>(
@@ -94,12 +77,20 @@ class _NotificationListChildPageState extends State<NotificationListChildPage> {
             return prev.loadDataStatus != current.loadDataStatus;
           },
           builder: (context, state) {
-            if (state.loadDataStatus == LoadStatus.loading) {
-              return const LoadingListWidget();
+            if (state.loadDataStatus == LoadStatus.initial) {
+              return Container();
+            } else if (state.loadDataStatus == LoadStatus.loading) {
+              return const ListLoadingWidget();
             } else if (state.loadDataStatus == LoadStatus.failure) {
-              return ErrorListWidget(onRefresh: _cubit.loadInitialData);
+              return ListErrorWidget(
+                onRefresh: _onRefreshData,
+              );
             } else {
-              return _buildNotificationList();
+              if (state.notifications.isEmpty) {
+                return ListEmptyWidget(onRefresh: _onRefreshData);
+              } else {
+                return _buildNotificationList();
+              }
             }
           },
         ),
@@ -112,9 +103,7 @@ class _NotificationListChildPageState extends State<NotificationListChildPage> {
       bloc: _cubit,
       builder: (context, state) {
         return RefreshIndicator(
-          onRefresh: () async {
-            _cubit.loadInitialData();
-          },
+          onRefresh: _onRefreshData,
           child: ListView.separated(
             controller: _scrollController,
             itemCount: state.notifications.length,
@@ -141,8 +130,12 @@ class _NotificationListChildPageState extends State<NotificationListChildPage> {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
     if (maxScroll - currentScroll <= AppConfigs.scrollThreshold) {
-      _cubit.loadNextData();
+      _cubit.fetchNextData();
     }
+  }
+
+  Future<void> _onRefreshData() async {
+    _cubit.fetchInitialData();
   }
 
   @override
