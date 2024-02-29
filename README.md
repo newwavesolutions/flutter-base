@@ -5,7 +5,7 @@ The app has been setup to work with [retrofit](https://pub.dev/packages/retrofit
 
 ## Getting Started
 
-1. Install [Flutter SDK](https://flutter.dev/docs/get-started/install). Require Flutter 3.0.5
+1. Install [Flutter SDK](https://flutter.dev/docs/get-started/install). Require Flutter >=3.3.0
 2. Install plugins in Android Studio (optional)
    * [Dart Data Class](https://plugins.jetbrains.com/plugin/12429-dart-data-class)
    * [Flutter Intl](https://plugins.jetbrains.com/plugin/13666-flutter-intl)

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/configs/app_configs.dart';
+import 'package:flutter_base/generated/l10n.dart';
 import 'package:flutter_base/models/enums/language.dart';
 
 class AppDatePicker {
@@ -14,18 +15,20 @@ class AppDatePicker {
     BuildContext context, {
     DateTime? minDate,
     DateTime? maxDate,
-    DateTime? currentDate,
-  }) {
+    DateTime? initialDate,
+  }) async {
     final firstDate = minDate ?? _firstDateDefault;
     final lastDate = maxDate ?? _lastDateDefault;
-    return showDatePicker(
+    final DateTime? picker = await showDatePicker(
       context: context,
-      initialDate: _now,
+      initialDate: initialDate,
       firstDate: firstDate,
       lastDate: lastDate,
-      currentDate: currentDate,
+      currentDate: _now,
       locale: AppConfigs.defaultLanguage.local,
+      helpText: S.current.date_picker_title,
     );
+    return picker;
   }
 
   static Future<TimeOfDay?> pickTime(

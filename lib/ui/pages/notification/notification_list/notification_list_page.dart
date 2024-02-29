@@ -61,7 +61,9 @@ class _NotificationListChildPageState extends State<NotificationListChildPage> {
     super.initState();
     _scrollController.addListener(_onScroll);
     _cubit = BlocProvider.of(context);
-    _cubit.fetchInitialData();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _cubit.fetchInitialData();
+    });
   }
 
   @override

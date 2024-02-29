@@ -1,51 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_text_styles.dart';
+import 'package:flutter_base/configs/app_configs.dart';
+import 'package:flutter_base/ui/widgets/picker/app_date_picker.dart';
+import 'package:flutter_base/utils/app_date_utils.dart';
 
-class AppTextField extends StatelessWidget {
+class AppDateInput extends StatelessWidget {
   final TextEditingController controller;
+  final DateTime? maxDate;
+  final DateTime? minDate;
+  final String dateFormatter;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onFieldSubmitted;
   final String? hintText;
-  final FocusNode? focusNode;
   final Widget? prefixIcon;
   final TextStyle? hintStyle;
   final TextStyle? style;
-  final Color? focusedColor;
   final EdgeInsets? padding;
   final TextStyle? errorStyle;
   final String? Function(String?)? validator;
-  final TextInputType? keyboardType;
-  final List<TextInputFormatter> inputFormatters;
   final bool enable;
 
-  const AppTextField({
+  const AppDateInput({
     super.key,
     required this.controller,
+    this.maxDate,
+    this.minDate,
+    this.dateFormatter = AppConfigs.dateDisplayFormat,
     this.onChanged,
     this.onFieldSubmitted,
     this.hintText,
-    this.focusNode,
     this.prefixIcon,
     this.hintStyle,
     this.style,
-    this.focusedColor,
     this.padding,
     this.errorStyle,
     this.validator,
-    this.keyboardType,
-    this.inputFormatters = const [],
     this.enable = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: true,
+      onTap: () async {
+        final date = controller.text.isNotEmpty
+            ? AppDateUtils.fromString(
+                controller.text,
+                format: dateFormatter,
+              )
+            : DateTime.now();
+        final pickedDate = await AppDatePicker.pickDate(
+          context,
+          initialDate: date,
+          maxDate: maxDate,
+          minDate: minDate,
+        );
+
+        if (pickedDate != null) {
+          controller.text = AppDateUtils.toDateString(
+            pickedDate,
+            format: dateFormatter,
+          );
+        }
+      },
       controller: controller,
-      focusNode: focusNode,
       style: style ?? AppTextStyle.blackS14,
-      inputFormatters: inputFormatters,
       decoration: InputDecoration(
         filled: true,
         fillColor: enable ? Colors.transparent : AppColors.inputDisabled,
@@ -54,7 +74,7 @@ class AppTextField extends StatelessWidget {
         hintText: hintText,
         hintStyle: hintStyle ?? AppTextStyle.grayS14,
         focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.secondary, width: 1.0),
+          borderSide: BorderSide(color: AppColors.inputBorder, width: 1.0),
         ),
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.inputBorder, width: 1.0),
@@ -72,7 +92,6 @@ class AppTextField extends StatelessWidget {
             AppTextStyle.blackS12.copyWith(color: AppColors.error),
         prefixIcon: prefixIcon,
       ),
-      keyboardType: keyboardType,
       onFieldSubmitted: onFieldSubmitted,
       validator: validator,
       enabled: enable,

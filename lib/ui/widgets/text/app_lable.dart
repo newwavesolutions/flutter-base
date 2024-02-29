@@ -22,12 +22,13 @@ class AppLabel extends StatelessWidget {
           text: text,
           style: AppTextStyle.blackS14Medium,
           children: <TextSpan>[
-            TextSpan(
-              text: '*',
-              style: AppTextStyle.blackS14Medium.copyWith(
-                color: const Color(0xFFEE3134),
+            if (showRequire)
+              TextSpan(
+                text: '*',
+                style: AppTextStyle.blackS14Medium.copyWith(
+                  color: const Color(0xFFEE3134),
+                ),
               ),
-            ),
           ],
         ),
       ),
