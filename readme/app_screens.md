@@ -26,12 +26,16 @@ flowchart TD
     <img src="../screenshots/screens_15pro/splash_page.png" width="24%">
     <img src="../screenshots/screens_15pro/onboarding_page.png" width="24%">
 </div>
+
 **Auth**
 <div style="display: flex; justify-content: space-between;">
-    <img src="../screenshots/screens_15pro/home_page.png" width="24%">
     <img src="../screenshots/screens_15pro/sign_in_page.png" width="24%">
 </div>
+
 **Home**
+<div style="display: flex; justify-content: space-between;">
+    <img src="../screenshots/screens_15pro/home_page.png" width="24%">
+</div>
 
 **Profile**
 
