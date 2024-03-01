@@ -56,26 +56,36 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: isEnabled ? onPressed : null,
-      child: Container(
-        height: height,
-        width: width,
-        padding: padding ?? EdgeInsets.zero,
-        decoration: BoxDecoration(
+    return Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(cornerRadius),
+        border: borderColor != null
+            ? Border.all(
+                color: borderColor!,
+                width: borderWidth,
+              )
+            : null,
+        boxShadow: boxShadow,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(
+          cornerRadius,
+        ),
+        child: Material(
+          color: isEnabled ? backgroundColor : AppColors.gray1,
           borderRadius: BorderRadius.circular(
             cornerRadius,
           ),
-          color: isEnabled ? backgroundColor : AppColors.gray1,
-          border: borderColor != null
-              ? Border.all(
-                  color: borderColor!,
-                  width: borderWidth,
-                )
-              : null,
-          boxShadow: boxShadow,
+          child: InkWell(
+            onTap: isEnabled ? onPressed : null,
+            child: Padding(
+              padding: padding ?? EdgeInsets.zero,
+              child: _buildChildWidget(),
+            ),
+          ),
         ),
-        child: _buildChildWidget(),
       ),
     );
   }

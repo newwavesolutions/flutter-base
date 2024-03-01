@@ -10,7 +10,7 @@ enum ProfileMenu {
     icon: Icons.password_sharp,
   ),
   openPolicy(
-    name: "Term,Policy",
+    name: "Term & Policy",
     icon: Icons.local_police_sharp,
   ),
   deleteAccount(

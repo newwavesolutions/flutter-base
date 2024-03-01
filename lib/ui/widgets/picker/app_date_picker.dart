@@ -14,18 +14,19 @@ class AppDatePicker {
     BuildContext context, {
     DateTime? minDate,
     DateTime? maxDate,
-    DateTime? currentDate,
-  }) {
+    DateTime? initialDate,
+  }) async {
     final firstDate = minDate ?? _firstDateDefault;
     final lastDate = maxDate ?? _lastDateDefault;
-    return showDatePicker(
+    final DateTime? picker = await showDatePicker(
       context: context,
-      initialDate: _now,
+      initialDate: initialDate,
       firstDate: firstDate,
       lastDate: lastDate,
-      currentDate: currentDate,
+      currentDate: _now,
       locale: AppConfigs.defaultLanguage.local,
     );
+    return picker;
   }
 
   static Future<TimeOfDay?> pickTime(

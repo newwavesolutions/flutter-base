@@ -8,7 +8,7 @@ class AppDimens {
   static const double fontLarge = 16.0;
   static const double fontExtra = 18.0;
 
-  static const double buttonHeight = 46;
+  static const double buttonHeight = 44;
   static const double buttonCornerRadius = 4;
   static const double buttonBorderWidth = 1;
 

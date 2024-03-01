@@ -32,5 +32,6 @@
   "settings_title": "Setting",
   "settings_language": "Language",
   "settings_language_english": "English",
-  "settings_language_vietnamese": "Vietnamese"
+  "settings_language_vietnamese": "Vietnamese",
+  "delete_account_confirmation_title": "Please input the password to delete your account"
 }
