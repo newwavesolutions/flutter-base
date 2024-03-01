@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/configs/app_configs.dart';
-import 'package:flutter_base/generated/l10n.dart';
 import 'package:flutter_base/models/enums/language.dart';
 
 class AppDatePicker {
