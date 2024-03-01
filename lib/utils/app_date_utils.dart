@@ -28,23 +28,30 @@ class AppDateUtils {
     return null;
   }
 
-  static String toDateString(DateTime? dateTime, {String format = AppConfigs.dateDisplayFormat}) {
+  static String toDateString(DateTime? dateTime,
+      {String format = AppConfigs.dateDisplayFormat}) {
     try {
-      return dateTime != null ? DateFormat(format).format(dateTime.toLocal()) : '';
+      return dateTime != null
+          ? DateFormat(format).format(dateTime.toLocal())
+          : '';
     } catch (e) {
       return '';
     }
   }
 
-  static String toDateTimeString(DateTime? dateTime, {String format = AppConfigs.dateTimeDisplayFormat}) {
+  static String toDateTimeString(DateTime? dateTime,
+      {String format = AppConfigs.dateTimeDisplayFormat}) {
     try {
-      return dateTime != null ? DateFormat(format).format(dateTime.toLocal()) : '';
+      return dateTime != null
+          ? DateFormat(format).format(dateTime.toLocal())
+          : '';
     } catch (e) {
       return '';
     }
   }
 
-  static String toDateAPIString(DateTime? dateTime, {String format = AppConfigs.dateAPIFormat}) {
+  static String toDateAPIString(DateTime? dateTime,
+      {String format = AppConfigs.dateAPIFormat}) {
     try {
       return dateTime != null ? DateFormat(format).format(dateTime) : '';
     } catch (e) {
@@ -52,7 +59,8 @@ class AppDateUtils {
     }
   }
 
-  static String toDateTimeAPIString(DateTime? dateTime, {String format = AppConfigs.dateTimeAPIFormat}) {
+  static String toDateTimeAPIString(DateTime? dateTime,
+      {String format = AppConfigs.dateTimeAPIFormat}) {
     try {
       return dateTime != null ? DateFormat(format).format(dateTime) : '';
     } catch (e) {

@@ -39,7 +39,8 @@ class UpdateProfileChildPage extends StatefulWidget {
   State<UpdateProfileChildPage> createState() => _UpdateProfileChildPageState();
 }
 
-class _UpdateProfileChildPageState extends State<UpdateProfileChildPage> with TickerProviderStateMixin {
+class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
+    with TickerProviderStateMixin {
   late final UpdateProfileCubit _cubit;
   late TextEditingController textNameController;
   late TextEditingController textBirthdayController;
@@ -91,7 +92,9 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage> with Ti
               ),
               const AppLabel(
                 text: "Birthday",
-                margin: EdgeInsets.only(top: AppDimens.paddingNormal, bottom: AppDimens.paddingSmall),
+                margin: EdgeInsets.only(
+                    top: AppDimens.paddingNormal,
+                    bottom: AppDimens.paddingSmall),
               ),
               BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
                 builder: (context, state) {
