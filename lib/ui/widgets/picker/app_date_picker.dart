@@ -26,7 +26,6 @@ class AppDatePicker {
       lastDate: lastDate,
       currentDate: _now,
       locale: AppConfigs.defaultLanguage.local,
-      helpText: S.current.date_picker_title,
     );
     return picker;
   }

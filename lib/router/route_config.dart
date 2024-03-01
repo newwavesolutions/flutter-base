@@ -3,10 +3,10 @@ import 'package:flutter_base/ui/pages/app_start/onboarding/onboarding_page.dart'
 import 'package:flutter_base/ui/pages/app_start/splash/splash_page.dart';
 import 'package:flutter_base/ui/pages/auth/sign_in/sign_in_page.dart';
 import 'package:flutter_base/ui/pages/auth/sign_up/sign_up_page.dart';
-import 'package:flutter_base/ui/pages/delete_account/delete_account_page.dart';
 import 'package:flutter_base/ui/pages/main/main_page.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
 import 'package:flutter_base/ui/pages/photo_view/photo_view_page.dart';
+import 'package:flutter_base/ui/pages/profile/delete_account/delete_account_page.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
 import 'package:flutter_base/ui/pages/profile/update_avatar/update_avatar_page.dart';
 import 'package:flutter_base/ui/pages/profile/update_profile/update_profile_page.dart';
