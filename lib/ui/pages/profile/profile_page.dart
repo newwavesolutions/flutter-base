@@ -127,14 +127,12 @@ class _ProfileTabPageState extends State<_ProfileTabPage> {
     switch (menu) {
       case ProfileMenu.updateProfile:
         _cubit.navigator.openUpdateProfile();
-      case ProfileMenu.changePassword:
-      // TODO: Handle this case.
       case ProfileMenu.deleteAccount:
         _cubit.navigator.openDeleteAccount();
-      case ProfileMenu.openPolicy:
-      // TODO: Handle this case.
       case ProfileMenu.logout:
         context.read<AuthCubit>().signOut();
+      case ProfileMenu.changePassword:
+      case ProfileMenu.openPolicy:
     }
   }
 }

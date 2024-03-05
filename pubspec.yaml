@@ -37,13 +37,13 @@ dependencies:
   flutter_bloc: ^8.1.0
 
   #Utilities
-  package_info_plus: ^5.0.1
   permission_handler: ^11.3.0
   intl: ^0.18.0
   intl_utils: ^2.8.2
   equatable: ^2.0.5
   url_launcher: ^6.1.10
   photo_view: ^0.14.0
+  device_info_plus: ^9.1.2
 
   #Store
   flutter_secure_storage: ^9.0.0
