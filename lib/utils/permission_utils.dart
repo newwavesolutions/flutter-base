@@ -6,24 +6,42 @@ import 'package:permission_handler/permission_handler.dart';
 
 class PermissionUtils {
   static Future<bool> requestPhotosPermission(BuildContext context) async {
-    final isSdkLessThan32 = Platform.isAndroid &&
+    final isSdkLessThan33 = Platform.isAndroid &&
         ((await DeviceInfoPlugin().androidInfo).version.sdkInt < 33);
-    if (await Permission.photos.isGranted ||
-        (await Permission.storage.isGranted && isSdkLessThan32)) {
+
+    if (isSdkLessThan33) {
+      if (context.mounted) {
+        return await requestStoragePermission(context);
+      }
+    } else if (await Permission.photos.isGranted) {
       return true;
     } else {
-      var status = isSdkLessThan32
-          ? await Permission.storage.request()
-          : await Permission.photos.request();
+      var status = await Permission.photos.request();
       if (status.isGranted || status.isLimited) {
         return true;
       } else if (status.isPermanentlyDenied) {
         if (context.mounted) {
-          showOpenAppSettingsDialog(context);
+          await showOpenAppSettingsDialog(context);
         }
       }
-      return false;
     }
+    return false;
+  }
+
+  static Future<bool> requestStoragePermission(BuildContext context) async {
+    if (await Permission.storage.isGranted) {
+      return true;
+    } else {
+      var status = await Permission.storage.request();
+      if (status.isGranted) {
+        return true;
+      } else if (status.isPermanentlyDenied) {
+        if (context.mounted) {
+          await showOpenAppSettingsDialog(context);
+        }
+      }
+    }
+    return false;
   }
 
   static Future<bool> requestCameraPermission(BuildContext context) async {
@@ -35,11 +53,11 @@ class PermissionUtils {
         return true;
       } else if (status.isPermanentlyDenied) {
         if (context.mounted) {
-          showOpenAppSettingsDialog(context);
+          await showOpenAppSettingsDialog(context);
         }
       }
-      return false;
     }
+    return false;
   }
 
   static Future<void> showOpenAppSettingsDialog(BuildContext context) async {
