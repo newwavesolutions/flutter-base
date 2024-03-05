@@ -42,8 +42,8 @@ class PermissionUtils {
     }
   }
 
-  static void showOpenAppSettingsDialog(BuildContext context) {
-    showDialog(
+  static Future<void> showOpenAppSettingsDialog(BuildContext context) async {
+    await showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(

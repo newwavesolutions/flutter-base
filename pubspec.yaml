@@ -37,7 +37,6 @@ dependencies:
   flutter_bloc: ^8.1.0
 
   #Utilities
-  package_info_plus: ^5.0.1
   permission_handler: ^11.3.0
   intl: ^0.18.0
   intl_utils: ^2.8.2
