@@ -4,13 +4,11 @@ class UpdateProfileState extends Equatable {
   final LoadStatus updateUserStatus;
   final UserEntity? user;
   final DateTime? birthday;
-  final String? gender;
 
   const UpdateProfileState({
     this.updateUserStatus = LoadStatus.initial,
     this.user,
     this.birthday,
-    this.gender,
   });
 
   @override
@@ -18,7 +16,6 @@ class UpdateProfileState extends Equatable {
         updateUserStatus,
         user,
         birthday,
-        gender,
       ];
 
   UpdateProfileState copyWith({
@@ -31,7 +28,6 @@ class UpdateProfileState extends Equatable {
       updateUserStatus: userStatus ?? updateUserStatus,
       user: user ?? this.user,
       birthday: birthday ?? this.birthday,
-      gender: gender ?? this.gender,
     );
   }
 }

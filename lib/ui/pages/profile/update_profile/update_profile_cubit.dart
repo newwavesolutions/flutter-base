@@ -16,11 +16,8 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   Future<void> updateData({
     required String name,
     required DateTime birthday,
+    required String gender,
   }) async {
     //Todo
-  }
-
-  void setGender(String gender) {
-    emit(state.copyWith(gender: gender));
   }
 }

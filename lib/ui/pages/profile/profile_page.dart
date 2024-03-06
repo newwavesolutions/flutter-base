@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_colors.dart';
 import 'package:flutter_base/common/app_dimens.dart';
-import 'package:flutter_base/common/app_text_styles.dart';
 import 'package:flutter_base/global_blocs/auth/auth_cubit.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/models/enums/profile_menu.dart';
 import 'package:flutter_base/ui/pages/profile/profile_navigator.dart';
-import 'package:flutter_base/ui/pages/profile/profile_state.dart';
+import 'package:flutter_base/ui/pages/profile/widgets/app_version_widget.dart';
 import 'package:flutter_base/ui/pages/profile/widgets/profile_menu_widget.dart';
 import 'package:flutter_base/ui/pages/profile/widgets/profile_banner_widget.dart';
 import 'package:flutter_base/ui/widgets/divider/app_divider.dart';
@@ -127,18 +126,10 @@ class _ProfileTabPageState extends State<_ProfileTabPage> {
           },
         ),
         const Spacer(),
-        Center(
-          child: BlocBuilder<ProfileCubit, ProfileState>(
-            buildWhen: (previous, current) =>
-                previous.version != current.version,
-            builder: (context, state) {
-              return Text(
-                'Version: ${state.version}',
-                style: AppTextStyle.blackS14,
-              );
-            },
-          ),
+        const Center(
+          child: AppVersionWidget(),
         ),
+        const SizedBox(height: 4),
       ],
     );
   }

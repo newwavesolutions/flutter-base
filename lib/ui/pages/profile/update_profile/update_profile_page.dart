@@ -6,6 +6,7 @@ import 'package:flutter_base/models/enums/gender_type.dart';
 import 'package:flutter_base/ui/pages/profile/update_profile/update_profile_navigator.dart';
 import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_button.dart';
+import 'package:flutter_base/ui/widgets/dropdown_menu/app_dropdown_controller.dart';
 import 'package:flutter_base/ui/widgets/dropdown_menu/app_dropdown_menu.dart';
 import 'package:flutter_base/ui/widgets/text/app_lable.dart';
 import 'package:flutter_base/ui/widgets/text_field/app_date_input.dart';
@@ -46,6 +47,7 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
   late final UpdateProfileCubit _cubit;
   late TextEditingController textNameController;
   late TextEditingController textBirthdayController;
+  late AppDropdownController genderController = AppDropdownController();
 
   @override
   void initState() {
@@ -113,18 +115,9 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
                   bottom: AppDimens.paddingSmall,
                 ),
               ),
-              BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
-                builder: (context, state) {
-                  return AppDropdownMenu(
-                    initialValue: state.gender,
-                    onChanged: (value) {
-                      if ((value ?? '').isNotEmpty) {
-                        _cubit.setGender(value!);
-                      }
-                    },
-                    options: GenderType.values.map((e) => e.vnText).toList(),
-                  );
-                },
+              AppDropdownMenu(
+                controller: genderController,
+                options: GenderType.values.map((e) => e.vnText).toList(),
               )
             ],
           );
@@ -137,6 +130,7 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
     _cubit.updateData(
       name: textNameController.text,
       birthday: DateFormat('dd/MM/yyyy').parse(textBirthdayController.text),
+      gender: genderController.text,
     );
   }
 
