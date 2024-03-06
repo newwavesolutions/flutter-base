@@ -10,6 +10,7 @@ class AppTextField extends StatelessWidget {
   final String? hintText;
   final FocusNode? focusNode;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final TextStyle? hintStyle;
   final TextStyle? style;
   final Color? focusedColor;
@@ -28,6 +29,7 @@ class AppTextField extends StatelessWidget {
     this.hintText,
     this.focusNode,
     this.prefixIcon,
+    this.suffixIcon,
     this.hintStyle,
     this.style,
     this.focusedColor,
@@ -50,7 +52,7 @@ class AppTextField extends StatelessWidget {
         filled: true,
         fillColor: enable ? Colors.transparent : AppColors.inputDisabled,
         contentPadding:
-            padding ?? const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            padding ?? const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
         hintText: hintText,
         hintStyle: hintStyle ?? AppTextStyle.grayS14,
         focusedBorder: const OutlineInputBorder(
@@ -71,6 +73,7 @@ class AppTextField extends StatelessWidget {
         errorStyle: errorStyle ??
             AppTextStyle.blackS12.copyWith(color: AppColors.error),
         prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
       ),
       keyboardType: keyboardType,
       onFieldSubmitted: onFieldSubmitted,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/configs/app_configs.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
-import 'package:flutter_base/repositories/notification_respository.dart';
+import 'package:flutter_base/repositories/notification_repository.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/widgets/notification_widget.dart';
 import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
 import 'package:flutter_base/ui/widgets/list/list_empty_widget.dart';

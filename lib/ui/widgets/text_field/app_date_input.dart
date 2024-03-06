@@ -14,6 +14,7 @@ class AppDateInput extends StatelessWidget {
   final ValueChanged<String>? onFieldSubmitted;
   final String? hintText;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final TextStyle? hintStyle;
   final TextStyle? style;
   final EdgeInsets? padding;
@@ -31,6 +32,7 @@ class AppDateInput extends StatelessWidget {
     this.onFieldSubmitted,
     this.hintText,
     this.prefixIcon,
+    this.suffixIcon,
     this.hintStyle,
     this.style,
     this.padding,
@@ -70,7 +72,7 @@ class AppDateInput extends StatelessWidget {
         filled: true,
         fillColor: enable ? Colors.transparent : AppColors.inputDisabled,
         contentPadding:
-            padding ?? const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            padding ?? const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
         hintText: hintText,
         hintStyle: hintStyle ?? AppTextStyle.grayS14,
         focusedBorder: const OutlineInputBorder(
@@ -91,6 +93,7 @@ class AppDateInput extends StatelessWidget {
         errorStyle: errorStyle ??
             AppTextStyle.blackS12.copyWith(color: AppColors.error),
         prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
       ),
       onFieldSubmitted: onFieldSubmitted,
       validator: validator,

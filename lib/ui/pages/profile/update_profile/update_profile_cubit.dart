@@ -19,4 +19,8 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   }) async {
     //Todo
   }
+
+  void setGender(String gender) {
+    emit(state.copyWith(gender: gender));
+  }
 }

@@ -1,14 +1,18 @@
 enum GenderType {
   male,
   female,
+  other,
 }
 
 extension GenderTypeExtension on GenderType {
   static GenderType? fromString(String text) {
-    if (text == "male" || text == "Nam") {
+    final sampleText = text.toLowerCase();
+    if (sampleText == "male" || sampleText == "nam") {
       return GenderType.male;
-    } else if (text == "female" || text == "Nữ") {
+    } else if (sampleText == "female" || sampleText == "nữ") {
       return GenderType.female;
+    } else if (sampleText == "other" || sampleText == "khác") {
+      return GenderType.other;
     }
     return null;
   }
@@ -19,6 +23,8 @@ extension GenderTypeExtension on GenderType {
         return 'Nam';
       case GenderType.female:
         return 'Nữ';
+      case GenderType.other:
+        return 'Khác';
       default:
         return '';
     }
@@ -30,6 +36,8 @@ extension GenderTypeExtension on GenderType {
         return 'Male';
       case GenderType.female:
         return 'Female';
+      case GenderType.other:
+        return 'Other';
       default:
         return '';
     }

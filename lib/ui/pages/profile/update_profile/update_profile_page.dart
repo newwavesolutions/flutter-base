@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/generated/l10n.dart';
 import 'package:flutter_base/global_blocs/user/user_cubit.dart';
+import 'package:flutter_base/models/enums/gender_type.dart';
 import 'package:flutter_base/ui/pages/profile/update_profile/update_profile_navigator.dart';
 import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_button.dart';
+import 'package:flutter_base/ui/widgets/dropdown_menu/app_dropdown_menu.dart';
 import 'package:flutter_base/ui/widgets/text/app_lable.dart';
 import 'package:flutter_base/ui/widgets/text_field/app_date_input.dart';
 import 'package:flutter_base/ui/widgets/text_field/app_text_field.dart';
@@ -65,11 +67,13 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
       body: SafeArea(
         child: _buildBodyWidget(),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(AppDimens.paddingNormal),
-        child: AppButton(
-          title: S.of(context).button_save,
-          onPressed: saveProfile,
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(AppDimens.paddingNormal),
+          child: AppButton(
+            title: S.of(context).button_save,
+            onPressed: saveProfile,
+          ),
         ),
       ),
     );
@@ -89,23 +93,39 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
               ),
               AppTextField(
                 controller: textNameController,
+                suffixIcon: const Icon(Icons.email_outlined),
               ),
               const AppLabel(
                 text: "Birthday",
                 margin: EdgeInsets.only(
-                    top: AppDimens.paddingNormal,
-                    bottom: AppDimens.paddingSmall),
+                  top: AppDimens.paddingNormal,
+                  bottom: AppDimens.paddingSmall,
+                ),
+              ),
+              AppDateInput(
+                controller: textBirthdayController,
+                suffixIcon: const Icon(Icons.edit_calendar),
+              ),
+              const AppLabel(
+                text: "Gender",
+                margin: EdgeInsets.only(
+                  top: AppDimens.paddingNormal,
+                  bottom: AppDimens.paddingSmall,
+                ),
               ),
               BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
                 builder: (context, state) {
-                  return AppDateInput(
-                    controller: textBirthdayController,
+                  return AppDropdownMenu(
+                    initialValue: state.gender,
+                    onChanged: (value) {
+                      if ((value ?? '').isNotEmpty) {
+                        _cubit.setGender(value!);
+                      }
+                    },
+                    options: GenderType.values.map((e) => e.vnText).toList(),
                   );
                 },
-              ),
-              const SizedBox(
-                height: 16,
-              ),
+              )
             ],
           );
         },

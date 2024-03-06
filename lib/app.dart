@@ -16,7 +16,7 @@ import 'network/api_client.dart';
 import 'network/api_util.dart';
 import 'repositories/auth_repository.dart';
 import 'repositories/movie_repository.dart';
-import 'repositories/notification_respository.dart';
+import 'repositories/notification_repository.dart';
 import 'repositories/user_repository.dart';
 import 'router/route_config.dart';
 

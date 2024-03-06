@@ -9,4 +9,8 @@ class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit({
     required this.navigator,
   }) : super(const ProfileState());
+
+  void setVersion(String version) {
+    emit(state.copyWith(version: version));
+  }
 }
