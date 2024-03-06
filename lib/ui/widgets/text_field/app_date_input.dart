@@ -14,6 +14,7 @@ class AppDateInput extends StatelessWidget {
   final ValueChanged<String>? onFieldSubmitted;
   final String? hintText;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final TextStyle? hintStyle;
   final TextStyle? style;
   final EdgeInsets? padding;
@@ -31,6 +32,7 @@ class AppDateInput extends StatelessWidget {
     this.onFieldSubmitted,
     this.hintText,
     this.prefixIcon,
+    this.suffixIcon,
     this.hintStyle,
     this.style,
     this.padding,
@@ -70,27 +72,33 @@ class AppDateInput extends StatelessWidget {
         filled: true,
         fillColor: enable ? Colors.transparent : AppColors.inputDisabled,
         contentPadding:
-            padding ?? const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            padding ?? const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
         hintText: hintText,
         hintStyle: hintStyle ?? AppTextStyle.grayS14,
         focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(0)),
           borderSide: BorderSide(color: AppColors.inputBorder, width: 1.0),
         ),
         enabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(0)),
           borderSide: BorderSide(color: AppColors.inputBorder, width: 1.0),
         ),
         disabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(0)),
           borderSide: BorderSide(color: AppColors.inputBorder, width: 1.0),
         ),
         errorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(0)),
           borderSide: BorderSide(color: AppColors.error, width: 1.0),
         ),
         focusedErrorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(0)),
           borderSide: BorderSide(color: AppColors.error, width: 1.0),
         ),
         errorStyle: errorStyle ??
             AppTextStyle.blackS12.copyWith(color: AppColors.error),
         prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
       ),
       onFieldSubmitted: onFieldSubmitted,
       validator: validator,

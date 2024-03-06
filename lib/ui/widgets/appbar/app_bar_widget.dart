@@ -7,14 +7,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final bool showCloseButton;
-  final VoidCallback? onClosePressed;
+  final bool showBackButton;
+  final VoidCallback? onBackPressed;
 
   const AppBarWidget({
     super.key,
     required this.title,
-    this.showCloseButton = true,
-    this.onClosePressed,
+    this.showBackButton = true,
+    this.onBackPressed,
   });
 
   @override
@@ -29,28 +29,26 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           style: AppTextStyle.blackS14Medium,
         ),
         centerTitle: true,
-        leading: const SizedBox(),
-        actions: [
-          if (showCloseButton)
-            Container(
-              width: 48,
-              height: 48,
-              margin: const EdgeInsets.only(right: 8),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {
-                    if (onClosePressed == null) {
-                      Navigator.of(context).pop();
-                    } else {
-                      onClosePressed?.call();
-                    }
-                  },
-                  child: Center(child: SvgPicture.asset(AppSVGs.icClose)),
+        leading: showBackButton
+            ? Container(
+                width: 48,
+                height: 48,
+                margin: const EdgeInsets.only(right: 8),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () {
+                      if (onBackPressed == null) {
+                        Navigator.of(context).pop();
+                      } else {
+                        onBackPressed?.call();
+                      }
+                    },
+                    child: Center(child: SvgPicture.asset(AppSVGs.icBack)),
+                  ),
                 ),
-              ),
-            )
-        ],
+              )
+            : const SizedBox(),
       ),
     );
   }

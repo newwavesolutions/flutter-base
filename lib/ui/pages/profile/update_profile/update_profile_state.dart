@@ -22,6 +22,7 @@ class UpdateProfileState extends Equatable {
     LoadStatus? userStatus,
     UserEntity? user,
     DateTime? birthday,
+    String? gender,
   }) {
     return UpdateProfileState(
       updateUserStatus: userStatus ?? updateUserStatus,

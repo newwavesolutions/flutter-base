@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/common/app_dimens.dart';
 import 'package:flutter_base/generated/l10n.dart';
 import 'package:flutter_base/global_blocs/user/user_cubit.dart';
+import 'package:flutter_base/models/enums/gender_type.dart';
 import 'package:flutter_base/ui/pages/profile/update_profile/update_profile_navigator.dart';
 import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_button.dart';
+import 'package:flutter_base/ui/widgets/picker/app_dropdown_picker.dart';
 import 'package:flutter_base/ui/widgets/text/app_lable.dart';
 import 'package:flutter_base/ui/widgets/text_field/app_date_input.dart';
 import 'package:flutter_base/ui/widgets/text_field/app_text_field.dart';
@@ -44,6 +46,7 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
   late final UpdateProfileCubit _cubit;
   late TextEditingController textNameController;
   late TextEditingController textBirthdayController;
+  late AppDropdownController genderController = AppDropdownController();
 
   @override
   void initState() {
@@ -65,11 +68,13 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
       body: SafeArea(
         child: _buildBodyWidget(),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(AppDimens.paddingNormal),
-        child: AppButton(
-          title: S.of(context).button_save,
-          onPressed: saveProfile,
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(AppDimens.paddingNormal),
+          child: AppButton(
+            title: S.of(context).button_save,
+            onPressed: saveProfile,
+          ),
         ),
       ),
     );
@@ -84,28 +89,32 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const AppLabel(
-                text: "Email",
+                text: "Name",
                 margin: EdgeInsets.only(bottom: AppDimens.paddingSmall),
               ),
-              AppTextField(
-                controller: textNameController,
-              ),
+              AppTextField(controller: textNameController),
               const AppLabel(
                 text: "Birthday",
                 margin: EdgeInsets.only(
-                    top: AppDimens.paddingNormal,
-                    bottom: AppDimens.paddingSmall),
+                  top: AppDimens.paddingNormal,
+                  bottom: AppDimens.paddingSmall,
+                ),
               ),
-              BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
-                builder: (context, state) {
-                  return AppDateInput(
-                    controller: textBirthdayController,
-                  );
-                },
+              AppDateInput(
+                controller: textBirthdayController,
+                suffixIcon: const Icon(Icons.edit_calendar),
               ),
-              const SizedBox(
-                height: 16,
+              const AppLabel(
+                text: "Gender",
+                margin: EdgeInsets.only(
+                  top: AppDimens.paddingNormal,
+                  bottom: AppDimens.paddingSmall,
+                ),
               ),
+              AppDropdownPicker(
+                controller: genderController,
+                options: GenderType.values.map((e) => e.text).toList(),
+              )
             ],
           );
         },
@@ -114,9 +123,15 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
   }
 
   void saveProfile() {
+    if (genderController.position == -1) {
+      // Handle unselect gender
+      return;
+    }
+    final gender = GenderType.values[genderController.position];
     _cubit.updateData(
       name: textNameController.text,
       birthday: DateFormat('dd/MM/yyyy').parse(textBirthdayController.text),
+      gender: gender,
     );
   }
 
