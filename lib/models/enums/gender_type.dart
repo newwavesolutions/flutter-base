@@ -1,45 +1,40 @@
 enum GenderType {
   male,
   female,
-  other,
+  unknown,
 }
 
-extension GenderTypeExtension on GenderType {
-  static GenderType? fromString(String text) {
-    final sampleText = text.toLowerCase();
-    if (sampleText == "male" || sampleText == "nam") {
+extension GenderTypeExt on GenderType {
+  static GenderType? fromCode(String? code) {
+    if (code == GenderType.male.code) {
       return GenderType.male;
-    } else if (sampleText == "female" || sampleText == "nữ") {
+    } else if (code == GenderType.female.code) {
       return GenderType.female;
-    } else if (sampleText == "other" || sampleText == "khác") {
-      return GenderType.other;
+    } else if (code == GenderType.unknown.code) {
+      return GenderType.unknown;
     }
     return null;
   }
 
-  String get vnText {
+  String? get code {
     switch (this) {
       case GenderType.male:
-        return 'Nam';
+        return 'male';
       case GenderType.female:
-        return 'Nữ';
-      case GenderType.other:
-        return 'Khác';
-      default:
-        return '';
+        return 'female';
+      case GenderType.unknown:
+        return 'unknown';
     }
   }
 
-  String get enText {
+  String get text {
     switch (this) {
       case GenderType.male:
         return 'Male';
       case GenderType.female:
         return 'Female';
-      case GenderType.other:
-        return 'Other';
-      default:
-        return '';
+      case GenderType.unknown:
+        return 'Unknown';
     }
   }
 }

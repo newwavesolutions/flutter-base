@@ -5,7 +5,7 @@ import 'package:flutter_base/global_blocs/auth/auth_cubit.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/models/enums/profile_menu.dart';
 import 'package:flutter_base/ui/pages/profile/profile_navigator.dart';
-import 'package:flutter_base/ui/pages/profile/widgets/app_version_widget.dart';
+import 'package:flutter_base/ui/widgets/common/app_version_widget.dart';
 import 'package:flutter_base/ui/pages/profile/widgets/profile_menu_widget.dart';
 import 'package:flutter_base/ui/pages/profile/widgets/profile_banner_widget.dart';
 import 'package:flutter_base/ui/widgets/divider/app_divider.dart';

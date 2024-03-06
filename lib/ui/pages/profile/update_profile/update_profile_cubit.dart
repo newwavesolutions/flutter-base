@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_base/models/entities/user/user_entity.dart';
+import 'package:flutter_base/models/enums/gender_type.dart';
 import 'package:flutter_base/models/enums/load_status.dart';
 import 'package:flutter_base/ui/pages/profile/update_profile/update_profile_navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   Future<void> updateData({
     required String name,
     required DateTime birthday,
-    required String gender,
+    required GenderType gender,
   }) async {
     //Todo
   }

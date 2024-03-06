@@ -71,7 +71,7 @@ class _NotificationListChildPageState extends State<NotificationListChildPage> {
     return Scaffold(
       appBar: const AppBarWidget(
         title: "Notifications",
-        showCloseButton: false,
+        showBackButton: false,
       ),
       body: SafeArea(
         child: BlocBuilder<NotificationListCubit, NotificationListState>(

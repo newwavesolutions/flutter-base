@@ -6,8 +6,7 @@ import 'package:flutter_base/models/enums/gender_type.dart';
 import 'package:flutter_base/ui/pages/profile/update_profile/update_profile_navigator.dart';
 import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_button.dart';
-import 'package:flutter_base/ui/widgets/dropdown_menu/app_dropdown_controller.dart';
-import 'package:flutter_base/ui/widgets/dropdown_menu/app_dropdown_menu.dart';
+import 'package:flutter_base/ui/widgets/picker/app_dropdown_picker.dart';
 import 'package:flutter_base/ui/widgets/text/app_lable.dart';
 import 'package:flutter_base/ui/widgets/text_field/app_date_input.dart';
 import 'package:flutter_base/ui/widgets/text_field/app_text_field.dart';
@@ -90,13 +89,10 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const AppLabel(
-                text: "Email",
+                text: "Name",
                 margin: EdgeInsets.only(bottom: AppDimens.paddingSmall),
               ),
-              AppTextField(
-                controller: textNameController,
-                suffixIcon: const Icon(Icons.email_outlined),
-              ),
+              AppTextField(controller: textNameController),
               const AppLabel(
                 text: "Birthday",
                 margin: EdgeInsets.only(
@@ -115,9 +111,9 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
                   bottom: AppDimens.paddingSmall,
                 ),
               ),
-              AppDropdownMenu(
+              AppDropdownPicker(
                 controller: genderController,
-                options: GenderType.values.map((e) => e.vnText).toList(),
+                options: GenderType.values.map((e) => e.text).toList(),
               )
             ],
           );
@@ -127,10 +123,15 @@ class _UpdateProfileChildPageState extends State<UpdateProfileChildPage>
   }
 
   void saveProfile() {
+    if (genderController.position == -1) {
+      // Handle unselect gender
+      return;
+    }
+    final gender = GenderType.values[genderController.position];
     _cubit.updateData(
       name: textNameController.text,
       birthday: DateFormat('dd/MM/yyyy').parse(textBirthdayController.text),
-      gender: genderController.text,
+      gender: gender,
     );
   }
 
