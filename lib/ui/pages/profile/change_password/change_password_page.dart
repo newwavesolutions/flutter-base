@@ -6,6 +6,7 @@ import 'package:flutter_base/ui/widgets/appbar/app_bar_widget.dart';
 import 'package:flutter_base/ui/widgets/buttons/app_button.dart';
 import 'package:flutter_base/ui/widgets/text/app_lable.dart';
 import 'package:flutter_base/ui/widgets/text_field/app_password_text_field.dart';
+import 'package:flutter_base/utils/app_validartor.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'change_password_cubit.dart';
@@ -48,7 +49,8 @@ class _ChangePasswordChildPageState extends State<ChangePasswordChildPage> {
       ObscureTextController(obscureText: true);
   final _obscureConfirmPasswordController =
       ObscureTextController(obscureText: true);
-  final _formKey = GlobalKey<FormState>();
+  final _passwordFormKey = GlobalKey<FormState>();
+  final _confirmPasswordFormKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -71,85 +73,86 @@ class _ChangePasswordChildPageState extends State<ChangePasswordChildPage> {
   Widget _buildBodyWidget() {
     return Padding(
       padding: const EdgeInsets.all(AppDimens.paddingNormal),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const AppLabel(
-              text: 'Current Password',
-              margin: EdgeInsets.only(bottom: AppDimens.paddingSmall),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const AppLabel(
+            text: 'Current Password',
+            margin: EdgeInsets.only(bottom: AppDimens.paddingSmall),
+          ),
+          AppPasswordTextField(
+            controller: _currentPasswordTextController,
+            obscureTextController: _obscureCurrentPasswordController,
+            validator: (value) {
+              if ((value ?? '').isEmpty) {
+                return 'Password is not empty!';
+              }
+              return null;
+            },
+          ),
+          const AppLabel(
+            text: 'New Password',
+            margin: EdgeInsets.only(
+              top: AppDimens.paddingNormal,
+              bottom: AppDimens.paddingSmall,
             ),
-            AppPasswordTextField(
-              controller: _currentPasswordTextController,
-              obscureTextController: _obscureCurrentPasswordController,
+          ),
+          Form(
+            key: _passwordFormKey,
+            child: AppPasswordTextField(
+              controller: _newPasswordTextController,
+              obscureTextController: _obscureNewPasswordController,
               validator: (value) {
-                if ((value ?? '').isEmpty) {
-                  return 'Password is not empty!';
-                }
-                return null;
+                return AppValidator.validatePassword(value);
+              },
+              onFieldSubmitted: (_) {
+                _passwordFormKey.currentState?.validate();
               },
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const AppLabel(
-                  text: 'New Password',
-                  margin: EdgeInsets.only(
-                    top: AppDimens.paddingNormal,
-                    bottom: AppDimens.paddingSmall,
-                  ),
-                ),
-                AppPasswordTextField(
-                  controller: _newPasswordTextController,
-                  obscureTextController: _obscureNewPasswordController,
-                  validator: (value) {
-                    if ((value ?? '').isEmpty) {
-                      return 'Password is not empty!';
-                    }
-                    return null;
-                  },
-                ),
-                const AppLabel(
-                  text: 'Confirm Password',
-                  margin: EdgeInsets.only(
-                    top: AppDimens.paddingNormal,
-                    bottom: AppDimens.paddingSmall,
-                  ),
-                ),
-                AppPasswordTextField(
-                  controller: _confirmPasswordTextController,
-                  validator: (value) {
-                    if (_newPasswordTextController.text != value) {
-                      return 'Password does not match!';
-                    }
-                    return null;
-                  },
-                  obscureTextController: _obscureConfirmPasswordController,
-                ),
-              ],
+          ),
+          const AppLabel(
+            text: 'Confirm Password',
+            margin: EdgeInsets.only(
+              top: AppDimens.paddingNormal,
+              bottom: AppDimens.paddingSmall,
             ),
-            const Spacer(),
-            BlocBuilder<ChangePasswordCubit, ChangePasswordState>(
-              buildWhen: (previous, current) =>
-                  previous.changePasswordStatus != current.changePasswordStatus,
-              builder: (context, state) {
-                return AppButton(
-                  title: 'Confirm',
-                  isLoading: state.changePasswordStatus == LoadStatus.loading,
-                  onPressed: _changePassword,
-                );
+          ),
+          Form(
+            key: _confirmPasswordFormKey,
+            child: AppPasswordTextField(
+              controller: _confirmPasswordTextController,
+              validator: (value) {
+                return AppValidator.validateConfirmPassword(
+                    _newPasswordTextController.text, value);
+              },
+              obscureTextController: _obscureConfirmPasswordController,
+              onFieldSubmitted: (_) {
+                _confirmPasswordFormKey.currentState?.validate();
               },
             ),
-          ],
-        ),
+          ),
+          const Spacer(),
+          BlocBuilder<ChangePasswordCubit, ChangePasswordState>(
+            buildWhen: (previous, current) =>
+                previous.changePasswordStatus != current.changePasswordStatus,
+            builder: (context, state) {
+              return AppButton(
+                title: 'Confirm',
+                isLoading: state.changePasswordStatus == LoadStatus.loading,
+                onPressed: _changePassword,
+              );
+            },
+          ),
+        ],
       ),
     );
   }
 
   void _changePassword() {
-    if (!_formKey.currentState!.validate()) {
+    if (!_passwordFormKey.currentState!.validate()) {
+      return;
+    }
+    if (!_confirmPasswordFormKey.currentState!.validate()) {
       return;
     }
     _cubit.changePassword(
