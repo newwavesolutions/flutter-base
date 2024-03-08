@@ -143,7 +143,9 @@ class _ProfileTabPageState extends State<_ProfileTabPage> {
       case ProfileMenu.logout:
         context.read<AuthCubit>().signOut();
       case ProfileMenu.changePassword:
+        _cubit.navigator.openChangePassword();
       case ProfileMenu.openPolicy:
+        _cubit.navigator.openTermPolicy();
     }
   }
 }

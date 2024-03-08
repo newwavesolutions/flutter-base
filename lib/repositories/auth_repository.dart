@@ -11,6 +11,12 @@ abstract class AuthRepository {
   Future<void> removeToken();
 
   Future<TokenEntity?> signIn(String username, String password);
+
+  Future<bool> changePassword({
+    required String currentPassword,
+    required String newPassword,
+    required String confirmPassword,
+  });
 }
 
 class AuthRepositoryImpl extends AuthRepository {
@@ -39,5 +45,15 @@ class AuthRepositoryImpl extends AuthRepository {
     await Future.delayed(const Duration(seconds: 2));
     return TokenEntity(
         accessToken: 'app_access_token', refreshToken: 'app_refresh_token');
+  }
+
+  @override
+  Future<bool> changePassword({
+    required String currentPassword,
+    required String newPassword,
+    required String confirmPassword,
+  }) async {
+    await Future.delayed(const Duration(seconds: 2));
+    return true;
   }
 }

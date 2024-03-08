@@ -21,7 +21,6 @@ class AppButton extends StatelessWidget {
   final Widget? trailingIcon;
 
   //Status
-  final bool isEnable;
   final bool isLoading;
 
   //Action & callback
@@ -46,7 +45,6 @@ class AppButton extends StatelessWidget {
     this.textStyle = AppTextStyle.white,
     this.leadingIcon,
     this.trailingIcon,
-    this.isEnable = true,
     this.isLoading = false,
     this.onPressed,
     this.padding,

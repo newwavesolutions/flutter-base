@@ -16,4 +16,12 @@ class ProfileNavigator extends AppNavigator {
   void openDeleteAccount() {
     pushNamed(AppRouter.deleteAccount);
   }
+
+  void openChangePassword() {
+    pushNamed(AppRouter.changePassword);
+  }
+
+  void openTermPolicy() {
+    pushNamed(AppRouter.termPolicy);
+  }
 }

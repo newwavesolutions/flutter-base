@@ -6,8 +6,10 @@ import 'package:flutter_base/ui/pages/auth/sign_up/sign_up_page.dart';
 import 'package:flutter_base/ui/pages/main/main_page.dart';
 import 'package:flutter_base/ui/pages/notification/notification_list/notification_list_page.dart';
 import 'package:flutter_base/ui/pages/photo_view/photo_view_page.dart';
+import 'package:flutter_base/ui/pages/profile/change_password/change_password_page.dart';
 import 'package:flutter_base/ui/pages/profile/delete_account/delete_account_page.dart';
 import 'package:flutter_base/ui/pages/profile/profile_page.dart';
+import 'package:flutter_base/ui/pages/profile/term_policy/term_policy_page.dart';
 import 'package:flutter_base/ui/pages/profile/update_avatar/update_avatar_page.dart';
 import 'package:flutter_base/ui/pages/profile/update_profile/update_profile_page.dart';
 import 'package:go_router/go_router.dart';
@@ -36,6 +38,8 @@ class AppRouter {
   static const String updateProfile = 'update_profile';
   static const String updateAvatar = 'update_avatar';
   static const String deleteAccount = 'delete_account';
+  static const String changePassword = 'change_password';
+  static const String termPolicy = 'term_policy';
 
   // GoRouter configuration
   static final _routes = <RouteBase>[
@@ -94,6 +98,16 @@ class AppRouter {
           name: deleteAccount,
           path: deleteAccount,
           builder: (context, state) => const DeleteAccountPage(),
+        ),
+        GoRoute(
+          name: changePassword,
+          path: changePassword,
+          builder: (context, state) => const ChangePasswordPage(),
+        ),
+        GoRoute(
+          name: termPolicy,
+          path: termPolicy,
+          builder: (context, state) => const TermPolicyPage(),
         ),
       ],
     ),
