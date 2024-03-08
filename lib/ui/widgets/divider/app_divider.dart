@@ -6,8 +6,9 @@ class AppDivider extends Divider {
     super.key,
     double super.indent = 0,
     double super.endIndent = 0,
+    double super.thickness = 0,
+    double super.height = 0,
   }) : super(
           color: AppColors.divider,
-          height: 1,
         );
 }
