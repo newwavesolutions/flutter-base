@@ -4,15 +4,13 @@ class UpdateAvatarState extends Equatable {
   final LoadStatus userStatus;
   final UserEntity? user;
   final File? image;
-  final LoadStatus imageCollectionStatus;
-  final LoadStatus imageCameraStatus;
+  final LoadStatus updateImageStatus;
 
   const UpdateAvatarState({
     this.userStatus = LoadStatus.initial,
     this.user,
     this.image,
-    this.imageCollectionStatus = LoadStatus.initial,
-    this.imageCameraStatus = LoadStatus.initial,
+    this.updateImageStatus = LoadStatus.initial,
   });
 
   @override
@@ -20,24 +18,20 @@ class UpdateAvatarState extends Equatable {
         userStatus,
         user,
         image,
-        imageCollectionStatus,
-        imageCameraStatus,
+        updateImageStatus,
       ];
 
   UpdateAvatarState copyWith({
     LoadStatus? userStatus,
     UserEntity? user,
     File? image,
-    LoadStatus? imageCollectionStatus,
-    LoadStatus? imageCameraStatus,
+    LoadStatus? updateImageStatus,
   }) {
     return UpdateAvatarState(
       userStatus: userStatus ?? this.userStatus,
       user: user ?? this.user,
       image: image ?? this.image,
-      imageCollectionStatus:
-          imageCollectionStatus ?? this.imageCollectionStatus,
-      imageCameraStatus: imageCameraStatus ?? this.imageCameraStatus,
+      updateImageStatus: updateImageStatus ?? this.updateImageStatus,
     );
   }
 }
