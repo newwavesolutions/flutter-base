@@ -9,12 +9,14 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showBackButton;
   final VoidCallback? onBackPressed;
+  final List<Widget>? actions;
 
   const AppBarWidget({
     super.key,
     required this.title,
     this.showBackButton = true,
     this.onBackPressed,
+    this.actions,
   });
 
   @override
@@ -49,6 +51,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 ),
               )
             : const SizedBox(),
+        actions: actions,
       ),
     );
   }
