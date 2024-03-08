@@ -9,7 +9,6 @@ class AppValidator {
   }
 
   static String? validatePassword(String? input) {
-    print(input);
     if (input == null) return null;
     RegExp regex = RegExp(r'^[a-zA-Z0-9]{8,12}$');
     bool isValid = regex.hasMatch(input);
